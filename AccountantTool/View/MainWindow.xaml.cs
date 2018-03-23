@@ -1,4 +1,6 @@
 ﻿using System.Globalization;
+using System.Windows.Controls;
+using System.Windows.Media;
 using AccountantTool.ViewModel;
 using MahApps.Metro.Controls;
 
@@ -17,6 +19,15 @@ namespace AccountantTool.View
             App.SelectedLanguage = new CultureInfo("en-US");
             App.SelectedLanguage = new CultureInfo("ru-RU");
             DataContext = new MainWindowViewModel();
+        }
+
+        private void AccountantRecordsListMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var hitTestResult = VisualTreeHelper.HitTest(this, e.GetPosition(this));
+            if (hitTestResult.VisualHit.GetType() != typeof(ListBoxItem))
+            {
+                AccountantRecordsList.UnselectAll();
+            }
         }
     }
 }

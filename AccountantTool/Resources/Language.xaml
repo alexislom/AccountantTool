@@ -3,8 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <system:String x:Key="AT_recordsTitle">Records</system:String>
-    <system:String x:Key="AT_searchTitle">Search</system:String>
-    <system:String x:Key="AT_settingsTitle">Settings</system:String>
+    <system:String x:Key="AtRecordsTitle">Records</system:String>
+    <system:String x:Key="AtSearchTitle">Search</system:String>
+    <system:String x:Key="AtSettingsTitle">Settings</system:String>
+    <system:String x:Key="AtNewRecordTitle">New record</system:String>
+
+    <system:String x:Key="AtListViewId">#</system:String>
 
 </ResourceDictionary>
