@@ -182,6 +182,14 @@
     </Compile>
     <Compile Include="Data\AccountantDbContext.cs" />
     <Compile Include="Data\AccountantDbInitializer.cs" />
+    <Compile Include="Model\AccountantRecord.cs" />
+    <Compile Include="Model\AdditionalInfo.cs" />
+    <Compile Include="Model\Company.cs" />
+    <Compile Include="Model\ContactPerson.cs" />
+    <Compile Include="Model\Contract.cs" />
+    <Compile Include="Model\License.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\Requisites.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\MainComponents\AsyncDelegateCommand.cs" />
     <Compile Include="ViewModel\MainComponents\EventRaiser.cs" />
@@ -224,9 +232,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\Images\icon.png" />
   </ItemGroup>
