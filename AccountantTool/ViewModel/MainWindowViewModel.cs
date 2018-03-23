@@ -8,7 +8,7 @@ namespace AccountantTool.ViewModel
     {
         private ICommand _command;
 
-        public ICommand Command
+        public ICommand OpenSettindsDialogCommand
         {
             get
             {

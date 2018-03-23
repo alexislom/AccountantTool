@@ -2,7 +2,7 @@
 using AccountantTool.ViewModel;
 using MahApps.Metro.Controls;
 
-namespace AccountantTool
+namespace AccountantTool.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

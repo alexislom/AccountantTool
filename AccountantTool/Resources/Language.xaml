@@ -1,9 +1,10 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:v="clr-namespace:System;assembly=mscorlib">
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <v:String x:Key="AT_recordsTitle">Records</v:String>
-    <v:String x:Key="AT_searchTitle">Search</v:String>
+    <system:String x:Key="AT_recordsTitle">Records</system:String>
+    <system:String x:Key="AT_searchTitle">Search</system:String>
+    <system:String x:Key="AT_settingsTitle">Settings</system:String>
 
 </ResourceDictionary>

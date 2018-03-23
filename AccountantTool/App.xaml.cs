@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
+using MahApps.Metro;
 
 namespace AccountantTool
 {
@@ -75,6 +76,14 @@ namespace AccountantTool
         {
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement),
                                     new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+
+            // Get the current app style (theme and accent) from the application
+            // you can then use the current theme and custom accent instead set a new theme
+            Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Current);
+
+            // Now set the accent and theme
+            ThemeManager.ChangeAppStyle(Current, ThemeManager.GetAccent("Cobalt"),
+                                                 ThemeManager.GetAppTheme("BaseLight")); // or appStyle.Item1(it's turple)
             base.OnStartup(e);
         }
 
