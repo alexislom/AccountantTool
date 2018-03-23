@@ -172,6 +172,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddAccountantRecordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -192,11 +196,15 @@
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Requisites.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModel\AddAccountantRecordWindowViewModel.cs" />
     <Compile Include="ViewModel\MainComponents\AsyncDelegateCommand.cs" />
     <Compile Include="ViewModel\MainComponents\EventRaiser.cs" />
     <Compile Include="ViewModel\MainComponents\RelayCommand.cs" />
     <Compile Include="ViewModel\MainComponents\ViewModelBase.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="View\AddAccountantRecordWindow.xaml.cs">
+      <DependentUpon>AddAccountantRecordWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

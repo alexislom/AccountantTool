@@ -1,10 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using AccountantTool.Data;
 using AccountantTool.Model;
+using AccountantTool.View;
 using AccountantTool.ViewModel.MainComponents;
 
 namespace AccountantTool.ViewModel
@@ -29,6 +31,11 @@ namespace AccountantTool.ViewModel
 
         #endregion Properties
 
+        #region Events
+
+        public event EventHandler<EventArgs<AccountantRecord>> AddNewAccountantRecordEvent;
+
+        #endregion Events
 
         #region Commands
 
@@ -48,19 +55,31 @@ namespace AccountantTool.ViewModel
             BindingOperations.EnableCollectionSynchronization(AccountantRecords, _accountantRecordsLock);
             FilteredAccountantRecords = CollectionViewSource.GetDefaultView(AccountantRecords);
 
-            AddNewAccountantRecordCommand = new RelayCommand<object>(AddAccountantRecordOpenWindow);
+            AddNewAccountantRecordCommand = new RelayCommand(AddAccountantRecordOpenWindow);
             OpenSettindsDialogCommand = new RelayCommand(DoStuff);
+
+            AddNewAccountantRecordEvent += OnAddNewAccountantRecordEvent;
         }
 
         #endregion Construction
 
+        #region Event handlers
+
+        private void OnAddNewAccountantRecordEvent(object sender, EventArgs<AccountantRecord> eventArgs)
+        {
+            //Context.AccountantRecords.Add(eventArgs.Value);
+            //Context.SaveChanges();
+        }
+
+        #endregion Event handlers
+
         #region Commands implementation
 
-        private static void AddAccountantRecordOpenWindow(object parameter)
+        private void AddAccountantRecordOpenWindow()
         {
-            //var addWindow = new AddMedicamentRecordWindow(this);
-            //addWindow.Owner = Application.Current.MainWindow;
-            //addWindow.ShowDialog();
+            var addWindow = new AddAccountantRecordWindow(this);
+            addWindow.Owner = Application.Current.MainWindow;
+            addWindow.ShowDialog();
         }
 
         private static void DoStuff()

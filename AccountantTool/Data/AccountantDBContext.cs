@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using AccountantTool.Model;
 
 namespace AccountantTool.Data
 {
@@ -35,7 +36,7 @@ namespace AccountantTool.Data
 
         //public DbSet<Manufacturer> Manufacturers { get; set; }
         //public DbSet<Medicament> Medicaments { get; set; }
-        //public DbSet<MedicamentRecord> MedicamentRecords { get; set; }
+        public DbSet<AccountantRecord> AccountantRecords { get; set; }
 
         #endregion Public Properties (tables)
     }
