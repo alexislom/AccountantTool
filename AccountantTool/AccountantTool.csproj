@@ -187,6 +187,14 @@
     <Compile Include="Converters\ListItemToIndexConverter.cs" />
     <Compile Include="Data\AccountantDbContext.cs" />
     <Compile Include="Data\AccountantDbInitializer.cs" />
+    <Compile Include="Data\Configs\AccountantRecordConfig.cs" />
+    <Compile Include="Data\Configs\AdditionalInfoConfig.cs" />
+    <Compile Include="Data\Configs\CompanyConfig.cs" />
+    <Compile Include="Data\Configs\ContactPersonConfig.cs" />
+    <Compile Include="Data\Configs\ContractConfig.cs" />
+    <Compile Include="Data\Configs\LicenseConfig.cs" />
+    <Compile Include="Data\Configs\ProductConfig.cs" />
+    <Compile Include="Data\Configs\RequisitesConfig.cs" />
     <Compile Include="Model\AccountantRecord.cs" />
     <Compile Include="Model\AdditionalInfo.cs" />
     <Compile Include="Model\Company.cs" />

@@ -7,12 +7,30 @@ namespace AccountantTool.Data
     {
         #region Construction
 
-        public AccountantDbContext() : base("AccountantDb")
+        public AccountantDbContext() : this("AccountantDb")
+        {
+        }
+
+        public AccountantDbContext(string connectionString)
+            : base(connectionString)
         {
             Configure();
         }
 
         #endregion Construction
+
+        #region Public Properties (tables)
+
+        public DbSet<AccountantRecord> AccountantRecords { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Requisites> Requisites { get; set; }
+        public DbSet<ContactPerson> ContactPersons { get; set; }
+        public DbSet<License> Licenses { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Contract> Contracts { get; set; }
+        public DbSet<AdditionalInfo> AdditionalInfos { get; set; }
+
+        #endregion Public Properties (tables)
 
         #region Configuration
 
@@ -32,12 +50,6 @@ namespace AccountantTool.Data
         }
         #endregion Initialization
 
-        #region Public Properties (tables)
 
-        //public DbSet<Manufacturer> Manufacturers { get; set; }
-        //public DbSet<Medicament> Medicaments { get; set; }
-        public DbSet<AccountantRecord> AccountantRecords { get; set; }
-
-        #endregion Public Properties (tables)
     }
 }
