@@ -48,8 +48,8 @@ namespace AccountantTool.ViewModel
             BindingOperations.EnableCollectionSynchronization(AccountantRecords, _accountantRecordsLock);
             FilteredAccountantRecords = CollectionViewSource.GetDefaultView(AccountantRecords);
 
-            AddNewAccountantRecordCommand = new RelayCommand(AddAccountantRecordOpenWindow);
-            OpenSettindsDialogCommand = new RelayCommand(x => { DoStuff(); });
+            AddNewAccountantRecordCommand = new RelayCommand<object>(AddAccountantRecordOpenWindow);
+            OpenSettindsDialogCommand = new RelayCommand(DoStuff);
         }
 
         #endregion Construction

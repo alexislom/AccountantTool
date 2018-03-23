@@ -5,7 +5,7 @@ namespace AccountantTool.ViewModel.MainComponents
 {
     public class RelayCommand : ICommand
     {
-        private readonly Action<object> _execute;
+        private readonly Action _execute;
         private readonly Predicate<object> _canExecute;
 
         /// <summary>
@@ -14,7 +14,7 @@ namespace AccountantTool.ViewModel.MainComponents
         /// <param name="execute">Execute method as action.</param>
         /// <param name="canExecute">The can execute.</param>
         /// <exception cref="ArgumentNullException">execute</exception>
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
+        public RelayCommand(Action execute, Predicate<object> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
@@ -37,7 +37,7 @@ namespace AccountantTool.ViewModel.MainComponents
         }
 
         public bool CanExecute(object parameter) => _canExecute == null || _canExecute(parameter);
-        public void Execute(object parameter) => _execute(parameter);
+        public void Execute(object parameter) => _execute();
 
         private event EventHandler CanExecuteChangedInternal;
 
