@@ -8,7 +8,8 @@
     <system:String x:Key="AtSettingsTitle">Settings</system:String>
     <system:String x:Key="AtNewRecordTitle">New record</system:String>
     <system:String x:Key="AtAddRecordTittle">Add/Edit record</system:String>
+    <system:String x:Key="AtDialogSave">Save</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
-
+    
 </ResourceDictionary>

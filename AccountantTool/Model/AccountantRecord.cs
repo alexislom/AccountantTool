@@ -4,7 +4,7 @@ namespace AccountantTool.Model
 {
     public class AccountantRecord
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         public Company Company { get; set; }
 

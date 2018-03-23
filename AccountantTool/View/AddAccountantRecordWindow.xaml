@@ -6,17 +6,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AccountantTool.View"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:viewModel="clr-namespace:AccountantTool.ViewModel"
         mc:Ignorable="d"
-        
-        
+        d:DataContext="{d:DesignInstance Type=viewModel:AddAccountantRecordWindowViewModel}"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+
         Title="{DynamicResource AtAddRecordTittle}"
         TitleAlignment="Center"
         TitleCharacterCasing="Normal"
 
         Height="400"
         Width="550"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        SaveWindowPosition="False"
+        ShowMaxRestoreButton="False"
+        ShowSystemMenuOnRightClick="False">
     <Grid>
-
+        <Button
+            Width="75"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Command="{Binding Path=AddAccountantRecordCommand}"
+            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type controls:MetroWindow}}}"
+            Content="{StaticResource AtDialogSave}"
+            IsDefault="True" />
     </Grid>
 </controls:MetroWindow>

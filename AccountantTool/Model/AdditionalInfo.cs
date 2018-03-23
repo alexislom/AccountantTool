@@ -2,6 +2,6 @@
 {
     public class AdditionalInfo
     {
-
+        public int Id { get; set; }
     }
 }

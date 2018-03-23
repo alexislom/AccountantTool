@@ -8,7 +8,7 @@ namespace AccountantTool.Data.Configs
         //TODO: Update config if it is need
         public AccountantRecordConfig()
         {
-            HasKey(p => p.Id);
+            //HasKey(p => p.Id);
         }
     }
 }

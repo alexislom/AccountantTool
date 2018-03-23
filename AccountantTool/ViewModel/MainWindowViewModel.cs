@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 using AccountantTool.Data;
 using AccountantTool.Model;
 using AccountantTool.View;
@@ -29,6 +31,8 @@ namespace AccountantTool.ViewModel
 
         public AccountantRecord SelectedAccountantRecord { get; set; }
 
+        public bool IsDataLoaded { get; set; }
+
         #endregion Properties
 
         #region Events
@@ -40,8 +44,8 @@ namespace AccountantTool.ViewModel
         #region Commands
 
         public ICommand OpenSettindsDialogCommand { get; set; }
-
         public ICommand AddNewAccountantRecordCommand { get; set; }
+        public ICommand LoadAccountantRecordsAsyncCommand { get; set; }
 
         #endregion Commands
 
@@ -57,6 +61,7 @@ namespace AccountantTool.ViewModel
 
             AddNewAccountantRecordCommand = new RelayCommand(AddAccountantRecordOpenWindow);
             OpenSettindsDialogCommand = new RelayCommand(DoStuff);
+            LoadAccountantRecordsAsyncCommand = new AsyncDelegateCommand(LoadAccountantRecordsAsync, x => IsDataLoaded);
 
             AddNewAccountantRecordEvent += OnAddNewAccountantRecordEvent;
         }
@@ -67,8 +72,8 @@ namespace AccountantTool.ViewModel
 
         private void OnAddNewAccountantRecordEvent(object sender, EventArgs<AccountantRecord> eventArgs)
         {
-            //Context.AccountantRecords.Add(eventArgs.Value);
-            //Context.SaveChanges();
+            Context.AccountantRecords.Add(eventArgs.Value);
+            Context.SaveChanges();
         }
 
         #endregion Event handlers
@@ -82,9 +87,43 @@ namespace AccountantTool.ViewModel
             addWindow.ShowDialog();
         }
 
+        public async Task AddNewAccountantRecordAsync(AccountantRecord record)
+        {
+            //Example data for testing command
+            await Task.Run(() =>
+            {
+                AccountantRecords.Add(record);
+                AddNewAccountantRecordEvent.Raise(this, record);
+            });
+            //await LoadFullAmountAndNumberAsync();
+        }
+
         private static void DoStuff()
         {
             MessageBox.Show("Responding to button click event...");
+        }
+
+        private async Task LoadAccountantRecordsAsync(object arg)
+        {
+            IsDataLoaded = false;
+
+            if (AccountantRecords.Count > 0)
+                AccountantRecords.Clear();
+
+            await Task.Factory.StartNew(() =>
+            {
+                Parallel.ForEach(Context.AccountantRecords, item =>
+                {
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        AccountantRecords.Add(item);           //Adding to Collection without freezing UI
+                    }), DispatcherPriority.Background).Wait(); //WaitForAdding
+                });
+            });
+            IsDataLoaded = true;
+
+            //await LoadFullAmountAndNumberAsync(); //Then Show Total
+            //await LoadRandomWatermarkAsync();//And Watermark of Search
         }
 
         #endregion Commands implementation

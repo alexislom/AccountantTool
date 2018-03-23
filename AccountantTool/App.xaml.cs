@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
+using AccountantTool.ViewModel.MainComponents;
 using MahApps.Metro;
 
 namespace AccountantTool
@@ -68,8 +69,7 @@ namespace AccountantTool
                 {
                     Current.Resources.MergedDictionaries.Add(dictionary);
                 }
-
-                LanguageChanged?.Invoke(Current, new EventArgs());
+                LanguageChanged.Raise(Current);
             }
         }
         protected override void OnStartup(StartupEventArgs e)

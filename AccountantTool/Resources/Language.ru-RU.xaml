@@ -8,5 +8,7 @@
     <system:String x:Key="AtSettingsTitle">Настройки</system:String>
     <system:String x:Key="AtNewRecordTitle">Новая запись</system:String>
     <system:String x:Key="AtAddRecordTittle">Добавить/Изменить запись</system:String>
+    <system:String x:Key="AtDialogSave">Сохранить</system:String>
 
+    <system:String x:Key="AtListViewId">#</system:String>
 </ResourceDictionary>

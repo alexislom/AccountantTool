@@ -2,6 +2,6 @@
 {
     public class ContactPerson
     {
-
+        public int Id { get; set; }
     }
 }
