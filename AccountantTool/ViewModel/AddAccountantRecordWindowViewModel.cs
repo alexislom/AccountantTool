@@ -10,21 +10,28 @@ namespace AccountantTool.ViewModel
         public MainWindowViewModel Model { get; }
         public ICommand AddAccountantRecordCommand { get; set; }
 
+        #region Accountant record binding
         public Company Company { get; set; }
+        public Requisites Requisites { get; set; }
 
-
+        #endregion Accountant record binding
 
         public AddAccountantRecordWindowViewModel(MainWindowViewModel model)
         {
             Model = model;
             Company = new Company();
+            Requisites = new Requisites { Address = new Address() };
 
             AddAccountantRecordCommand = new RelayCommand<MetroWindow>(AddAccountantRecord);
         }
 
         private async void AddAccountantRecord(MetroWindow window)
         {
-            var record = new AccountantRecord { Company = Company};
+            var record = new AccountantRecord
+            {
+                Company = Company,
+                Requisites = Requisites
+            };
 
             await Model.AddNewAccountantRecordAsync(record);
 

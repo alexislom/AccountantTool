@@ -32,7 +32,7 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="10"/>
             <Setter Property="Width" Value="300"/>
-            <Setter Property="Height" Value="50"/>
+            <Setter Property="Height" Value="30"/>
             <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
@@ -70,7 +70,69 @@
                             IsDefault="True" />
                 </Grid>
             </TabItem>
-            <TabItem Header="{DynamicResource AtRequisitesDialogTitle}"/>
+            <TabItem Header="{DynamicResource AtRequisitesDialogTitle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource AtAddressIndexTextBlock}"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Requisites.Address.Index, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource AtAddressCountryTextBlock}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Requisites.Address.Country, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource AtAddressRegionTextBlock}"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Requisites.Address.Region, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource AtAddressDistrictTextBlock}"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Requisites.Address.District, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource AtAddressCityTextBlock}"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Requisites.Address.City, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource AtAddressHouseTextBlock}"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Requisites.Address.House, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="6" Grid.Column="0" Text="{DynamicResource AtAddressFlatTextBlock}"/>
+                    <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Requisites.Address.Flat, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="7" Grid.Column="0" Text="{DynamicResource AtRequisitesPhonesTextBlock}"/>
+                    <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Requisites.Phones, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="8" Grid.Column="0" Text="{DynamicResource AtRequisitesEmailTextBlock}"/>
+                    <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Requisites.Email, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="9" Grid.Column="0" Text="{DynamicResource AtRequisitesSiteTextBlock}"/>
+                    <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Requisites.Site, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="10" Grid.Column="0" Text="{DynamicResource AtRequisitesOtherTextBlock}"/>
+                    <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Requisites.OtherRequisites, Mode=TwoWay}"/>
+                </Grid>
+            </TabItem>
             <TabItem Header="{DynamicResource AtContactPersonDialogTitle}"/>
             <TabItem Header="{DynamicResource AtLicenseDialogTitle}"/>
             <TabItem Header="{DynamicResource AtProductsDialogTitle}"/>

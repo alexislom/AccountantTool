@@ -19,9 +19,22 @@
     <system:String x:Key="AtAddInfoDialogTitle">Дополнительная информация</system:String>
     <!--New record dialog-->
     <system:String x:Key="AtDialogSave">Сохранить</system:String>
-
+    <!--Name of company tab-->
     <system:String x:Key="AtFullNameOfTheCompanyTextBlock">Полное имя:</system:String>
     <system:String x:Key="AtShortNameOfTheCompanyTextBlock">Сокращённое имя:</system:String>
+    <!--Requisites tab-->
+    <system:String x:Key="AtAddressIndexTextBlock">Индекс:</system:String>
+    <system:String x:Key="AtAddressCountryTextBlock">Страна:</system:String>
+    <system:String x:Key="AtAddressRegionTextBlock">Область:</system:String>
+    <system:String x:Key="AtAddressDistrictTextBlock">Район:</system:String>
+    <system:String x:Key="AtAddressCityTextBlock">Город:</system:String>
+    <system:String x:Key="AtAddressHouseTextBlock">Дом:</system:String>
+    <system:String x:Key="AtAddressFlatTextBlock">Квартира:</system:String>
+
+    <system:String x:Key="AtRequisitesPhonesTextBlock">Контактные телефоны:</system:String>
+    <system:String x:Key="AtRequisitesEmailTextBlock">Адрес электронной почты:</system:String>
+    <system:String x:Key="AtRequisitesSiteTextBlock">Сайт компании:</system:String>
+    <system:String x:Key="AtRequisitesOtherTextBlock">Иные реквизиты компании:</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
 </ResourceDictionary>

@@ -4,7 +4,9 @@
     {
         public int Id { get; set; }
 
-        public int Index { get; set; }
+        public int Index { get; set; } = 220000;
+
+        public string Region { get; set; }
 
         public string Country { get; set; }
 

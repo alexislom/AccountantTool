@@ -19,9 +19,22 @@
     <system:String x:Key="AtAddInfoDialogTitle">Additional info</system:String>
     <!--New record dialog-->
     <system:String x:Key="AtDialogSave">Save</system:String>
-
+    <!--Name of company tab-->
     <system:String x:Key="AtFullNameOfTheCompanyTextBlock">Full name:</system:String>
     <system:String x:Key="AtShortNameOfTheCompanyTextBlock">Short name:</system:String>
+    <!--Requisites tab-->
+    <system:String x:Key="AtAddressIndexTextBlock">Index:</system:String>
+    <system:String x:Key="AtAddressCountryTextBlock">Country:</system:String>
+    <system:String x:Key="AtAddressRegionTextBlock">Region:</system:String>
+    <system:String x:Key="AtAddressDistrictTextBlock">District:</system:String>
+    <system:String x:Key="AtAddressCityTextBlock">City:</system:String>
+    <system:String x:Key="AtAddressHouseTextBlock">House:</system:String>
+    <system:String x:Key="AtAddressFlatTextBlock">Flat:</system:String>
+
+    <system:String x:Key="AtRequisitesPhonesTextBlock">Contact phones:</system:String>
+    <system:String x:Key="AtRequisitesEmailTextBlock">Emailof company:</system:String>
+    <system:String x:Key="AtRequisitesSiteTextBlock">Site of company:</system:String>
+    <system:String x:Key="AtRequisitesOtherTextBlock">Other requisites of company:</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
     
