@@ -3,23 +3,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
+    <!--Main window-->
     <system:String x:Key="AtRecordsTitle">Записи</system:String>
     <system:String x:Key="AtSearchTitle">Поиск</system:String>
     <system:String x:Key="AtSettingsTitle">Настройки</system:String>
     <system:String x:Key="AtNewRecordTitle">Новая запись</system:String>
     <system:String x:Key="AtAddRecordTittle">Добавить/Изменить запись</system:String>
-
-    <system:String x:Key="AtDialogSave">Сохранить</system:String>
+    <!--Table and add record dialog tittles-->
     <system:String x:Key="AtNameOfTheCompanyDialogTitle">Название компании</system:String>
-    <system:String x:Key="AtFullNameOfTheCompanyTextBlock">Полное имя:</system:String>
-    <system:String x:Key="AtShortNameOfTheCompanyTextBlock">Сокращённое имя:</system:String>
-
     <system:String x:Key="AtRequisitesDialogTitle">Реквизиты</system:String>
     <system:String x:Key="AtContactPersonDialogTitle">Контактное лицо</system:String>
     <system:String x:Key="AtLicenseDialogTitle">Лицензия</system:String>
     <system:String x:Key="AtProductsDialogTitle">Продукты</system:String>
     <system:String x:Key="AtContractsDialogTitle">Контракты</system:String>
     <system:String x:Key="AtAddInfoDialogTitle">Дополнительная информация</system:String>
+    <!--New record dialog-->
+    <system:String x:Key="AtDialogSave">Сохранить</system:String>
+
+    <system:String x:Key="AtFullNameOfTheCompanyTextBlock">Полное имя:</system:String>
+    <system:String x:Key="AtShortNameOfTheCompanyTextBlock">Сокращённое имя:</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
 </ResourceDictionary>

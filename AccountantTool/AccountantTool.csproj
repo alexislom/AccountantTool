@@ -195,6 +195,9 @@
     <Compile Include="Data\Configs\LicenseConfig.cs" />
     <Compile Include="Data\Configs\ProductConfig.cs" />
     <Compile Include="Data\Configs\RequisitesConfig.cs" />
+    <Compile Include="Helpers\Search\CollectionViewGeneric.cs" />
+    <Compile Include="Helpers\Search\IAccountantRecordSearch.cs" />
+    <Compile Include="Helpers\Search\ICollectionView.cs" />
     <Compile Include="Model\AccountantRecord.cs" />
     <Compile Include="Model\AdditionalInfo.cs" />
     <Compile Include="Model\Company.cs" />

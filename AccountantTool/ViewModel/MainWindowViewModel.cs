@@ -1,48 +1,63 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
 using AccountantTool.Data;
+using AccountantTool.Helpers.Search;
 using AccountantTool.Model;
 using AccountantTool.View;
 using AccountantTool.ViewModel.MainComponents;
 
 namespace AccountantTool.ViewModel
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : ViewModelBase, IAccountantRecordSearch
     {
         #region Fields
-
-        private object _accountantRecordsLock = new object();
-
+        private readonly object _accountantRecordsLock = new object();
+        private string _searchString;
         #endregion Fields
 
         #region Properties
-
         public AccountantDbContext Context { get; set; }
         public ObservableCollection<AccountantRecord> AccountantRecords { get; set; }
-        public ICollectionView FilteredAccountantRecords { get; set; }
+        public ICollectionView<AccountantRecord> FilteredAccountantRecords { get; set; }
         public AccountantRecord SelectedAccountantRecord { get; set; }
         public bool IsDataLoaded { get; set; }
-
+        public string SearchString
+        {
+            get => _searchString;
+            set
+            {
+                _searchString = value; OnPropertyChanged();
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    FilteredAccountantRecords.Filter = null;
+                }
+                else
+                {
+                    Task.Run(() =>
+                    {
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            FilteredAccountantRecords.Filter = obj => ((AccountantRecord)obj).ToString().Contains(value.ToLower());
+                        }), DispatcherPriority.Background);
+                    });
+                }
+            }
+        }
         #endregion Properties
 
         #region Events
-
         public event EventHandler<EventArgs<AccountantRecord>> AddNewAccountantRecordEvent;
-
         #endregion Events
 
         #region Commands
-
         public ICommand OpenSettindsDialogCommand { get; set; }
         public ICommand AddNewAccountantRecordCommand { get; set; }
         public ICommand LoadAccountantRecordsAsyncCommand { get; set; }
-
         #endregion Commands
 
         #region Construction
@@ -53,7 +68,7 @@ namespace AccountantTool.ViewModel
             AccountantRecords = new ObservableCollection<AccountantRecord>();
 
             BindingOperations.EnableCollectionSynchronization(AccountantRecords, _accountantRecordsLock);
-            FilteredAccountantRecords = CollectionViewSource.GetDefaultView(AccountantRecords);
+            FilteredAccountantRecords = new CollectionViewGeneric<AccountantRecord>(CollectionViewSource.GetDefaultView(AccountantRecords));
 
             AddNewAccountantRecordCommand = new RelayCommand(AddAccountantRecordOpenWindow);
             OpenSettindsDialogCommand = new RelayCommand(DoStuff);

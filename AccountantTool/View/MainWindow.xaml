@@ -28,11 +28,8 @@
     SaveWindowPosition="True"
     ShowSystemMenuOnRightClick="False"
 
-    mc:Ignorable="d">
-    
-    <Window.DataContext>
-        <viewModel:MainWindowViewModel/>
-    </Window.DataContext>
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=viewModel:MainWindowViewModel}">
     <Window.InputBindings>
         <KeyBinding Key="F1" Command="{Binding AddNewAccountantRecordCommand}" />
         <!--<KeyBinding
@@ -107,10 +104,10 @@
                     Height="20"
                     Margin="5,0"
                     VerticalContentAlignment="Center"
-                    controls:TextBoxHelper.Watermark="Search text box"/>
+                    controls:TextBoxHelper.Watermark="Search text box"
+                    Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}"/>
                 <!--mah:TextBoxHelper.Watermark="{Binding RandomWatermark, StringFormat={}Например: {0}, TargetNullValue=Загрузка..., Mode=TwoWay}"
-                    IsEnabled="{Binding Path=IsLoadedData}"
-                    Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" />-->
+                    IsEnabled="{Binding Path=IsLoadedData}"/>-->
             </StackPanel>
         </DockPanel>
         <ListView
@@ -149,11 +146,17 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridView.Columns>
-                        <GridViewColumn Header="№" 
-                                        DisplayMemberBinding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexConverter}}" Width="30"/>
+                    <!--<GridView.Columns>-->
+                        <GridViewColumn Header="№"
+                                        DisplayMemberBinding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexConverter}}" Width="35"/>
 
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=AccountantRecords.Company}" Header="LALALA" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtNameOfTheCompanyDialogTitle}" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtRequisitesDialogTitle}" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtContactPersonDialogTitle}" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtLicenseDialogTitle}" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtProductsDialogTitle}" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtContractsDialogTitle}" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtAddInfoDialogTitle}" />
                         <!--<GridViewColumn DisplayMemberBinding="{Binding Medicament.Manufacturer.Name}" Header="{DynamicResource r_listViewManufacturer}" />
                         <GridViewColumn DisplayMemberBinding="{Binding Medicament.Price, StringFormat={}{0} грн}" Header="{DynamicResource r_listViewUnitPrice}" />
                         <GridViewColumn DisplayMemberBinding="{Binding Count}" Header="{DynamicResource r_listViewNumber}" />
@@ -164,7 +167,7 @@
                             Header="{DynamicResource r_listViewAmount}" />
                         <GridViewColumn DisplayMemberBinding="{Binding Received, StringFormat=d}" Header="{DynamicResource r_listViewReceived}" />
                         <GridViewColumn DisplayMemberBinding="{Binding Expiration, StringFormat=d}" Header="{DynamicResource r_listViewExpiration}" />-->
-                    </GridView.Columns>
+                    <!--</GridView.Columns>-->
                 </GridView>
             </ListView.View>
         </ListView>
