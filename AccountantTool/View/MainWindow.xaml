@@ -147,17 +147,17 @@
             <ListView.View>
                 <GridView>
                     <!--<GridView.Columns>-->
-                        <GridViewColumn Header="№"
+                    <GridViewColumn Header="№"
                                         DisplayMemberBinding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexConverter}}" Width="35"/>
 
-                        <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtNameOfTheCompanyDialogTitle}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtRequisitesDialogTitle}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtContactPersonDialogTitle}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtLicenseDialogTitle}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtProductsDialogTitle}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtContractsDialogTitle}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtAddInfoDialogTitle}" />
-                        <!--<GridViewColumn DisplayMemberBinding="{Binding Medicament.Manufacturer.Name}" Header="{DynamicResource r_listViewManufacturer}" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtNameOfTheCompanyDialogTitle}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtRequisitesDialogTitle}" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtContactPersonDialogTitle}" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtLicenseDialogTitle}" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtProductsDialogTitle}" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtContractsDialogTitle}" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtAddInfoDialogTitle}" />
+                    <!--<GridViewColumn DisplayMemberBinding="{Binding Medicament.Manufacturer.Name}" Header="{DynamicResource r_listViewManufacturer}" />
                         <GridViewColumn DisplayMemberBinding="{Binding Medicament.Price, StringFormat={}{0} грн}" Header="{DynamicResource r_listViewUnitPrice}" />
                         <GridViewColumn DisplayMemberBinding="{Binding Count}" Header="{DynamicResource r_listViewNumber}" />
                         <GridViewColumn DisplayMemberBinding="{Binding Medicament.Unit, Converter={StaticResource EnumToStringConverter}}" Header="{DynamicResource r_listViewUnit}" />

@@ -5,9 +5,11 @@ namespace AccountantTool.Data
 {
     public class AccountantDbContext : DbContext
     {
+        private const string NameOfDb = "AccountantDb";
+
         #region Construction
 
-        public AccountantDbContext() : this("AccountantDb")
+        public AccountantDbContext() : this(NameOfDb)
         {
         }
 
