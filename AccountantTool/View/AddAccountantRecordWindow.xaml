@@ -40,6 +40,7 @@
     </Window.Resources>
     <Grid>
         <controls:MetroTabControl>
+            <!--Name of company tab-->
             <TabItem Header="{DynamicResource AtNameOfTheCompanyDialogTitle}">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -70,6 +71,7 @@
                             IsDefault="True" />
                 </Grid>
             </TabItem>
+            <!--Requisites tab-->
             <TabItem Header="{DynamicResource AtRequisitesDialogTitle}">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -133,10 +135,52 @@
                     <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Requisites.OtherRequisites, Mode=TwoWay}"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="{DynamicResource AtContactPersonDialogTitle}"/>
+            <!--Contact person tab-->
+            <TabItem Header="{DynamicResource AtContactPersonDialogTitle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource AtContactPersonPositionTextBlock}"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ContactPerson.Position, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource AtContactPersonSurnameTextBlock}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ContactPerson.Surname, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource AtContactPersonNameTextBlock}"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ContactPerson.Name, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource AtContactPersonPatronymicTextBlock}"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ContactPerson.Patronymic, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource AtContactPersonContactPhoneTextBlock}"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ContactPerson.ContactPhone, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource AtContactPersonEmailTextBlock}"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ContactPerson.Email, Mode=TwoWay}"/>
+                </Grid>
+            </TabItem>
+            <!--License tab-->
             <TabItem Header="{DynamicResource AtLicenseDialogTitle}"/>
+            <!--Products tab-->
             <TabItem Header="{DynamicResource AtProductsDialogTitle}"/>
+            <!--Contracts tab-->
             <TabItem Header="{DynamicResource AtContractsDialogTitle}"/>
+            <!--Additional info tab-->
             <TabItem Header="{DynamicResource AtAddInfoDialogTitle}"/>
         </controls:MetroTabControl>
     </Grid>

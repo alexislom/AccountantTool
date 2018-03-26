@@ -35,6 +35,13 @@
     <system:String x:Key="AtRequisitesEmailTextBlock">Адрес электронной почты:</system:String>
     <system:String x:Key="AtRequisitesSiteTextBlock">Сайт компании:</system:String>
     <system:String x:Key="AtRequisitesOtherTextBlock">Иные реквизиты компании:</system:String>
+    <!--Contact person tab-->
+    <system:String x:Key="AtContactPersonPositionTextBlock">Должность:</system:String>
+    <system:String x:Key="AtContactPersonSurnameTextBlock">Фамилия:</system:String>
+    <system:String x:Key="AtContactPersonNameTextBlock">Имя:</system:String>
+    <system:String x:Key="AtContactPersonPatronymicTextBlock">Отчество:</system:String>
+    <system:String x:Key="AtContactPersonContactPhoneTextBlock">Контактный телефон:</system:String>
+    <system:String x:Key="AtContactPersonEmailTextBlock">Адрес электронной почты:</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
 </ResourceDictionary>

@@ -12,6 +12,8 @@
 
         public string Patronymic { get; set; }
 
+        public string ContactPhone { get; set; }
+
         public string Email { get; set; }
     }
 }

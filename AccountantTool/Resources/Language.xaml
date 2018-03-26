@@ -35,6 +35,13 @@
     <system:String x:Key="AtRequisitesEmailTextBlock">Emailof company:</system:String>
     <system:String x:Key="AtRequisitesSiteTextBlock">Site of company:</system:String>
     <system:String x:Key="AtRequisitesOtherTextBlock">Other requisites of company:</system:String>
+    <!--Contact person tab-->
+    <system:String x:Key="AtContactPersonPositionTextBlock">Position:</system:String>
+    <system:String x:Key="AtContactPersonSurnameTextBlock">Surname:</system:String>
+    <system:String x:Key="AtContactPersonNameTextBlock">Name:</system:String>
+    <system:String x:Key="AtContactPersonPatronymicTextBlock">Patronymic:</system:String>
+    <system:String x:Key="AtContactPersonContactPhoneTextBlock">ContactPhone:</system:String>
+    <system:String x:Key="AtContactPersonEmailTextBlock">Email:</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
     

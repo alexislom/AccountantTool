@@ -13,7 +13,7 @@ namespace AccountantTool.ViewModel
         #region Accountant record binding
         public Company Company { get; set; }
         public Requisites Requisites { get; set; }
-
+        public ContactPerson ContactPerson { get; set; }
         #endregion Accountant record binding
 
         public AddAccountantRecordWindowViewModel(MainWindowViewModel model)
@@ -21,6 +21,7 @@ namespace AccountantTool.ViewModel
             Model = model;
             Company = new Company();
             Requisites = new Requisites { Address = new Address() };
+            ContactPerson = new ContactPerson();
 
             AddAccountantRecordCommand = new RelayCommand<MetroWindow>(AddAccountantRecord);
         }
@@ -30,7 +31,8 @@ namespace AccountantTool.ViewModel
             var record = new AccountantRecord
             {
                 Company = Company,
-                Requisites = Requisites
+                Requisites = Requisites,
+                ContactPerson = ContactPerson
             };
 
             await Model.AddNewAccountantRecordAsync(record);
