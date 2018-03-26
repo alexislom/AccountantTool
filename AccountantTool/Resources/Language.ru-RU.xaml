@@ -8,7 +8,18 @@
     <system:String x:Key="AtSettingsTitle">Настройки</system:String>
     <system:String x:Key="AtNewRecordTitle">Новая запись</system:String>
     <system:String x:Key="AtAddRecordTittle">Добавить/Изменить запись</system:String>
+
     <system:String x:Key="AtDialogSave">Сохранить</system:String>
+    <system:String x:Key="AtNameOfTheCompanyDialogTitle">Название компании</system:String>
+    <system:String x:Key="AtFullNameOfTheCompanyTextBlock">Полное имя:</system:String>
+    <system:String x:Key="AtShortNameOfTheCompanyTextBlock">Сокращённое имя:</system:String>
+
+    <system:String x:Key="AtRequisitesDialogTitle">Реквизиты</system:String>
+    <system:String x:Key="AtContactPersonDialogTitle">Контактное лицо</system:String>
+    <system:String x:Key="AtLicenseDialogTitle">Лицензия</system:String>
+    <system:String x:Key="AtProductsDialogTitle">Продукты</system:String>
+    <system:String x:Key="AtContractsDialogTitle">Контракты</system:String>
+    <system:String x:Key="AtAddInfoDialogTitle">Дополнительная информация</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
 </ResourceDictionary>

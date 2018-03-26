@@ -28,8 +28,11 @@
     SaveWindowPosition="True"
     ShowSystemMenuOnRightClick="False"
 
-    mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=viewModel:MainWindowViewModel}">
+    mc:Ignorable="d">
+    
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel/>
+    </Window.DataContext>
     <Window.InputBindings>
         <KeyBinding Key="F1" Command="{Binding AddNewAccountantRecordCommand}" />
         <!--<KeyBinding
@@ -148,10 +151,10 @@
                 <GridView>
                     <GridView.Columns>
                         <GridViewColumn Header="№" 
-                                        DisplayMemberBinding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexConverter}}"/>
+                                        DisplayMemberBinding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexConverter}}" Width="30"/>
 
-                        <!--<GridViewColumn DisplayMemberBinding="{Binding Medicament.Name}" Header="{DynamicResource r_listViewName}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Medicament.Manufacturer.Name}" Header="{DynamicResource r_listViewManufacturer}" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=AccountantRecords.Company}" Header="LALALA" />
+                        <!--<GridViewColumn DisplayMemberBinding="{Binding Medicament.Manufacturer.Name}" Header="{DynamicResource r_listViewManufacturer}" />
                         <GridViewColumn DisplayMemberBinding="{Binding Medicament.Price, StringFormat={}{0} грн}" Header="{DynamicResource r_listViewUnitPrice}" />
                         <GridViewColumn DisplayMemberBinding="{Binding Count}" Header="{DynamicResource r_listViewNumber}" />
                         <GridViewColumn DisplayMemberBinding="{Binding Medicament.Unit, Converter={StaticResource EnumToStringConverter}}" Header="{DynamicResource r_listViewUnit}" />

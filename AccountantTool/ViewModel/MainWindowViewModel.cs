@@ -24,13 +24,9 @@ namespace AccountantTool.ViewModel
         #region Properties
 
         public AccountantDbContext Context { get; set; }
-
         public ObservableCollection<AccountantRecord> AccountantRecords { get; set; }
-
         public ICollectionView FilteredAccountantRecords { get; set; }
-
         public AccountantRecord SelectedAccountantRecord { get; set; }
-
         public bool IsDataLoaded { get; set; }
 
         #endregion Properties
@@ -64,6 +60,8 @@ namespace AccountantTool.ViewModel
             LoadAccountantRecordsAsyncCommand = new AsyncDelegateCommand(LoadAccountantRecordsAsync, x => IsDataLoaded);
 
             AddNewAccountantRecordEvent += OnAddNewAccountantRecordEvent;
+
+            LoadAccountantRecordsAsyncCommand.Execute(null);
         }
 
         #endregion Construction

@@ -1,36 +1,81 @@
 ﻿<controls:MetroWindow
-        x:Class="AccountantTool.View.AddAccountantRecordWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AccountantTool.View"
-        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:viewModel="clr-namespace:AccountantTool.ViewModel"
-        mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=viewModel:AddAccountantRecordWindowViewModel}"
-        GlowBrush="{DynamicResource AccentColorBrush}"
+    x:Class="AccountantTool.View.AddAccountantRecordWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:AccountantTool.View"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:viewModel="clr-namespace:AccountantTool.ViewModel"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=viewModel:AddAccountantRecordWindowViewModel}"
+    GlowBrush="{DynamicResource AccentColorBrush}"
 
-        Title="{DynamicResource AtAddRecordTittle}"
-        TitleAlignment="Center"
-        TitleCharacterCasing="Normal"
+    Title="{DynamicResource AtAddRecordTittle}"
+    TitleAlignment="Center"
+    TitleCharacterCasing="Normal"
 
-        Height="400"
-        Width="550"
-        WindowStartupLocation="CenterOwner"
-        ResizeMode="NoResize"
-        SaveWindowPosition="False"
-        ShowMaxRestoreButton="False"
-        ShowSystemMenuOnRightClick="False">
+    Height="700"
+    Width="800"
+    WindowStartupLocation="CenterOwner"
+    ResizeMode="NoResize"
+    SaveWindowPosition="False"
+    ShowMaxRestoreButton="False"
+    ShowSystemMenuOnRightClick="False">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Button
-            Width="75"
-            Margin="0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Command="{Binding Path=AddAccountantRecordCommand}"
-            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type controls:MetroWindow}}}"
-            Content="{StaticResource AtDialogSave}"
-            IsDefault="True" />
+        <controls:MetroTabControl>
+            <TabItem Header="{DynamicResource AtNameOfTheCompanyDialogTitle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource AtFullNameOfTheCompanyTextBlock}"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Company.LongName, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource AtShortNameOfTheCompanyTextBlock}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Company.ShortName, Mode=TwoWay}"/>
+                    <Button Grid.Row="2"
+                            Grid.Column="1"
+                            Width="75"
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Command="{Binding AddAccountantRecordCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type controls:MetroWindow}}}"
+                            Content="{StaticResource AtDialogSave}"
+                            IsDefault="True" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="{DynamicResource AtRequisitesDialogTitle}"/>
+            <TabItem Header="{DynamicResource AtContactPersonDialogTitle}"/>
+            <TabItem Header="{DynamicResource AtLicenseDialogTitle}"/>
+            <TabItem Header="{DynamicResource AtProductsDialogTitle}"/>
+            <TabItem Header="{DynamicResource AtContractsDialogTitle}"/>
+            <TabItem Header="{DynamicResource AtAddInfoDialogTitle}"/>
+        </controls:MetroTabControl>
     </Grid>
 </controls:MetroWindow>

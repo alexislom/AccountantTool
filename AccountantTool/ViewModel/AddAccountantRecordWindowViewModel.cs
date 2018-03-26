@@ -1,11 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using AccountantTool.Model;
 using AccountantTool.ViewModel.MainComponents;
-using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using MahApps.Metro.Controls;
 
 namespace AccountantTool.ViewModel
@@ -13,27 +8,27 @@ namespace AccountantTool.ViewModel
     public class AddAccountantRecordWindowViewModel
     {
         public MainWindowViewModel Model { get; }
-
-        public Task<List<AccountantRecord>> Records { get; set; }
-
         public ICommand AddAccountantRecordCommand { get; set; }
+
+        public Company Company { get; set; }
+
+
 
         public AddAccountantRecordWindowViewModel(MainWindowViewModel model)
         {
             Model = model;
-            Records = Model.Context.AccountantRecords.ToListAsync();
+            Company = new Company();
 
             AddAccountantRecordCommand = new RelayCommand<MetroWindow>(AddAccountantRecord);
         }
 
         private async void AddAccountantRecord(MetroWindow window)
         {
-            var record = new AccountantRecord { };
+            var record = new AccountantRecord { Company = Company};
 
             await Model.AddNewAccountantRecordAsync(record);
 
             window.Close();
         }
-
     }
 }
