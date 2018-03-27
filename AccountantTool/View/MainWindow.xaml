@@ -150,6 +150,30 @@
                     <GridViewColumn Header="№"
                                         DisplayMemberBinding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexConverter}}" Width="35"/>
 
+                    <!--<GridViewColumn DisplayMemberBinding="{Binding Company}"  Header="{DynamicResource AtNameOfTheCompanyDialogTitle}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding ShortName}"></TextBox>
+                                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding LongName}"></TextBox>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>-->
+
                     <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtNameOfTheCompanyDialogTitle}"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtRequisitesDialogTitle}" />
                     <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtContactPersonDialogTitle}" />
