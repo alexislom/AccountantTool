@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 using AccountantTool.ViewModel;
@@ -18,16 +19,16 @@ namespace AccountantTool.View
             var currentLanguage = App.SelectedLanguage;
             App.SelectedLanguage = new CultureInfo("en-US");
             App.SelectedLanguage = new CultureInfo("ru-RU");
-            DataContext = new MainWindowViewModel();
+            DataContext = new MainWindowViewModel(MainGrid.Worksheets[0]);
         }
 
-        private void AccountantRecordsListMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            var hitTestResult = VisualTreeHelper.HitTest(this, e.GetPosition(this));
-            if (hitTestResult.VisualHit.GetType() != typeof(ListBoxItem))
-            {
-                //AccountantRecordsList.UnselectAll();
-            }
-        }
+        //private void AccountantRecordsListMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        //{
+        //    var hitTestResult = VisualTreeHelper.HitTest(this, e.GetPosition(this));
+        //    if (hitTestResult.VisualHit.GetType() != typeof(ListBoxItem))
+        //    {
+        //        AccountantRecordsList.UnselectAll();
+        //    }
+        //}
     }
 }

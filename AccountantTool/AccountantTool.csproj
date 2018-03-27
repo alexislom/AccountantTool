@@ -63,6 +63,9 @@
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SQLite.CodeFirst, Version=1.5.1.25, Culture=neutral, PublicKeyToken=eb96ba0a78d831a7, processorArchitecture=MSIL">
       <HintPath>..\packages\SQLite.CodeFirst.1.5.1.25\lib\net45\SQLite.CodeFirst.dll</HintPath>
     </Reference>
@@ -184,6 +187,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\ColumnIndexes.cs" />
     <Compile Include="Converters\ListItemToIndexConverter.cs" />
     <Compile Include="Data\AccountantDbContext.cs" />
     <Compile Include="Data\AccountantDbInitializer.cs" />
@@ -208,6 +212,7 @@
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Requisites.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ReoGrid\DataFormatter\AccountantToolDataFormatter.cs" />
     <Compile Include="ViewModel\AddAccountantRecordWindowViewModel.cs" />
     <Compile Include="ViewModel\MainComponents\AsyncDelegateCommand.cs" />
     <Compile Include="ViewModel\MainComponents\EventRaiser.cs" />
@@ -253,7 +258,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ReoGrid\DropDownCell\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\icon.png" />
   </ItemGroup>

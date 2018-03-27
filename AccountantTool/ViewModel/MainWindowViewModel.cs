@@ -10,11 +10,14 @@ using AccountantTool.Helpers.Search;
 using AccountantTool.Model;
 using AccountantTool.View;
 using AccountantTool.ViewModel.MainComponents;
+using unvell.ReoGrid;
 
 namespace AccountantTool.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase, IAccountantRecordSearch
     {
+        public Worksheet MainGrid { get; }
+
         #region Fields
         private readonly object _accountantRecordsLock = new object();
         private string _searchString;
@@ -62,8 +65,12 @@ namespace AccountantTool.ViewModel
 
         #region Construction
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(Worksheet mainGrid)
         {
+            MainGrid = mainGrid;
+
+            InitializeWorksheet();
+
             Context = new AccountantDbContext();
             AccountantRecords = new ObservableCollection<AccountantRecord>();
 
@@ -80,6 +87,16 @@ namespace AccountantTool.ViewModel
         }
 
         #endregion Construction
+
+        #region Work with worksheet
+
+        private void InitializeWorksheet()
+        {
+            MainGrid.Columns = 7;
+        }
+
+        #endregion Work with worksheet
+
 
         #region Event handlers
 
