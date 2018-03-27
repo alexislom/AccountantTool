@@ -114,7 +114,7 @@ namespace AccountantTool.ViewModel
             {
                 var accountantRecord = AccountantRecords[i];
                 Worksheet.SetCellData(i, 0, accountantRecord.Company);
-                //Worksheet.SetCellBody(i, 0, accountantRecord.Company);
+                //Worksheet.SetCellBody(i, 0, new);
                 Worksheet.SetCellData(i, 1, accountantRecord.Requisites);
                 Worksheet.SetCellData(i, 2, accountantRecord.ContactPerson);
                 Worksheet.SetCellData(i, 3, accountantRecord.License);

@@ -1,7 +1,8 @@
 ﻿namespace AccountantTool.Common
 {
-    public class ColumnIndexes
+    public enum ColumnIndexes
     {
-        public const int REQUISITES = 1;
+        Company = 0,
+        Requisites = 1
     }
 }

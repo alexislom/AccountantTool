@@ -213,8 +213,11 @@
     <Compile Include="Model\Requisites.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ReoGrid\DataFormatter\AccountantToolDataFormatter.cs" />
-    <Compile Include="ReoGrid\DataFormatter\CompanyFormatter.cs" />
-    <Compile Include="ReoGrid\CustomDropDownCell\ListViewCompanyCell.cs" />
+    <Compile Include="ReoGrid\DataFormatter\CompanyDataFormatter.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\CustomDropdownListViewCell.cs" />
+    <Compile Include="ReoGrid\DataFormatter\DataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\EmptyDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\RequisitesDataFormatter.cs" />
     <Compile Include="ViewModel\AddAccountantRecordWindowViewModel.cs" />
     <Compile Include="ViewModel\MainComponents\AsyncDelegateCommand.cs" />
     <Compile Include="ViewModel\MainComponents\EventRaiser.cs" />

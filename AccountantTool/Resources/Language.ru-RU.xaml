@@ -42,6 +42,11 @@
     <system:String x:Key="AtContactPersonPatronymicTextBlock">Отчество:</system:String>
     <system:String x:Key="AtContactPersonContactPhoneTextBlock">Контактный телефон:</system:String>
     <system:String x:Key="AtContactPersonEmailTextBlock">Адрес электронной почты:</system:String>
+    <!--License tab-->
+    <system:String x:Key="AtLicenseNumberOfLicenseTextBlock">Номер лицензии:</system:String>
+    <system:String x:Key="AtLicenseDateOfIssueTextBlock">Дата выдачи:</system:String>
+    <system:String x:Key="AtLicenseDateOfExpirationTextBlock">Дата окончания действия:</system:String>
+    <system:String x:Key="AtLicenseLicenseTypeTextBlock">Вид лицензии:</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
 </ResourceDictionary>

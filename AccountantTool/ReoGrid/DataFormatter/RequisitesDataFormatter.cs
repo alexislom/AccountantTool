@@ -9,7 +9,7 @@ namespace AccountantTool.ReoGrid.DataFormatter
     {
         public override string FormatCell(Cell cell)
         {
-            if (cell.Column == ColumnIndexes.REQUISITES)
+            if (cell.Column == (int) ColumnIndexes.Requisites)
             {
                 var data = ParseRequisites(cell);
 

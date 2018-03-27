@@ -161,7 +161,36 @@
                 </Grid>
             </TabItem>
             <!--License tab-->
-            <TabItem Header="{DynamicResource AtLicenseDialogTitle}"/>
+            <TabItem Header="{DynamicResource AtLicenseDialogTitle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource AtLicenseNumberOfLicenseTextBlock}"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding License.NumberOfLicense, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource AtLicenseDateOfIssueTextBlock}"/>
+                    <DatePicker Grid.Row="1" Grid.Column="1" Margin="10"
+                                HorizontalAlignment="Center"
+                                SelectedDate="{Binding License.DateOfIssue}" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource AtLicenseDateOfExpirationTextBlock}"/>
+                    <DatePicker Grid.Row="2" Grid.Column="1" Margin="10"
+                                HorizontalAlignment="Center"
+                                SelectedDate="{Binding License.DateOfExpiration}" />
+
+                    <!--<TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource AtLicenseLicenseTypeTextBlock}"/>
+                    <ComboBox Grid.Row="3" Grid.Column="1" Items="{Binding LicenseType}"/>-->
+                </Grid>
+            </TabItem>
             <!--Products tab-->
             <TabItem Header="{DynamicResource AtProductsDialogTitle}"/>
             <!--Contracts tab-->

@@ -2,7 +2,7 @@
 
 namespace AccountantTool.ReoGrid.CustomDropDownCell
 {
-    public class ListViewCompanyCell : unvell.ReoGrid.CellTypes.CellBody
+    public class CustomDropdownListViewCell : CellBody
     {
 
     }

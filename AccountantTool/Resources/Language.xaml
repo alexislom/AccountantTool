@@ -42,6 +42,11 @@
     <system:String x:Key="AtContactPersonPatronymicTextBlock">Patronymic:</system:String>
     <system:String x:Key="AtContactPersonContactPhoneTextBlock">ContactPhone:</system:String>
     <system:String x:Key="AtContactPersonEmailTextBlock">Email:</system:String>
+    <!--License tab-->
+    <system:String x:Key="AtLicenseNumberOfLicenseTextBlock">Number of license:</system:String>
+    <system:String x:Key="AtLicenseDateOfIssueTextBlock">Date of issue:</system:String>
+    <system:String x:Key="AtLicenseDateOfExpirationTextBlock">Date of expiration:</system:String>
+    <system:String x:Key="AtLicenseLicenseTypeTextBlock">License type:</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
     
