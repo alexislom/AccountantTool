@@ -8,8 +8,22 @@ namespace AccountantTool.ReoGrid.DataFormatter
 {
     public class AccountantToolDataFormatter : IDataFormatter
     {
+        public DataFormatter GetFormatter(Cell cell)
+        {
+            switch (cell.Column)
+            {
+                case 0:
+                    return new CompanyFormatter();
+                default:
+                    return new EmptyDataFormatter();
+            }
+        }
+
         public string FormatCell(Cell cell)
         {
+            var formatter = GetFormatter(cell);
+            return formatter.FormatCell(cell);
+
             if (cell.Column == ColumnIndexes.REQUISITES)
             {
                 var data = ParseRequisites(cell);

@@ -107,7 +107,7 @@
             </StackPanel>
         </DockPanel>
         <rg:ReoGridControl x:Name="MainGrid" Grid.Row="1">
-            
+
         </rg:ReoGridControl>
     </Grid>
 

@@ -1,4 +1,5 @@
 ﻿using AccountantTool.ViewModel.MainComponents;
+using Newtonsoft.Json;
 
 namespace AccountantTool.Model
 {
@@ -31,5 +32,10 @@ namespace AccountantTool.Model
         //        OnPropertyChanged();
         //    }
         //}
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

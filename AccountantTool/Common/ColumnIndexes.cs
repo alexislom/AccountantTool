@@ -2,6 +2,6 @@
 {
     public class ColumnIndexes
     {
-        public const int REQUISITES = 2;
+        public const int REQUISITES = 1;
     }
 }

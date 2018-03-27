@@ -1,22 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
+using AccountantTool.Common;
 using AccountantTool.Data;
 using AccountantTool.Helpers.Search;
 using AccountantTool.Model;
+using AccountantTool.ReoGrid.DataFormatter;
 using AccountantTool.View;
 using AccountantTool.ViewModel.MainComponents;
 using unvell.ReoGrid;
+using unvell.ReoGrid.DataFormat;
 
 namespace AccountantTool.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase, IAccountantRecordSearch
     {
-        public Worksheet MainGrid { get; }
+        public Worksheet Worksheet { get; }
 
         #region Fields
         private readonly object _accountantRecordsLock = new object();
@@ -67,13 +71,14 @@ namespace AccountantTool.ViewModel
 
         public MainWindowViewModel(Worksheet mainGrid)
         {
-            MainGrid = mainGrid;
+            Worksheet = mainGrid;
 
-            InitializeWorksheet();
+           
 
             Context = new AccountantDbContext();
             AccountantRecords = new ObservableCollection<AccountantRecord>();
 
+           
             BindingOperations.EnableCollectionSynchronization(AccountantRecords, _accountantRecordsLock);
             FilteredAccountantRecords = new CollectionViewGeneric<AccountantRecord>(CollectionViewSource.GetDefaultView(AccountantRecords));
 
@@ -84,6 +89,8 @@ namespace AccountantTool.ViewModel
             AddNewAccountantRecordEvent += OnAddNewAccountantRecordEvent;
 
             LoadAccountantRecordsAsyncCommand.Execute(null);
+            DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
+            InitializeWorksheet();
         }
 
         #endregion Construction
@@ -92,7 +99,29 @@ namespace AccountantTool.ViewModel
 
         private void InitializeWorksheet()
         {
-            MainGrid.Columns = 7;
+            AccountantRecords.Add(new AccountantRecord()
+            {
+                Requisites = new Requisites(),
+                Company = new Company(),
+                ContactPerson = new ContactPerson(),
+                Contract = new Contract(),
+                AdditionalInfo = new AdditionalInfo(),
+                License = new License(),
+                Product = new List<Product>(),
+            });
+            Worksheet.Columns = 8;
+            for (int i = 0; i < AccountantRecords.Count; i++)
+            {
+                var accountantRecord = AccountantRecords[i];
+                Worksheet.SetCellData(i, 0, accountantRecord.Company);
+                //Worksheet.SetCellBody(i, 0, accountantRecord.Company);
+                Worksheet.SetCellData(i, 1, accountantRecord.Requisites);
+                Worksheet.SetCellData(i, 2, accountantRecord.ContactPerson);
+                Worksheet.SetCellData(i, 3, accountantRecord.License);
+                Worksheet.SetCellData(i, 4, accountantRecord.Product);
+                Worksheet.SetCellData(i, 5, accountantRecord.Contract);
+                Worksheet.SetCellData(i, 6, accountantRecord.AdditionalInfo);
+            }
         }
 
         #endregion Work with worksheet

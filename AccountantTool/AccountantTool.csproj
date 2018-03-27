@@ -213,6 +213,8 @@
     <Compile Include="Model\Requisites.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ReoGrid\DataFormatter\AccountantToolDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\CompanyFormatter.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\ListViewCompanyCell.cs" />
     <Compile Include="ViewModel\AddAccountantRecordWindowViewModel.cs" />
     <Compile Include="ViewModel\MainComponents\AsyncDelegateCommand.cs" />
     <Compile Include="ViewModel\MainComponents\EventRaiser.cs" />
@@ -258,9 +260,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ReoGrid\DropDownCell\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\Images\icon.png" />
   </ItemGroup>
