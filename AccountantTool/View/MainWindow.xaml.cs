@@ -26,7 +26,7 @@ namespace AccountantTool.View
             var hitTestResult = VisualTreeHelper.HitTest(this, e.GetPosition(this));
             if (hitTestResult.VisualHit.GetType() != typeof(ListBoxItem))
             {
-                AccountantRecordsList.UnselectAll();
+                //AccountantRecordsList.UnselectAll();
             }
         }
     }
