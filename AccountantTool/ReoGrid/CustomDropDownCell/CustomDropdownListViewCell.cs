@@ -60,22 +60,22 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
             this.OnMouseUp(s);
 
             //this.RaiseEvent(new RoutedEventArgs(DropDownButton.ClickEvent, this));
-            RaiseEvent(new MouseButtonEventArgs(Mouse.PrimaryDevice, 0, MouseButton.Left)
-            {
-                RoutedEvent = Mouse.MouseDownEvent,
-                Source = this,
-            });
+            //RaiseEvent(new MouseButtonEventArgs(Mouse.PrimaryDevice, 0, MouseButton.Left)
+            //{
+            //    RoutedEvent = Mouse.MouseDownEvent,
+            //    Source = this,
+            //});
         }
     }
 
     public class CustomDropdownListViewCell : CellBody
     {
-        private DropdownWindow dropdownPanel;
+        private DropdownWindow _dropdownPanel;
 
         /// <summary>
         /// Get dropdown panel.
         /// </summary>
-        protected DropdownWindow DropdownPanel => dropdownPanel;
+        protected DropdownWindow DropdownPanel => _dropdownPanel;
 
         /// <summary>
         /// Determines whether or not to open the drop-down panel when user clicked inside cell.
@@ -216,8 +216,7 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
             // call base to draw cell background and text
             base.OnPaint(dc);
 
-            DropdownControl.DoRender(dc.Graphics.PlatformGraphics, Cell);
-            var kek = this.DropdownButtonRect;
+            //DropdownControl.DoRender(dc.Graphics.PlatformGraphics, Cell);
 
             // draw button surface
             // this.OnPaintDropdownButton(dc, this.dropdownButtonRect);
@@ -255,7 +254,7 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
             if (PullDownOnClick || dropdownButtonRect.Contains(e.RelativePosition))
             {
                 DropdownControl.OnMouseDownClick(e);
-
+                //PushDown();
                 //if (isDropdown)
                 //{
                 //    PullUp();
@@ -324,35 +323,34 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
         /// </summary>
         //public virtual void PushDown()
         //{
-        //    if (this.Cell == null && this.Cell.Worksheet == null) return;
+        //    if (Cell == null && Cell.Worksheet == null) return;
 
-        //    if (this.Cell.IsReadOnly && this.DisableWhenCellReadonly)
+        //    if (Cell.IsReadOnly && DisableWhenCellReadonly)
         //    {
         //        return;
         //    }
 
-        //    sheet = base.Cell == null ? null : (base.Cell.Worksheet);
+        //    sheet = Cell?.Worksheet;
 
-        //    Point p;
-
-        //    if (sheet != null && this.DropdownControl != null
-        //        && Views.CellsViewport.TryGetCellPositionToControl(sheet.ViewportController.FocusView, this.Cell.InternalPos, out p))
+        //    if (sheet != null && DropdownControl != null)
+        //        //&& Views.CellsViewport.TryGetCellPositionToControl(sheet.ViewportController.FocusView, this.Cell.InternalPos, out Point p))
         //    {
-        //        if (this.dropdownPanel == null)
+        //        if (this._dropdownPanel == null)
         //        {
-        //            this.dropdownPanel = new DropdownWindow(this);
+        //            this._dropdownPanel = new DropdownWindow(this);
         //            //dropdown.VisibleChanged += dropdown_VisibleChanged;
 
         //            //this.dropdownPanel.LostFocus -= DropdownControl_LostFocus;
         //            //this.dropdownPanel.OwnerItem = this.dropdownControl;
-        //            this.dropdownPanel.VisibleChanged += DropdownPanel_VisibleChanged;
+        //            //this.dropdownPanel.VisibleChanged += DropdownPanel_VisibleChanged;
+        //            _dropdownPanel.LostFocus += DropdownPanel_VisibleChanged;
         //        }
 
-        //        this.dropdownPanel.Width = Math.Max((int)Math.Round(Bounds.Width * sheet.renderScaleFactor), MinimumDropdownWidth);
-        //        this.dropdownPanel.Height = DropdownPanelHeight;
+        //        this._dropdownPanel.Width = Math.Max((int)Math.Round(Bounds.Width * sheet.ScaleFactor), MinimumDropdownWidth);
+        //        this._dropdownPanel.Height = DropdownPanelHeight;
 
-        //        this.dropdownPanel.Show(sheet.workbook.ControlInstance,
-        //            new System.Drawing.Point((int)Math.Round(p.X), (int)Math.Round(p.Y + Bounds.Height * sheet.renderScaleFactor)));
+        //        //this.dropdownPanel.Show(sheet.Workbook.ControlInstance,
+        //        //    new System.Drawing.Point((int)Math.Round(p.X), (int)Math.Round(p.Y + Bounds.Height * sheet.ScaleFactor)));
 
         //        this.DropdownControl.Focus();
 
@@ -382,9 +380,9 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
         /// </summary>
         public virtual void PullUp()
         {
-            if (dropdownPanel != null)
+            if (_dropdownPanel != null)
             {
-                dropdownPanel.Hide();
+                _dropdownPanel.Hide();
 
                 isDropdown = false;
 

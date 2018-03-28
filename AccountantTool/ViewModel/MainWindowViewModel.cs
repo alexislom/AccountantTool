@@ -17,6 +17,7 @@ using AccountantTool.ReoGrid.DataFormatter;
 using AccountantTool.View;
 using AccountantTool.ViewModel.MainComponents;
 using unvell.ReoGrid;
+using unvell.ReoGrid.CellTypes;
 using unvell.ReoGrid.DataFormat;
 
 namespace AccountantTool.ViewModel
@@ -121,7 +122,7 @@ namespace AccountantTool.ViewModel
                     DropdownControl = new ContentControlWrapper(new CompanyControl()) //new Button {Content = "test button"})
                 };
 
-                Worksheet.SetCellBody(i, 0, customDropdownListViewCell);
+                Worksheet.SetCellBody(i, 0, new DropdownListCell()); //customDropdownListViewCell);
 
                 Worksheet.SetCellData(i, 1, accountantRecord.Requisites);
                 Worksheet.SetCellData(i, 2, accountantRecord.ContactPerson);

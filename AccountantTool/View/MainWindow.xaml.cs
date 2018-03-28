@@ -1,7 +1,5 @@
 ﻿using System.Globalization;
-using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Media;
+using System.Windows.Forms;
 using AccountantTool.ViewModel;
 using MahApps.Metro.Controls;
 
@@ -19,7 +17,15 @@ namespace AccountantTool.View
             var currentLanguage = App.SelectedLanguage;
             App.SelectedLanguage = new CultureInfo("en-US");
             App.SelectedLanguage = new CultureInfo("ru-RU");
-            DataContext = new MainWindowViewModel(MainGrid.Worksheets[0]);
+            //DataContext = new MainWindowViewModel(MainGrid.Worksheets[0]);
+            var grid = new unvell.ReoGrid.ReoGridControl
+            {
+                Dock = DockStyle.Fill,
+            };
+
+            WindowsFormsHost.Child = grid;
+
+            DataContext = new MainWindowViewModel(grid.Worksheets[0]);
         }
 
         //private void AccountantRecordsListMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
