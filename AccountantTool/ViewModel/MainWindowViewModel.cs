@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
 using AccountantTool.Common;
+using AccountantTool.Controls;
 using AccountantTool.Data;
 using AccountantTool.Helpers.Search;
 using AccountantTool.Model;
@@ -115,12 +116,13 @@ namespace AccountantTool.ViewModel
                 var accountantRecord = AccountantRecords[i];
                 Worksheet.SetCellData(i, 0, accountantRecord.Company);
 
-                var ctrl = new CustomDropdownListViewCell
+                var customDropdownListViewCell = new CustomDropdownListViewCell
                 {
-                    DropdownControl = new ContentControlWrapper(new Button {Content = "test button"})
+                    DropdownControl = new ContentControlWrapper(new CompanyControl()) //new Button {Content = "test button"})
                 };
 
-                Worksheet.SetCellBody(i, 0, ctrl);
+                Worksheet.SetCellBody(i, 0, customDropdownListViewCell);
+
                 Worksheet.SetCellData(i, 1, accountantRecord.Requisites);
                 Worksheet.SetCellData(i, 2, accountantRecord.ContactPerson);
                 Worksheet.SetCellData(i, 3, accountantRecord.License);

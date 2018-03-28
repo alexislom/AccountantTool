@@ -47,6 +47,12 @@
     <system:String x:Key="AtLicenseDateOfIssueTextBlock">Date of issue:</system:String>
     <system:String x:Key="AtLicenseDateOfExpirationTextBlock">Date of expiration:</system:String>
     <system:String x:Key="AtLicenseLicenseTypeTextBlock">License type:</system:String>
+    <!--Products tab-->
+    <system:String x:Key="AtProductNameTextBlock">Name of product:</system:String>
+    <system:String x:Key="AtProductDescriptionTextBlock">Description of product:</system:String>
+    <system:String x:Key="AtProductCostFromSellerTextBlock">Cost from seller:</system:String>
+    <system:String x:Key="AtProductCostForCustomerTextBlock">Cost for customer:</system:String>
+    <system:String x:Key="AtProductCountTextBlock">Count:</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
     

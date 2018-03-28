@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using DropDownButtonLib.Controls;
 using unvell.ReoGrid;
 using unvell.ReoGrid.CellTypes;
 using unvell.ReoGrid.Events;
@@ -10,6 +12,7 @@ using unvell.ReoGrid.Graphics;
 using unvell.ReoGrid.Interaction;
 using unvell.ReoGrid.Rendering;
 using DrawingContext = System.Windows.Media.DrawingContext;
+using Point = unvell.ReoGrid.Graphics.Point;
 using Size = unvell.ReoGrid.Graphics.Size;
 
 namespace AccountantTool.ReoGrid.CustomDropDownCell
@@ -18,10 +21,10 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
     {
         private readonly ContentControl _contentControl;
 
-        public ContentControlWrapper(ContentControl child)
+        public ContentControlWrapper(ContentControl contentControl)
         {
-            Content = child;
-            _contentControl = child;
+            Content = contentControl;
+            _contentControl = contentControl;
         }
 
         internal void DoRender(DrawingContext platformGraphics, Cell cell)
@@ -34,16 +37,34 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
 
             _contentControl.Width = w; //100;
             _contentControl.Height = h; // 30;
-            Measure(new System.Windows.Size(Double.PositiveInfinity, Double.PositiveInfinity));
+            Measure(new System.Windows.Size(double.PositiveInfinity, double.PositiveInfinity));
             Arrange(new Rect(DesiredSize));
             var bmp = new RenderTargetBitmap(w, h, 96, 96, PixelFormats.Pbgra32);
             bmp.Render(this);
             platformGraphics.DrawImage(bmp, new Rect(DesiredSize));
         }
 
-        internal void OnMouseDownClick()
+        internal void OnMouseDownClick(CellMouseEventArgs e)
         {
+            var s = new MouseButtonEventArgs(Mouse.PrimaryDevice, 0, MouseButton.Left)
+            {
+                RoutedEvent = Mouse.MouseDownEvent,
+                Source = this,
+            };
+            this.OnMouseDown(s);
+            s = new MouseButtonEventArgs(Mouse.PrimaryDevice, 300, MouseButton.Left)
+            {
+                RoutedEvent = Mouse.MouseUpEvent,
+                Source = this,
+            };
+            this.OnMouseUp(s);
 
+            //this.RaiseEvent(new RoutedEventArgs(DropDownButton.ClickEvent, this));
+            RaiseEvent(new MouseButtonEventArgs(Mouse.PrimaryDevice, 0, MouseButton.Left)
+            {
+                RoutedEvent = Mouse.MouseDownEvent,
+                Source = this,
+            });
         }
     }
 
@@ -196,6 +217,8 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
             base.OnPaint(dc);
 
             DropdownControl.DoRender(dc.Graphics.PlatformGraphics, Cell);
+            var kek = this.DropdownButtonRect;
+
             // draw button surface
             // this.OnPaintDropdownButton(dc, this.dropdownButtonRect);
         }
@@ -207,8 +230,19 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
         ///// <param name="buttonRect">Rectangle of drop-down button.</param>
         //protected virtual void OnPaintDropdownButton(CellDrawingContext dc, Rectangle buttonRect)
         //{
-        //    var ctrl = new System.Windows.Controls.ContentControl();
-
+        //    if (this.Cell != null)
+        //    {
+        //        if (this.Cell.IsReadOnly)
+        //        {
+        //            ControlPaint.DrawComboButton(dc.Graphics.PlatformGraphics, (System.Drawing.Rectangle)(buttonRect),
+        //                System.Windows.Forms.ButtonState.Inactive);
+        //        }
+        //        else
+        //        {
+        //            ControlPaint.DrawComboButton(dc.Graphics.PlatformGraphics, (System.Drawing.Rectangle)(buttonRect),
+        //                this.isDropdown ? System.Windows.Forms.ButtonState.Pushed : System.Windows.Forms.ButtonState.Normal);
+        //        }
+        //    }
         //}
 
         /// <summary>
@@ -220,14 +254,16 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
         {
             if (PullDownOnClick || dropdownButtonRect.Contains(e.RelativePosition))
             {
-                if (isDropdown)
-                {
-                    PullUp();
-                }
-                else
-                {
-                    //PushDown();
-                }
+                DropdownControl.OnMouseDownClick(e);
+
+                //if (isDropdown)
+                //{
+                //    PullUp();
+                //}
+                //else
+                //{
+                //    //PushDown();
+                //}
 
                 return true;
             }
@@ -352,10 +388,7 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
 
                 isDropdown = false;
 
-                if (sheet != null)
-                {
-                    sheet.RequestInvalidate();
-                }
+                sheet?.RequestInvalidate();
             }
 
             DropdownClosed?.Invoke(this, null);
@@ -381,6 +414,6 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
             }
         }
 
-        #endregion // Dropdown Window
+        #endregion Dropdown Window
     }
 }

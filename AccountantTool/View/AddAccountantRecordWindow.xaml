@@ -192,7 +192,36 @@
                 </Grid>
             </TabItem>
             <!--Products tab-->
-            <TabItem Header="{DynamicResource AtProductsDialogTitle}"/>
+            <TabItem Header="{DynamicResource AtProductsDialogTitle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource AtProductNameTextBlock}"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Product.Name, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource AtProductDescriptionTextBlock}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Product.Description, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource AtProductCostFromSellerTextBlock}"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Product.CostFromSeller, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource AtProductCostForCustomerTextBlock}"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Product.CostForCustomer, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource AtProductCountTextBlock}"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Product.Count, Mode=TwoWay}"/>
+                </Grid>
+            </TabItem>
             <!--Contracts tab-->
             <TabItem Header="{DynamicResource AtContractsDialogTitle}"/>
             <!--Additional info tab-->

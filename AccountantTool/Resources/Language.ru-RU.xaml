@@ -47,6 +47,12 @@
     <system:String x:Key="AtLicenseDateOfIssueTextBlock">Дата выдачи:</system:String>
     <system:String x:Key="AtLicenseDateOfExpirationTextBlock">Дата окончания действия:</system:String>
     <system:String x:Key="AtLicenseLicenseTypeTextBlock">Вид лицензии:</system:String>
+    <!--Products tab-->
+    <system:String x:Key="AtProductNameTextBlock">Наименование изделия:</system:String>
+    <system:String x:Key="AtProductDescriptionTextBlock">Характеристика изделия:</system:String>
+    <system:String x:Key="AtProductCostFromSellerTextBlock">Стоимость у продавца:</system:String>
+    <system:String x:Key="AtProductCostForCustomerTextBlock">Стоимость при поставке покупателю:</system:String>
+    <system:String x:Key="AtProductCountTextBlock">Количество поставляемых изделий:</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
 </ResourceDictionary>
