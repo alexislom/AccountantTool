@@ -53,6 +53,14 @@
     <system:String x:Key="AtProductCostFromSellerTextBlock">Cost from seller:</system:String>
     <system:String x:Key="AtProductCostForCustomerTextBlock">Cost for customer:</system:String>
     <system:String x:Key="AtProductCountTextBlock">Count:</system:String>
+    <!--Contracts tab-->
+    <system:String x:Key="AtContractNumberTextBlock">Number of contract:</system:String>
+    <system:String x:Key="AtContractSideOfContractTextBlock">Side of contract:</system:String>
+    <system:String x:Key="AtContractDateOfStartTextBlock">Date of start:</system:String>
+    <system:String x:Key="AtContractDateOfEndTextBlock">Date of end:</system:String>
+    <system:String x:Key="AtContractContractStageTextBlock">Contract stage:</system:String>
+    <!--Additional info tab-->
+    <system:String x:Key="AtAdditionalInfoNotesTextBlock">Notes:</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
     

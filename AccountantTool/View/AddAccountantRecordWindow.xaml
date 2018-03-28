@@ -223,9 +223,56 @@
                 </Grid>
             </TabItem>
             <!--Contracts tab-->
-            <TabItem Header="{DynamicResource AtContractsDialogTitle}"/>
+            <TabItem Header="{DynamicResource AtContractsDialogTitle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource AtContractNumberTextBlock}"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Contract.NumberOfContract, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource AtContractSideOfContractTextBlock}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Contract.SideOfContract, Mode=TwoWay}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource AtContractDateOfStartTextBlock}"/>
+                    <DatePicker Grid.Row="2" Grid.Column="1" Margin="10"
+                                HorizontalAlignment="Center"
+                                SelectedDate="{Binding Contract.DateOfStart}" />
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource AtContractDateOfEndTextBlock}"/>
+                    <DatePicker Grid.Row="3" Grid.Column="1" Margin="10"
+                                HorizontalAlignment="Center"
+                                SelectedDate="{Binding Contract.DateOfEnd}" />
+
+                    <!--<TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource AtContractContractStageTextBlock}"/>
+                    <ComboBox Grid.Row="4" Grid.Column="1" Items="{Binding ContractStage}"/>-->
+                </Grid>
+            </TabItem>
             <!--Additional info tab-->
-            <TabItem Header="{DynamicResource AtAddInfoDialogTitle}"/>
+            <TabItem Header="{DynamicResource AtAddInfoDialogTitle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource AtAdditionalInfoNotesTextBlock}"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding AdditionalInfo.Notes, Mode=TwoWay}"/>
+                </Grid>
+            </TabItem>
         </controls:MetroTabControl>
     </Grid>
 </controls:MetroWindow>

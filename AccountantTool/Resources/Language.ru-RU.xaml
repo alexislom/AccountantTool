@@ -53,6 +53,14 @@
     <system:String x:Key="AtProductCostFromSellerTextBlock">Стоимость у продавца:</system:String>
     <system:String x:Key="AtProductCostForCustomerTextBlock">Стоимость при поставке покупателю:</system:String>
     <system:String x:Key="AtProductCountTextBlock">Количество поставляемых изделий:</system:String>
+    <!--Contracts tab-->
+    <system:String x:Key="AtContractNumberTextBlock">Номер контракта:</system:String>
+    <system:String x:Key="AtContractSideOfContractTextBlock">Стороны контракта:</system:String>
+    <system:String x:Key="AtContractDateOfStartTextBlock">Дата заключения контракта:</system:String>
+    <system:String x:Key="AtContractDateOfEndTextBlock">Дата исполнения контракта:</system:String>
+    <system:String x:Key="AtContractContractStageTextBlock">Стадия контракта:</system:String>
+    <!--Additional info tab-->
+    <system:String x:Key="AtAdditionalInfoNotesTextBlock">Записи:</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
 </ResourceDictionary>
