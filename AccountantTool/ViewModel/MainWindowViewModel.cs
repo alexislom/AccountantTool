@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -10,6 +11,7 @@ using AccountantTool.Common;
 using AccountantTool.Data;
 using AccountantTool.Helpers.Search;
 using AccountantTool.Model;
+using AccountantTool.ReoGrid.CustomDropDownCell;
 using AccountantTool.ReoGrid.DataFormatter;
 using AccountantTool.View;
 using AccountantTool.ViewModel.MainComponents;
@@ -73,12 +75,9 @@ namespace AccountantTool.ViewModel
         {
             Worksheet = mainGrid;
 
-           
-
             Context = new AccountantDbContext();
             AccountantRecords = new ObservableCollection<AccountantRecord>();
 
-           
             BindingOperations.EnableCollectionSynchronization(AccountantRecords, _accountantRecordsLock);
             FilteredAccountantRecords = new CollectionViewGeneric<AccountantRecord>(CollectionViewSource.GetDefaultView(AccountantRecords));
 
@@ -89,6 +88,7 @@ namespace AccountantTool.ViewModel
             AddNewAccountantRecordEvent += OnAddNewAccountantRecordEvent;
 
             LoadAccountantRecordsAsyncCommand.Execute(null);
+
             DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
             InitializeWorksheet();
         }
@@ -110,11 +110,17 @@ namespace AccountantTool.ViewModel
                 Product = new List<Product>(),
             });
             Worksheet.Columns = 8;
-            for (int i = 0; i < AccountantRecords.Count; i++)
+            for (var i = 0; i < AccountantRecords.Count; i++)
             {
                 var accountantRecord = AccountantRecords[i];
                 Worksheet.SetCellData(i, 0, accountantRecord.Company);
-                //Worksheet.SetCellBody(i, 0, new);
+
+                var ctrl = new CustomDropdownListViewCell
+                {
+                    DropdownControl = new ContentControlWrapper(new Button {Content = "test button"})
+                };
+
+                Worksheet.SetCellBody(i, 0, ctrl);
                 Worksheet.SetCellData(i, 1, accountantRecord.Requisites);
                 Worksheet.SetCellData(i, 2, accountantRecord.ContactPerson);
                 Worksheet.SetCellData(i, 3, accountantRecord.License);
