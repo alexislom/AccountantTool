@@ -15,7 +15,7 @@ namespace AccountantTool.Model
 
         public int NumberOfContract { get; set; }
 
-        public string SideOfContract { get; set; }
+        public string SidesOfContract { get; set; }
 
         public DateTime DateOfStart { get; set; }
 

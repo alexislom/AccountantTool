@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
+using AccountantTool.Common;
 using AccountantTool.Data;
 using AccountantTool.Helpers.Search;
 using AccountantTool.Model;
@@ -97,6 +98,9 @@ namespace AccountantTool.ViewModel
 
         private void InitializeWorksheet()
         {
+            Worksheet.Columns = Constants.CountOfColumns;
+            Worksheet.SetColumnsWidth(0, 7, 200);
+
             AccountantRecords.Add(new AccountantRecord
             {
                 Requisites = new Requisites
@@ -137,7 +141,7 @@ namespace AccountantTool.ViewModel
                     DateOfStart = DateTime.Now,
                     IsFulfilled = false,
                     NumberOfContract = 1,
-                    SideOfContract = "asdasd"
+                    SidesOfContract = "asdasd"
                 },
                 AdditionalInfo = new AdditionalInfo
                 {
@@ -150,7 +154,7 @@ namespace AccountantTool.ViewModel
                     DateOfIssue = DateTime.Now,
                     NumberOfLicense = 3
                 },
-                Product = new List<Product>
+                Products = new List<Product>
                 {
                     new Product
                     {
@@ -177,7 +181,7 @@ namespace AccountantTool.ViewModel
                     }
                 },
             });
-            Worksheet.Columns = 8;
+
             for (var i = 0; i < AccountantRecords.Count; i++)
             {
                 var accountantRecord = AccountantRecords[i];
@@ -194,9 +198,14 @@ namespace AccountantTool.ViewModel
                 Worksheet.SetCellData(i, 3, accountantRecord.License);
                 Worksheet.SetCellBody(i, 3, new LicenseListViewDropdownCell(accountantRecord.License));
 
-                Worksheet.SetCellData(i, 4, accountantRecord.Product);
+                Worksheet.SetCellData(i, 4, accountantRecord.Products);
+                Worksheet.SetCellBody(i, 4, new ProductsListViewDropdownCell(accountantRecord.Products));
+
                 Worksheet.SetCellData(i, 5, accountantRecord.Contract);
+                Worksheet.SetCellBody(i, 5, new ContactListViewDropdownCell(accountantRecord.Contract));
+
                 Worksheet.SetCellData(i, 6, accountantRecord.AdditionalInfo);
+                Worksheet.SetCellBody(i, 6, new AdditionalInfoListViewDropdownCell(accountantRecord.AdditionalInfo));
             }
         }
 

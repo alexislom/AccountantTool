@@ -8,9 +8,9 @@
 
         public string Description { get; set; }
 
-        public decimal CostFromSeller { get; set; }
+        public double CostFromSeller { get; set; }
 
-        public decimal CostForCustomer { get; set; }
+        public double CostForCustomer { get; set; }
 
         public int Count { get; set; }
     }

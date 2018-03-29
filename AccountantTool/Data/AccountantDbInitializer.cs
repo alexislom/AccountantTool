@@ -43,7 +43,7 @@ namespace AccountantTool.Data
                 Requisites = requisites,
                 ContactPerson = contactPerson,
                 License = license,
-                Product = products,
+                Products = products,
                 Contract = contract,
                 AdditionalInfo = additionalInfo
             };

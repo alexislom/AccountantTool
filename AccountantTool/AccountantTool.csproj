@@ -191,6 +191,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\ColumnIndexes.cs" />
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Controls\AdditionalInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AdditionalInfoControl.Designer.cs">
+      <DependentUpon>AdditionalInfoControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CompanyControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -203,11 +210,23 @@
     <Compile Include="Controls\ContactPersonControl.Designer.cs">
       <DependentUpon>ContactPersonControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ContractControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ContractControl.Designer.cs">
+      <DependentUpon>ContractControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LicenseControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\LicenseControl.Designer.cs">
       <DependentUpon>LicenseControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProductsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ProductsControl.Designer.cs">
+      <DependentUpon>ProductsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\RequisitesControl.cs">
       <SubType>UserControl</SubType>
@@ -239,10 +258,13 @@
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Requisites.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\AdditionalInfoListViewDropdownCell.cs" />
     <Compile Include="ReoGrid\CustomDropDownCell\BaseListViewDropdownCell.cs" />
     <Compile Include="ReoGrid\CustomDropDownCell\CompanyListViewDropdownCell.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\ContactListViewDropdownCell.cs" />
     <Compile Include="ReoGrid\CustomDropDownCell\ContactPersonListViewDropdownCell.cs" />
     <Compile Include="ReoGrid\CustomDropDownCell\LicenseListViewDropdownCell.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\ProductsListViewDropdownCell.cs" />
     <Compile Include="ReoGrid\CustomDropDownCell\RequisitesListViewDropdownCell.cs" />
     <Compile Include="ReoGrid\DataFormatter\AccountantToolDataFormatter.cs" />
     <Compile Include="ReoGrid\DataFormatter\CompanyDataFormatter.cs" />
@@ -277,14 +299,23 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Controls\AdditionalInfoControl.resx">
+      <DependentUpon>AdditionalInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CompanyControl.resx">
       <DependentUpon>CompanyControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ContactPersonControl.resx">
       <DependentUpon>ContactPersonControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ContractControl.resx">
+      <DependentUpon>ContractControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\LicenseControl.resx">
       <DependentUpon>LicenseControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ProductsControl.resx">
+      <DependentUpon>ProductsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\RequisitesControl.resx">
       <DependentUpon>RequisitesControl.cs</DependentUpon>
