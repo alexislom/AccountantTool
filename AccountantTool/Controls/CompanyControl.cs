@@ -5,14 +5,15 @@ namespace AccountantTool.Controls
 {
     public partial class CompanyControl : UserControl
     {
-        public Company AccountantRecordCompany { get; private set; }
+        public Company Model { get; private set; }
 
-        public CompanyControl(Company accountantRecordCompany)
+        public CompanyControl(Company model)
         {
-            AccountantRecordCompany = accountantRecordCompany;
+            Model = model;
             InitializeComponent();
-            this.txtFullName.Text = AccountantRecordCompany.LongName;
-            this.txtShortName.Text = AccountantRecordCompany.ShortName;
+
+            txtFullName.Text = Model.LongName;
+            txtShortName.Text = Model.ShortName;
         }
     }
 }

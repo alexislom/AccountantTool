@@ -110,7 +110,11 @@ namespace AccountantTool.ViewModel
                         House = "5",
                         Index = 2222222,
                         Region = "nasgnals"
-                    }
+                    },
+                    Email = "aaalalalalala",
+                    OtherRequisites = "adakwbfjawkf",
+                    Phones = "1241451436146",
+                    Site = "asfasfafw.com"
                 },
                 Company = new Company
                 {
@@ -177,12 +181,13 @@ namespace AccountantTool.ViewModel
             for (var i = 0; i < AccountantRecords.Count; i++)
             {
                 var accountantRecord = AccountantRecords[i];
+
                 Worksheet.SetCellData(i, 0, accountantRecord.Company);
-
-
                 Worksheet.SetCellBody(i, 0, new CompanyListViewDropdownCell(accountantRecord.Company));
 
                 Worksheet.SetCellData(i, 1, accountantRecord.Requisites);
+                Worksheet.SetCellBody(i, 1, new RequisitesListViewDropdownCell(accountantRecord.Requisites));
+
                 Worksheet.SetCellData(i, 2, accountantRecord.ContactPerson);
                 Worksheet.SetCellData(i, 3, accountantRecord.License);
                 Worksheet.SetCellData(i, 4, accountantRecord.Product);

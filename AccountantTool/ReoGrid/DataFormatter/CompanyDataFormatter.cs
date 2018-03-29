@@ -1,4 +1,5 @@
-﻿using AccountantTool.Model;
+﻿using AccountantTool.Common;
+using AccountantTool.Model;
 using Newtonsoft.Json;
 using unvell.ReoGrid;
 
@@ -8,7 +9,7 @@ namespace AccountantTool.ReoGrid.DataFormatter
     {
         public override string FormatCell(Cell cell)
         {
-            if (cell.Column != 0)
+            if (cell.Column != (int)ColumnIndexes.Company)
                 return null;
 
             var data = cell.Data as Company;

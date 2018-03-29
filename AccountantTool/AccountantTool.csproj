@@ -228,6 +228,7 @@
     <Compile Include="Model\Requisites.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ReoGrid\CustomDropDownCell\CompanyListViewDropdownCell.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\RequisitesListViewDropdownCell.cs" />
     <Compile Include="ReoGrid\DataFormatter\AccountantToolDataFormatter.cs" />
     <Compile Include="ReoGrid\DataFormatter\CompanyDataFormatter.cs" />
     <Compile Include="ReoGrid\DataFormatter\DataFormatter.cs" />
