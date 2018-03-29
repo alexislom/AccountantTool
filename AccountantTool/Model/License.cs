@@ -1,11 +1,15 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace AccountantTool.Model
 {
     public enum LicenseType
     {
+        [Description("First type of license")]
         One,
+        [Description("Secound type of license")]
         Two,
+        [Description("Third type of license")]
         Three
     }
 

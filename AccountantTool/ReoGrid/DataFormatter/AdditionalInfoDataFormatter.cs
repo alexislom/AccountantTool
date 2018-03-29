@@ -1,5 +1,4 @@
-﻿using System;
-using unvell.ReoGrid;
+﻿using unvell.ReoGrid;
 
 namespace AccountantTool.ReoGrid.DataFormatter
 {

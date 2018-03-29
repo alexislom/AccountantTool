@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.ProductsListView = new System.Windows.Forms.ListView();
             this.NumberOfProductColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DescriptionColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CostFromSellerColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -36,21 +36,21 @@
             this.CountColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
-            // listView1
+            // ProductsListView
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ProductsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.NumberOfProductColumnHeader,
             this.DescriptionColumnHeader,
             this.CostFromSellerColumnHeader,
             this.CostForCustomerColumnHeader,
             this.CountColumnHeader});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(838, 423);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.ProductsListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ProductsListView.Location = new System.Drawing.Point(0, 0);
+            this.ProductsListView.Name = "ProductsListView";
+            this.ProductsListView.Size = new System.Drawing.Size(838, 423);
+            this.ProductsListView.TabIndex = 2;
+            this.ProductsListView.UseCompatibleStateImageBehavior = false;
+            this.ProductsListView.View = System.Windows.Forms.View.Details;
             // 
             // NumberOfProductColumnHeader
             // 
@@ -81,7 +81,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.ProductsListView);
             this.Name = "ProductsControl";
             this.Size = new System.Drawing.Size(838, 423);
             this.ResumeLayout(false);
@@ -90,7 +90,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView ProductsListView;
         private System.Windows.Forms.ColumnHeader NumberOfProductColumnHeader;
         private System.Windows.Forms.ColumnHeader DescriptionColumnHeader;
         private System.Windows.Forms.ColumnHeader CostFromSellerColumnHeader;

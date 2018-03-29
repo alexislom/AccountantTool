@@ -1,11 +1,15 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace AccountantTool.Model
 {
     public enum ContractStage
     {
+        [Description("First type of contract")]
         One,
+        [Description("Secound type of contract")]
         Two,
+        [Description("Third type of contract")]
         Tree
     }
 

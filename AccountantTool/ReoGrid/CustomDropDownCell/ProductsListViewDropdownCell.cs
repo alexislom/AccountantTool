@@ -6,7 +6,7 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
 {
     public class ProductsListViewDropdownCell : BaseListViewDropdownCell
     {
-        public ProductsListViewDropdownCell(ICollection<Product> model) : base(new ProductsControl(model))
+        public ProductsListViewDropdownCell(List<Product> model) : base(new ProductsControl(model))
         {
         }
     }

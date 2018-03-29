@@ -10,11 +10,11 @@ namespace AccountantTool.Model
 
         public Requisites Requisites { get; set; }
 
-        public ICollection<ContactPerson> ContactPersons { get; set; }
+        public List<ContactPerson> ContactPersons { get; set; }
 
-        public ICollection<License> License { get; set; }
+        public List<License> License { get; set; }
 
-        public ICollection<Product> Products { get; set; }
+        public List<Product> Products { get; set; }
 
         public Contract Contract { get; set; }
 

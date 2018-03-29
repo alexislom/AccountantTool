@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.LicenseListView = new System.Windows.Forms.ListView();
             this.NumberOfLicenseColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DateOfIssueColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DateOfEndColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LicenseTypeColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
-            // listView1
+            // LicenseListView
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.LicenseListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.NumberOfLicenseColumnHeader,
             this.DateOfIssueColumnHeader,
             this.DateOfEndColumnHeader,
             this.LicenseTypeColumnHeader});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(632, 364);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.LicenseListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LicenseListView.Location = new System.Drawing.Point(0, 0);
+            this.LicenseListView.Name = "LicenseListView";
+            this.LicenseListView.Size = new System.Drawing.Size(632, 364);
+            this.LicenseListView.TabIndex = 1;
+            this.LicenseListView.UseCompatibleStateImageBehavior = false;
+            this.LicenseListView.View = System.Windows.Forms.View.Details;
             // 
             // NumberOfLicenseColumnHeader
             // 
@@ -74,7 +74,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.LicenseListView);
             this.Name = "LicenseControl";
             this.Size = new System.Drawing.Size(632, 364);
             this.ResumeLayout(false);
@@ -83,7 +83,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView LicenseListView;
         private System.Windows.Forms.ColumnHeader NumberOfLicenseColumnHeader;
         private System.Windows.Forms.ColumnHeader DateOfIssueColumnHeader;
         private System.Windows.Forms.ColumnHeader DateOfEndColumnHeader;

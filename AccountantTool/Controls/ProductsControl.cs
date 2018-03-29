@@ -9,10 +9,22 @@ namespace AccountantTool.Controls
     {
         public List<Product> Model { get; private set; }
 
-        public ProductsControl(ICollection<Product> model)
+        public ProductsControl(List<Product> model)
         {
             Model = model.ToList();
             InitializeComponent();
+
+            foreach (var product in Model)
+            {
+                ProductsListView.Items.Add(new ListViewItem(new[]
+                {
+                    product.Name,
+                    product.Description,
+                    product.CostFromSeller.ToString("C"),
+                    product.CostForCustomer.ToString("C"),
+                    product.Count.ToString()
+                }));
+            }
         }
     }
 }

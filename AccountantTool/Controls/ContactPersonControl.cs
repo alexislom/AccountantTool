@@ -9,15 +9,21 @@ namespace AccountantTool.Controls
     {
         public List<ContactPerson> Model { get; private set; }
 
-        public ContactPersonControl(ICollection<ContactPerson> model)
+        public ContactPersonControl(List<ContactPerson> model)
         {
             Model = model.ToList();
             InitializeComponent();
 
-            //PositionColumnHeader.Text = Model.Position;
-            //FullNameColumnHeader.Text = $"{Model.Surname} {Model.Name} {Model.Patronymic}";
-            //PhoneColumnHeader.Text = Model.ContactPhone;
-            //EmailColumnHeader.Text = Model.Email;
+            foreach (var contactPerson in Model)
+            {
+                ContactsListView.Items.Add(new ListViewItem(new[]
+                {
+                    contactPerson.Position,
+                    $"{contactPerson.Surname} {contactPerson.Name} {contactPerson.Patronymic}",
+                    contactPerson.ContactPhone,
+                    contactPerson.Email
+                }));
+            }
         }
     }
 }

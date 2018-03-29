@@ -6,7 +6,7 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
 {
     public class LicenseListViewDropdownCell : BaseListViewDropdownCell
     {
-        public LicenseListViewDropdownCell(ICollection<License> model) : base(new LicenseControl(model))
+        public LicenseListViewDropdownCell(List<License> model) : base(new LicenseControl(model))
         {
         }
     }
