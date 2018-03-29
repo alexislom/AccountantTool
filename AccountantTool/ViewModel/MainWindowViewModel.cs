@@ -189,7 +189,11 @@ namespace AccountantTool.ViewModel
                 Worksheet.SetCellBody(i, 1, new RequisitesListViewDropdownCell(accountantRecord.Requisites));
 
                 Worksheet.SetCellData(i, 2, accountantRecord.ContactPerson);
+                Worksheet.SetCellBody(i, 2, new ContactPersonListViewDropdownCell(accountantRecord.ContactPerson));
+
                 Worksheet.SetCellData(i, 3, accountantRecord.License);
+                Worksheet.SetCellBody(i, 3, new LicenseListViewDropdownCell(accountantRecord.License));
+
                 Worksheet.SetCellData(i, 4, accountantRecord.Product);
                 Worksheet.SetCellData(i, 5, accountantRecord.Contract);
                 Worksheet.SetCellData(i, 6, accountantRecord.AdditionalInfo);

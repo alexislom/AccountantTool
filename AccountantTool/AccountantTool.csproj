@@ -197,6 +197,18 @@
     <Compile Include="Controls\CompanyControl.Designer.cs">
       <DependentUpon>CompanyControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ContactPersonControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ContactPersonControl.Designer.cs">
+      <DependentUpon>ContactPersonControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LicenseControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LicenseControl.Designer.cs">
+      <DependentUpon>LicenseControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RequisitesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -227,7 +239,10 @@
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Requisites.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\BaseListViewDropdownCell.cs" />
     <Compile Include="ReoGrid\CustomDropDownCell\CompanyListViewDropdownCell.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\ContactPersonListViewDropdownCell.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\LicenseListViewDropdownCell.cs" />
     <Compile Include="ReoGrid\CustomDropDownCell\RequisitesListViewDropdownCell.cs" />
     <Compile Include="ReoGrid\DataFormatter\AccountantToolDataFormatter.cs" />
     <Compile Include="ReoGrid\DataFormatter\CompanyDataFormatter.cs" />
@@ -264,6 +279,12 @@
     </Compile>
     <EmbeddedResource Include="Controls\CompanyControl.resx">
       <DependentUpon>CompanyControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ContactPersonControl.resx">
+      <DependentUpon>ContactPersonControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LicenseControl.resx">
+      <DependentUpon>LicenseControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\RequisitesControl.resx">
       <DependentUpon>RequisitesControl.cs</DependentUpon>

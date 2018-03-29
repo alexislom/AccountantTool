@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.RequisitesGroupBox = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textOtherRequisites = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.textRequisitesFlat = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -50,8 +52,6 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label10 = new System.Windows.Forms.Label();
-            this.textOtherRequisites = new System.Windows.Forms.TextBox();
             this.RequisitesGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,6 +83,22 @@
             this.RequisitesGroupBox.TabIndex = 0;
             this.RequisitesGroupBox.TabStop = false;
             this.RequisitesGroupBox.Text = "Реквизиты";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(17, 182);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(93, 13);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "Иные реквизиты";
+            // 
+            // textOtherRequisites
+            // 
+            this.textOtherRequisites.Location = new System.Drawing.Point(199, 175);
+            this.textOtherRequisites.Name = "textOtherRequisites";
+            this.textOtherRequisites.Size = new System.Drawing.Size(241, 20);
+            this.textOtherRequisites.TabIndex = 18;
             // 
             // label9
             // 
@@ -235,7 +251,7 @@
             this.columnHeader2});
             this.listView1.Location = new System.Drawing.Point(16, 227);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(279, 123);
+            this.listView1.Size = new System.Drawing.Size(213, 123);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -243,28 +259,12 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Отдел";
-            this.columnHeader1.Width = 129;
+            this.columnHeader1.Width = 92;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Телефон";
             this.columnHeader2.Width = 137;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(17, 182);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(93, 13);
-            this.label10.TabIndex = 19;
-            this.label10.Text = "Иные реквизиты";
-            // 
-            // textOtherRequisites
-            // 
-            this.textOtherRequisites.Location = new System.Drawing.Point(199, 175);
-            this.textOtherRequisites.Name = "textOtherRequisites";
-            this.textOtherRequisites.Size = new System.Drawing.Size(241, 20);
-            this.textOtherRequisites.TabIndex = 18;
             // 
             // RequisitesControl
             // 
