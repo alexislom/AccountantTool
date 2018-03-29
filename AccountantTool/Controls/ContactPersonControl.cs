@@ -1,15 +1,17 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 using AccountantTool.Model;
 
 namespace AccountantTool.Controls
 {
     public partial class ContactPersonControl : UserControl
     {
-        public ContactPerson Model { get; private set; }
+        public List<ContactPerson> Model { get; private set; }
 
-        public ContactPersonControl(ContactPerson model)
+        public ContactPersonControl(ICollection<ContactPerson> model)
         {
-            Model = model;
+            Model = model.ToList();
             InitializeComponent();
 
             //PositionColumnHeader.Text = Model.Position;

@@ -1,4 +1,5 @@
-﻿using unvell.ReoGrid;
+﻿using AccountantTool.Common;
+using unvell.ReoGrid;
 using unvell.ReoGrid.DataFormat;
 
 namespace AccountantTool.ReoGrid.DataFormatter
@@ -19,10 +20,20 @@ namespace AccountantTool.ReoGrid.DataFormatter
         {
             switch (cell.Column)
             {
-                case 0:
+                case Constants.CompanyColumnIndex:
                     return new CompanyDataFormatter();
-                case 1:
+                case Constants.RequisitesColumnIndex:
                     return new RequisitesDataFormatter();
+                case Constants.ContactPersonColumnIndex:
+                    return new ContactPersonDataFormatter();
+                case Constants.LicenseColumnIndex:
+                    return new LicenseDataFormatter();
+                case Constants.ProductsColumnIndex:
+                    return new ProductsDataFormatter();
+                case Constants.ContractColumnIndex:
+                    return new ContractDataFormatter();
+                case Constants.AdditionalInfoColumnIndex:
+                    return new AdditionalInfoDataFormatter();
                 default:
                     return new EmptyDataFormatter();
             }

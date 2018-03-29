@@ -88,7 +88,7 @@ namespace AccountantTool.ViewModel
 
             LoadAccountantRecordsAsyncCommand.Execute(null);
 
-            DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
+            // Worksheet
             InitializeWorksheet();
         }
 
@@ -99,6 +99,7 @@ namespace AccountantTool.ViewModel
         private void InitializeWorksheet()
         {
             Worksheet.Columns = Constants.CountOfColumns;
+            DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
             Worksheet.SetColumnsWidth(0, 7, 200);
 
             AccountantRecords.Add(new AccountantRecord
@@ -125,14 +126,17 @@ namespace AccountantTool.ViewModel
                     LongName = "TestLongName",
                     ShortName = "TestShortName"
                 },
-                ContactPerson = new ContactPerson
+                ContactPersons = new List<ContactPerson>
                 {
-                    ContactPhone = "ContactPhone ",
-                    Email = "Email",
-                    Name = "Name",
-                    Patronymic = "Patronymic ",
-                    Position = "Position",
-                    Surname = "Surname"
+                    new ContactPerson
+                    {
+                        ContactPhone = "ContactPhone ",
+                        Email = "Email",
+                        Name = "Name",
+                        Patronymic = "Patronymic ",
+                        Position = "Position",
+                        Surname = "Surname"
+                    }
                 },
                 Contract = new Contract
                 {
@@ -147,12 +151,15 @@ namespace AccountantTool.ViewModel
                 {
                     Notes = "asd"
                 },
-                License = new License
+                License = new List<License>
                 {
-                    LicenseType = LicenseType.One,
-                    DateOfExpiration = DateTime.Now,
-                    DateOfIssue = DateTime.Now,
-                    NumberOfLicense = 3
+                    new License
+                    {
+                        LicenseType = LicenseType.One,
+                        DateOfExpiration = DateTime.Now,
+                        DateOfIssue = DateTime.Now,
+                        NumberOfLicense = 3
+                    }
                 },
                 Products = new List<Product>
                 {
@@ -186,26 +193,26 @@ namespace AccountantTool.ViewModel
             {
                 var accountantRecord = AccountantRecords[i];
 
-                Worksheet.SetCellData(i, 0, accountantRecord.Company);
-                Worksheet.SetCellBody(i, 0, new CompanyListViewDropdownCell(accountantRecord.Company));
+                Worksheet.SetCellData(i, Constants.CompanyColumnIndex, accountantRecord.Company);
+                Worksheet.SetCellBody(i, Constants.CompanyColumnIndex, new CompanyListViewDropdownCell(accountantRecord.Company));
 
-                Worksheet.SetCellData(i, 1, accountantRecord.Requisites);
-                Worksheet.SetCellBody(i, 1, new RequisitesListViewDropdownCell(accountantRecord.Requisites));
+                Worksheet.SetCellData(i, Constants.RequisitesColumnIndex, accountantRecord.Requisites);
+                Worksheet.SetCellBody(i, Constants.RequisitesColumnIndex, new RequisitesListViewDropdownCell(accountantRecord.Requisites));
 
-                Worksheet.SetCellData(i, 2, accountantRecord.ContactPerson);
-                Worksheet.SetCellBody(i, 2, new ContactPersonListViewDropdownCell(accountantRecord.ContactPerson));
+                Worksheet.SetCellData(i, Constants.ContactPersonColumnIndex, accountantRecord.ContactPersons);
+                Worksheet.SetCellBody(i, Constants.ContactPersonColumnIndex, new ContactPersonListViewDropdownCell(accountantRecord.ContactPersons));
 
-                Worksheet.SetCellData(i, 3, accountantRecord.License);
-                Worksheet.SetCellBody(i, 3, new LicenseListViewDropdownCell(accountantRecord.License));
+                Worksheet.SetCellData(i, Constants.LicenseColumnIndex, accountantRecord.License);
+                Worksheet.SetCellBody(i, Constants.LicenseColumnIndex, new LicenseListViewDropdownCell(accountantRecord.License));
 
-                Worksheet.SetCellData(i, 4, accountantRecord.Products);
-                Worksheet.SetCellBody(i, 4, new ProductsListViewDropdownCell(accountantRecord.Products));
+                Worksheet.SetCellData(i, Constants.ProductsColumnIndex, accountantRecord.Products);
+                Worksheet.SetCellBody(i, Constants.ProductsColumnIndex, new ProductsListViewDropdownCell(accountantRecord.Products));
 
-                Worksheet.SetCellData(i, 5, accountantRecord.Contract);
-                Worksheet.SetCellBody(i, 5, new ContactListViewDropdownCell(accountantRecord.Contract));
+                Worksheet.SetCellData(i, Constants.ContractColumnIndex, accountantRecord.Contract);
+                Worksheet.SetCellBody(i, Constants.ContractColumnIndex, new ContactListViewDropdownCell(accountantRecord.Contract));
 
-                Worksheet.SetCellData(i, 6, accountantRecord.AdditionalInfo);
-                Worksheet.SetCellBody(i, 6, new AdditionalInfoListViewDropdownCell(accountantRecord.AdditionalInfo));
+                Worksheet.SetCellData(i, Constants.AdditionalInfoColumnIndex, accountantRecord.AdditionalInfo);
+                Worksheet.SetCellBody(i, Constants.AdditionalInfoColumnIndex, new AdditionalInfoListViewDropdownCell(accountantRecord.AdditionalInfo));
             }
         }
 

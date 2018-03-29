@@ -43,8 +43,8 @@ namespace AccountantTool.ViewModel
             {
                 Company = Company,
                 Requisites = Requisites,
-                ContactPerson = ContactPerson,
-                License = License,
+                //ContactPersons = ContactPerson,
+                //License = License,
 
                 Contract = Contract,
                 AdditionalInfo = AdditionalInfo

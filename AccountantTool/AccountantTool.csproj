@@ -190,7 +190,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common\ColumnIndexes.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Controls\AdditionalInfoControl.cs">
       <SubType>UserControl</SubType>
@@ -267,9 +266,14 @@
     <Compile Include="ReoGrid\CustomDropDownCell\ProductsListViewDropdownCell.cs" />
     <Compile Include="ReoGrid\CustomDropDownCell\RequisitesListViewDropdownCell.cs" />
     <Compile Include="ReoGrid\DataFormatter\AccountantToolDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\AdditionalInfoDataFormatter.cs" />
     <Compile Include="ReoGrid\DataFormatter\CompanyDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\ContractDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\ContactPersonDataFormatter.cs" />
     <Compile Include="ReoGrid\DataFormatter\DataFormatter.cs" />
     <Compile Include="ReoGrid\DataFormatter\EmptyDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\LicenseDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\ProductsDataFormatter.cs" />
     <Compile Include="ReoGrid\DataFormatter\RequisitesDataFormatter.cs" />
     <Compile Include="ViewModel\AddAccountantRecordWindowViewModel.cs" />
     <Compile Include="ViewModel\MainComponents\AsyncDelegateCommand.cs" />

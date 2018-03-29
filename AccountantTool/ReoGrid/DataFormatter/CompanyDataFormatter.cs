@@ -9,7 +9,7 @@ namespace AccountantTool.ReoGrid.DataFormatter
     {
         public override string FormatCell(Cell cell)
         {
-            if (cell.Column != (int)ColumnIndexes.Company)
+            if (cell.Column != Constants.CompanyColumnIndex)
                 return null;
 
             var data = cell.Data as Company;

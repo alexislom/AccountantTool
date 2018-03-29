@@ -5,45 +5,39 @@ using unvell.ReoGrid;
 
 namespace AccountantTool.ReoGrid.DataFormatter
 {
-    public class RequisitesDataFormatter : DataFormatter
+    public class ContactPersonDataFormatter : DataFormatter
     {
         public override string FormatCell(Cell cell)
         {
             if (cell.Column == Constants.RequisitesColumnIndex)
             {
-                var data = ParseRequisites(cell);
+                var data = ParseData(cell);
 
                 if (data == null)
-                {
                     return null;
-                }
 
-                return data.Site ?? JsonConvert.SerializeObject(data);
+                return data.Name ?? JsonConvert.SerializeObject(data);
             }
 
             return cell.Data.ToString();
         }
 
-        #region Helpers
-
-        public static Requisites ParseRequisites(Cell cell)
+        private ContactPerson ParseData(Cell cell)
         {
             if (cell?.Data == null)
                 return null;
 
-            var data = cell.GetData<Requisites>();
+            var data = cell.GetData<ContactPerson>();
 
             if (data != null)
                 return data;
 
             var context = cell.GetData<string>();
 
-            data = JsonConvert.DeserializeObject<Requisites>(context);
+            data = JsonConvert.DeserializeObject<ContactPerson>(context);
             cell.Data = data;
 
             return data;
         }
-
-        #endregion Helpers
     }
 }

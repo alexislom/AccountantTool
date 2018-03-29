@@ -37,18 +37,18 @@ namespace AccountantTool.Data
             var contract = new Contract { };
             var additionalInfo = new AdditionalInfo { };
 
-            var accountantRecord = new AccountantRecord
-            {
-                Company = company,
-                Requisites = requisites,
-                ContactPerson = contactPerson,
-                License = license,
-                Products = products,
-                Contract = contract,
-                AdditionalInfo = additionalInfo
-            };
+            //var accountantRecord = new AccountantRecord
+            //{
+            //    Company = company,
+            //    Requisites = requisites,
+            //    ContactPersons = contactPerson,
+            //    License = license,
+            //    Products = products,
+            //    Contract = contract,
+            //    AdditionalInfo = additionalInfo
+            //};
 
-            context.AccountantRecords.Add(accountantRecord);
+            //context.AccountantRecords.Add(accountantRecord);
             context.SaveChanges();
             base.Seed(context);
         }

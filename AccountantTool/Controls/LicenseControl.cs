@@ -1,15 +1,17 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 using License = AccountantTool.Model.License;
 
 namespace AccountantTool.Controls
 {
     public partial class LicenseControl : UserControl
     {
-        public License Model { get; private set; }
+        public List<License> Model { get; private set; }
 
-        public LicenseControl(License model)
+        public LicenseControl(ICollection<License> model)
         {
-            Model = model;
+            Model = model.ToList();
             InitializeComponent();
         }
     }
