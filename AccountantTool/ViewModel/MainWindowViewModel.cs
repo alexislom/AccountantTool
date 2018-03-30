@@ -67,6 +67,7 @@ namespace AccountantTool.ViewModel
         public ICommand OpenSettindsDialogCommand { get; set; }
         public ICommand AddNewAccountantRecordCommand { get; set; }
         public ICommand LoadAccountantRecordsAsyncCommand { get; set; }
+        public ICommand AddNewRecordCommand { get; set; }
         #endregion Commands
 
         #region Construction
@@ -84,6 +85,7 @@ namespace AccountantTool.ViewModel
             AddNewAccountantRecordCommand = new RelayCommand(AddAccountantRecordOpenWindow);
             OpenSettindsDialogCommand = new RelayCommand(DoStuff);
             LoadAccountantRecordsAsyncCommand = new AsyncDelegateCommand(LoadAccountantRecordsAsync, x => IsDataLoaded);
+            AddNewRecordCommand = new RelayCommand(OnAddNewRecord);
 
             AddNewAccountantRecordEvent += OnAddNewAccountantRecordEvent;
 
@@ -100,6 +102,14 @@ namespace AccountantTool.ViewModel
         private void InitializeWorksheet()
         {
             Worksheet.Columns = Constants.CountOfColumns;
+            Worksheet.ColumnHeaders[Constants.CompanyColumnIndex].Text = "Название компании";
+            Worksheet.ColumnHeaders[Constants.RequisitesColumnIndex].Text = "Реквизиты";
+            Worksheet.ColumnHeaders[Constants.ContactPersonColumnIndex].Text = "Контактное лицо";
+            Worksheet.ColumnHeaders[Constants.LicenseColumnIndex].Text = "Наличие лицензии и сроки";
+            Worksheet.ColumnHeaders[Constants.ProductsColumnIndex].Text = "Покупаемые изделия и стоимость";
+            Worksheet.ColumnHeaders[Constants.ContractColumnIndex].Text = "Исполнение контракта";
+            Worksheet.ColumnHeaders[Constants.AdditionalInfoColumnIndex].Text = "Дополнительная информация";
+
             DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
             Worksheet.SetColumnsWidth(0, 7, 200);
 
@@ -235,31 +245,35 @@ namespace AccountantTool.ViewModel
             {
                 var accountantRecord = AccountantRecords[i];
 
-                Worksheet.SetCellData(i, Constants.CompanyColumnIndex, accountantRecord.Company);
-                Worksheet.SetCellBody(i, Constants.CompanyColumnIndex, new CompanyListViewDropdownCell(accountantRecord.Company));
-
-                Worksheet.SetCellData(i, Constants.RequisitesColumnIndex, accountantRecord.Requisites);
-                Worksheet.SetCellBody(i, Constants.RequisitesColumnIndex, new RequisitesListViewDropdownCell(accountantRecord.Requisites));
-
-                Worksheet.SetCellData(i, Constants.ContactPersonColumnIndex, new ListWrapper<ContactPerson>(accountantRecord.ContactPersons));
-                Worksheet.SetCellBody(i, Constants.ContactPersonColumnIndex, new ContactPersonListViewDropdownCell(accountantRecord.ContactPersons));
-
-                Worksheet.SetCellData(i, Constants.LicenseColumnIndex, new ListWrapper<License>(accountantRecord.License));
-                Worksheet.SetCellBody(i, Constants.LicenseColumnIndex, new LicenseListViewDropdownCell(accountantRecord.License));
-
-                Worksheet.SetCellData(i, Constants.ProductsColumnIndex, new ListWrapper<Product>(accountantRecord.Products));
-                Worksheet.SetCellBody(i, Constants.ProductsColumnIndex, new ProductsListViewDropdownCell(accountantRecord.Products));
-
-                Worksheet.SetCellData(i, Constants.ContractColumnIndex, accountantRecord.Contract);
-                Worksheet.SetCellBody(i, Constants.ContractColumnIndex, new ContactListViewDropdownCell(accountantRecord.Contract));
-
-                Worksheet.SetCellData(i, Constants.AdditionalInfoColumnIndex, accountantRecord.AdditionalInfo);
-                Worksheet.SetCellBody(i, Constants.AdditionalInfoColumnIndex, new AdditionalInfoListViewDropdownCell(accountantRecord.AdditionalInfo));
+                AddRecord(i, accountantRecord);
             }
         }
 
-        #endregion Work with worksheet
+        private void AddRecord(int row, AccountantRecord record)
+        {
+            Worksheet.SetCellData(row, Constants.CompanyColumnIndex, record.Company);
+            Worksheet.SetCellBody(row, Constants.CompanyColumnIndex, new CompanyListViewDropdownCell(record.Company));
 
+            Worksheet.SetCellData(row, Constants.RequisitesColumnIndex, record.Requisites);
+            Worksheet.SetCellBody(row, Constants.RequisitesColumnIndex, new RequisitesListViewDropdownCell(record.Requisites));
+
+            Worksheet.SetCellData(row, Constants.ContactPersonColumnIndex, new ListWrapper<ContactPerson>(record.ContactPersons));
+            Worksheet.SetCellBody(row, Constants.ContactPersonColumnIndex, new ContactPersonListViewDropdownCell(record.ContactPersons));
+
+            Worksheet.SetCellData(row, Constants.LicenseColumnIndex, new ListWrapper<License>(record.License));
+            Worksheet.SetCellBody(row, Constants.LicenseColumnIndex, new LicenseListViewDropdownCell(record.License));
+
+            Worksheet.SetCellData(row, Constants.ProductsColumnIndex, new ListWrapper<Product>(record.Products));
+            Worksheet.SetCellBody(row, Constants.ProductsColumnIndex, new ProductsListViewDropdownCell(record.Products));
+
+            Worksheet.SetCellData(row, Constants.ContractColumnIndex, record.Contract);
+            Worksheet.SetCellBody(row, Constants.ContractColumnIndex, new ContactListViewDropdownCell(record.Contract));
+
+            Worksheet.SetCellData(row, Constants.AdditionalInfoColumnIndex, record.AdditionalInfo);
+            Worksheet.SetCellBody(row, Constants.AdditionalInfoColumnIndex, new AdditionalInfoListViewDropdownCell(record.AdditionalInfo));
+        }
+
+        #endregion Work with worksheet
 
         #region Event handlers
 
@@ -272,6 +286,22 @@ namespace AccountantTool.ViewModel
         #endregion Event handlers
 
         #region Commands implementation
+
+        private void OnAddNewRecord()
+        {
+            var newRecord = new AccountantRecord();
+
+            var rowToInsertNewRecord = AccountantRecords.Count;
+
+            AccountantRecords.Add(newRecord);
+
+            if (Worksheet.RowCount == AccountantRecords.Count)
+            {
+                Worksheet.AppendRows(5);
+            }
+
+            AddRecord(rowToInsertNewRecord, newRecord);
+        }
 
         private void AddAccountantRecordOpenWindow()
         {

@@ -11,18 +11,21 @@ namespace AccountantTool.Controls
 
         public LicenseControl(List<License> model)
         {
-            Model = model.ToList();
+            Model = model; //model.ToList();
             InitializeComponent();
 
-            foreach (var license in Model)
+            if (Model != null)
             {
-                LicenseListView.Items.Add(new ListViewItem(new[]
+                foreach (var license in Model)
                 {
-                    license.NumberOfLicense.ToString(),
-                    license.DateOfIssue.ToString("d"),
-                    license.DateOfExpiration.ToString("d"),
-                    license.LicenseType.ToString()
-                }));
+                    LicenseListView.Items.Add(new ListViewItem(new[]
+                    {
+                        license?.NumberOfLicense.ToString(),
+                        license?.DateOfIssue.ToString("d"),
+                        license?.DateOfExpiration.ToString("d"),
+                        license?.LicenseType.ToString()
+                    }));
+                }
             }
         }
     }

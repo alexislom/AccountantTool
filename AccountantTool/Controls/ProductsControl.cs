@@ -11,19 +11,22 @@ namespace AccountantTool.Controls
 
         public ProductsControl(List<Product> model)
         {
-            Model = model.ToList();
+            Model = model; //model.ToList();
             InitializeComponent();
 
-            foreach (var product in Model)
+            if (Model != null)
             {
-                ProductsListView.Items.Add(new ListViewItem(new[]
+                foreach (var product in Model)
                 {
-                    product.Name,
-                    product.Description,
-                    product.CostFromSeller.ToString("C"),
-                    product.CostForCustomer.ToString("C"),
-                    product.Count.ToString()
-                }));
+                    ProductsListView.Items.Add(new ListViewItem(new[]
+                    {
+                        product?.Name,
+                        product?.Description,
+                        product?.CostFromSeller.ToString("C"),
+                        product?.CostForCustomer.ToString("C"),
+                        product?.Count.ToString()
+                    }));
+                }
             }
         }
     }

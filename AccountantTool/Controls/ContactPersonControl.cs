@@ -11,18 +11,21 @@ namespace AccountantTool.Controls
 
         public ContactPersonControl(List<ContactPerson> model)
         {
-            Model = model.ToList();
+            Model = model; //model.ToList();
             InitializeComponent();
 
-            foreach (var contactPerson in Model)
+            if (Model != null)
             {
-                ContactsListView.Items.Add(new ListViewItem(new[]
+                foreach (var contactPerson in Model)
                 {
-                    contactPerson.Position,
-                    $"{contactPerson.Surname} {contactPerson.Name} {contactPerson.Patronymic}",
-                    contactPerson.ContactPhone,
-                    contactPerson.Email
-                }));
+                    ContactsListView.Items.Add(new ListViewItem(new[]
+                    {
+                        contactPerson?.Position,
+                        $"{contactPerson?.Surname} {contactPerson?.Name} {contactPerson?.Patronymic}",
+                        contactPerson?.ContactPhone,
+                        contactPerson?.Email
+                    }));
+                }
             }
         }
     }

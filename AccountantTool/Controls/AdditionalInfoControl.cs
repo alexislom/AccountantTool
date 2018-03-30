@@ -11,7 +11,7 @@ namespace AccountantTool.Controls
         {
             Model = model;
             InitializeComponent();
-            txtNotes.Text = Model.Notes;
+            txtNotes.Text = Model?.Notes;
         }
     }
 }

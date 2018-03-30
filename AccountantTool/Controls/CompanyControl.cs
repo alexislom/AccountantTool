@@ -12,8 +12,8 @@ namespace AccountantTool.Controls
             Model = model;
             InitializeComponent();
 
-            txtFullName.Text = Model.LongName;
-            txtShortName.Text = Model.ShortName;
+            txtFullName.Text = Model?.LongName;
+            txtShortName.Text = Model?.ShortName;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text;
 using AccountantTool.Common;
 using AccountantTool.Helpers;
@@ -14,6 +15,9 @@ namespace AccountantTool.ReoGrid.DataFormatter
             if (cell.Column == Constants.LicenseColumnIndex)
             {
                 var data = cell.GetData<ListWrapper<License>>();
+
+                if (data.Context == null)
+                    return string.Empty;
 
                 if (data.Context.Count == 1)
                 {

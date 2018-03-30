@@ -15,6 +15,9 @@ namespace AccountantTool.ReoGrid.DataFormatter
             {
                 var data = cell.GetData<ListWrapper<Product>>();
 
+                if (data.Context == null)
+                    return string.Empty;
+
                 if (data.Context.Count == 1)
                 {
                     return data.Context.FirstOrDefault()?.Name;
