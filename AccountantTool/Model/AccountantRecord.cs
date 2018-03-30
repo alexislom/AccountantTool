@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace AccountantTool.Model
 {
     public class AccountantRecord
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public Company Company { get; set; }
 
@@ -20,8 +21,13 @@ namespace AccountantTool.Model
 
         public AdditionalInfo AdditionalInfo { get; set; }
 
+        public AccountantRecord()
+        {
+            Company = new Company { ParentId = Id };
+        }
+
         #region Override Methods
-        
+
         /// <summary>
         /// This method need for filter search.
         /// </summary>

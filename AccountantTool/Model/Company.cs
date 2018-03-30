@@ -1,11 +1,12 @@
-﻿using AccountantTool.ViewModel.MainComponents;
+﻿using System;
+using AccountantTool.ViewModel.MainComponents;
 using Newtonsoft.Json;
 
 namespace AccountantTool.Model
 {
-    public class Company : ViewModelBase
+    public class Company
     {
-        public int Id { get; set; }
+        public Guid ParentId { get; set; }
 
         public string LongName { get; set; }
 

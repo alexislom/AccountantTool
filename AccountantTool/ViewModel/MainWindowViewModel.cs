@@ -118,8 +118,10 @@ namespace AccountantTool.ViewModel
 
             DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
             Worksheet.SetColumnsWidth(0, 7, 200);
+            var id = Guid.NewGuid();
             var kek = new AccountantRecord
             {
+                Id = id,
                 Requisites = new Requisites
                 {
                     Address = new Address
@@ -139,6 +141,7 @@ namespace AccountantTool.ViewModel
                 },
                 Company = new Company
                 {
+                    ParentId = id,
                     LongName = "TestLongName",
                     ShortName = "TestShortName"
                 },
@@ -297,7 +300,8 @@ namespace AccountantTool.ViewModel
         private void OnAddNewRecord()
         {
             var random = new Random();
-            var newRecord = new AccountantRecord { Company = new Company { ShortName = "SN" + random.Next(1, 500) } };
+            var id = Guid.NewGuid();
+            var newRecord = new AccountantRecord { Id = id, Company = new Company { ShortName = "SN" + random.Next(1, 500), ParentId = id } };
 
             var rowIndexToInsertNewRecord = AccountantRecords.Count;
 
@@ -319,7 +323,7 @@ namespace AccountantTool.ViewModel
 
                 if (companyCell != null)
                 {
-                    //AccountantRecords.Remove(AccountantRecords.FirstOrDefault(s=> s.Id == companyCell.GetData<Company>().RecordId));
+                    AccountantRecords.Remove(AccountantRecords.FirstOrDefault(s => s.Id == companyCell.GetData<Company>().ParentId));
                     //AccountantRecords.Remove(companyCell.GetData<Company>().ParentRef);
                 }
             }
