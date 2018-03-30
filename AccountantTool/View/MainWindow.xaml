@@ -33,8 +33,8 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModel:MainWindowViewModel}">
     <Window.InputBindings>
-        <KeyBinding Key="F1" Command="{Binding AddNewAccountantRecordCommand}" />
-        <KeyBinding Key="F2" Command="{Binding AddNewRecordCommand}" />
+        <!--<KeyBinding Key="F1" Command="{Binding AddNewAccountantRecordCommand}" />-->
+        <KeyBinding Key="F1" Command="{Binding AddNewRecordCommand}" />
         <!--<KeyBinding
             Key="Delete"
             Command="{Binding DeleteMedicamentRecordCommand}"
@@ -77,12 +77,14 @@
 
         <DockPanel>
             <Menu>
-                <MenuItem Header="1" Command="{Binding LoadAccountantRecordsAsyncCommand}" Icon="{iconPacks:Material Autorenew}" />
+                <!--<MenuItem Header="1" Command="{Binding LoadAccountantRecordsAsyncCommand}" Icon="{iconPacks:Material Autorenew}" />
                 <Separator Margin="-20,-6" />
                 <MenuItem Header="{DynamicResource AtNewRecordTitle}" Command="{Binding AddNewAccountantRecordCommand}"
+                          Icon="{iconPacks:Entypo NewMessage}" InputGestureText="F1"/>-->
+                <MenuItem Header="{DynamicResource AtNewRecordTitle}" Command="{Binding AddNewRecordCommand}"
                           Icon="{iconPacks:Entypo NewMessage}" InputGestureText="F1"/>
-                <MenuItem Header="Новая запись(test)" Command="{Binding AddNewRecordCommand}"
-                          Icon="{iconPacks:Entypo NewMessage}" />
+                <MenuItem Header="Delete rows" Command="{Binding DeleteRecordCommand}"
+                          Icon="{iconPacks:Material BookmarkRemove}" InputGestureText="F1"/>
             </Menu>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" TextBlock.FontSize="14">
                 <TextBlock Height="Auto" Margin="0,-1,0,0" VerticalAlignment="Center"

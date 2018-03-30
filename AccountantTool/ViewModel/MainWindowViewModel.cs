@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
@@ -68,6 +70,7 @@ namespace AccountantTool.ViewModel
         public ICommand AddNewAccountantRecordCommand { get; set; }
         public ICommand LoadAccountantRecordsAsyncCommand { get; set; }
         public ICommand AddNewRecordCommand { get; set; }
+        public ICommand DeleteRecordCommand { get; set; }
         #endregion Commands
 
         #region Construction
@@ -76,20 +79,22 @@ namespace AccountantTool.ViewModel
         {
             Worksheet = mainGrid;
 
-            Context = new AccountantDbContext();
+            //Context = new AccountantDbContext();
             AccountantRecords = new ObservableCollection<AccountantRecord>();
 
-            BindingOperations.EnableCollectionSynchronization(AccountantRecords, _accountantRecordsLock);
-            FilteredAccountantRecords = new CollectionViewGeneric<AccountantRecord>(CollectionViewSource.GetDefaultView(AccountantRecords));
+            //BindingOperations.EnableCollectionSynchronization(AccountantRecords, _accountantRecordsLock);
+            //FilteredAccountantRecords = new CollectionViewGeneric<AccountantRecord>(CollectionViewSource.GetDefaultView(AccountantRecords));
 
-            AddNewAccountantRecordCommand = new RelayCommand(AddAccountantRecordOpenWindow);
-            OpenSettindsDialogCommand = new RelayCommand(DoStuff);
-            LoadAccountantRecordsAsyncCommand = new AsyncDelegateCommand(LoadAccountantRecordsAsync, x => IsDataLoaded);
+            //AddNewAccountantRecordCommand = new RelayCommand(AddAccountantRecordOpenWindow);
+            //OpenSettindsDialogCommand = new RelayCommand(DoStuff);
+            //LoadAccountantRecordsAsyncCommand = new AsyncDelegateCommand(LoadAccountantRecordsAsync, x => IsDataLoaded);
+
             AddNewRecordCommand = new RelayCommand(OnAddNewRecord);
+            DeleteRecordCommand = new RelayCommand(OnDeleteRecord, x => AccountantRecords.Count > 1 && Worksheet.RowCount > 1);
 
-            AddNewAccountantRecordEvent += OnAddNewAccountantRecordEvent;
+            //AddNewAccountantRecordEvent += OnAddNewAccountantRecordEvent;
 
-            LoadAccountantRecordsAsyncCommand.Execute(null);
+            //LoadAccountantRecordsAsyncCommand.Execute(null);
 
             // Worksheet
             InitializeWorksheet();
@@ -102,6 +107,7 @@ namespace AccountantTool.ViewModel
         private void InitializeWorksheet()
         {
             Worksheet.Columns = Constants.CountOfColumns;
+            Worksheet.SelectionMode = WorksheetSelectionMode.Row;
             Worksheet.ColumnHeaders[Constants.CompanyColumnIndex].Text = "Название компании";
             Worksheet.ColumnHeaders[Constants.RequisitesColumnIndex].Text = "Реквизиты";
             Worksheet.ColumnHeaders[Constants.ContactPersonColumnIndex].Text = "Контактное лицо";
@@ -112,8 +118,7 @@ namespace AccountantTool.ViewModel
 
             DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
             Worksheet.SetColumnsWidth(0, 7, 200);
-
-            AccountantRecords.Add(new AccountantRecord
+            var kek = new AccountantRecord
             {
                 Requisites = new Requisites
                 {
@@ -230,7 +235,8 @@ namespace AccountantTool.ViewModel
                         CostFromSeller = 44444,
                         Description = "qweqgfhdbgsdweqwe",
                         Name = "asd"
-                    },new Product
+                    },
+                    new Product
                     {
                         Count = 2,
                         CostForCustomer = 111.3,
@@ -239,7 +245,8 @@ namespace AccountantTool.ViewModel
                         Name = "asd3"
                     }
                 },
-            });
+            };
+            AccountantRecords.Add(kek);
 
             for (var i = 0; i < AccountantRecords.Count; i++)
             {
@@ -289,18 +296,36 @@ namespace AccountantTool.ViewModel
 
         private void OnAddNewRecord()
         {
-            var newRecord = new AccountantRecord();
+            var random = new Random();
+            var newRecord = new AccountantRecord { Company = new Company { ShortName = "SN" + random.Next(1, 500) } };
 
-            var rowToInsertNewRecord = AccountantRecords.Count;
+            var rowIndexToInsertNewRecord = AccountantRecords.Count;
 
             AccountantRecords.Add(newRecord);
 
             if (Worksheet.RowCount == AccountantRecords.Count)
             {
-                Worksheet.AppendRows(5);
+                Worksheet.AppendRows(Constants.CountOfRowsToAdd);
             }
 
-            AddRecord(rowToInsertNewRecord, newRecord);
+            AddRecord(rowIndexToInsertNewRecord, newRecord);
+        }
+
+        private void OnDeleteRecord()
+        {
+            for (int i = 0, index = Worksheet.SelectionRange.Row; i < Worksheet.SelectionRange.Rows; i++, index++)
+            {
+                var companyCell = Worksheet.GetCell(index, Constants.CompanyColumnIndex);
+
+                if (companyCell != null)
+                {
+                    //AccountantRecords.Remove(AccountantRecords.FirstOrDefault(s=> s.Id == companyCell.GetData<Company>().RecordId));
+                    //AccountantRecords.Remove(companyCell.GetData<Company>().ParentRef);
+                }
+            }
+
+            //Worksheet.ClearRangeContent(Worksheet.SelectionRange, CellElementFlag.Data);
+            Worksheet.DeleteRows(Worksheet.SelectionRange.Row, Worksheet.SelectionRange.Rows);
         }
 
         private void AddAccountantRecordOpenWindow()

@@ -2,7 +2,9 @@
 {
     public class Constants
     {
+        //worksheet properties
         public const int CountOfColumns = 7;
+        public const int CountOfRowsToAdd = 5;
 
         // Column indexes
         public const int CompanyColumnIndex = 0;
