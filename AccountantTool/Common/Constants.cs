@@ -2,7 +2,7 @@
 {
     public class Constants
     {
-        //worksheet properties
+        // Worksheet properties
         public const int CountOfColumns = 7;
         public const int CountOfRowsToAdd = 5;
 

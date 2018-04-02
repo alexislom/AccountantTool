@@ -1,4 +1,6 @@
-﻿namespace AccountantTool.Controls
+﻿using AccountantTool.Helpers;
+
+namespace AccountantTool.Controls
 {
     partial class RequisitesControl
     {
@@ -49,9 +51,19 @@
             this.textRequisitesCountry = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textRequisitesIndex = new System.Windows.Forms.TextBox();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.OtherRequisitesListView = new AccountantTool.Helpers.EditableListView();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.AddDepartmentBtn = new System.Windows.Forms.Button();
+            this.RemoveDepartmentBtn = new System.Windows.Forms.Button();
+            this.AddOtherRequisiteBtn = new System.Windows.Forms.Button();
+            this.RemoveOtherRequisiteBtn = new System.Windows.Forms.Button();
+            this.OkRequisitesBtn = new System.Windows.Forms.Button();
+            this.DepartmentsListView = new AccountantTool.Helpers.EditableListView();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.RequisitesGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -244,18 +256,6 @@
             this.textRequisitesIndex.Size = new System.Drawing.Size(100, 20);
             this.textRequisitesIndex.TabIndex = 0;
             // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-            this.listView1.Location = new System.Drawing.Point(16, 227);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(213, 123);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Отдел";
@@ -266,14 +266,112 @@
             this.columnHeader2.Text = "Телефон";
             this.columnHeader2.Width = 137;
             // 
+            // OtherRequisitesListView
+            // 
+            this.OtherRequisitesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4});
+            this.OtherRequisitesListView.Location = new System.Drawing.Point(243, 227);
+            this.OtherRequisitesListView.Name = "OtherRequisitesListView";
+            this.OtherRequisitesListView.Size = new System.Drawing.Size(222, 123);
+            this.OtherRequisitesListView.TabIndex = 2;
+            this.OtherRequisitesListView.UseCompatibleStateImageBehavior = false;
+            this.OtherRequisitesListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Иной реквизит";
+            this.columnHeader3.Width = 92;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Его значение";
+            this.columnHeader4.Width = 137;
+            // 
+            // AddDepartmentBtn
+            // 
+            this.AddDepartmentBtn.Location = new System.Drawing.Point(16, 367);
+            this.AddDepartmentBtn.Name = "AddDepartmentBtn";
+            this.AddDepartmentBtn.Size = new System.Drawing.Size(75, 41);
+            this.AddDepartmentBtn.TabIndex = 3;
+            this.AddDepartmentBtn.Text = "Добавить отдел";
+            this.AddDepartmentBtn.UseVisualStyleBackColor = true;
+            // 
+            // RemoveDepartmentBtn
+            // 
+            this.RemoveDepartmentBtn.Location = new System.Drawing.Point(154, 367);
+            this.RemoveDepartmentBtn.Name = "RemoveDepartmentBtn";
+            this.RemoveDepartmentBtn.Size = new System.Drawing.Size(75, 41);
+            this.RemoveDepartmentBtn.TabIndex = 4;
+            this.RemoveDepartmentBtn.Text = "Удалить отдел";
+            this.RemoveDepartmentBtn.UseVisualStyleBackColor = true;
+            // 
+            // AddOtherRequisiteBtn
+            // 
+            this.AddOtherRequisiteBtn.Location = new System.Drawing.Point(243, 366);
+            this.AddOtherRequisiteBtn.Name = "AddOtherRequisiteBtn";
+            this.AddOtherRequisiteBtn.Size = new System.Drawing.Size(75, 42);
+            this.AddOtherRequisiteBtn.TabIndex = 5;
+            this.AddOtherRequisiteBtn.Text = "Добавить реквизит";
+            this.AddOtherRequisiteBtn.UseVisualStyleBackColor = true;
+            // 
+            // RemoveOtherRequisiteBtn
+            // 
+            this.RemoveOtherRequisiteBtn.Location = new System.Drawing.Point(390, 366);
+            this.RemoveOtherRequisiteBtn.Name = "RemoveOtherRequisiteBtn";
+            this.RemoveOtherRequisiteBtn.Size = new System.Drawing.Size(75, 42);
+            this.RemoveOtherRequisiteBtn.TabIndex = 6;
+            this.RemoveOtherRequisiteBtn.Text = "Удалить реквизит";
+            this.RemoveOtherRequisiteBtn.UseVisualStyleBackColor = true;
+            // 
+            // OkRequisitesBtn
+            // 
+            this.OkRequisitesBtn.Location = new System.Drawing.Point(202, 414);
+            this.OkRequisitesBtn.Name = "OkRequisitesBtn";
+            this.OkRequisitesBtn.Size = new System.Drawing.Size(75, 38);
+            this.OkRequisitesBtn.TabIndex = 7;
+            this.OkRequisitesBtn.Text = "Ok";
+            this.OkRequisitesBtn.UseVisualStyleBackColor = true;
+            // 
+            // DepartmentsListView
+            // 
+            this.DepartmentsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader5,
+            this.columnHeader6});
+            this.DepartmentsListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DepartmentsListView.FullRowSelect = true;
+            this.DepartmentsListView.GridLines = true;
+            this.DepartmentsListView.Location = new System.Drawing.Point(16, 227);
+            this.DepartmentsListView.Name = "DepartmentsListView";
+            this.DepartmentsListView.Size = new System.Drawing.Size(213, 123);
+            this.DepartmentsListView.TabIndex = 8;
+            this.DepartmentsListView.UseCompatibleStateImageBehavior = false;
+            this.DepartmentsListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Отдел";
+            this.columnHeader5.Width = 92;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Телефон";
+            this.columnHeader6.Width = 137;
+            // 
             // RequisitesControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.DepartmentsListView);
+            this.Controls.Add(this.OkRequisitesBtn);
+            this.Controls.Add(this.RemoveOtherRequisiteBtn);
+            this.Controls.Add(this.AddOtherRequisiteBtn);
+            this.Controls.Add(this.RemoveDepartmentBtn);
+            this.Controls.Add(this.AddDepartmentBtn);
+            this.Controls.Add(this.OtherRequisitesListView);
             this.Controls.Add(this.RequisitesGroupBox);
             this.Name = "RequisitesControl";
-            this.Size = new System.Drawing.Size(481, 367);
+            this.Size = new System.Drawing.Size(481, 462);
             this.RequisitesGroupBox.ResumeLayout(false);
             this.RequisitesGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -297,7 +395,6 @@
         private System.Windows.Forms.TextBox textRequisitesCountry;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textRequisitesIndex;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Label label8;
@@ -306,5 +403,16 @@
         private System.Windows.Forms.TextBox textRequisitesFlat;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textOtherRequisites;
+        private System.Windows.Forms.ListView OtherRequisitesListView;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.Button AddDepartmentBtn;
+        private System.Windows.Forms.Button RemoveDepartmentBtn;
+        private System.Windows.Forms.Button AddOtherRequisiteBtn;
+        private System.Windows.Forms.Button RemoveOtherRequisiteBtn;
+        private System.Windows.Forms.Button OkRequisitesBtn;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private EditableListView DepartmentsListView;
     }
 }

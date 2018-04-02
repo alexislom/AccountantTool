@@ -21,6 +21,30 @@ namespace AccountantTool.Controls
             textRequisitesFlat.Text = Model?.Address.Flat;
             textRequisitesEmail.Text = Model?.Email;
             textOtherRequisites.Text = Model?.OtherRequisites;
+
+            if (Model?.Phones != null)
+            {
+                foreach (var phone in Model.Phones)
+                {
+                    DepartmentsListView.Items.Add(new ListViewItem(new[]
+                    {
+                        phone.Key,
+                        phone.Value
+                    }));
+                }
+            }
+
+            if (Model?.Other != null)
+            {
+                foreach (var other in Model.Other)
+                {
+                    OtherRequisitesListView.Items.Add(new ListViewItem(new[]
+                    {
+                        other.Key,
+                        other.Value
+                    }));
+                }
+            }
         }
     }
 }

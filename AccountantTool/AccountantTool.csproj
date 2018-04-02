@@ -244,6 +244,9 @@
     <Compile Include="Data\Configs\LicenseConfig.cs" />
     <Compile Include="Data\Configs\ProductConfig.cs" />
     <Compile Include="Data\Configs\RequisitesConfig.cs" />
+    <Compile Include="Helpers\EditableListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Helpers\EnumHelpers.cs" />
     <Compile Include="Helpers\ListWrapper.cs" />
     <Compile Include="Helpers\Search\CollectionViewGeneric.cs" />

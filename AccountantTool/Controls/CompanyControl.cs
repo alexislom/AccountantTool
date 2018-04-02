@@ -15,5 +15,11 @@ namespace AccountantTool.Controls
             txtFullName.Text = Model?.LongName;
             txtShortName.Text = Model?.ShortName;
         }
+
+        private void OkCompanyBtn_Click(object sender, System.EventArgs e)
+        {
+            Model.LongName = txtFullName?.Text;
+            Model.ShortName = txtShortName?.Text;
+        }
     }
 }

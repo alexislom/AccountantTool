@@ -90,7 +90,7 @@ namespace AccountantTool.ViewModel
             //LoadAccountantRecordsAsyncCommand = new AsyncDelegateCommand(LoadAccountantRecordsAsync, x => IsDataLoaded);
 
             AddNewRecordCommand = new RelayCommand(OnAddNewRecord);
-            DeleteRecordCommand = new RelayCommand(OnDeleteRecord, x => AccountantRecords.Count > 1 && Worksheet.RowCount > 1);
+            DeleteRecordCommand = new RelayCommand(OnDeleteRecord, x => AccountantRecords.Count >= 1 && Worksheet.RowCount > 1);
 
             //AddNewAccountantRecordEvent += OnAddNewAccountantRecordEvent;
 
@@ -108,13 +108,8 @@ namespace AccountantTool.ViewModel
         {
             Worksheet.Columns = Constants.CountOfColumns;
             Worksheet.SelectionMode = WorksheetSelectionMode.Row;
-            Worksheet.ColumnHeaders[Constants.CompanyColumnIndex].Text = "Название компании";
-            Worksheet.ColumnHeaders[Constants.RequisitesColumnIndex].Text = "Реквизиты";
-            Worksheet.ColumnHeaders[Constants.ContactPersonColumnIndex].Text = "Контактное лицо";
-            Worksheet.ColumnHeaders[Constants.LicenseColumnIndex].Text = "Наличие лицензии и сроки";
-            Worksheet.ColumnHeaders[Constants.ProductsColumnIndex].Text = "Покупаемые изделия и стоимость";
-            Worksheet.ColumnHeaders[Constants.ContractColumnIndex].Text = "Исполнение контракта";
-            Worksheet.ColumnHeaders[Constants.AdditionalInfoColumnIndex].Text = "Дополнительная информация";
+
+            InitializeHeaders();
 
             DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
             Worksheet.SetColumnsWidth(0, 7, 200);
@@ -136,8 +131,19 @@ namespace AccountantTool.ViewModel
                     },
                     Email = "aaalalalalala",
                     OtherRequisites = "adakwbfjawkf",
-                    Phones = "1241451436146",
-                    Site = "asfasfafw.com"
+                    Phones = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("First department", "111111111"),
+                        new KeyValuePair<string, string>("Second department", "22222222222"),
+                        new KeyValuePair<string, string>("Third department", "33333333333"),
+                    },
+                    Site = "asfasfafw.com",
+                    Other = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("A", "aaa213214adsa"),
+                        new KeyValuePair<string, string>("B", "agggggggsa"),
+                        new KeyValuePair<string, string>("C", "dfsdgf3214adsa"),
+                    }
                 },
                 Company = new Company
                 {
@@ -259,6 +265,17 @@ namespace AccountantTool.ViewModel
             }
         }
 
+        private void InitializeHeaders()
+        {
+            Worksheet.ColumnHeaders[Constants.CompanyColumnIndex].Text = "Название компании";
+            Worksheet.ColumnHeaders[Constants.RequisitesColumnIndex].Text = "Реквизиты";
+            Worksheet.ColumnHeaders[Constants.ContactPersonColumnIndex].Text = "Контактное лицо";
+            Worksheet.ColumnHeaders[Constants.LicenseColumnIndex].Text = "Наличие лицензии и сроки";
+            Worksheet.ColumnHeaders[Constants.ProductsColumnIndex].Text = "Покупаемые изделия и стоимость";
+            Worksheet.ColumnHeaders[Constants.ContractColumnIndex].Text = "Исполнение контракта";
+            Worksheet.ColumnHeaders[Constants.AdditionalInfoColumnIndex].Text = "Дополнительная информация";
+        }
+
         private void AddRecord(int row, AccountantRecord record)
         {
             Worksheet.SetCellData(row, Constants.CompanyColumnIndex, record.Company);
@@ -323,12 +340,11 @@ namespace AccountantTool.ViewModel
 
                 if (companyCell != null)
                 {
-                    AccountantRecords.Remove(AccountantRecords.FirstOrDefault(s => s.Id == companyCell.GetData<Company>().ParentId));
-                    //AccountantRecords.Remove(companyCell.GetData<Company>().ParentRef);
+                    var recordToRemove = AccountantRecords.FirstOrDefault(s => s.Id == companyCell.GetData<Company>().ParentId);
+                    AccountantRecords.Remove(recordToRemove);
                 }
             }
 
-            //Worksheet.ClearRangeContent(Worksheet.SelectionRange, CellElementFlag.Data);
             Worksheet.DeleteRows(Worksheet.SelectionRange.Row, Worksheet.SelectionRange.Rows);
         }
 
