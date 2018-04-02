@@ -6,9 +6,11 @@
     <!--Main window-->
     <system:String x:Key="AtRecordsTitle">Records</system:String>
     <system:String x:Key="AtSearchTitle">Search</system:String>
-    <system:String x:Key="AtSettingsTitle">Settings</system:String>
+    <system:String x:Key="AtChangeLanguageTitle">Change language</system:String>
     <system:String x:Key="AtNewRecordTitle">New record</system:String>
     <system:String x:Key="AtAddRecordTittle">Add/Edit record</system:String>
+    <system:String x:Key="AtDeleteRecordsTitle">Delete records</system:String>
+    <system:String x:Key="AtSaveDocumentTitle">Save document</system:String>
     <!--Table and add record dialog tittles-->
     <system:String x:Key="AtNameOfTheCompanyDialogTitle">Name of the company</system:String>
     <system:String x:Key="AtRequisitesDialogTitle">Requisites</system:String>
@@ -63,5 +65,5 @@
     <system:String x:Key="AtAdditionalInfoNotesTextBlock">Notes:</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
-    
+
 </ResourceDictionary>

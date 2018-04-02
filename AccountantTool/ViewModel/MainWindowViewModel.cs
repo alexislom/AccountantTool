@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,6 +20,7 @@ using AccountantTool.View;
 using AccountantTool.ViewModel.MainComponents;
 using unvell.ReoGrid;
 using unvell.ReoGrid.DataFormat;
+using unvell.ReoGrid.IO;
 
 namespace AccountantTool.ViewModel
 {
@@ -69,8 +71,9 @@ namespace AccountantTool.ViewModel
         public ICommand OpenSettindsDialogCommand { get; set; }
         public ICommand AddNewAccountantRecordCommand { get; set; }
         public ICommand LoadAccountantRecordsAsyncCommand { get; set; }
-        public ICommand AddNewRecordCommand { get; set; }
-        public ICommand DeleteRecordCommand { get; set; }
+        public ICommand AddNewRecordCommand { get; private set; }
+        public ICommand DeleteRecordCommand { get; private set; }
+        public ICommand SaveDocumentCommand { get; private set; }
         #endregion Commands
 
         #region Construction
@@ -86,11 +89,12 @@ namespace AccountantTool.ViewModel
             //FilteredAccountantRecords = new CollectionViewGeneric<AccountantRecord>(CollectionViewSource.GetDefaultView(AccountantRecords));
 
             //AddNewAccountantRecordCommand = new RelayCommand(AddAccountantRecordOpenWindow);
-            //OpenSettindsDialogCommand = new RelayCommand(DoStuff);
+            OpenSettindsDialogCommand = new RelayCommand(ChangeLanguage);
             //LoadAccountantRecordsAsyncCommand = new AsyncDelegateCommand(LoadAccountantRecordsAsync, x => IsDataLoaded);
 
             AddNewRecordCommand = new RelayCommand(OnAddNewRecord);
             DeleteRecordCommand = new RelayCommand(OnDeleteRecord, x => AccountantRecords.Count >= 1 && Worksheet.RowCount > 1);
+            SaveDocumentCommand = new RelayCommand(OnSaveDocument);
 
             //AddNewAccountantRecordEvent += OnAddNewAccountantRecordEvent;
 
@@ -339,6 +343,11 @@ namespace AccountantTool.ViewModel
             Worksheet.DeleteRows(Worksheet.SelectionRange.Row, Worksheet.SelectionRange.Rows);
         }
 
+        private void OnSaveDocument()
+        {
+            Worksheet.Workbook.Save(@"C:\Downloads\Report.xls", FileFormat.Excel2007);
+        }
+
         private void AddAccountantRecordOpenWindow()
         {
             var addWindow = new AddAccountantRecordWindow(this);
@@ -357,9 +366,9 @@ namespace AccountantTool.ViewModel
             //await LoadFullAmountAndNumberAsync();
         }
 
-        private static void DoStuff()
+        private static void ChangeLanguage()
         {
-            MessageBox.Show("Responding to button click event...");
+            App.SelectedLanguage = App.SelectedLanguage.Equals(App.Languages[0]) ? new CultureInfo("ru-RU") : new CultureInfo("en-US");
         }
 
         private async Task LoadAccountantRecordsAsync(object arg)

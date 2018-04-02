@@ -63,7 +63,7 @@
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <iconPacks:PackIconModern Kind="Settings"/>
-                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource AtSettingsTitle}"/>
+                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource AtChangeLanguageTitle}"/>
                     </StackPanel>
                 </Button.Content>
             </Button>
@@ -83,8 +83,10 @@
                           Icon="{iconPacks:Entypo NewMessage}" InputGestureText="F1"/>-->
                 <MenuItem Header="{DynamicResource AtNewRecordTitle}" Command="{Binding AddNewRecordCommand}"
                           Icon="{iconPacks:Entypo NewMessage}" InputGestureText="F1"/>
-                <MenuItem Header="Delete rows" Command="{Binding DeleteRecordCommand}"
-                          Icon="{iconPacks:Material BookmarkRemove}" InputGestureText="F1"/>
+                <MenuItem Header="{DynamicResource AtDeleteRecordsTitle}" Command="{Binding DeleteRecordCommand}"
+                          Icon="{iconPacks:Material BookmarkRemove}"/>
+                <MenuItem Header="{DynamicResource AtSaveDocumentTitle}" Command="{Binding SaveDocumentCommand}"
+                          Icon="{iconPacks:Material ContentSave}"/>
             </Menu>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" TextBlock.FontSize="14">
                 <TextBlock Height="Auto" Margin="0,-1,0,0" VerticalAlignment="Center"

@@ -6,9 +6,11 @@
     <!--Main window-->
     <system:String x:Key="AtRecordsTitle">Записи</system:String>
     <system:String x:Key="AtSearchTitle">Поиск</system:String>
-    <system:String x:Key="AtSettingsTitle">Настройки</system:String>
+    <system:String x:Key="AtChangeLanguageTitle">Сменить язык</system:String>
     <system:String x:Key="AtNewRecordTitle">Новая запись</system:String>
     <system:String x:Key="AtAddRecordTittle">Добавить/Изменить запись</system:String>
+    <system:String x:Key="AtDeleteRecordsTitle">Удалить записи</system:String>
+    <system:String x:Key="AtSaveDocumentTitle">Сохранить документ</system:String>
     <!--Table and add record dialog tittles-->
     <system:String x:Key="AtNameOfTheCompanyDialogTitle">Название компании</system:String>
     <system:String x:Key="AtRequisitesDialogTitle">Реквизиты</system:String>
