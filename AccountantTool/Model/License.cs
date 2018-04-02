@@ -23,6 +23,8 @@ namespace AccountantTool.Model
 
         public DateTime DateOfExpiration { get; set; }
 
-        public LicenseType LicenseType { get; set; }
+        //public LicenseType LicenseType { get; set; }
+
+        public string LicenseType { get; set; }
     }
 }

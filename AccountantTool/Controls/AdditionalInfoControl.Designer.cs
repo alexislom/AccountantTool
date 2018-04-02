@@ -31,6 +31,7 @@
             this.AddInfoGroupBox = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNotes = new System.Windows.Forms.TextBox();
+            this.OkAddInfoBtn = new System.Windows.Forms.Button();
             this.AddInfoGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,13 +63,24 @@
             this.txtNotes.Size = new System.Drawing.Size(216, 20);
             this.txtNotes.TabIndex = 0;
             // 
+            // OkAddInfoBtn
+            // 
+            this.OkAddInfoBtn.Location = new System.Drawing.Point(348, 92);
+            this.OkAddInfoBtn.Name = "OkAddInfoBtn";
+            this.OkAddInfoBtn.Size = new System.Drawing.Size(75, 25);
+            this.OkAddInfoBtn.TabIndex = 6;
+            this.OkAddInfoBtn.Text = "Ok";
+            this.OkAddInfoBtn.UseVisualStyleBackColor = true;
+            this.OkAddInfoBtn.Click += new System.EventHandler(this.OkAddInfoBtn_Click);
+            // 
             // AdditionalInfoControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.OkAddInfoBtn);
             this.Controls.Add(this.AddInfoGroupBox);
             this.Name = "AdditionalInfoControl";
-            this.Size = new System.Drawing.Size(437, 99);
+            this.Size = new System.Drawing.Size(437, 125);
             this.AddInfoGroupBox.ResumeLayout(false);
             this.AddInfoGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -80,5 +92,6 @@
         private System.Windows.Forms.GroupBox AddInfoGroupBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNotes;
+        private System.Windows.Forms.Button OkAddInfoBtn;
     }
 }

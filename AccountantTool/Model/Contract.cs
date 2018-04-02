@@ -25,7 +25,8 @@ namespace AccountantTool.Model
 
         public DateTime DateOfEnd { get; set; }
 
-        public ContractStage ContractStage { get; set; }
+        //public ContractStage ContractStage { get; set; }
+        public string ContractStage { get; set; }
 
         //public bool IsFulfilled { get; set; }
     }

@@ -39,6 +39,7 @@
             this.textDateOfContract = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textNumberOfContract = new System.Windows.Forms.TextBox();
+            this.OkContractBtn = new System.Windows.Forms.Button();
             this.ContractGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -141,13 +142,24 @@
             this.textNumberOfContract.Size = new System.Drawing.Size(141, 20);
             this.textNumberOfContract.TabIndex = 0;
             // 
+            // OkContractBtn
+            // 
+            this.OkContractBtn.Location = new System.Drawing.Point(231, 204);
+            this.OkContractBtn.Name = "OkContractBtn";
+            this.OkContractBtn.Size = new System.Drawing.Size(75, 23);
+            this.OkContractBtn.TabIndex = 2;
+            this.OkContractBtn.Text = "Ok";
+            this.OkContractBtn.UseVisualStyleBackColor = true;
+            this.OkContractBtn.Click += new System.EventHandler(this.OkContractBtn_Click);
+            // 
             // ContractControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.OkContractBtn);
             this.Controls.Add(this.ContractGroupBox);
             this.Name = "ContractControl";
-            this.Size = new System.Drawing.Size(339, 213);
+            this.Size = new System.Drawing.Size(339, 235);
             this.ContractGroupBox.ResumeLayout(false);
             this.ContractGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -167,5 +179,6 @@
         private System.Windows.Forms.TextBox textDateOfContract;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textNumberOfContract;
+        private System.Windows.Forms.Button OkContractBtn;
     }
 }

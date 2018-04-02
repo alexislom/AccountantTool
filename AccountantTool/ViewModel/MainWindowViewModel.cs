@@ -183,7 +183,7 @@ namespace AccountantTool.ViewModel
                 },
                 Contract = new Contract
                 {
-                    ContractStage = ContractStage.One,
+                    ContractStage = "One", //ContractStage.One,
                     DateOfEnd = DateTime.Now,
                     DateOfStart = DateTime.Now,
                     //IsFulfilled = false,
@@ -198,21 +198,21 @@ namespace AccountantTool.ViewModel
                 {
                     new License
                     {
-                        LicenseType = LicenseType.One,
+                        LicenseType = "One", //LicenseType.One,
                         DateOfExpiration = DateTime.Now,
                         DateOfIssue = DateTime.Now,
                         NumberOfLicense = "355"
                     },
                     new License
                     {
-                        LicenseType = LicenseType.Two,
+                        LicenseType = "Two", //LicenseType.Two,
                         DateOfExpiration = DateTime.Now,
                         DateOfIssue = DateTime.Now,
                         NumberOfLicense = "344"
                     },
                     new License
                     {
-                        LicenseType = LicenseType.Three,
+                        LicenseType = "Three", //LicenseType.Three,
                         DateOfExpiration = DateTime.Now,
                         DateOfIssue = DateTime.Now,
                         NumberOfLicense = "366"
