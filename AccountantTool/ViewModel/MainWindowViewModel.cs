@@ -156,37 +156,29 @@ namespace AccountantTool.ViewModel
                     {
                         ContactPhone = "12312412452154",
                         Email = "Email1",
-                        Name = "Name",
-                        Patronymic = "Patronymic ",
+                        FullName = "FIOName1",
                         Position = "Position1",
-                        Surname = "Surname1"
                     },
                     new ContactPerson
                     {
                         ContactPhone = "C15on5215125",
                         Email = "Email2",
-                        Name = "Name",
-                        Patronymic = "Patronymic ",
+                        FullName = "FIOName2",
                         Position = "Position2",
-                        Surname = "Surname2"
                     },
                     new ContactPerson
                     {
                         ContactPhone = "Con125215125Phone ",
                         Email = "Email3",
-                        Name = "Name",
-                        Patronymic = "Patronymic ",
+                        FullName = "FIOName3",
                         Position = "Position3",
-                        Surname = "Surname3"
                     },
                     new ContactPerson
                     {
                         ContactPhone = "15155656546 ",
                         Email = "Email4",
-                        Name = "Name",
-                        Patronymic = "Patronymic ",
+                        FullName = "FIOName4",
                         Position = "Position4",
-                        Surname = "Surname4"
                     }
                 },
                 Contract = new Contract

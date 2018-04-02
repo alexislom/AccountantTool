@@ -20,7 +20,7 @@ namespace AccountantTool.ReoGrid.DataFormatter
 
                 if (data.Context.Count == 1)
                 {
-                    return data.Context.FirstOrDefault()?.Surname;
+                    return data.Context.FirstOrDefault()?.FullName;
                 }
 
                 var stringBuilder = new StringBuilder(data.Context.Count);

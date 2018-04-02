@@ -103,7 +103,7 @@ namespace AccountantTool.Controls
                 foreach (ListViewItem item in DepartmentsListView.Items)
                 {
                     var subItem = item.SubItems;
-                    Model.DepartmentPhones.Add(new KeyValuePair<string, string>(subItem[0].Text, subItem[1].Text));
+                    Model.DepartmentPhones.Add(new KeyValuePair<string, string>(subItem[0]?.Text, subItem[1]?.Text));
                 }
             }
 
@@ -114,7 +114,7 @@ namespace AccountantTool.Controls
                 foreach (ListViewItem item in OtherRequisitesListView.Items)
                 {
                     var subItem = item.SubItems;
-                    Model.OtherRequisites.Add(new KeyValuePair<string, string>(subItem[0].Text, subItem[1].Text));
+                    Model.OtherRequisites.Add(new KeyValuePair<string, string>(subItem[0]?.Text, subItem[1]?.Text));
                 }
             }
         }
