@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 
-        public int Index { get; set; } = 220000;
+        public string Index { get; set; }
 
         public string Region { get; set; }
 

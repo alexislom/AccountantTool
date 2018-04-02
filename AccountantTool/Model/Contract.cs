@@ -17,7 +17,7 @@ namespace AccountantTool.Model
     {
         public int Id { get; set; }
 
-        public int NumberOfContract { get; set; }
+        public string NumberOfContract { get; set; }
 
         public string SidesOfContract { get; set; }
 
@@ -27,6 +27,6 @@ namespace AccountantTool.Model
 
         public ContractStage ContractStage { get; set; }
 
-        public bool IsFulfilled { get; set; }
+        //public bool IsFulfilled { get; set; }
     }
 }

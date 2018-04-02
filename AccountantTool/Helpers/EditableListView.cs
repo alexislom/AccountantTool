@@ -7,13 +7,16 @@ namespace AccountantTool.Helpers
     public class EditableListView : ListView
     {
         #region Fields
-        private ListViewItem _li;
-        private int _x = 0;
-        private int _y = 0;
+        private int _x;
+        private int _y;
         private string _subItemText;
-        private int _subItemSelected = 0;
+        private int _subItemSelected;
         private readonly TextBox _editBox = new TextBox();
         #endregion Fields
+
+        #region Properties
+        public ListViewItem SelectedItem { get; private set; }
+        #endregion Properties
 
         public EditableListView()
         {
@@ -42,7 +45,7 @@ namespace AccountantTool.Helpers
         {
             if (e.KeyChar == 13)
             {
-                _li.SubItems[_subItemSelected].Text = _editBox.Text;
+                SelectedItem.SubItems[_subItemSelected].Text = _editBox.Text;
                 _editBox.Hide();
             }
 
@@ -52,7 +55,7 @@ namespace AccountantTool.Helpers
 
         private void FocusOver(object sender, EventArgs e)
         {
-            _li.SubItems[_subItemSelected].Text = _editBox.Text;
+            SelectedItem.SubItems[_subItemSelected].Text = _editBox.Text;
             _editBox.Hide();
         }
 
@@ -74,21 +77,20 @@ namespace AccountantTool.Helpers
                 epos += Columns[i].Width;
             }
 
-            _subItemText = _li.SubItems[_subItemSelected].Text;
+            _subItemText = SelectedItem.SubItems[_subItemSelected].Text;
 
-            var r = new Rectangle(spos, _li.Bounds.Y, epos, _li.Bounds.Bottom);
-            _editBox.Size = new Size(epos - spos, _li.Bounds.Bottom - _li.Bounds.Top);
-            _editBox.Location = new Point(spos, _li.Bounds.Y);
+            //var r = new Rectangle(spos, SelectedItem.Bounds.Y, epos, SelectedItem.Bounds.Bottom);
+            _editBox.Size = new Size(epos - spos, SelectedItem.Bounds.Bottom - SelectedItem.Bounds.Top);
+            _editBox.Location = new Point(spos, SelectedItem.Bounds.Y);
             _editBox.Show();
             _editBox.Text = _subItemText;
             _editBox.SelectAll();
             _editBox.Focus();
-
         }
 
         public void OnMouseDown(object sender, MouseEventArgs e)
         {
-            _li = GetItemAt(e.X, e.Y);
+            SelectedItem = GetItemAt(e.X, e.Y);
             _x = e.X;
             _y = e.Y;
         }

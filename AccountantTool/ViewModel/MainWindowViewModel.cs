@@ -126,19 +126,18 @@ namespace AccountantTool.ViewModel
                         District = "district",
                         Flat = "flat",
                         House = "5",
-                        Index = 2222222,
+                        Index = "2222222",
                         Region = "nasgnals"
                     },
                     Email = "aaalalalalala",
-                    OtherRequisites = "adakwbfjawkf",
-                    Phones = new List<KeyValuePair<string, string>>
+                    DepartmentPhones = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("First department", "111111111"),
                         new KeyValuePair<string, string>("Second department", "22222222222"),
                         new KeyValuePair<string, string>("Third department", "33333333333"),
                     },
                     Site = "asfasfafw.com",
-                    Other = new List<KeyValuePair<string, string>>
+                    OtherRequisites = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("A", "aaa213214adsa"),
                         new KeyValuePair<string, string>("B", "agggggggsa"),
@@ -195,8 +194,8 @@ namespace AccountantTool.ViewModel
                     ContractStage = ContractStage.One,
                     DateOfEnd = DateTime.Now,
                     DateOfStart = DateTime.Now,
-                    IsFulfilled = false,
-                    NumberOfContract = 1,
+                    //IsFulfilled = false,
+                    NumberOfContract = "1",
                     SidesOfContract = "asdasd"
                 },
                 AdditionalInfo = new AdditionalInfo
@@ -210,28 +209,28 @@ namespace AccountantTool.ViewModel
                         LicenseType = LicenseType.One,
                         DateOfExpiration = DateTime.Now,
                         DateOfIssue = DateTime.Now,
-                        NumberOfLicense = 355
+                        NumberOfLicense = "355"
                     },
                     new License
                     {
                         LicenseType = LicenseType.Two,
                         DateOfExpiration = DateTime.Now,
                         DateOfIssue = DateTime.Now,
-                        NumberOfLicense = 344
+                        NumberOfLicense = "344"
                     },
                     new License
                     {
                         LicenseType = LicenseType.Three,
                         DateOfExpiration = DateTime.Now,
                         DateOfIssue = DateTime.Now,
-                        NumberOfLicense = 366
+                        NumberOfLicense = "366"
                     }
                 },
                 Products = new List<Product>
                 {
                     new Product
                     {
-                        Count = 6,
+                        Count = "6",
                         CostForCustomer = 2,
                         CostFromSeller = 4,
                         Description = "qweqweqwe",
@@ -239,7 +238,7 @@ namespace AccountantTool.ViewModel
                     },
                     new Product
                     {
-                        Count = 9,
+                        Count = 9.ToString(),
                         CostForCustomer = 2233223,
                         CostFromSeller = 44444,
                         Description = "qweqgfhdbgsdweqwe",
@@ -247,7 +246,7 @@ namespace AccountantTool.ViewModel
                     },
                     new Product
                     {
-                        Count = 2,
+                        Count = "2",
                         CostForCustomer = 111.3,
                         CostFromSeller = 0.22,
                         Description = "eeteyherhgqweqweqwe",

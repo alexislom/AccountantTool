@@ -113,7 +113,7 @@
                     <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Requisites.Address.Flat, Mode=TwoWay}"/>
 
                     <TextBlock Grid.Row="7" Grid.Column="0" Text="{DynamicResource AtRequisitesPhonesTextBlock}"/>
-                    <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Requisites.Phones, Mode=TwoWay}"/>
+                    <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Requisites.DepartmentPhones, Mode=TwoWay}"/>
 
                     <TextBlock Grid.Row="8" Grid.Column="0" Text="{DynamicResource AtRequisitesEmailTextBlock}"/>
                     <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Requisites.Email, Mode=TwoWay}"/>

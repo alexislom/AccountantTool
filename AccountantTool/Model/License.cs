@@ -17,7 +17,7 @@ namespace AccountantTool.Model
     {
         public int Id { get; set; }
 
-        public int NumberOfLicense { get; set; }
+        public string NumberOfLicense { get; set; }
 
         public DateTime DateOfIssue { get; set; }
 
