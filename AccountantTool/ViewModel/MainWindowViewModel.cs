@@ -113,59 +113,6 @@ namespace AccountantTool.ViewModel
 
         #endregion Construction
 
-        #region Work with worksheet
-
-        private void InitializeWorksheet()
-        {
-            Worksheet.Columns = Constants.CountOfColumns;
-            Worksheet.SelectionMode = WorksheetSelectionMode.Row;
-
-            InitializeHeaders();
-
-            DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
-            Worksheet.SetColumnsWidth(Constants.CompanyColumnIndex, Constants.CountOfColumns, Constants.ColumnsWidth);
-        }
-
-        private void AddRecord(int row, AccountantRecord record)
-        {
-            if (record == null)
-                throw new ArgumentNullException(nameof(record));
-
-            Worksheet.SetCellData(row, Constants.CompanyColumnIndex, record.Company);
-            Worksheet.SetCellBody(row, Constants.CompanyColumnIndex, new CompanyListViewDropdownCell(record.Company));
-
-            Worksheet.SetCellData(row, Constants.RequisitesColumnIndex, record.Requisites);
-            Worksheet.SetCellBody(row, Constants.RequisitesColumnIndex, new RequisitesListViewDropdownCell(record.Requisites));
-
-            Worksheet.SetCellData(row, Constants.ContactPersonColumnIndex, new ListWrapper<ContactPerson>(record.ContactPersons));
-            Worksheet.SetCellBody(row, Constants.ContactPersonColumnIndex, new ContactPersonListViewDropdownCell(record.ContactPersons));
-
-            Worksheet.SetCellData(row, Constants.LicenseColumnIndex, new ListWrapper<License>(record.License));
-            Worksheet.SetCellBody(row, Constants.LicenseColumnIndex, new LicenseListViewDropdownCell(record.License));
-
-            Worksheet.SetCellData(row, Constants.ProductsColumnIndex, new ListWrapper<Product>(record.Products));
-            Worksheet.SetCellBody(row, Constants.ProductsColumnIndex, new ProductsListViewDropdownCell(record.Products));
-
-            Worksheet.SetCellData(row, Constants.ContractColumnIndex, record.Contract);
-            Worksheet.SetCellBody(row, Constants.ContractColumnIndex, new ContactListViewDropdownCell(record.Contract));
-
-            Worksheet.SetCellData(row, Constants.AdditionalInfoColumnIndex, record.AdditionalInfo);
-            Worksheet.SetCellBody(row, Constants.AdditionalInfoColumnIndex, new AdditionalInfoListViewDropdownCell(record.AdditionalInfo));
-        }
-
-        private void InitializeHeaders()
-        {
-            Worksheet.ColumnHeaders[Constants.CompanyColumnIndex].Text = IsRussianLanguage ? "Name of the company" : "Название компании";
-            Worksheet.ColumnHeaders[Constants.RequisitesColumnIndex].Text = IsRussianLanguage ? "Requisites" : "Реквизиты";
-            Worksheet.ColumnHeaders[Constants.ContactPersonColumnIndex].Text = IsRussianLanguage ? "Contact person" : "Контактное лицо";
-            Worksheet.ColumnHeaders[Constants.LicenseColumnIndex].Text = IsRussianLanguage ? "Availability of license and terms" : "Наличие лицензии и сроки";
-            Worksheet.ColumnHeaders[Constants.ProductsColumnIndex].Text = IsRussianLanguage ? "Purchased products and cost" : "Покупаемые изделия и стоимость";
-            Worksheet.ColumnHeaders[Constants.ContractColumnIndex].Text = IsRussianLanguage ? "Execution of the contract" : "Исполнение контракта";
-            Worksheet.ColumnHeaders[Constants.AdditionalInfoColumnIndex].Text = IsRussianLanguage ? "Additional Information" : "Дополнительная информация";
-        }
-
-        #endregion Work with worksheet
-
         //#region Event handlers
 
         //private void OnAddNewAccountantRecordEvent(object sender, EventArgs<AccountantRecord> eventArgs)
@@ -260,45 +207,6 @@ namespace AccountantTool.ViewModel
             }
         }
 
-        private static void SetRecordData(Cell cell, AccountantRecord accountantRecord, int columnIndex)
-        {
-            switch (columnIndex)
-            {
-                case Constants.CompanyColumnIndex:
-                    var company = cell.GetData<Company>();
-                    accountantRecord.Company = company;
-                    accountantRecord.Id = company.ParentId;
-                    break;
-                case Constants.RequisitesColumnIndex:
-                    var requisites = cell.GetData<Requisites>();
-                    accountantRecord.Requisites = requisites;
-                    break;
-                case Constants.ContactPersonColumnIndex:
-                    var contactPersons = cell.GetData<ListWrapper<ContactPerson>>();
-                    accountantRecord.ContactPersons = new List<ContactPerson>(contactPersons.Context.Count);
-                    accountantRecord.ContactPersons.AddRange(contactPersons.Context);
-                    break;
-                case Constants.LicenseColumnIndex:
-                    var license = cell.GetData<ListWrapper<License>>();
-                    accountantRecord.License = new List<License>(license.Context.Count);
-                    accountantRecord.License.AddRange(license.Context);
-                    break;
-                case Constants.ProductsColumnIndex:
-                    var products = cell.GetData<ListWrapper<Product>>();
-                    accountantRecord.Products = new List<Product>(products.Context.Count);
-                    accountantRecord.Products.AddRange(products.Context);
-                    break;
-                case Constants.ContractColumnIndex:
-                    var contract = cell.GetData<Contract>();
-                    accountantRecord.Contract = contract;
-                    break;
-                case Constants.AdditionalInfoColumnIndex:
-                    var addInfo = cell.GetData<AdditionalInfo>();
-                    accountantRecord.AdditionalInfo = addInfo;
-                    break;
-            }
-        }
-
         private void OnSaveDocument()
         {
             var saveFileDialog = new SaveFileDialog
@@ -355,5 +263,97 @@ namespace AccountantTool.ViewModel
         //}
 
         #endregion Commands implementation
+
+        #region Work with worksheet
+
+        private static void SetRecordData(Cell cell, AccountantRecord accountantRecord, int columnIndex)
+        {
+            switch (columnIndex)
+            {
+                case Constants.CompanyColumnIndex:
+                    var company = cell.GetData<Company>();
+                    accountantRecord.Company = company;
+                    accountantRecord.Id = company.ParentId;
+                    break;
+                case Constants.RequisitesColumnIndex:
+                    var requisites = cell.GetData<Requisites>();
+                    accountantRecord.Requisites = requisites;
+                    break;
+                case Constants.ContactPersonColumnIndex:
+                    var contactPersons = cell.GetData<ListWrapper<ContactPerson>>();
+                    accountantRecord.ContactPersons = new List<ContactPerson>(contactPersons.Context.Count);
+                    accountantRecord.ContactPersons.AddRange(contactPersons.Context);
+                    break;
+                case Constants.LicenseColumnIndex:
+                    var license = cell.GetData<ListWrapper<License>>();
+                    accountantRecord.License = new List<License>(license.Context.Count);
+                    accountantRecord.License.AddRange(license.Context);
+                    break;
+                case Constants.ProductsColumnIndex:
+                    var products = cell.GetData<ListWrapper<Product>>();
+                    accountantRecord.Products = new List<Product>(products.Context.Count);
+                    accountantRecord.Products.AddRange(products.Context);
+                    break;
+                case Constants.ContractColumnIndex:
+                    var contract = cell.GetData<Contract>();
+                    accountantRecord.Contract = contract;
+                    break;
+                case Constants.AdditionalInfoColumnIndex:
+                    var addInfo = cell.GetData<AdditionalInfo>();
+                    accountantRecord.AdditionalInfo = addInfo;
+                    break;
+            }
+        }
+
+        private void InitializeWorksheet()
+        {
+            Worksheet.Columns = Constants.CountOfColumns;
+            Worksheet.SelectionMode = WorksheetSelectionMode.Row;
+
+            InitializeHeaders();
+
+            DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
+            Worksheet.SetColumnsWidth(Constants.CompanyColumnIndex, Constants.CountOfColumns, Constants.ColumnsWidth);
+        }
+
+        private void AddRecord(int row, AccountantRecord record)
+        {
+            if (record == null)
+                throw new ArgumentNullException(nameof(record));
+
+            Worksheet.SetCellData(row, Constants.CompanyColumnIndex, record.Company);
+            Worksheet.SetCellBody(row, Constants.CompanyColumnIndex, new CompanyListViewDropdownCell(record.Company));
+
+            Worksheet.SetCellData(row, Constants.RequisitesColumnIndex, record.Requisites);
+            Worksheet.SetCellBody(row, Constants.RequisitesColumnIndex, new RequisitesListViewDropdownCell(record.Requisites));
+
+            Worksheet.SetCellData(row, Constants.ContactPersonColumnIndex, new ListWrapper<ContactPerson>(record.ContactPersons));
+            Worksheet.SetCellBody(row, Constants.ContactPersonColumnIndex, new ContactPersonListViewDropdownCell(record.ContactPersons));
+
+            Worksheet.SetCellData(row, Constants.LicenseColumnIndex, new ListWrapper<License>(record.License));
+            Worksheet.SetCellBody(row, Constants.LicenseColumnIndex, new LicenseListViewDropdownCell(record.License));
+
+            Worksheet.SetCellData(row, Constants.ProductsColumnIndex, new ListWrapper<Product>(record.Products));
+            Worksheet.SetCellBody(row, Constants.ProductsColumnIndex, new ProductsListViewDropdownCell(record.Products));
+
+            Worksheet.SetCellData(row, Constants.ContractColumnIndex, record.Contract);
+            Worksheet.SetCellBody(row, Constants.ContractColumnIndex, new ContactListViewDropdownCell(record.Contract));
+
+            Worksheet.SetCellData(row, Constants.AdditionalInfoColumnIndex, record.AdditionalInfo);
+            Worksheet.SetCellBody(row, Constants.AdditionalInfoColumnIndex, new AdditionalInfoListViewDropdownCell(record.AdditionalInfo));
+        }
+
+        private void InitializeHeaders()
+        {
+            Worksheet.ColumnHeaders[Constants.CompanyColumnIndex].Text = IsRussianLanguage ? "Name of the company" : "Название компании";
+            Worksheet.ColumnHeaders[Constants.RequisitesColumnIndex].Text = IsRussianLanguage ? "Requisites" : "Реквизиты";
+            Worksheet.ColumnHeaders[Constants.ContactPersonColumnIndex].Text = IsRussianLanguage ? "Contact person" : "Контактное лицо";
+            Worksheet.ColumnHeaders[Constants.LicenseColumnIndex].Text = IsRussianLanguage ? "Availability of license and terms" : "Наличие лицензии и сроки";
+            Worksheet.ColumnHeaders[Constants.ProductsColumnIndex].Text = IsRussianLanguage ? "Purchased products and cost" : "Покупаемые изделия и стоимость";
+            Worksheet.ColumnHeaders[Constants.ContractColumnIndex].Text = IsRussianLanguage ? "Execution of the contract" : "Исполнение контракта";
+            Worksheet.ColumnHeaders[Constants.AdditionalInfoColumnIndex].Text = IsRussianLanguage ? "Additional Information" : "Дополнительная информация";
+        }
+
+        #endregion Work with worksheet
     }
 }
