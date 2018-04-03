@@ -11,7 +11,6 @@ namespace AccountantTool.ReoGrid.DataFormatter
         {
             if (cell.Column == Constants.CompanyColumnIndex)
             {
-                //var data = cell.Data as Company;
                 var data = cell.GetData<Company>();
 
                 if (data == null)

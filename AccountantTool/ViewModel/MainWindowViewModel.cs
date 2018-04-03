@@ -38,6 +38,7 @@ namespace AccountantTool.ViewModel
         #region Properties
         //public AccountantDbContext Context { get; set; }
         public ObservableCollection<AccountantRecord> AccountantRecords { get; set; }
+        public bool IsRussianLanguage => App.SelectedLanguage.Equals(App.Languages[0]);
         //public ICollectionView<AccountantRecord> FilteredAccountantRecords { get; set; }
         //public AccountantRecord SelectedAccountantRecord { get; set; }
         //public bool IsDataLoaded { get; set; }
@@ -122,286 +123,6 @@ namespace AccountantTool.ViewModel
 
             DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
             Worksheet.SetColumnsWidth(0, 7, 200);
-
-            #region comments
-            /*
-            var id = Guid.NewGuid();
-            var kek = new AccountantRecord
-            {
-                Id = id,
-                Requisites = new Requisites
-                {
-                    Address = new Address
-                    {
-                        City = "asd",
-                        Country = "asdaxzca",
-                        District = "district",
-                        Flat = "flat",
-                        House = "5",
-                        Index = "2222222",
-                        Region = "nasgnals"
-                    },
-                    Email = "aaalalalalala",
-                    DepartmentPhones = new List<KeyValuePair<string, string>>
-                    {
-                        new KeyValuePair<string, string>("First department", "111111111"),
-                        new KeyValuePair<string, string>("Second department", "22222222222"),
-                        new KeyValuePair<string, string>("Third department", "33333333333"),
-                    },
-                    Site = "asfasfafw.com",
-                    OtherRequisites = new List<KeyValuePair<string, string>>
-                    {
-                        new KeyValuePair<string, string>("A", "aaa213214adsa"),
-                        new KeyValuePair<string, string>("B", "agggggggsa"),
-                        new KeyValuePair<string, string>("C", "dfsdgf3214adsa"),
-                    }
-                },
-                Company = new Company
-                {
-                    ParentId = id,
-                    LongName = "TestLongName",
-                    ShortName = "TestShortName"
-                },
-                ContactPersons = new List<ContactPerson>
-                {
-                    new ContactPerson
-                    {
-                        ContactPhone = "12312412452154",
-                        Email = "Email1",
-                        FullName = "FIOName1",
-                        Position = "Position1",
-                    },
-                    new ContactPerson
-                    {
-                        ContactPhone = "C15on5215125",
-                        Email = "Email2",
-                        FullName = "FIOName2",
-                        Position = "Position2",
-                    },
-                    new ContactPerson
-                    {
-                        ContactPhone = "Con125215125Phone ",
-                        Email = "Email3",
-                        FullName = "FIOName3",
-                        Position = "Position3",
-                    },
-                    new ContactPerson
-                    {
-                        ContactPhone = "15155656546 ",
-                        Email = "Email4",
-                        FullName = "FIOName4",
-                        Position = "Position4",
-                    }
-                },
-                Contract = new Contract
-                {
-                    ContractStage = "One", //ContractStage.One,
-                    DateOfEnd = DateTime.Now,
-                    DateOfStart = DateTime.Now,
-                    //IsFulfilled = false,
-                    NumberOfContract = "1",
-                    SidesOfContract = "asdasd"
-                },
-                AdditionalInfo = new AdditionalInfo
-                {
-                    Notes = "asd"
-                },
-                License = new List<License>
-                {
-                    new License
-                    {
-                        LicenseType = "One", //LicenseType.One,
-                        DateOfExpiration = DateTime.Now,
-                        DateOfIssue = DateTime.Now,
-                        NumberOfLicense = "355"
-                    },
-                    new License
-                    {
-                        LicenseType = "Two", //LicenseType.Two,
-                        DateOfExpiration = DateTime.Now,
-                        DateOfIssue = DateTime.Now,
-                        NumberOfLicense = "344"
-                    },
-                    new License
-                    {
-                        LicenseType = "Three", //LicenseType.Three,
-                        DateOfExpiration = DateTime.Now,
-                        DateOfIssue = DateTime.Now,
-                        NumberOfLicense = "366"
-                    }
-                },
-                Products = new List<Product>
-                {
-                    new Product
-                    {
-                        Count = "6",
-                        CostForCustomer = 2,
-                        CostFromSeller = 4,
-                        Description = "qweqweqwe",
-                        Name = "asd4"
-                    },
-                    new Product
-                    {
-                        Count = 9.ToString(),
-                        CostForCustomer = 2233223,
-                        CostFromSeller = 44444,
-                        Description = "qweqgfhdbgsdweqwe",
-                        Name = "asd"
-                    },
-                    new Product
-                    {
-                        Count = "2",
-                        CostForCustomer = 111.3,
-                        CostFromSeller = 0.22,
-                        Description = "eeteyherhgqweqweqwe",
-                        Name = "asd3"
-                    }
-                },
-            };
-            var id2 = Guid.NewGuid();
-            var kek2 = new AccountantRecord
-            {
-                Id = id2,
-                Requisites = new Requisites
-                {
-                    Address = new Address
-                    {
-                        City = "asd",
-                        Country = "asdaxzca",
-                        District = "district",
-                        Flat = "flat",
-                        House = "5",
-                        Index = "2222222",
-                        Region = "nasgnals"
-                    },
-                    Email = "aaalalalalala",
-                    DepartmentPhones = new List<KeyValuePair<string, string>>
-                    {
-                        new KeyValuePair<string, string>("First department", "111111111"),
-                        new KeyValuePair<string, string>("Second department", "22222222222"),
-                        new KeyValuePair<string, string>("Third department", "33333333333"),
-                    },
-                    Site = "asfasfafw.com",
-                    OtherRequisites = new List<KeyValuePair<string, string>>
-                    {
-                        new KeyValuePair<string, string>("A", "aaa213214adsa"),
-                        new KeyValuePair<string, string>("B", "agggggggsa"),
-                        new KeyValuePair<string, string>("C", "dfsdgf3214adsa"),
-                    }
-                },
-                Company = new Company
-                {
-                    ParentId = id,
-                    LongName = "TestLongName",
-                    ShortName = "TestShortName"
-                },
-                ContactPersons = new List<ContactPerson>
-                {
-                    new ContactPerson
-                    {
-                        ContactPhone = "12312412452154",
-                        Email = "Email1",
-                        FullName = "FIOName1",
-                        Position = "Position1",
-                    },
-                    new ContactPerson
-                    {
-                        ContactPhone = "C15on5215125",
-                        Email = "Email2",
-                        FullName = "FIOName2",
-                        Position = "Position2",
-                    },
-                    new ContactPerson
-                    {
-                        ContactPhone = "Con125215125Phone ",
-                        Email = "Email3",
-                        FullName = "FIOName3",
-                        Position = "Position3",
-                    },
-                    new ContactPerson
-                    {
-                        ContactPhone = "15155656546 ",
-                        Email = "Email4",
-                        FullName = "FIOName4",
-                        Position = "Position4",
-                    }
-                },
-                Contract = new Contract
-                {
-                    ContractStage = "One", //ContractStage.One,
-                    DateOfEnd = DateTime.Now,
-                    DateOfStart = DateTime.Now,
-                    //IsFulfilled = false,
-                    NumberOfContract = "1",
-                    SidesOfContract = "asdasd"
-                },
-                AdditionalInfo = new AdditionalInfo
-                {
-                    Notes = "asd"
-                },
-                License = new List<License>
-                {
-                    new License
-                    {
-                        LicenseType = "One", //LicenseType.One,
-                        DateOfExpiration = DateTime.Now,
-                        DateOfIssue = DateTime.Now,
-                        NumberOfLicense = "355"
-                    },
-                    new License
-                    {
-                        LicenseType = "Two", //LicenseType.Two,
-                        DateOfExpiration = DateTime.Now,
-                        DateOfIssue = DateTime.Now,
-                        NumberOfLicense = "344"
-                    },
-                    new License
-                    {
-                        LicenseType = "Three", //LicenseType.Three,
-                        DateOfExpiration = DateTime.Now,
-                        DateOfIssue = DateTime.Now,
-                        NumberOfLicense = "366"
-                    }
-                },
-                Products = new List<Product>
-                {
-                    new Product
-                    {
-                        Count = "6",
-                        CostForCustomer = 2,
-                        CostFromSeller = 4,
-                        Description = "qweqweqwe",
-                        Name = "asd4"
-                    },
-                    new Product
-                    {
-                        Count = 9.ToString(),
-                        CostForCustomer = 2233223,
-                        CostFromSeller = 44444,
-                        Description = "qweqgfhdbgsdweqwe",
-                        Name = "asd"
-                    },
-                    new Product
-                    {
-                        Count = "2",
-                        CostForCustomer = 111.3,
-                        CostFromSeller = 0.22,
-                        Description = "eeteyherhgqweqweqwe",
-                        Name = "asd3"
-                    }
-                },
-            };
-            AccountantRecords.Add(kek);
-            AccountantRecords.Add(kek2);
-
-            for (var i = 0; i < AccountantRecords.Count; i++)
-            {
-                var accountantRecord = AccountantRecords[i];
-
-                AddRecord(i, accountantRecord);
-            }
-            */
-            #endregion comments
         }
 
         private void AddRecord(int row, AccountantRecord record)
@@ -433,13 +154,13 @@ namespace AccountantTool.ViewModel
 
         private void InitializeHeaders()
         {
-            Worksheet.ColumnHeaders[Constants.CompanyColumnIndex].Text = "Название компании";
-            Worksheet.ColumnHeaders[Constants.RequisitesColumnIndex].Text = "Реквизиты";
-            Worksheet.ColumnHeaders[Constants.ContactPersonColumnIndex].Text = "Контактное лицо";
-            Worksheet.ColumnHeaders[Constants.LicenseColumnIndex].Text = "Наличие лицензии и сроки";
-            Worksheet.ColumnHeaders[Constants.ProductsColumnIndex].Text = "Покупаемые изделия и стоимость";
-            Worksheet.ColumnHeaders[Constants.ContractColumnIndex].Text = "Исполнение контракта";
-            Worksheet.ColumnHeaders[Constants.AdditionalInfoColumnIndex].Text = "Дополнительная информация";
+            Worksheet.ColumnHeaders[Constants.CompanyColumnIndex].Text = IsRussianLanguage ? "Name of the company" : "Название компании";
+            Worksheet.ColumnHeaders[Constants.RequisitesColumnIndex].Text = IsRussianLanguage ? "Requisites" : "Реквизиты";
+            Worksheet.ColumnHeaders[Constants.ContactPersonColumnIndex].Text = IsRussianLanguage ? "Contact person" : "Контактное лицо";
+            Worksheet.ColumnHeaders[Constants.LicenseColumnIndex].Text = IsRussianLanguage ? "Availability of license and terms" : "Наличие лицензии и сроки";
+            Worksheet.ColumnHeaders[Constants.ProductsColumnIndex].Text = IsRussianLanguage ? "Purchased products and cost" : "Покупаемые изделия и стоимость";
+            Worksheet.ColumnHeaders[Constants.ContractColumnIndex].Text = IsRussianLanguage ? "Execution of the contract" : "Исполнение контракта";
+            Worksheet.ColumnHeaders[Constants.AdditionalInfoColumnIndex].Text = IsRussianLanguage ? "Additional Information" : "Дополнительная информация";
         }
 
         #endregion Work with worksheet
@@ -455,6 +176,12 @@ namespace AccountantTool.ViewModel
         //#endregion Event handlers
 
         #region Commands implementation
+
+        private void ChangeLanguage()
+        {
+            App.SelectedLanguage = IsRussianLanguage ? new CultureInfo("ru-RU") : new CultureInfo("en-US");
+            InitializeHeaders();
+        }
 
         private void OnAddNewRecord()
         {
@@ -511,7 +238,7 @@ namespace AccountantTool.ViewModel
                     for (var columnIndex = Constants.CompanyColumnIndex; columnIndex < Constants.CountOfColumns; columnIndex++)
                     {
                         var cell = Worksheet.GetCell(rowIndex, columnIndex);
-                        // TODO: REFACTOR THIS!!!
+                        // TODO: REFACTOR THIS???!!!
                         if (cell == null)
                             return;
 
@@ -576,12 +303,6 @@ namespace AccountantTool.ViewModel
             {
                 Worksheet.Workbook.Save($"{saveFileDialog.FileName}", FileFormat.ReoGridFormat);
             }
-        }
-
-        private static void ChangeLanguage()
-        {
-            App.SelectedLanguage =
-                App.SelectedLanguage.Equals(App.Languages[0]) ? new CultureInfo("ru-RU") : new CultureInfo("en-US");
         }
 
         //private void AddAccountantRecordOpenWindow()

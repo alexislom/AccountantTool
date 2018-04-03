@@ -14,7 +14,7 @@
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:converters="clr-namespace:AccountantTool.Converters"
 
-    Title="Accountant tool"
+    Title="{DynamicResource AtMainWindowTitle}"
     TitleAlignment="Center"
     TitleCharacterCasing="Normal"
     TitlebarHeight="36"
