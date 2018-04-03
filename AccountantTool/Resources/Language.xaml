@@ -7,6 +7,7 @@
     <system:String x:Key="AtRecordsTitle">Records</system:String>
     <system:String x:Key="AtSearchTitle">Search</system:String>
     <system:String x:Key="AtChangeLanguageTitle">Change language</system:String>
+    <system:String x:Key="AtLoadData">Load data</system:String>
     <system:String x:Key="AtNewRecordTitle">New record</system:String>
     <system:String x:Key="AtAddRecordTittle">Add/Edit record</system:String>
     <system:String x:Key="AtDeleteRecordsTitle">Delete records</system:String>

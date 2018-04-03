@@ -81,6 +81,8 @@
                 <Separator Margin="-20,-6" />
                 <MenuItem Header="{DynamicResource AtNewRecordTitle}" Command="{Binding AddNewAccountantRecordCommand}"
                           Icon="{iconPacks:Entypo NewMessage}" InputGestureText="F1"/>-->
+                <MenuItem Header="{DynamicResource AtLoadData}" Command="{Binding LoadDataCommand}"
+                          Icon="{iconPacks:Material Loading}"/>
                 <MenuItem Header="{DynamicResource AtNewRecordTitle}" Command="{Binding AddNewRecordCommand}"
                           Icon="{iconPacks:Entypo NewMessage}" InputGestureText="F1"/>
                 <MenuItem Header="{DynamicResource AtDeleteRecordsTitle}" Command="{Binding DeleteRecordCommand}"

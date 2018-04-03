@@ -18,6 +18,7 @@ using AccountantTool.ReoGrid.CustomDropDownCell;
 using AccountantTool.ReoGrid.DataFormatter;
 using AccountantTool.View;
 using AccountantTool.ViewModel.MainComponents;
+using Microsoft.Win32;
 using unvell.ReoGrid;
 using unvell.ReoGrid.DataFormat;
 using unvell.ReoGrid.IO;
@@ -71,7 +72,8 @@ namespace AccountantTool.ViewModel
         //public ICommand AddNewAccountantRecordCommand { get; set; }
         //public ICommand LoadAccountantRecordsAsyncCommand { get; set; }
 
-        public ICommand ChangeLanguageCommand { get; set; }
+        public ICommand ChangeLanguageCommand { get; }
+        public ICommand LoadDataCommand { get; }
         public ICommand AddNewRecordCommand { get; }
         public ICommand DeleteRecordCommand { get; }
         public ICommand SaveDocumentCommand { get; }
@@ -93,6 +95,7 @@ namespace AccountantTool.ViewModel
             ChangeLanguageCommand = new RelayCommand(ChangeLanguage);
             //LoadAccountantRecordsAsyncCommand = new AsyncDelegateCommand(LoadAccountantRecordsAsync, x => IsDataLoaded);
 
+            LoadDataCommand = new RelayCommand(OnLoadData);
             AddNewRecordCommand = new RelayCommand(OnAddNewRecord);
             DeleteRecordCommand = new RelayCommand(OnDeleteRecord, x => AccountantRecords.Count >= 1 && Worksheet.RowCount > 1);
             SaveDocumentCommand = new RelayCommand(OnSaveDocument);
@@ -345,9 +348,32 @@ namespace AccountantTool.ViewModel
             Worksheet.DeleteRows(Worksheet.SelectionRange.Row, Worksheet.SelectionRange.Rows);
         }
 
+        private void OnLoadData()
+        {
+            var openFileDialog = new OpenFileDialog
+            {
+                RestoreDirectory = true,
+                Filter = "Excel Files|*.xls;*.xlsx;*.xlsm"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Worksheet.Workbook.Load($"{openFileDialog.FileName}", FileFormat.Excel2007);
+            }
+        }
+
         private void OnSaveDocument()
         {
-            Worksheet.Workbook.Save(@"C:\Downloads\Report.rgf", FileFormat.ReoGridFormat);
+            var saveFileDialog = new SaveFileDialog
+            {
+                RestoreDirectory = true,
+                Filter = "Excel Files|*.xls;*.xlsx;*.xlsm"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                Worksheet.Workbook.Save($"{saveFileDialog.FileName}", FileFormat.Excel2007);
+            }
         }
 
         private static void ChangeLanguage()
