@@ -59,7 +59,7 @@
     </Window.Resources>
     <controls:MetroWindow.LeftWindowCommands>
         <controls:WindowCommands HorizontalContentAlignment="Stretch" ShowLastSeparator="False">
-            <Button Command="{Binding OpenSettindsDialogCommand}">
+            <Button Command="{Binding ChangeLanguageCommand}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <iconPacks:PackIconModern Kind="Settings"/>
@@ -91,9 +91,9 @@
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" TextBlock.FontSize="14">
                 <TextBlock Height="Auto" Margin="0,-1,0,0" VerticalAlignment="Center"
                            Text="{DynamicResource AtSearchTitle}" />
-                <TextBox Height="20" Width="200" Margin="5,0" VerticalContentAlignment="Center"
+                <!--<TextBox Height="20" Width="200" Margin="5,0" VerticalContentAlignment="Center"
                     controls:TextBoxHelper.Watermark="Search text box"
-                    Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}"/>
+                    Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}"/>-->
                 <!--mah:TextBoxHelper.Watermark="{Binding RandomWatermark, StringFormat={}Например: {0}, TargetNullValue=Загрузка..., Mode=TwoWay}"
                     IsEnabled="{Binding Path=IsLoadedData}"/>-->
             </StackPanel>

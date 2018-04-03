@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace AccountantTool.Model
 {
+    [Serializable]
     public class AccountantRecord
     {
         public Guid Id { get; set; }
@@ -26,18 +28,9 @@ namespace AccountantTool.Model
             Company = new Company { ParentId = Id };
         }
 
-        #region Override Methods
-
-        /// <summary>
-        /// This method need for filter search.
-        /// </summary>
-        /// <returns></returns>
         public override string ToString()
         {
-            //return $"{Company.LongName}, {Requisites}, {ContactPerson}, {License}, {Product}, {Contract}, {AdditionalInfo}".ToLower();
-            //return $"{Company.LongName}".ToLower();
-            return "Test string";
+            return JsonConvert.SerializeObject(this);
         }
-        #endregion Override Methods
     }
 }

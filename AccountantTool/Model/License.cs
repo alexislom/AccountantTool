@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Newtonsoft.Json;
 
 namespace AccountantTool.Model
 {
@@ -13,6 +14,7 @@ namespace AccountantTool.Model
         Three
     }
 
+    [Serializable]
     public class License
     {
         public int Id { get; set; }
@@ -26,5 +28,10 @@ namespace AccountantTool.Model
         //public LicenseType LicenseType { get; set; }
 
         public string LicenseType { get; set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

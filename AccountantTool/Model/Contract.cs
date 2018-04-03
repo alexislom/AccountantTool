@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Newtonsoft.Json;
 
 namespace AccountantTool.Model
 {
@@ -13,6 +14,7 @@ namespace AccountantTool.Model
         Tree
     }
 
+    [Serializable]
     public class Contract
     {
         public int Id { get; set; }
@@ -29,5 +31,10 @@ namespace AccountantTool.Model
         public string ContractStage { get; set; }
 
         //public bool IsFulfilled { get; set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

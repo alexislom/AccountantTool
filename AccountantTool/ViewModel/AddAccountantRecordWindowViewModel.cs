@@ -50,7 +50,7 @@ namespace AccountantTool.ViewModel
                 AdditionalInfo = AdditionalInfo
             };
 
-            await Model.AddNewAccountantRecordAsync(record);
+            //await Model.AddNewAccountantRecordAsync(record);
 
             window.Close();
         }

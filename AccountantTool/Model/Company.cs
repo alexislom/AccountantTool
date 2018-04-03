@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace AccountantTool.Model
 {
+    [Serializable]
     public class Company
     {
         public Guid ParentId { get; set; }

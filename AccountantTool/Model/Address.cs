@@ -1,4 +1,6 @@
-﻿namespace AccountantTool.Model
+﻿using Newtonsoft.Json;
+
+namespace AccountantTool.Model
 {
     public class Address
     {
@@ -17,5 +19,10 @@
         public string House { get; set; }
 
         public string Flat { get; set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

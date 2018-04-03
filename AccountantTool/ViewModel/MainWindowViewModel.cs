@@ -24,56 +24,57 @@ using unvell.ReoGrid.IO;
 
 namespace AccountantTool.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase, IAccountantRecordSearch
+    public class MainWindowViewModel : ViewModelBase //, IAccountantRecordSearch
     {
         public Worksheet Worksheet { get; }
 
         #region Fields
-        private readonly object _accountantRecordsLock = new object();
-        private string _searchString;
+        //private readonly object _accountantRecordsLock = new object();
+        //private string _searchString;
         #endregion Fields
 
         #region Properties
-        public AccountantDbContext Context { get; set; }
+        //public AccountantDbContext Context { get; set; }
         public ObservableCollection<AccountantRecord> AccountantRecords { get; set; }
-        public ICollectionView<AccountantRecord> FilteredAccountantRecords { get; set; }
-        public AccountantRecord SelectedAccountantRecord { get; set; }
-        public bool IsDataLoaded { get; set; }
-        public string SearchString
-        {
-            get => _searchString;
-            set
-            {
-                _searchString = value; OnPropertyChanged();
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    FilteredAccountantRecords.Filter = null;
-                }
-                else
-                {
-                    Task.Run(() =>
-                    {
-                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            FilteredAccountantRecords.Filter = obj => ((AccountantRecord)obj).ToString().Contains(value.ToLower());
-                        }), DispatcherPriority.Background);
-                    });
-                }
-            }
-        }
+        //public ICollectionView<AccountantRecord> FilteredAccountantRecords { get; set; }
+        //public AccountantRecord SelectedAccountantRecord { get; set; }
+        //public bool IsDataLoaded { get; set; }
+        //public string SearchString
+        //{
+        //    get => _searchString;
+        //    set
+        //    {
+        //        _searchString = value; OnPropertyChanged();
+        //        if (string.IsNullOrWhiteSpace(value))
+        //        {
+        //            FilteredAccountantRecords.Filter = null;
+        //        }
+        //        else
+        //        {
+        //            Task.Run(() =>
+        //            {
+        //                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+        //                {
+        //                    FilteredAccountantRecords.Filter = obj => ((AccountantRecord)obj).ToString().Contains(value.ToLower());
+        //                }), DispatcherPriority.Background);
+        //            });
+        //        }
+        //    }
+        //}
         #endregion Properties
 
-        #region Events
-        public event EventHandler<EventArgs<AccountantRecord>> AddNewAccountantRecordEvent;
-        #endregion Events
+        //#region Events
+        //public event EventHandler<EventArgs<AccountantRecord>> AddNewAccountantRecordEvent;
+        //#endregion Events
 
         #region Commands
-        public ICommand OpenSettindsDialogCommand { get; set; }
-        public ICommand AddNewAccountantRecordCommand { get; set; }
-        public ICommand LoadAccountantRecordsAsyncCommand { get; set; }
-        public ICommand AddNewRecordCommand { get; private set; }
-        public ICommand DeleteRecordCommand { get; private set; }
-        public ICommand SaveDocumentCommand { get; private set; }
+        //public ICommand AddNewAccountantRecordCommand { get; set; }
+        //public ICommand LoadAccountantRecordsAsyncCommand { get; set; }
+
+        public ICommand ChangeLanguageCommand { get; set; }
+        public ICommand AddNewRecordCommand { get; }
+        public ICommand DeleteRecordCommand { get; }
+        public ICommand SaveDocumentCommand { get; }
         #endregion Commands
 
         #region Construction
@@ -89,7 +90,7 @@ namespace AccountantTool.ViewModel
             //FilteredAccountantRecords = new CollectionViewGeneric<AccountantRecord>(CollectionViewSource.GetDefaultView(AccountantRecords));
 
             //AddNewAccountantRecordCommand = new RelayCommand(AddAccountantRecordOpenWindow);
-            OpenSettindsDialogCommand = new RelayCommand(ChangeLanguage);
+            ChangeLanguageCommand = new RelayCommand(ChangeLanguage);
             //LoadAccountantRecordsAsyncCommand = new AsyncDelegateCommand(LoadAccountantRecordsAsync, x => IsDataLoaded);
 
             AddNewRecordCommand = new RelayCommand(OnAddNewRecord);
@@ -117,6 +118,7 @@ namespace AccountantTool.ViewModel
 
             DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
             Worksheet.SetColumnsWidth(0, 7, 200);
+
             var id = Guid.NewGuid();
             var kek = new AccountantRecord
             {
@@ -260,17 +262,6 @@ namespace AccountantTool.ViewModel
             }
         }
 
-        private void InitializeHeaders()
-        {
-            Worksheet.ColumnHeaders[Constants.CompanyColumnIndex].Text = "Название компании";
-            Worksheet.ColumnHeaders[Constants.RequisitesColumnIndex].Text = "Реквизиты";
-            Worksheet.ColumnHeaders[Constants.ContactPersonColumnIndex].Text = "Контактное лицо";
-            Worksheet.ColumnHeaders[Constants.LicenseColumnIndex].Text = "Наличие лицензии и сроки";
-            Worksheet.ColumnHeaders[Constants.ProductsColumnIndex].Text = "Покупаемые изделия и стоимость";
-            Worksheet.ColumnHeaders[Constants.ContractColumnIndex].Text = "Исполнение контракта";
-            Worksheet.ColumnHeaders[Constants.AdditionalInfoColumnIndex].Text = "Дополнительная информация";
-        }
-
         private void AddRecord(int row, AccountantRecord record)
         {
             Worksheet.SetCellData(row, Constants.CompanyColumnIndex, record.Company);
@@ -295,25 +286,36 @@ namespace AccountantTool.ViewModel
             Worksheet.SetCellBody(row, Constants.AdditionalInfoColumnIndex, new AdditionalInfoListViewDropdownCell(record.AdditionalInfo));
         }
 
-        #endregion Work with worksheet
-
-        #region Event handlers
-
-        private void OnAddNewAccountantRecordEvent(object sender, EventArgs<AccountantRecord> eventArgs)
+        private void InitializeHeaders()
         {
-            Context.AccountantRecords.Add(eventArgs.Value);
-            Context.SaveChanges();
+            Worksheet.ColumnHeaders[Constants.CompanyColumnIndex].Text = "Название компании";
+            Worksheet.ColumnHeaders[Constants.RequisitesColumnIndex].Text = "Реквизиты";
+            Worksheet.ColumnHeaders[Constants.ContactPersonColumnIndex].Text = "Контактное лицо";
+            Worksheet.ColumnHeaders[Constants.LicenseColumnIndex].Text = "Наличие лицензии и сроки";
+            Worksheet.ColumnHeaders[Constants.ProductsColumnIndex].Text = "Покупаемые изделия и стоимость";
+            Worksheet.ColumnHeaders[Constants.ContractColumnIndex].Text = "Исполнение контракта";
+            Worksheet.ColumnHeaders[Constants.AdditionalInfoColumnIndex].Text = "Дополнительная информация";
         }
 
-        #endregion Event handlers
+        #endregion Work with worksheet
+
+        //#region Event handlers
+
+        //private void OnAddNewAccountantRecordEvent(object sender, EventArgs<AccountantRecord> eventArgs)
+        //{
+        //    Context.AccountantRecords.Add(eventArgs.Value);
+        //    Context.SaveChanges();
+        //}
+
+        //#endregion Event handlers
 
         #region Commands implementation
 
         private void OnAddNewRecord()
         {
-            var random = new Random();
+            // TODO: Refactor this
             var id = Guid.NewGuid();
-            var newRecord = new AccountantRecord { Id = id, Company = new Company { ShortName = "SN" + random.Next(1, 500), ParentId = id } };
+            var newRecord = new AccountantRecord { Id = id, Company = new Company { ParentId = id } };
 
             var rowIndexToInsertNewRecord = AccountantRecords.Count;
 
@@ -345,25 +347,7 @@ namespace AccountantTool.ViewModel
 
         private void OnSaveDocument()
         {
-            Worksheet.Workbook.Save(@"C:\Downloads\Report.xls", FileFormat.Excel2007);
-        }
-
-        private void AddAccountantRecordOpenWindow()
-        {
-            var addWindow = new AddAccountantRecordWindow(this);
-            addWindow.Owner = Application.Current.MainWindow;
-            addWindow.ShowDialog();
-        }
-
-        public async Task AddNewAccountantRecordAsync(AccountantRecord record)
-        {
-            //Example data for testing command
-            await Task.Run(() =>
-            {
-                AccountantRecords.Add(record);
-                AddNewAccountantRecordEvent.Raise(this, record);
-            });
-            //await LoadFullAmountAndNumberAsync();
+            Worksheet.Workbook.Save(@"C:\Downloads\Report.rgf", FileFormat.ReoGridFormat);
         }
 
         private static void ChangeLanguage()
@@ -371,28 +355,46 @@ namespace AccountantTool.ViewModel
             App.SelectedLanguage = App.SelectedLanguage.Equals(App.Languages[0]) ? new CultureInfo("ru-RU") : new CultureInfo("en-US");
         }
 
-        private async Task LoadAccountantRecordsAsync(object arg)
-        {
-            IsDataLoaded = false;
+        //private void AddAccountantRecordOpenWindow()
+        //{
+        //    var addWindow = new AddAccountantRecordWindow(this);
+        //    addWindow.Owner = Application.Current.MainWindow;
+        //    addWindow.ShowDialog();
+        //}
 
-            if (AccountantRecords.Count > 0)
-                AccountantRecords.Clear();
+        //public async Task AddNewAccountantRecordAsync(AccountantRecord record)
+        //{
+        //    //Example data for testing command
+        //    await Task.Run(() =>
+        //    {
+        //        AccountantRecords.Add(record);
+        //        AddNewAccountantRecordEvent.Raise(this, record);
+        //    });
+        //    //await LoadFullAmountAndNumberAsync();
+        //}
 
-            await Task.Factory.StartNew(() =>
-            {
-                Parallel.ForEach(Context.AccountantRecords, item =>
-                {
-                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        AccountantRecords.Add(item);           //Adding to Collection without freezing UI
-                    }), DispatcherPriority.Background).Wait(); //WaitForAdding
-                });
-            });
-            IsDataLoaded = true;
+        //private async Task LoadAccountantRecordsAsync(object arg)
+        //{
+        //    IsDataLoaded = false;
 
-            //await LoadFullAmountAndNumberAsync(); //Then Show Total
-            //await LoadRandomWatermarkAsync();//And Watermark of Search
-        }
+        //    if (AccountantRecords.Count > 0)
+        //        AccountantRecords.Clear();
+
+        //    await Task.Factory.StartNew(() =>
+        //    {
+        //        Parallel.ForEach(Context.AccountantRecords, item =>
+        //        {
+        //            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+        //            {
+        //                AccountantRecords.Add(item);           //Adding to Collection without freezing UI
+        //            }), DispatcherPriority.Background).Wait(); //WaitForAdding
+        //        });
+        //    });
+        //    IsDataLoaded = true;
+
+        //    //await LoadFullAmountAndNumberAsync(); //Then Show Total
+        //    //await LoadRandomWatermarkAsync();//And Watermark of Search
+        //}
 
         #endregion Commands implementation
     }

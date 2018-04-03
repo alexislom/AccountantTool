@@ -12,14 +12,15 @@ namespace AccountantTool.ReoGrid.DataFormatter
             if (cell.Column != Constants.CompanyColumnIndex)
                 return null;
 
-            var data = cell.Data as Company;
+            //var data = cell.Data as Company;
 
-            if (data == null)
-            {
-                data = JsonConvert.DeserializeObject<Company>(data.ToString());
-            }
+            //if (data == null)
+            //{
+            //    data = JsonConvert.DeserializeObject<Company>(data.ToString());
+            //}
 
-            return data.ShortName;
+            //return data.ShortName;
+            return "Company cell";
         }
     }
 }
