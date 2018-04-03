@@ -19,7 +19,7 @@ namespace AccountantTool.ReoGrid.DataFormatter
                     cell.Data = data;
                 }
 
-                return data.ShortName;
+                return data.ShortName ?? string.Empty;
             }
 
             return cell.Data.ToString();

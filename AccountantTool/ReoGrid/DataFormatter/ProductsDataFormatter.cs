@@ -1,4 +1,5 @@
-﻿using AccountantTool.Common;
+﻿using System;
+using AccountantTool.Common;
 using AccountantTool.Helpers;
 using AccountantTool.Model;
 using Newtonsoft.Json;
@@ -20,7 +21,7 @@ namespace AccountantTool.ReoGrid.DataFormatter
                     cell.Data = data;
                 }
 
-                return cell.Data.ToString();
+                return String.Empty; //cell.Data.ToString();
             }
 
             return cell.Data.ToString();

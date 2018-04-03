@@ -91,8 +91,8 @@
                           Icon="{iconPacks:Material ContentSave}"/>
             </Menu>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" TextBlock.FontSize="14">
-                <TextBlock Height="Auto" Margin="0,-1,0,0" VerticalAlignment="Center"
-                           Text="{DynamicResource AtSearchTitle}" />
+                <!--<TextBlock Height="Auto" Margin="0,-1,0,0" VerticalAlignment="Center"
+                           Text="{DynamicResource AtSearchTitle}" />-->
                 <!--<TextBox Height="20" Width="200" Margin="5,0" VerticalContentAlignment="Center"
                     controls:TextBoxHelper.Watermark="Search text box"
                     Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}"/>-->

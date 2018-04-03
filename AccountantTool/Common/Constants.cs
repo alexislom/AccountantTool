@@ -4,6 +4,7 @@
     {
         // Worksheet properties
         public const int CountOfColumns = 7;
+        public const int ColumnsWidth = 250;
         public const int CountOfRowsToAdd = 5;
 
         // Column indexes

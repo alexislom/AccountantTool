@@ -97,8 +97,9 @@ namespace AccountantTool.ViewModel
             ChangeLanguageCommand = new RelayCommand(ChangeLanguage);
             //LoadAccountantRecordsAsyncCommand = new AsyncDelegateCommand(LoadAccountantRecordsAsync, x => IsDataLoaded);
 
-            LoadDataCommand = new RelayCommand(OnLoadData);
-            AddNewRecordCommand = new RelayCommand(OnAddNewRecord);
+            LoadDataCommand = new AsyncDelegateCommand(OnLoadData);
+            //AddNewRecordCommand = new RelayCommand(OnAddNewRecord);
+            AddNewRecordCommand = new AsyncDelegateCommand(OnAddNewRecord);
             DeleteRecordCommand = new RelayCommand(OnDeleteRecord, x => AccountantRecords.Count >= 1 && Worksheet.RowCount > 1);
             SaveDocumentCommand = new RelayCommand(OnSaveDocument);
 
@@ -122,7 +123,7 @@ namespace AccountantTool.ViewModel
             InitializeHeaders();
 
             DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
-            Worksheet.SetColumnsWidth(0, 7, 200);
+            Worksheet.SetColumnsWidth(Constants.CompanyColumnIndex, Constants.CountOfColumns, Constants.ColumnsWidth);
         }
 
         private void AddRecord(int row, AccountantRecord record)
@@ -183,7 +184,7 @@ namespace AccountantTool.ViewModel
             InitializeHeaders();
         }
 
-        private void OnAddNewRecord()
+        private async Task OnAddNewRecord(object param)
         {
             // TODO: Refactor this
             var id = Guid.NewGuid();
@@ -198,7 +199,10 @@ namespace AccountantTool.ViewModel
                 Worksheet.AppendRows(Constants.CountOfRowsToAdd);
             }
 
-            AddRecord(rowIndexToInsertNewRecord, newRecord);
+            await Task.Run(() =>
+            {
+                AddRecord(rowIndexToInsertNewRecord, newRecord);
+            });
         }
 
         private void OnDeleteRecord()
@@ -217,7 +221,7 @@ namespace AccountantTool.ViewModel
             Worksheet.DeleteRows(Worksheet.SelectionRange.Row, Worksheet.SelectionRange.Rows);
         }
 
-        private void OnLoadData()
+        private async Task OnLoadData(object param)
         {
             var openFileDialog = new OpenFileDialog
             {
@@ -245,9 +249,13 @@ namespace AccountantTool.ViewModel
                         SetRecordData(cell, accountantRecord, columnIndex);
                     }
 
-                    AccountantRecords.Add(accountantRecord);
+                    var rowIndexClosure = rowIndex;
+                    await Task.Run(() =>
+                    {
+                        AccountantRecords.Add(accountantRecord);
 
-                    AddRecord(rowIndex, AccountantRecords.Last());
+                        AddRecord(rowIndexClosure, AccountantRecords.Last());
+                    });
                 }
             }
         }
