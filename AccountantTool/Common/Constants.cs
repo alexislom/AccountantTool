@@ -14,5 +14,9 @@
         public const int ProductsColumnIndex = 4;
         public const int ContractColumnIndex = 5;
         public const int AdditionalInfoColumnIndex = 6;
+
+        // Open/Save file dialog
+        public const bool FileDialogRestoreDirectory = true;
+        public const string FileDialogFilter = "ReoGrid format|*.rgf;";
     }
 }

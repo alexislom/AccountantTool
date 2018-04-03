@@ -1,4 +1,7 @@
-﻿using unvell.ReoGrid;
+﻿using AccountantTool.Common;
+using AccountantTool.Model;
+using Newtonsoft.Json;
+using unvell.ReoGrid;
 
 namespace AccountantTool.ReoGrid.DataFormatter
 {
@@ -6,7 +9,20 @@ namespace AccountantTool.ReoGrid.DataFormatter
     {
         public override string FormatCell(Cell cell)
         {
-            return "AdditionalInfo";
+            if (cell.Column == Constants.AdditionalInfoColumnIndex)
+            {
+                var data = cell.GetData<AdditionalInfo>();
+
+                if (data == null)
+                {
+                    data = JsonConvert.DeserializeObject<AdditionalInfo>(cell.Data.ToString());
+                    cell.Data = data;
+                }
+
+                return data.Notes;
+            }
+
+            return cell.Data.ToString();
         }
     }
 }

@@ -19,6 +19,7 @@ using AccountantTool.ReoGrid.DataFormatter;
 using AccountantTool.View;
 using AccountantTool.ViewModel.MainComponents;
 using Microsoft.Win32;
+using Newtonsoft.Json;
 using unvell.ReoGrid;
 using unvell.ReoGrid.DataFormat;
 using unvell.ReoGrid.IO;
@@ -122,6 +123,8 @@ namespace AccountantTool.ViewModel
             DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
             Worksheet.SetColumnsWidth(0, 7, 200);
 
+            #region comments
+            /*
             var id = Guid.NewGuid();
             var kek = new AccountantRecord
             {
@@ -255,7 +258,141 @@ namespace AccountantTool.ViewModel
                     }
                 },
             };
+            var id2 = Guid.NewGuid();
+            var kek2 = new AccountantRecord
+            {
+                Id = id2,
+                Requisites = new Requisites
+                {
+                    Address = new Address
+                    {
+                        City = "asd",
+                        Country = "asdaxzca",
+                        District = "district",
+                        Flat = "flat",
+                        House = "5",
+                        Index = "2222222",
+                        Region = "nasgnals"
+                    },
+                    Email = "aaalalalalala",
+                    DepartmentPhones = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("First department", "111111111"),
+                        new KeyValuePair<string, string>("Second department", "22222222222"),
+                        new KeyValuePair<string, string>("Third department", "33333333333"),
+                    },
+                    Site = "asfasfafw.com",
+                    OtherRequisites = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("A", "aaa213214adsa"),
+                        new KeyValuePair<string, string>("B", "agggggggsa"),
+                        new KeyValuePair<string, string>("C", "dfsdgf3214adsa"),
+                    }
+                },
+                Company = new Company
+                {
+                    ParentId = id,
+                    LongName = "TestLongName",
+                    ShortName = "TestShortName"
+                },
+                ContactPersons = new List<ContactPerson>
+                {
+                    new ContactPerson
+                    {
+                        ContactPhone = "12312412452154",
+                        Email = "Email1",
+                        FullName = "FIOName1",
+                        Position = "Position1",
+                    },
+                    new ContactPerson
+                    {
+                        ContactPhone = "C15on5215125",
+                        Email = "Email2",
+                        FullName = "FIOName2",
+                        Position = "Position2",
+                    },
+                    new ContactPerson
+                    {
+                        ContactPhone = "Con125215125Phone ",
+                        Email = "Email3",
+                        FullName = "FIOName3",
+                        Position = "Position3",
+                    },
+                    new ContactPerson
+                    {
+                        ContactPhone = "15155656546 ",
+                        Email = "Email4",
+                        FullName = "FIOName4",
+                        Position = "Position4",
+                    }
+                },
+                Contract = new Contract
+                {
+                    ContractStage = "One", //ContractStage.One,
+                    DateOfEnd = DateTime.Now,
+                    DateOfStart = DateTime.Now,
+                    //IsFulfilled = false,
+                    NumberOfContract = "1",
+                    SidesOfContract = "asdasd"
+                },
+                AdditionalInfo = new AdditionalInfo
+                {
+                    Notes = "asd"
+                },
+                License = new List<License>
+                {
+                    new License
+                    {
+                        LicenseType = "One", //LicenseType.One,
+                        DateOfExpiration = DateTime.Now,
+                        DateOfIssue = DateTime.Now,
+                        NumberOfLicense = "355"
+                    },
+                    new License
+                    {
+                        LicenseType = "Two", //LicenseType.Two,
+                        DateOfExpiration = DateTime.Now,
+                        DateOfIssue = DateTime.Now,
+                        NumberOfLicense = "344"
+                    },
+                    new License
+                    {
+                        LicenseType = "Three", //LicenseType.Three,
+                        DateOfExpiration = DateTime.Now,
+                        DateOfIssue = DateTime.Now,
+                        NumberOfLicense = "366"
+                    }
+                },
+                Products = new List<Product>
+                {
+                    new Product
+                    {
+                        Count = "6",
+                        CostForCustomer = 2,
+                        CostFromSeller = 4,
+                        Description = "qweqweqwe",
+                        Name = "asd4"
+                    },
+                    new Product
+                    {
+                        Count = 9.ToString(),
+                        CostForCustomer = 2233223,
+                        CostFromSeller = 44444,
+                        Description = "qweqgfhdbgsdweqwe",
+                        Name = "asd"
+                    },
+                    new Product
+                    {
+                        Count = "2",
+                        CostForCustomer = 111.3,
+                        CostFromSeller = 0.22,
+                        Description = "eeteyherhgqweqweqwe",
+                        Name = "asd3"
+                    }
+                },
+            };
             AccountantRecords.Add(kek);
+            AccountantRecords.Add(kek2);
 
             for (var i = 0; i < AccountantRecords.Count; i++)
             {
@@ -263,10 +400,15 @@ namespace AccountantTool.ViewModel
 
                 AddRecord(i, accountantRecord);
             }
+            */
+            #endregion comments
         }
 
         private void AddRecord(int row, AccountantRecord record)
         {
+            if (record == null)
+                throw new ArgumentNullException(nameof(record));
+
             Worksheet.SetCellData(row, Constants.CompanyColumnIndex, record.Company);
             Worksheet.SetCellBody(row, Constants.CompanyColumnIndex, new CompanyListViewDropdownCell(record.Company));
 
@@ -352,13 +494,73 @@ namespace AccountantTool.ViewModel
         {
             var openFileDialog = new OpenFileDialog
             {
-                RestoreDirectory = true,
-                Filter = "Excel Files|*.xls;*.xlsx;*.xlsm"
+                RestoreDirectory = Constants.FileDialogRestoreDirectory,
+                Filter = Constants.FileDialogFilter
             };
 
             if (openFileDialog.ShowDialog() == true)
             {
-                Worksheet.Workbook.Load($"{openFileDialog.FileName}", FileFormat.Excel2007);
+                Worksheet.Workbook.Load($"{openFileDialog.FileName}", FileFormat.ReoGridFormat);
+
+                AccountantRecords.Clear();
+
+                for (var rowIndex = 0; rowIndex < Worksheet.RowCount; rowIndex++)
+                {
+                    var accountantRecord = new AccountantRecord();
+
+                    for (var columnIndex = Constants.CompanyColumnIndex; columnIndex < Constants.CountOfColumns; columnIndex++)
+                    {
+                        var cell = Worksheet.GetCell(rowIndex, columnIndex);
+                        // TODO: REFACTOR THIS!!!
+                        if (cell == null)
+                            return;
+
+                        SetRecordData(cell, accountantRecord, columnIndex);
+                    }
+
+                    AccountantRecords.Add(accountantRecord);
+
+                    AddRecord(rowIndex, AccountantRecords.Last());
+                }
+            }
+        }
+
+        private static void SetRecordData(Cell cell, AccountantRecord accountantRecord, int columnIndex)
+        {
+            switch (columnIndex)
+            {
+                case Constants.CompanyColumnIndex:
+                    var company = cell.GetData<Company>();
+                    accountantRecord.Company = company;
+                    accountantRecord.Id = company.ParentId;
+                    break;
+                case Constants.RequisitesColumnIndex:
+                    var requisites = cell.GetData<Requisites>();
+                    accountantRecord.Requisites = requisites;
+                    break;
+                case Constants.ContactPersonColumnIndex:
+                    var contactPersons = cell.GetData<ListWrapper<ContactPerson>>();
+                    accountantRecord.ContactPersons = new List<ContactPerson>(contactPersons.Context.Count);
+                    accountantRecord.ContactPersons.AddRange(contactPersons.Context);
+                    break;
+                case Constants.LicenseColumnIndex:
+                    var license = cell.GetData<ListWrapper<License>>();
+                    accountantRecord.License = new List<License>(license.Context.Count);
+                    accountantRecord.License.AddRange(license.Context);
+                    break;
+                case Constants.ProductsColumnIndex:
+                    var products = cell.GetData<ListWrapper<Product>>();
+                    accountantRecord.Products = new List<Product>(products.Context.Count);
+                    accountantRecord.Products.AddRange(products.Context);
+                    break;
+                case Constants.ContractColumnIndex:
+                    var contract = cell.GetData<Contract>();
+                    accountantRecord.Contract = contract;
+                    break;
+                case Constants.AdditionalInfoColumnIndex:
+                    var addInfo = cell.GetData<AdditionalInfo>();
+                    accountantRecord.AdditionalInfo = addInfo;
+                    break;
             }
         }
 
@@ -366,19 +568,20 @@ namespace AccountantTool.ViewModel
         {
             var saveFileDialog = new SaveFileDialog
             {
-                RestoreDirectory = true,
-                Filter = "Excel Files|*.xls;*.xlsx;*.xlsm"
+                RestoreDirectory = Constants.FileDialogRestoreDirectory,
+                Filter = Constants.FileDialogFilter
             };
 
             if (saveFileDialog.ShowDialog() == true)
             {
-                Worksheet.Workbook.Save($"{saveFileDialog.FileName}", FileFormat.Excel2007);
+                Worksheet.Workbook.Save($"{saveFileDialog.FileName}", FileFormat.ReoGridFormat);
             }
         }
 
         private static void ChangeLanguage()
         {
-            App.SelectedLanguage = App.SelectedLanguage.Equals(App.Languages[0]) ? new CultureInfo("ru-RU") : new CultureInfo("en-US");
+            App.SelectedLanguage =
+                App.SelectedLanguage.Equals(App.Languages[0]) ? new CultureInfo("ru-RU") : new CultureInfo("en-US");
         }
 
         //private void AddAccountantRecordOpenWindow()

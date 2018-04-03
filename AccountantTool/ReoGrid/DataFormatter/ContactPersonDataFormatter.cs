@@ -3,6 +3,7 @@ using System.Text;
 using AccountantTool.Common;
 using AccountantTool.Helpers;
 using AccountantTool.Model;
+using Newtonsoft.Json;
 using unvell.ReoGrid;
 
 namespace AccountantTool.ReoGrid.DataFormatter
@@ -15,21 +16,29 @@ namespace AccountantTool.ReoGrid.DataFormatter
             {
                 var data = cell.GetData<ListWrapper<ContactPerson>>();
 
-                if (data?.Context == null)
-                    return string.Empty;
-
-                if (data.Context.Count == 1)
+                if (data == null)
                 {
-                    return data.Context.FirstOrDefault()?.FullName;
+                    data = JsonConvert.DeserializeObject<ListWrapper<ContactPerson>>(cell.Data.ToString());
+                    cell.Data = data;
                 }
 
-                var stringBuilder = new StringBuilder(data.Context.Count);
-                stringBuilder.Append(data.Context.FirstOrDefault()?.Position);
+                return cell.Data.ToString();
 
-                foreach (var person in data.Context.Skip(1))
-                    stringBuilder.Append(", " + person.Position);
+                //if (data?.Context == null)
+                //    return string.Empty;
 
-                return stringBuilder.ToString();
+                //if (data.Context.Count == 1)
+                //{
+                //    return data.Context.FirstOrDefault()?.FullName;
+                //}
+
+                //var stringBuilder = new StringBuilder(data.Context.Count);
+                //stringBuilder.Append(data.Context.FirstOrDefault()?.Position);
+
+                //foreach (var person in data.Context.Skip(1))
+                //    stringBuilder.Append(", " + person.Position);
+
+                //return stringBuilder.ToString();
             }
 
             return cell.Data.ToString();

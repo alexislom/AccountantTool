@@ -9,18 +9,21 @@ namespace AccountantTool.ReoGrid.DataFormatter
     {
         public override string FormatCell(Cell cell)
         {
-            if (cell.Column != Constants.CompanyColumnIndex)
-                return null;
-
-            var data = cell.Data as Company;
-
-            if (data == null)
+            if (cell.Column == Constants.CompanyColumnIndex)
             {
-                data = JsonConvert.DeserializeObject<Company>(data.ToString());
+                //var data = cell.Data as Company;
+                var data = cell.GetData<Company>();
+
+                if (data == null)
+                {
+                    data = JsonConvert.DeserializeObject<Company>(cell.Data.ToString());
+                    cell.Data = data;
+                }
+
+                return data.ShortName;
             }
 
-            return data.ShortName;
-            //return "Company cell";
+            return cell.Data.ToString();
         }
     }
 }

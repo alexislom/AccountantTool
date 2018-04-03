@@ -11,39 +11,49 @@ namespace AccountantTool.ReoGrid.DataFormatter
         {
             if (cell.Column == Constants.RequisitesColumnIndex)
             {
-                var data = ParseRequisites(cell);
+                //var data = ParseRequisites(cell);
+
+                //if (data == null)
+                //{
+                //    return null;
+                //}
+
+                //return data.Site ?? JsonConvert.SerializeObject(data);
+
+                var data = cell.GetData<Requisites>();
 
                 if (data == null)
                 {
-                    return null;
+                    data = JsonConvert.DeserializeObject<Requisites>(cell.Data.ToString());
+                    cell.Data = data;
                 }
 
-                return data.Site ?? JsonConvert.SerializeObject(data);
+                return data.Site;
             }
 
             return cell.Data.ToString();
         }
 
-        #region Helpers
+        //#region Helpers
 
-        public static Requisites ParseRequisites(Cell cell)
-        {
-            if (cell?.Data == null)
-                return null;
+        //public static Requisites ParseRequisites(Cell cell)
+        //{
+        //    if (cell?.Data == null)
+        //        return null;
 
-            var data = cell.GetData<Requisites>();
+        //    var data = cell.GetData<Requisites>();
 
-            if (data != null)
-                return data;
+        //    if (data != null)
+        //        return data;
 
-            var context = cell.GetData<string>();
+        //    var context = cell.GetData<string>();
 
-            data = JsonConvert.DeserializeObject<Requisites>(context);
-            cell.Data = data;
+        //    data = JsonConvert.DeserializeObject<Requisites>(context);
+        //    cell.Data = data;
 
-            return data;
-        }
+        //    return data;
+        //}
 
-        #endregion Helpers
+        //#endregion Helpers
     }
 }
