@@ -14,13 +14,16 @@ namespace AccountantTool.Controls
             Model = model;
             InitializeComponent();
 
-            textRequisitesIndex.Text = Model?.Address.Index;
-            textRequisitesCountry.Text = Model?.Address.Country;
-            textRequisitesRegion.Text = Model?.Address.Region;
-            textRequisitesDistrict.Text = Model?.Address.District;
-            textRequisitesCity.Text = Model?.Address.City;
-            textRequisitesHouse.Text = Model?.Address.House;
-            textRequisitesFlat.Text = Model?.Address.Flat;
+            if (Model.Address != null)
+            {
+                textRequisitesIndex.Text = Model.Address?.Index;
+                textRequisitesCountry.Text = Model.Address?.Country;
+                textRequisitesRegion.Text = Model.Address?.Region;
+                textRequisitesDistrict.Text = Model.Address?.District;
+                textRequisitesCity.Text = Model.Address?.City;
+                textRequisitesHouse.Text = Model.Address?.House;
+                textRequisitesFlat.Text = Model.Address?.Flat;
+            }
             textRequisitesSite.Text = Model?.Site;
             textRequisitesEmail.Text = Model?.Email;
 
@@ -87,15 +90,18 @@ namespace AccountantTool.Controls
 
         private void OkRequisitesBtn_Click(object sender, EventArgs e)
         {
-            Model.Address.Index = textRequisitesIndex?.Text;
-            Model.Address.Country = textRequisitesCountry?.Text;
-            Model.Address.Region = textRequisitesRegion?.Text;
+            Model.Address = new Address
+            {
+                Index = textRequisitesIndex?.Text,
+                Country = textRequisitesCountry?.Text,
+                Region = textRequisitesRegion?.Text,
+                District = textRequisitesDistrict?.Text,
+                City = textRequisitesCity?.Text,
+                House = textRequisitesHouse?.Text,
+                Flat = textRequisitesFlat?.Text
+            };
             Model.Site = textRequisitesSite?.Text;
             Model.Email = textRequisitesEmail?.Text;
-            Model.Address.District = textRequisitesDistrict?.Text;
-            Model.Address.City = textRequisitesCity?.Text;
-            Model.Address.House = textRequisitesHouse?.Text;
-            Model.Address.Flat = textRequisitesFlat?.Text;
 
             if (DepartmentsListView.Items.Count != 0)
             {

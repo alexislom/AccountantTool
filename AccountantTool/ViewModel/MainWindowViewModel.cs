@@ -64,11 +64,21 @@ namespace AccountantTool.ViewModel
         {
             // TODO: Refactor this
             var id = Guid.NewGuid();
-            var newRecord = new AccountantRecord { Id = id, Company = new Company { ParentId = id } };
+            var newEmptyRecord = new AccountantRecord
+            {
+                Id = id,
+                Company = new Company { ParentId = id },
+                Requisites = new Requisites(),
+                ContactPersons = new List<ContactPerson>(),
+                License = new List<License>(),
+                Products = new List<Product>(),
+                Contract = new Contract(),
+                AdditionalInfo = new AdditionalInfo()
+            };
 
             var rowIndexToInsertNewRecord = AccountantRecords.Count;
 
-            AccountantRecords.Add(newRecord);
+            AccountantRecords.Add(newEmptyRecord);
 
             if (Worksheet.RowCount == AccountantRecords.Count)
             {
@@ -77,7 +87,7 @@ namespace AccountantTool.ViewModel
 
             await Task.Run(() =>
             {
-                AddRecord(rowIndexToInsertNewRecord, newRecord);
+                AddRecord(rowIndexToInsertNewRecord, newEmptyRecord);
             });
         }
 
