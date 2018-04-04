@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace AccountantTool.ViewModel.MainComponents
+namespace AccountantTool.Common
 {
     /// <summary>
     /// Base ViewModel

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace AccountantTool.ViewModel.MainComponents
+namespace AccountantTool.Common
 {
     public class AsyncDelegateCommand : ICommand
     {

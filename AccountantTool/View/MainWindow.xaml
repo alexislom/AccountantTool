@@ -12,7 +12,6 @@
 
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-    xmlns:converters="clr-namespace:AccountantTool.Converters"
 
     Title="{DynamicResource AtMainWindowTitle}"
     TitleAlignment="Center"
@@ -33,16 +32,15 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModel:MainWindowViewModel}">
     <Window.InputBindings>
-        <!--<KeyBinding Key="F1" Command="{Binding AddNewAccountantRecordCommand}" />-->
         <KeyBinding Key="F1" Command="{Binding AddNewRecordCommand}" />
         <!--<KeyBinding
             Key="Delete"
-            Command="{Binding DeleteMedicamentRecordCommand}"
-            CommandParameter="{Binding SelectedMedicamentRecord}" />
+            Command="{Binding Delete...Command}"
+            CommandParameter="{Binding Selected...}" />
         <KeyBinding
             Key="Enter"
-            Command="{Binding EditMedicamentRecordCommand}"
-            CommandParameter="{Binding SelectedMedicamentRecord}"
+            Command="{Binding Edit...RecordCommand}"
+            CommandParameter="{Binding Selected...}"
             Modifiers="Alt" />-->
     </Window.InputBindings>
     <Window.Resources>
@@ -55,7 +53,6 @@
                 </Button.Template>
             </Button>
         </DataTemplate>
-        <converters:ListItemToIndexConverter x:Key="IndexConverter" />
     </Window.Resources>
     <controls:MetroWindow.LeftWindowCommands>
         <controls:WindowCommands HorizontalContentAlignment="Stretch" ShowLastSeparator="False">
@@ -77,16 +74,15 @@
 
         <DockPanel>
             <Menu>
-                <!--<MenuItem Header="1" Command="{Binding LoadAccountantRecordsAsyncCommand}" Icon="{iconPacks:Material Autorenew}" />
-                <Separator Margin="-20,-6" />
-                <MenuItem Header="{DynamicResource AtNewRecordTitle}" Command="{Binding AddNewAccountantRecordCommand}"
-                          Icon="{iconPacks:Entypo NewMessage}" InputGestureText="F1"/>-->
                 <MenuItem Header="{DynamicResource AtLoadData}" Command="{Binding LoadDataCommand}"
-                          Icon="{iconPacks:Material Loading}"/>
+                          Icon="{iconPacks:Material Autorenew}"/>
+                <Separator Margin="-20,-6" />
                 <MenuItem Header="{DynamicResource AtNewRecordTitle}" Command="{Binding AddNewRecordCommand}"
                           Icon="{iconPacks:Entypo NewMessage}" InputGestureText="F1"/>
+                <Separator Margin="-20,-6" />
                 <MenuItem Header="{DynamicResource AtDeleteRecordsTitle}" Command="{Binding DeleteRecordCommand}"
                           Icon="{iconPacks:Material BookmarkRemove}"/>
+                <Separator Margin="-20,-6" />
                 <MenuItem Header="{DynamicResource AtSaveDocumentTitle}" Command="{Binding SaveDocumentCommand}"
                           Icon="{iconPacks:Material ContentSave}"/>
             </Menu>

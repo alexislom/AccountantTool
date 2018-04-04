@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AccountantTool.ViewModel.MainComponents
+namespace AccountantTool.Common
 {
     public class EventArgs<T> : EventArgs
     {

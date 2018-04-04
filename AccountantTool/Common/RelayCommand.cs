@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace AccountantTool.ViewModel.MainComponents
+namespace AccountantTool.Common
 {
     public class RelayCommand : ICommand
     {
