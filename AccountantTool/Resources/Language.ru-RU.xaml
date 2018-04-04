@@ -4,11 +4,15 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <!--Main window-->
+    <system:String x:Key="AtMainWindowTitle">Программа бухгалтерского учёта</system:String>
     <system:String x:Key="AtRecordsTitle">Записи</system:String>
     <system:String x:Key="AtSearchTitle">Поиск</system:String>
-    <system:String x:Key="AtSettingsTitle">Настройки</system:String>
+    <system:String x:Key="AtChangeLanguageTitle">Сменить язык</system:String>
+    <system:String x:Key="AtLoadData">Загрузить данные</system:String>
     <system:String x:Key="AtNewRecordTitle">Новая запись</system:String>
     <system:String x:Key="AtAddRecordTittle">Добавить/Изменить запись</system:String>
+    <system:String x:Key="AtDeleteRecordsTitle">Удалить выбранные записи</system:String>
+    <system:String x:Key="AtSaveDocumentTitle">Сохранить документ</system:String>
     <!--Table and add record dialog tittles-->
     <system:String x:Key="AtNameOfTheCompanyDialogTitle">Название компании</system:String>
     <system:String x:Key="AtRequisitesDialogTitle">Реквизиты</system:String>
@@ -42,6 +46,25 @@
     <system:String x:Key="AtContactPersonPatronymicTextBlock">Отчество:</system:String>
     <system:String x:Key="AtContactPersonContactPhoneTextBlock">Контактный телефон:</system:String>
     <system:String x:Key="AtContactPersonEmailTextBlock">Адрес электронной почты:</system:String>
+    <!--License tab-->
+    <system:String x:Key="AtLicenseNumberOfLicenseTextBlock">Номер лицензии:</system:String>
+    <system:String x:Key="AtLicenseDateOfIssueTextBlock">Дата выдачи:</system:String>
+    <system:String x:Key="AtLicenseDateOfExpirationTextBlock">Дата окончания действия:</system:String>
+    <system:String x:Key="AtLicenseLicenseTypeTextBlock">Вид лицензии:</system:String>
+    <!--Products tab-->
+    <system:String x:Key="AtProductNameTextBlock">Наименование изделия:</system:String>
+    <system:String x:Key="AtProductDescriptionTextBlock">Характеристика изделия:</system:String>
+    <system:String x:Key="AtProductCostFromSellerTextBlock">Стоимость у продавца:</system:String>
+    <system:String x:Key="AtProductCostForCustomerTextBlock">Стоимость при поставке покупателю:</system:String>
+    <system:String x:Key="AtProductCountTextBlock">Количество поставляемых изделий:</system:String>
+    <!--Contracts tab-->
+    <system:String x:Key="AtContractNumberTextBlock">Номер контракта:</system:String>
+    <system:String x:Key="AtContractSideOfContractTextBlock">Стороны контракта:</system:String>
+    <system:String x:Key="AtContractDateOfStartTextBlock">Дата заключения контракта:</system:String>
+    <system:String x:Key="AtContractDateOfEndTextBlock">Дата исполнения контракта:</system:String>
+    <system:String x:Key="AtContractContractStageTextBlock">Стадия контракта:</system:String>
+    <!--Additional info tab-->
+    <system:String x:Key="AtAdditionalInfoNotesTextBlock">Записи:</system:String>
 
     <system:String x:Key="AtListViewId">#</system:String>
 </ResourceDictionary>

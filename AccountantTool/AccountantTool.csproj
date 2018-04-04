@@ -39,11 +39,14 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\..\..\Temp\ReoGrid\Demo\bin\Debug\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    <Reference Include="ControlzEx, Version=3.0.1.66, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.1.66\lib\net45\ControlzEx.dll</HintPath>
     </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.8.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.8.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="DropDownButtonLib, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dirkster.DropDownButtonLib.1.0.4\lib\net4\DropDownButtonLib.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -54,14 +57,17 @@
     <Reference Include="FastColoredTextBox">
       <HintPath>..\..\..\Temp\ReoGrid\Demo\bin\Debug\FastColoredTextBox.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=1.6.1.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.6.1\lib\net45\MahApps.Metro.dll</HintPath>
+    <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro.IconPacks, Version=2.1.0.15, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.2.1.0\lib\net46\MahApps.Metro.IconPacks.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SQLite.CodeFirst, Version=1.5.1.25, Culture=neutral, PublicKeyToken=eb96ba0a78d831a7, processorArchitecture=MSIL">
       <HintPath>..\packages\SQLite.CodeFirst.1.5.1.25\lib\net45\SQLite.CodeFirst.dll</HintPath>
@@ -89,6 +95,7 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.3.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
     </Reference>
@@ -133,9 +140,7 @@
     <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
     </Reference>
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -147,8 +152,8 @@
     <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
     </Reference>
-    <Reference Include="unvell.ReoGrid">
-      <HintPath>..\..\..\Temp\ReoGrid\Demo\bin\Debug\unvell.ReoGrid.dll</HintPath>
+    <Reference Include="unvell.ReoGrid, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\unvell.ReoGrid.dll.2.1.0.0\lib\20\unvell.ReoGrid.dll</HintPath>
     </Reference>
     <Reference Include="unvell.ReoScript">
       <HintPath>..\..\..\Temp\ReoGrid\Demo\bin\Debug\unvell.ReoScript.dll</HintPath>
@@ -162,6 +167,7 @@
       <HintPath>..\packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -169,10 +175,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Resources\Language.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AddAccountantRecordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -184,17 +186,54 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Converters\ListItemToIndexConverter.cs" />
-    <Compile Include="Data\AccountantDbContext.cs" />
-    <Compile Include="Data\AccountantDbInitializer.cs" />
-    <Compile Include="Data\Configs\AccountantRecordConfig.cs" />
-    <Compile Include="Data\Configs\AdditionalInfoConfig.cs" />
-    <Compile Include="Data\Configs\CompanyConfig.cs" />
-    <Compile Include="Data\Configs\ContactPersonConfig.cs" />
-    <Compile Include="Data\Configs\ContractConfig.cs" />
-    <Compile Include="Data\Configs\LicenseConfig.cs" />
-    <Compile Include="Data\Configs\ProductConfig.cs" />
-    <Compile Include="Data\Configs\RequisitesConfig.cs" />
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Controls\AdditionalInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AdditionalInfoControl.Designer.cs">
+      <DependentUpon>AdditionalInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CompanyControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CompanyControl.Designer.cs">
+      <DependentUpon>CompanyControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ContactPersonControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ContactPersonControl.Designer.cs">
+      <DependentUpon>ContactPersonControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ContractControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ContractControl.Designer.cs">
+      <DependentUpon>ContractControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LicenseControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LicenseControl.Designer.cs">
+      <DependentUpon>LicenseControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProductsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ProductsControl.Designer.cs">
+      <DependentUpon>ProductsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RequisitesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\RequisitesControl.Designer.cs">
+      <DependentUpon>RequisitesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\EditableListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Helpers\EnumHelpers.cs" />
+    <Compile Include="Helpers\ListWrapper.cs" />
     <Compile Include="Helpers\Search\CollectionViewGeneric.cs" />
     <Compile Include="Helpers\Search\IAccountantRecordSearch.cs" />
     <Compile Include="Helpers\Search\ICollectionView.cs" />
@@ -208,15 +247,29 @@
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Requisites.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModel\AddAccountantRecordWindowViewModel.cs" />
-    <Compile Include="ViewModel\MainComponents\AsyncDelegateCommand.cs" />
-    <Compile Include="ViewModel\MainComponents\EventRaiser.cs" />
-    <Compile Include="ViewModel\MainComponents\RelayCommand.cs" />
-    <Compile Include="ViewModel\MainComponents\ViewModelBase.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\AdditionalInfoListViewDropdownCell.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\BaseListViewDropdownCell.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\CompanyListViewDropdownCell.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\ContactListViewDropdownCell.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\ContactPersonListViewDropdownCell.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\LicenseListViewDropdownCell.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\ProductsListViewDropdownCell.cs" />
+    <Compile Include="ReoGrid\CustomDropDownCell\RequisitesListViewDropdownCell.cs" />
+    <Compile Include="ReoGrid\DataFormatter\AccountantToolDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\AdditionalInfoDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\CompanyDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\ContractDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\ContactPersonDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\DataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\EmptyDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\LicenseDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\ProductsDataFormatter.cs" />
+    <Compile Include="ReoGrid\DataFormatter\RequisitesDataFormatter.cs" />
+    <Compile Include="Common\AsyncDelegateCommand.cs" />
+    <Compile Include="Common\EventRaiser.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="View\AddAccountantRecordWindow.xaml.cs">
-      <DependentUpon>AddAccountantRecordWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -236,6 +289,27 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Controls\AdditionalInfoControl.resx">
+      <DependentUpon>AdditionalInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CompanyControl.resx">
+      <DependentUpon>CompanyControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ContactPersonControl.resx">
+      <DependentUpon>ContactPersonControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ContractControl.resx">
+      <DependentUpon>ContractControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LicenseControl.resx">
+      <DependentUpon>LicenseControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ProductsControl.resx">
+      <DependentUpon>ProductsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\RequisitesControl.resx">
+      <DependentUpon>RequisitesControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

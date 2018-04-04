@@ -1,8 +1,7 @@
-﻿using System.Globalization;
-using System.Windows.Controls;
-using System.Windows.Media;
+﻿using System.Windows.Forms;
 using AccountantTool.ViewModel;
 using MahApps.Metro.Controls;
+using unvell.ReoGrid;
 
 namespace AccountantTool.View
 {
@@ -15,19 +14,17 @@ namespace AccountantTool.View
         {
             InitializeComponent();
 
-            var currentLanguage = App.SelectedLanguage;
-            App.SelectedLanguage = new CultureInfo("en-US");
-            App.SelectedLanguage = new CultureInfo("ru-RU");
-            DataContext = new MainWindowViewModel();
-        }
-
-        private void AccountantRecordsListMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            var hitTestResult = VisualTreeHelper.HitTest(this, e.GetPosition(this));
-            if (hitTestResult.VisualHit.GetType() != typeof(ListBoxItem))
+            // Wrap winform control into WPF
+            var grid = new ReoGridControl
             {
-                AccountantRecordsList.UnselectAll();
-            }
+                Dock = DockStyle.Fill,
+            };
+            WindowsFormsHost.Child = grid;
+
+            // Hide sheet tab control
+            grid.SetSettings(WorkbookSettings.View_ShowSheetTabControl, false);
+
+            DataContext = new MainWindowViewModel(grid.Worksheets[0]);
         }
     }
 }

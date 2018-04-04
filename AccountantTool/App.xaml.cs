@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
-using AccountantTool.ViewModel.MainComponents;
+using AccountantTool.Common;
 using MahApps.Metro;
 
 namespace AccountantTool

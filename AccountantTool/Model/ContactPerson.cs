@@ -1,19 +1,24 @@
-﻿namespace AccountantTool.Model
+﻿using System;
+using Newtonsoft.Json;
+
+namespace AccountantTool.Model
 {
+    [Serializable]
     public class ContactPerson
     {
         public int Id { get; set; }
 
         public string Position { get; set; }
 
-        public string Surname { get; set; }
-
-        public string Name { get; set; }
-
-        public string Patronymic { get; set; }
+        public string FullName { get; set; }
 
         public string ContactPhone { get; set; }
 
         public string Email { get; set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

@@ -1,10 +1,12 @@
-﻿namespace AccountantTool.Model
+﻿using Newtonsoft.Json;
+
+namespace AccountantTool.Model
 {
     public class Address
     {
         public int Id { get; set; }
 
-        public int Index { get; set; } = 220000;
+        public string Index { get; set; }
 
         public string Region { get; set; }
 
@@ -17,5 +19,10 @@
         public string House { get; set; }
 
         public string Flat { get; set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

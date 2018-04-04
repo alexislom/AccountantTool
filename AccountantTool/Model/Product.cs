@@ -1,5 +1,9 @@
-﻿namespace AccountantTool.Model
+﻿using System;
+using Newtonsoft.Json;
+
+namespace AccountantTool.Model
 {
+    [Serializable]
     public class Product
     {
         public int Id { get; set; }
@@ -8,10 +12,15 @@
 
         public string Description { get; set; }
 
-        public decimal CostFromSeller { get; set; }
+        public double CostFromSeller { get; set; }
 
-        public decimal CostForCustomer { get; set; }
+        public double CostForCustomer { get; set; }
 
-        public int Count { get; set; }
+        public string Count { get; set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

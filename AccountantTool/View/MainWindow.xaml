@@ -6,13 +6,14 @@
     xmlns:viewModel="clr-namespace:AccountantTool.ViewModel"
     BorderBrush="{DynamicResource AccentColorBrush}"
 
+    xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rg="clr-namespace:unvell.ReoGrid;assembly=unvell.ReoGrid"
 
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-    xmlns:converters="clr-namespace:AccountantTool.Converters"
 
-    Title="Accountant tool"
+    Title="{DynamicResource AtMainWindowTitle}"
     TitleAlignment="Center"
     TitleCharacterCasing="Normal"
     TitlebarHeight="36"
@@ -31,15 +32,15 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModel:MainWindowViewModel}">
     <Window.InputBindings>
-        <KeyBinding Key="F1" Command="{Binding AddNewAccountantRecordCommand}" />
+        <KeyBinding Key="F1" Command="{Binding AddNewRecordCommand}" />
         <!--<KeyBinding
             Key="Delete"
-            Command="{Binding DeleteMedicamentRecordCommand}"
-            CommandParameter="{Binding SelectedMedicamentRecord}" />
+            Command="{Binding Delete...Command}"
+            CommandParameter="{Binding Selected...}" />
         <KeyBinding
             Key="Enter"
-            Command="{Binding EditMedicamentRecordCommand}"
-            CommandParameter="{Binding SelectedMedicamentRecord}"
+            Command="{Binding Edit...RecordCommand}"
+            CommandParameter="{Binding Selected...}"
             Modifiers="Alt" />-->
     </Window.InputBindings>
     <Window.Resources>
@@ -52,149 +53,56 @@
                 </Button.Template>
             </Button>
         </DataTemplate>
-        <converters:ListItemToIndexConverter x:Key="IndexConverter" />
     </Window.Resources>
     <controls:MetroWindow.LeftWindowCommands>
         <controls:WindowCommands HorizontalContentAlignment="Stretch" ShowLastSeparator="False">
-            <Button Command="{Binding OpenSettindsDialogCommand}">
+            <Button Command="{Binding ChangeLanguageCommand}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <iconPacks:PackIconModern Kind="Settings"/>
-                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource AtSettingsTitle}"/>
+                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource AtChangeLanguageTitle}"/>
                     </StackPanel>
                 </Button.Content>
             </Button>
         </controls:WindowCommands>
     </controls:MetroWindow.LeftWindowCommands>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
-            <RowDefinition Height="292*" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DockPanel HorizontalAlignment="Stretch">
-            <Menu Grid.Row="0">
-                <MenuItem Header="{DynamicResource AtRecordsTitle}" Icon="{iconPacks:Modern CabinetFiles}">
-                    <MenuItem
-                        Command="{Binding LoadAccountantRecordsAsyncCommand}"
-                        Header="1"
-                        Icon="{iconPacks:Material Autorenew}" />
-                    <Separator Margin="-20,-6" />
-                    <MenuItem
-                        Header="{DynamicResource AtNewRecordTitle}"
-                        Icon="{iconPacks:Entypo NewMessage}"
-                        Command="{Binding AddNewAccountantRecordCommand}"
-                        InputGestureText="F1"/>
-                    <!--IsEnabled="{Binding IsLoadedData}"
-                    -->
-                </MenuItem>
+
+        <DockPanel>
+            <Menu>
+                <MenuItem Header="{DynamicResource AtLoadData}" Command="{Binding LoadDataCommand}"
+                          Icon="{iconPacks:Material Autorenew}"/>
+                <Separator Margin="-20,-6" />
+                <MenuItem Header="{DynamicResource AtNewRecordTitle}" Command="{Binding AddNewRecordCommand}"
+                          Icon="{iconPacks:Entypo NewMessage}" InputGestureText="F1"/>
+                <Separator Margin="-20,-6" />
+                <MenuItem Header="{DynamicResource AtDeleteRecordsTitle}" Command="{Binding DeleteRecordCommand}"
+                          Icon="{iconPacks:Material BookmarkRemove}"/>
+                <Separator Margin="-20,-6" />
+                <MenuItem Header="{DynamicResource AtSaveDocumentTitle}" Command="{Binding SaveDocumentCommand}"
+                          Icon="{iconPacks:Material ContentSave}"/>
             </Menu>
-            <StackPanel
-                HorizontalAlignment="Right"
-                Orientation="Horizontal"
-                TextBlock.FontSize="14">
-                <TextBlock
-                    Height="Auto"
-                    Margin="0,-1,0,0"
-                    VerticalAlignment="Center"
-                    Text="{DynamicResource AtSearchTitle}" />
-                <TextBox
-                    Width="200"
-                    Height="20"
-                    Margin="5,0"
-                    VerticalContentAlignment="Center"
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" TextBlock.FontSize="14">
+                <!--<TextBlock Height="Auto" Margin="0,-1,0,0" VerticalAlignment="Center"
+                           Text="{DynamicResource AtSearchTitle}" />-->
+                <!--<TextBox Height="20" Width="200" Margin="5,0" VerticalContentAlignment="Center"
                     controls:TextBoxHelper.Watermark="Search text box"
-                    Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}"/>
+                    Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}"/>-->
                 <!--mah:TextBoxHelper.Watermark="{Binding RandomWatermark, StringFormat={}Например: {0}, TargetNullValue=Загрузка..., Mode=TwoWay}"
                     IsEnabled="{Binding Path=IsLoadedData}"/>-->
             </StackPanel>
         </DockPanel>
-        <ListView
-            Name="AccountantRecordsList"
-            Grid.Row="1"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            ItemsSource="{Binding FilteredAccountantRecords}"
-            MouseDown="AccountantRecordsListMouseDown"
-            SelectedItem="{Binding SelectedAccountantRecord}"
-            SelectionMode="Single">
-            <ListView.Resources>
-                <ContextMenu x:Key="ContextMenu">
-                    <!--<MenuItem
-                        Command="{Binding Path=DataContext.EditMedicamentRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
-                        CommandParameter="{Binding Path=DataContext.SelectedMedicamentRecord, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
-                        Header="Информация"
-                        Icon="{iconPacks:PackIconMaterial InformationOutline}" />
-                    <Separator Margin="-20,-6" />
-                    <MenuItem
-                        Command="{Binding Path=DataContext.EditMedicamentRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
-                        CommandParameter="{Binding Path=DataContext.SelectedMedicamentRecord, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
-                        Header="{DynamicResource r_editMedicalRecordTitle}"
-                        Icon="{iconPacks:PackIconEntypo Edit}" />
-                    <MenuItem
-                        Command="{Binding Path=DataContext.DeleteMedicamentRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
-                        CommandParameter="{Binding Path=DataContext.SelectedMedicamentRecord, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
-                        Header="{DynamicResource r_deleteMedicalRecordTitle}"
-                        Icon="{iconPacks:PackIconMaterialLight Delete}" />-->
-                </ContextMenu>
-            </ListView.Resources>
-            <ListView.ItemContainerStyle>
-                <Style BasedOn="{StaticResource {x:Type ListViewItem}}" TargetType="{x:Type ListViewItem}">
-                    <Setter Property="ContextMenu" Value="{StaticResource ContextMenu}" />
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.View>
-                <GridView>
-                    <!--<GridView.Columns>-->
-                    <GridViewColumn Header="№"
-                                        DisplayMemberBinding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexConverter}}" Width="35"/>
 
-                    <!--<GridViewColumn DisplayMemberBinding="{Binding Company}"  Header="{DynamicResource AtNameOfTheCompanyDialogTitle}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding ShortName}"></TextBox>
-                                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding LongName}"></TextBox>
-                                </Grid>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>-->
+        <!--Wrapping ReoGridControl like WinForms control using WindowsFormsHost
+            Unfortunately, it's necessasry only for customization dropdown list view cells
+            https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/walkthrough-arranging-windows-forms-controls-in-wpf
+            https://reogrid.net/document/installation/-->
+        <WindowsFormsHost Grid.Row="1" x:Name="WindowsFormsHost"/>
 
-                    <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtNameOfTheCompanyDialogTitle}"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtRequisitesDialogTitle}" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtContactPersonDialogTitle}" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtLicenseDialogTitle}" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtProductsDialogTitle}" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtContractsDialogTitle}" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Company.LongName}" Header="{DynamicResource AtAddInfoDialogTitle}" />
-                    <!--<GridViewColumn DisplayMemberBinding="{Binding Medicament.Manufacturer.Name}" Header="{DynamicResource r_listViewManufacturer}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Medicament.Price, StringFormat={}{0} грн}" Header="{DynamicResource r_listViewUnitPrice}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Count}" Header="{DynamicResource r_listViewNumber}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Medicament.Unit, Converter={StaticResource EnumToStringConverter}}" Header="{DynamicResource r_listViewUnit}" />
-                        <GridViewColumn
-                            Width="75"
-                            DisplayMemberBinding="{Binding Amount, StringFormat={}{0} грн}"
-                            Header="{DynamicResource r_listViewAmount}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Received, StringFormat=d}" Header="{DynamicResource r_listViewReceived}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Expiration, StringFormat=d}" Header="{DynamicResource r_listViewExpiration}" />-->
-                    <!--</GridView.Columns>-->
-                </GridView>
-            </ListView.View>
-        </ListView>
-
+        <!--<rg:ReoGridControl x:Name="MainGrid" Grid.Row="1"/>-->
     </Grid>
 </controls:MetroWindow>
