@@ -210,6 +210,7 @@ namespace AccountantTool.ViewModel
         {
             Worksheet.Columns = Constants.CountOfColumns;
             Worksheet.SelectionMode = WorksheetSelectionMode.Row;
+            Worksheet.SetSettings(WorksheetSettings.Edit_Readonly, Constants.EditReadonly);
 
             InitializeHeaders();
 

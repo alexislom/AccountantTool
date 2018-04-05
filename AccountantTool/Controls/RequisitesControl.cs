@@ -21,6 +21,7 @@ namespace AccountantTool.Controls
                 textRequisitesRegion.Text = Model.Address?.Region;
                 textRequisitesDistrict.Text = Model.Address?.District;
                 textRequisitesCity.Text = Model.Address?.City;
+                textRequisitesStreet.Text = Model.Address?.Street;
                 textRequisitesHouse.Text = Model.Address?.House;
                 textRequisitesFlat.Text = Model.Address?.Flat;
             }
@@ -97,6 +98,7 @@ namespace AccountantTool.Controls
                 Region = textRequisitesRegion?.Text,
                 District = textRequisitesDistrict?.Text,
                 City = textRequisitesCity?.Text,
+                Street = textRequisitesStreet?.Text,
                 House = textRequisitesHouse?.Text,
                 Flat = textRequisitesFlat?.Text
             };

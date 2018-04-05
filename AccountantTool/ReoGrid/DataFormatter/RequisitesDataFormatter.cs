@@ -19,7 +19,10 @@ namespace AccountantTool.ReoGrid.DataFormatter
                     cell.Data = data;
                 }
 
-                return data.Site ?? string.Empty;
+                if (!string.IsNullOrEmpty(data.Site))
+                    return data.Site;
+
+                return string.IsNullOrEmpty(data.Email) ? string.Empty : data.Email;
             }
 
             return cell.Data.ToString();

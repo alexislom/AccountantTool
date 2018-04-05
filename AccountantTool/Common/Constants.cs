@@ -6,6 +6,7 @@
         public const int CountOfColumns = 7;
         public const int ColumnsWidth = 260;
         public const int CountOfRowsToAdd = 5;
+        public const bool EditReadonly = true;
 
         // Column indexes
         public const int CompanyColumnIndex = 0;
