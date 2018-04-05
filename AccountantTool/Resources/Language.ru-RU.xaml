@@ -13,6 +13,7 @@
     <system:String x:Key="AtAddRecordTittle">Добавить/Изменить запись</system:String>
     <system:String x:Key="AtDeleteRecordsTitle">Удалить выбранные записи</system:String>
     <system:String x:Key="AtSaveDocumentTitle">Сохранить документ</system:String>
+    <system:String x:Key="AtExportToExcelTitle">Экспорт в excel</system:String>
     <!--Table and add record dialog tittles-->
     <system:String x:Key="AtNameOfTheCompanyDialogTitle">Название компании</system:String>
     <system:String x:Key="AtRequisitesDialogTitle">Реквизиты</system:String>

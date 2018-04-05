@@ -85,6 +85,8 @@
                 <Separator Margin="-20,-6" />
                 <MenuItem Header="{DynamicResource AtSaveDocumentTitle}" Command="{Binding SaveDocumentCommand}"
                           Icon="{iconPacks:Material ContentSave}"/>
+                <MenuItem Header="{DynamicResource AtExportToExcelTitle}" Command="{Binding ExportToExcelCommand}"
+                          Icon="{iconPacks:Material Export}"/>
             </Menu>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" TextBlock.FontSize="14">
                 <!--<TextBlock Height="Auto" Margin="0,-1,0,0" VerticalAlignment="Center"

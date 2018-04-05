@@ -13,6 +13,7 @@
     <system:String x:Key="AtAddRecordTittle">Add/Edit record</system:String>
     <system:String x:Key="AtDeleteRecordsTitle">Delete selected records</system:String>
     <system:String x:Key="AtSaveDocumentTitle">Save document</system:String>
+    <system:String x:Key="AtExportToExcelTitle">Export to excel</system:String>
     <!--Table and add record dialog tittles-->
     <system:String x:Key="AtNameOfTheCompanyDialogTitle">Name of the company</system:String>
     <system:String x:Key="AtRequisitesDialogTitle">Requisites</system:String>

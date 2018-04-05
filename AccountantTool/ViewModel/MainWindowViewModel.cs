@@ -31,6 +31,7 @@ namespace AccountantTool.ViewModel
         public ICommand AddNewRecordCommand { get; }
         public ICommand DeleteRecordCommand { get; }
         public ICommand SaveDocumentCommand { get; }
+        public ICommand ExportToExcelCommand { get; }
         #endregion Commands
 
         #region Construction
@@ -44,8 +45,9 @@ namespace AccountantTool.ViewModel
             ChangeLanguageCommand = new RelayCommand(ChangeLanguage);
             LoadDataCommand = new AsyncDelegateCommand(OnLoadData);
             AddNewRecordCommand = new AsyncDelegateCommand(OnAddNewRecord);
-            DeleteRecordCommand = new AsyncDelegateCommand(OnDeleteRecord, x => AccountantRecords.Count >= 1 && Worksheet.RowCount > 1);
-            SaveDocumentCommand = new RelayCommand(OnSaveDocument);
+            DeleteRecordCommand = new AsyncDelegateCommand(OnDeleteRecord, CanExecuteOperation);
+            SaveDocumentCommand = new RelayCommand(OnSaveDocument, CanExecuteOperation);
+            ExportToExcelCommand = new RelayCommand(OnExportToExcel, CanExecuteOperation);
 
             InitializeWorksheet();
         }
@@ -53,6 +55,8 @@ namespace AccountantTool.ViewModel
         #endregion Construction
 
         #region Commands implementation
+
+        private bool CanExecuteOperation(object param) => AccountantRecords.Count >= 1 && Worksheet.RowCount > 1;
 
         private void ChangeLanguage()
         {
@@ -161,6 +165,11 @@ namespace AccountantTool.ViewModel
             {
                 Worksheet.Workbook.Save($"{saveFileDialog.FileName}", FileFormat.ReoGridFormat);
             }
+        }
+
+        private void OnExportToExcel()
+        {
+
         }
 
         #endregion Commands implementation
