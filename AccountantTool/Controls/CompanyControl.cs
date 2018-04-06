@@ -5,7 +5,7 @@ namespace AccountantTool.Controls
 {
     public partial class CompanyControl : UserControl
     {
-        public Company Model { get; private set; }
+        public Company Model { get; }
 
         public CompanyControl(Company model)
         {

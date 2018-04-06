@@ -7,7 +7,7 @@ namespace AccountantTool.Controls
 {
     public partial class RequisitesControl : UserControl
     {
-        public Requisites Model { get; private set; }
+        public Requisites Model { get; }
 
         public RequisitesControl(Requisites model)
         {

@@ -2,12 +2,14 @@
 using System.Globalization;
 using System.Windows.Forms;
 using AccountantTool.Model;
+using DateTime = System.DateTime;
 
 namespace AccountantTool.Controls
 {
     public partial class ContractControl : UserControl
     {
-        public Contract Model { get; private set; }
+        public Contract Model { get; }
+        private readonly DateTime _minDateTime = new DateTime(2000, 01, 01);
 
         public ContractControl(Contract model)
         {
@@ -16,23 +18,23 @@ namespace AccountantTool.Controls
 
             textNumberOfContract.Text = Model?.NumberOfContract;
             textSidesOfContract.Text = Model?.SidesOfContract;
-            //textDateOfContract.Text = Model?.DateOfStart.ToString(CultureInfo.InvariantCulture);
-            //textDateOfEnd.Text = Model?.DateOfEnd.ToString(CultureInfo.InvariantCulture);
-            dateOfConctract.Value = Model.DateOfStart < dateOfConctract.Value ? dateOfConctract.MinDate : Model.DateOfStart;
-            dateOfEnd.Value = Model.DateOfEnd < dateOfEnd.Value ? dateOfEnd.MinDate : Model.DateOfEnd;
+
+            maskedTextDateOfStart.Text = Model?.DateOfStart < _minDateTime ? DateTime.Now.ToString("d") : Model?.DateOfStart.ToString("d");
+            maskedTextDateOfEnd.Text = Model?.DateOfEnd < _minDateTime ? DateTime.Now.ToString("d") : Model?.DateOfEnd.ToString("d");
+
             textContractStage.Text = Model?.ContractStage;
         }
 
-        private void OkContractBtn_Click(object sender, System.EventArgs e)
+        private void OkContractBtn_Click(object sender, EventArgs e)
         {
             Model.NumberOfContract = textNumberOfContract?.Text;
 
-            //DateTime.TryParse(textDateOfContract?.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateOfStart);
-            //DateTime.TryParse(textDateOfEnd?.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateOfEnd);
+            DateTime.TryParse(maskedTextDateOfStart?.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateOfStart);
+            DateTime.TryParse(maskedTextDateOfEnd?.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateOfEnd);
 
-            Model.DateOfStart = dateOfConctract.Value; //dateOfStart;
+            Model.DateOfStart = dateOfStart;
             Model.SidesOfContract = textSidesOfContract?.Text;
-            Model.DateOfEnd = dateOfEnd.Value; //dateOfEnd;
+            Model.DateOfEnd = dateOfEnd;
             Model.ContractStage = textContractStage?.Text;
         }
     }

@@ -38,15 +38,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textNumberOfContract = new System.Windows.Forms.TextBox();
             this.OkContractBtn = new System.Windows.Forms.Button();
-            this.dateOfConctract = new System.Windows.Forms.DateTimePicker();
-            this.dateOfEnd = new System.Windows.Forms.DateTimePicker();
+            this.maskedTextDateOfStart = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextDateOfEnd = new System.Windows.Forms.MaskedTextBox();
             this.ContractGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ContractGroupBox
             // 
-            this.ContractGroupBox.Controls.Add(this.dateOfEnd);
-            this.ContractGroupBox.Controls.Add(this.dateOfConctract);
+            this.ContractGroupBox.Controls.Add(this.maskedTextDateOfEnd);
+            this.ContractGroupBox.Controls.Add(this.maskedTextDateOfStart);
             this.ContractGroupBox.Controls.Add(this.label8);
             this.ContractGroupBox.Controls.Add(this.textContractStage);
             this.ContractGroupBox.Controls.Add(this.label7);
@@ -138,23 +138,25 @@
             this.OkContractBtn.UseVisualStyleBackColor = true;
             this.OkContractBtn.Click += new System.EventHandler(this.OkContractBtn_Click);
             // 
-            // dateOfConctract
+            // maskedTextDateOfStart
             // 
-            this.dateOfConctract.Location = new System.Drawing.Point(151, 56);
-            this.dateOfConctract.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.dateOfConctract.Name = "dateOfConctract";
-            this.dateOfConctract.Size = new System.Drawing.Size(213, 20);
-            this.dateOfConctract.TabIndex = 17;
-            this.dateOfConctract.Value = new System.DateTime(2018, 4, 6, 12, 0, 29, 0);
+            this.maskedTextDateOfStart.Culture = new System.Globalization.CultureInfo("");
+            this.maskedTextDateOfStart.Location = new System.Drawing.Point(151, 60);
+            this.maskedTextDateOfStart.Mask = "00/00/0000";
+            this.maskedTextDateOfStart.Name = "maskedTextDateOfStart";
+            this.maskedTextDateOfStart.Size = new System.Drawing.Size(213, 20);
+            this.maskedTextDateOfStart.TabIndex = 19;
+            this.maskedTextDateOfStart.ValidatingType = typeof(System.DateTime);
             // 
-            // dateOfEnd
+            // maskedTextDateOfEnd
             // 
-            this.dateOfEnd.Location = new System.Drawing.Point(151, 119);
-            this.dateOfEnd.MinDate = new System.DateTime(2000, 1, 2, 0, 0, 0, 0);
-            this.dateOfEnd.Name = "dateOfEnd";
-            this.dateOfEnd.Size = new System.Drawing.Size(213, 20);
-            this.dateOfEnd.TabIndex = 18;
-            this.dateOfEnd.Value = new System.DateTime(2018, 4, 6, 12, 0, 41, 0);
+            this.maskedTextDateOfEnd.Culture = new System.Globalization.CultureInfo("");
+            this.maskedTextDateOfEnd.Location = new System.Drawing.Point(151, 125);
+            this.maskedTextDateOfEnd.Mask = "00/00/0000";
+            this.maskedTextDateOfEnd.Name = "maskedTextDateOfEnd";
+            this.maskedTextDateOfEnd.Size = new System.Drawing.Size(213, 20);
+            this.maskedTextDateOfEnd.TabIndex = 20;
+            this.maskedTextDateOfEnd.ValidatingType = typeof(System.DateTime);
             // 
             // ContractControl
             // 
@@ -182,7 +184,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textNumberOfContract;
         private System.Windows.Forms.Button OkContractBtn;
-        private System.Windows.Forms.DateTimePicker dateOfConctract;
-        private System.Windows.Forms.DateTimePicker dateOfEnd;
+        private System.Windows.Forms.MaskedTextBox maskedTextDateOfEnd;
+        private System.Windows.Forms.MaskedTextBox maskedTextDateOfStart;
     }
 }

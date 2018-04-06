@@ -34,6 +34,7 @@ namespace AccountantTool.ViewModel
         public ICommand DeleteRecordCommand { get; }
         public ICommand SaveDocumentCommand { get; }
         public ICommand ExportToExcelCommand { get; }
+        public ICommand AddDocsCommand { get; }
         #endregion Commands
 
         #region Construction
@@ -50,6 +51,7 @@ namespace AccountantTool.ViewModel
             DeleteRecordCommand = new AsyncDelegateCommand(OnDeleteRecord, CanExecuteOperation);
             SaveDocumentCommand = new RelayCommand(OnSaveDocument, CanExecuteOperation);
             ExportToExcelCommand = new RelayCommand(OnExportToExcel, CanExecuteOperation);
+            AddDocsCommand = new RelayCommand(OnAddDocuments, x => false);
 
             InitializeWorksheet();
         }
@@ -348,6 +350,11 @@ namespace AccountantTool.ViewModel
             }
         }
 
+        private void OnAddDocuments()
+        {
+
+        }
+
         #endregion Commands implementation
 
         #region Work with worksheet
@@ -424,7 +431,7 @@ namespace AccountantTool.ViewModel
             Worksheet.SetCellBody(row, Constants.ProductsColumnIndex, new ProductsListViewDropdownCell(record.Products));
 
             Worksheet.SetCellData(row, Constants.ContractColumnIndex, record.Contract);
-            Worksheet.SetCellBody(row, Constants.ContractColumnIndex, new ContactListViewDropdownCell(record.Contract));
+            Worksheet.SetCellBody(row, Constants.ContractColumnIndex, new ContractListViewDropdownCell(record.Contract));
 
             Worksheet.SetCellData(row, Constants.AdditionalInfoColumnIndex, record.AdditionalInfo);
             Worksheet.SetCellBody(row, Constants.AdditionalInfoColumnIndex, new AdditionalInfoListViewDropdownCell(record.AdditionalInfo));

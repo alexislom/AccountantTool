@@ -5,7 +5,7 @@ namespace AccountantTool.Controls
 {
     public partial class AdditionalInfoControl : UserControl
     {
-        public AdditionalInfo Model { get; private set; }
+        public AdditionalInfo Model { get; }
 
         public AdditionalInfoControl(AdditionalInfo model)
         {
