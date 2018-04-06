@@ -4,8 +4,6 @@ namespace AccountantTool.Model
 {
     public class Address
     {
-        public int Id { get; set; }
-
         public string Index { get; set; }
 
         public string Region { get; set; }

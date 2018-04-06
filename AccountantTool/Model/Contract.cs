@@ -17,8 +17,6 @@ namespace AccountantTool.Model
     [Serializable]
     public class Contract
     {
-        public int Id { get; set; }
-
         public string NumberOfContract { get; set; }
 
         public string SidesOfContract { get; set; }

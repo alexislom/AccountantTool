@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using AccountantTool.Model;
 
@@ -15,8 +16,10 @@ namespace AccountantTool.Controls
 
             textNumberOfContract.Text = Model?.NumberOfContract;
             textSidesOfContract.Text = Model?.SidesOfContract;
-            textDateOfContract.Text = Model?.DateOfStart.ToString("d");
-            textDateOfEnd.Text = Model?.DateOfEnd.ToString("d");
+            //textDateOfContract.Text = Model?.DateOfStart.ToString(CultureInfo.InvariantCulture);
+            //textDateOfEnd.Text = Model?.DateOfEnd.ToString(CultureInfo.InvariantCulture);
+            dateOfConctract.Value = Model.DateOfStart < dateOfConctract.Value ? dateOfConctract.MinDate : Model.DateOfStart;
+            dateOfEnd.Value = Model.DateOfEnd < dateOfEnd.Value ? dateOfEnd.MinDate : Model.DateOfEnd;
             textContractStage.Text = Model?.ContractStage;
         }
 
@@ -24,12 +27,12 @@ namespace AccountantTool.Controls
         {
             Model.NumberOfContract = textNumberOfContract?.Text;
 
-            DateTime.TryParse(textNumberOfContract?.Text, out var dateOfStart);
-            DateTime.TryParse(textDateOfEnd?.Text, out var dateOfEnd);
+            //DateTime.TryParse(textDateOfContract?.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateOfStart);
+            //DateTime.TryParse(textDateOfEnd?.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateOfEnd);
 
-            Model.DateOfStart = dateOfStart;
+            Model.DateOfStart = dateOfConctract.Value; //dateOfStart;
             Model.SidesOfContract = textSidesOfContract?.Text;
-            Model.DateOfEnd = dateOfEnd;
+            Model.DateOfEnd = dateOfEnd.Value; //dateOfEnd;
             Model.ContractStage = textContractStage?.Text;
         }
     }

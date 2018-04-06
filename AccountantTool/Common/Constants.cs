@@ -19,6 +19,7 @@
 
         // Open/Save file dialog
         public const bool FileDialogRestoreDirectory = true;
-        public const string FileDialogFilter = "ReoGrid format|*.rgf;";
+        public const string SaveFileDialogFilter = "ReoGrid format|*.rgf;";
+        public const string ExportFileDialogFilter = "Execl files (*.xls)|*.xlsx";
     }
 }

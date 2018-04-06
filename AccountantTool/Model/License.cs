@@ -17,8 +17,6 @@ namespace AccountantTool.Model
     [Serializable]
     public class License
     {
-        public int Id { get; set; }
-
         public string NumberOfLicense { get; set; }
 
         public DateTime DateOfIssue { get; set; }

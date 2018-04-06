@@ -4,12 +4,14 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using AccountantTool.Common;
 using AccountantTool.Helpers;
 using AccountantTool.Model;
 using AccountantTool.ReoGrid.CustomDropDownCell;
 using AccountantTool.ReoGrid.DataFormatter;
+using ClosedXML.Excel;
 using Microsoft.Win32;
 using unvell.ReoGrid;
 using unvell.ReoGrid.DataFormat;
@@ -22,7 +24,7 @@ namespace AccountantTool.ViewModel
         #region Properties
         public ObservableCollection<AccountantRecord> AccountantRecords { get; set; }
         public Worksheet Worksheet { get; }
-        public bool IsRussianLanguage => App.SelectedLanguage.Equals(App.Languages[0]);
+        public bool IsEnglishLanguage => App.SelectedLanguage.Equals(App.Languages[0]);
         #endregion Properties
 
         #region Commands
@@ -60,7 +62,7 @@ namespace AccountantTool.ViewModel
 
         private void ChangeLanguage()
         {
-            App.SelectedLanguage = IsRussianLanguage ? new CultureInfo("ru-RU") : new CultureInfo("en-US");
+            App.SelectedLanguage = IsEnglishLanguage ? new CultureInfo("ru-RU") : new CultureInfo("en-US");
             InitializeHeaders();
         }
 
@@ -119,7 +121,7 @@ namespace AccountantTool.ViewModel
             var openFileDialog = new OpenFileDialog
             {
                 RestoreDirectory = Constants.FileDialogRestoreDirectory,
-                Filter = Constants.FileDialogFilter
+                Filter = Constants.SaveFileDialogFilter
             };
 
             if (openFileDialog.ShowDialog() == true)
@@ -158,18 +160,192 @@ namespace AccountantTool.ViewModel
             var saveFileDialog = new SaveFileDialog
             {
                 RestoreDirectory = Constants.FileDialogRestoreDirectory,
-                Filter = Constants.FileDialogFilter
+                Filter = Constants.SaveFileDialogFilter,
+                Title = IsEnglishLanguage ? "Save input data" : "Сохранить введённые данные"
             };
 
             if (saveFileDialog.ShowDialog() == true)
             {
                 Worksheet.Workbook.Save($"{saveFileDialog.FileName}", FileFormat.ReoGridFormat);
+
+                MessageBox.Show($"{(IsEnglishLanguage ? "File save as:" : "Файл сохранён как:")}" + Environment.NewLine +
+                                saveFileDialog.FileName, $"{(IsEnglishLanguage ? "Save input data" : "Сохранить введённые данные")}",
+                                MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         private void OnExportToExcel()
         {
+            var exportFileDialog = new SaveFileDialog
+            {
+                RestoreDirectory = Constants.FileDialogRestoreDirectory,
+                Filter = Constants.ExportFileDialogFilter,
+                Title = IsEnglishLanguage ? "Export to excel" : "Экспорт в эксель"
+            };
 
+            if (exportFileDialog.ShowDialog() == true)
+            {
+                var workbook = new XLWorkbook();
+                var worksheet = workbook.Worksheets.Add("Inserting Data");
+
+                var row = 1;
+                const int column = 1;
+
+                foreach (var record in AccountantRecords)
+                {
+                    // Name of company
+                    worksheet.Cell(row, column).Value = "Название компании";
+                    worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+
+                    row++;
+
+                    worksheet.Cell(row, column).Value = record.Company.LongName;
+                    worksheet.Range(row, column, row, column + 4).Merge().Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+
+                    row++;
+
+                    // Requisites
+
+                    worksheet.Cell(row, column).Value = "Реквизиты:";
+                    worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+
+                    row++;
+
+                    worksheet.Cell(row, column).Value = "Адрес:";
+
+                    row++;
+
+                    worksheet.Cell(row, column).Value = $"{record.Requisites.Address.Index}, " +
+                                                        $"{record.Requisites.Address.Country}, " +
+                                                        $"{record.Requisites.Address.Region}, " +
+                                                        $"{record.Requisites.Address.City}, " +
+                                                        $"{record.Requisites.Address.District}, " +
+                                                        $"{record.Requisites.Address.Street}, " +
+                                                        $"{record.Requisites.Address.House}, " +
+                                                        $"{record.Requisites.Address.Flat}";
+
+                    worksheet.Cell(row, column).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+
+                    worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("SubTitles");
+
+                    row++;
+
+                    worksheet.Cell(row, column).Value = "Адрес электронной почты:";
+                    worksheet.Cell(row, column + 1).Value = record.Requisites.Email;
+
+                    row++;
+
+                    worksheet.Cell(row, column).Value = "Сайт:";
+                    worksheet.Cell(row, column + 1).Value = record.Requisites.Site;
+
+                    row++;
+
+                    worksheet.Cell(row, column).Value = "Контактные телефоны:";
+                    worksheet.Range(row, column, row, column + 4).Merge().Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+
+                    row++;
+
+                    var contactPhonesRange = worksheet.Cell(row, column).InsertData(record.Requisites.DepartmentPhones.AsEnumerable());
+                    if (contactPhonesRange != null)
+                    {
+                        row += contactPhonesRange.RowCount();
+                    }
+
+
+                    worksheet.Cell(row, column).Value = "Иные реквизиты:";
+                    worksheet.Range(row, column, row, column + 4).Merge().Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+
+                    row++;
+
+                    var contactOtherRequisites = worksheet.Cell(row, column).InsertData(record.Requisites.OtherRequisites.AsEnumerable());
+
+                    if (contactOtherRequisites != null)
+                    {
+                        row += contactOtherRequisites.RowCount();
+                    }
+
+                    // Contact persons
+
+                    worksheet.Cell(row, column).Value = "Контактные лица";
+                    worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+
+                    row++;
+                    if (record.ContactPersons.Any())
+                    {
+                        var contactPersons = worksheet.Cell(row, column).InsertData(record.ContactPersons.AsEnumerable());
+
+                        row += contactPersons.RowCount();
+                    }
+
+                    // License
+
+                    worksheet.Cell(row, column).Value = "Наличие лицензии и сроки";
+                    worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+
+                    row++;
+
+                    if (record.License.Any())
+                    {
+                        var license = worksheet.Cell(row, column).InsertData(record.License.AsEnumerable());
+
+                        row += license.RowCount();
+
+                    }
+                    // Products
+
+                    worksheet.Cell(row, column).Value = "Покупаемые изделия и стоимость";
+                    worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+
+                    row++;
+
+                    if (record.Products.Any())
+                    {
+                        var products = worksheet.Cell(row, column).InsertData(record.Products.AsEnumerable());
+
+                        row += products.RowCount();
+                    }
+
+                    // Contract
+
+                    worksheet.Cell(row, column).Value = "Исполнение контракта";
+                    worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+
+                    row++;
+
+                    IEnumerable<Contract> contract = new List<Contract> { record.Contract };
+
+                    var contractCell = worksheet.Cell(row, column).InsertData(contract);
+
+                    row += contractCell.RowCount();
+
+                    // Additional info
+
+                    worksheet.Cell(row, column).Value = "Дополнительная информация";
+                    worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+
+                    row++;
+
+                    worksheet.Cell(row, column).Value = record.AdditionalInfo.Notes;
+
+                    // End of record info, setting page break and add row
+                    worksheet.PageSetup.AddHorizontalPageBreak(row);
+                    row++;
+                }
+
+                var titlesStyle = workbook.Style;
+                titlesStyle.Font.Bold = true;
+                titlesStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+                workbook.NamedRanges.NamedRange("Titles").Ranges.Style = titlesStyle;
+
+                worksheet.Columns().AdjustToContents();
+
+                workbook.SaveAs($"{exportFileDialog.FileName}");
+
+                MessageBox.Show($"{(IsEnglishLanguage ? "File save as:" : "Файл сохранён как:")}" + Environment.NewLine +
+                                exportFileDialog.FileName, $"{(IsEnglishLanguage ? "Export to excel" : "Экспорт в эксель")}",
+                                MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         #endregion Commands implementation
@@ -256,13 +432,13 @@ namespace AccountantTool.ViewModel
 
         private void InitializeHeaders()
         {
-            Worksheet.ColumnHeaders[Constants.CompanyColumnIndex].Text = IsRussianLanguage ? "Name of the company" : "Название компании";
-            Worksheet.ColumnHeaders[Constants.RequisitesColumnIndex].Text = IsRussianLanguage ? "Requisites" : "Реквизиты";
-            Worksheet.ColumnHeaders[Constants.ContactPersonColumnIndex].Text = IsRussianLanguage ? "Contact person" : "Контактное лицо";
-            Worksheet.ColumnHeaders[Constants.LicenseColumnIndex].Text = IsRussianLanguage ? "Availability of license and terms" : "Наличие лицензии и сроки";
-            Worksheet.ColumnHeaders[Constants.ProductsColumnIndex].Text = IsRussianLanguage ? "Purchased products and cost" : "Покупаемые изделия и стоимость";
-            Worksheet.ColumnHeaders[Constants.ContractColumnIndex].Text = IsRussianLanguage ? "Execution of contract" : "Исполнение контракта";
-            Worksheet.ColumnHeaders[Constants.AdditionalInfoColumnIndex].Text = IsRussianLanguage ? "Additional Information" : "Дополнительная информация";
+            Worksheet.ColumnHeaders[Constants.CompanyColumnIndex].Text = IsEnglishLanguage ? "Name of the company" : "Название компании";
+            Worksheet.ColumnHeaders[Constants.RequisitesColumnIndex].Text = IsEnglishLanguage ? "Requisites" : "Реквизиты";
+            Worksheet.ColumnHeaders[Constants.ContactPersonColumnIndex].Text = IsEnglishLanguage ? "Contact person" : "Контактное лицо";
+            Worksheet.ColumnHeaders[Constants.LicenseColumnIndex].Text = IsEnglishLanguage ? "Availability of license and terms" : "Наличие лицензии и сроки";
+            Worksheet.ColumnHeaders[Constants.ProductsColumnIndex].Text = IsEnglishLanguage ? "Purchased products and cost" : "Покупаемые изделия и стоимость";
+            Worksheet.ColumnHeaders[Constants.ContractColumnIndex].Text = IsEnglishLanguage ? "Execution of contract" : "Исполнение контракта";
+            Worksheet.ColumnHeaders[Constants.AdditionalInfoColumnIndex].Text = IsEnglishLanguage ? "Additional Information" : "Дополнительная информация";
         }
 
         #endregion Work with worksheet

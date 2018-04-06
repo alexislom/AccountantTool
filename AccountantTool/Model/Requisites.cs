@@ -7,8 +7,6 @@ namespace AccountantTool.Model
     [Serializable]
     public class Requisites
     {
-        public int Id { get; set; }
-
         public Address Address { get; set; }
 
         public List<KeyValuePair<string, string>> DepartmentPhones { get; set; }
