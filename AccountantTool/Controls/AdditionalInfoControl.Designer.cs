@@ -32,16 +32,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.OkAddInfoBtn = new System.Windows.Forms.Button();
+            this.cbAttachedDocuments = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.AddInfoGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // AddInfoGroupBox
             // 
+            this.AddInfoGroupBox.Controls.Add(this.label2);
+            this.AddInfoGroupBox.Controls.Add(this.cbAttachedDocuments);
             this.AddInfoGroupBox.Controls.Add(this.label1);
             this.AddInfoGroupBox.Controls.Add(this.txtNotes);
             this.AddInfoGroupBox.Location = new System.Drawing.Point(13, 15);
             this.AddInfoGroupBox.Name = "AddInfoGroupBox";
-            this.AddInfoGroupBox.Size = new System.Drawing.Size(410, 71);
+            this.AddInfoGroupBox.Size = new System.Drawing.Size(410, 103);
             this.AddInfoGroupBox.TabIndex = 5;
             this.AddInfoGroupBox.TabStop = false;
             this.AddInfoGroupBox.Text = "Дополнительная информация";
@@ -49,7 +53,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 30);
+            this.label1.Location = new System.Drawing.Point(19, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 2;
@@ -58,20 +62,37 @@
             // txtNotes
             // 
             this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNotes.Location = new System.Drawing.Point(156, 27);
+            this.txtNotes.Location = new System.Drawing.Point(158, 23);
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(216, 20);
             this.txtNotes.TabIndex = 0;
             // 
             // OkAddInfoBtn
             // 
-            this.OkAddInfoBtn.Location = new System.Drawing.Point(348, 92);
+            this.OkAddInfoBtn.Location = new System.Drawing.Point(335, 124);
             this.OkAddInfoBtn.Name = "OkAddInfoBtn";
             this.OkAddInfoBtn.Size = new System.Drawing.Size(75, 25);
             this.OkAddInfoBtn.TabIndex = 6;
             this.OkAddInfoBtn.Text = "Ok";
             this.OkAddInfoBtn.UseVisualStyleBackColor = true;
             this.OkAddInfoBtn.Click += new System.EventHandler(this.OkAddInfoBtn_Click);
+            // 
+            // cbAttachedDocuments
+            // 
+            this.cbAttachedDocuments.FormattingEnabled = true;
+            this.cbAttachedDocuments.Location = new System.Drawing.Point(158, 63);
+            this.cbAttachedDocuments.Name = "cbAttachedDocuments";
+            this.cbAttachedDocuments.Size = new System.Drawing.Size(216, 21);
+            this.cbAttachedDocuments.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 66);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Документы";
             // 
             // AdditionalInfoControl
             // 
@@ -80,7 +101,7 @@
             this.Controls.Add(this.OkAddInfoBtn);
             this.Controls.Add(this.AddInfoGroupBox);
             this.Name = "AdditionalInfoControl";
-            this.Size = new System.Drawing.Size(437, 125);
+            this.Size = new System.Drawing.Size(437, 159);
             this.AddInfoGroupBox.ResumeLayout(false);
             this.AddInfoGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -93,5 +114,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.Button OkAddInfoBtn;
+        private System.Windows.Forms.ComboBox cbAttachedDocuments;
+        private System.Windows.Forms.Label label2;
     }
 }

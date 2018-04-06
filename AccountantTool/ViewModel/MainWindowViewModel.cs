@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -51,7 +52,7 @@ namespace AccountantTool.ViewModel
             DeleteRecordCommand = new AsyncDelegateCommand(OnDeleteRecord, CanExecuteOperation);
             SaveDocumentCommand = new RelayCommand(OnSaveDocument, CanExecuteOperation);
             ExportToExcelCommand = new RelayCommand(OnExportToExcel, CanExecuteOperation);
-            AddDocsCommand = new RelayCommand(OnAddDocuments, x => false);
+            AddDocsCommand = new RelayCommand(OnAddDocuments, CanExecuteOperation);
 
             InitializeWorksheet();
         }
@@ -352,7 +353,21 @@ namespace AccountantTool.ViewModel
 
         private void OnAddDocuments()
         {
-
+            var openFileDialog = new OpenFileDialog
+            {
+                Multiselect = true
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                foreach (var ofdFileName in openFileDialog.FileNames)
+                {
+                    if (!Directory.Exists(Constants.AdditionalDocumentsDirectory))
+                    {
+                        Directory.CreateDirectory(Constants.AdditionalDocumentsDirectory);
+                    }
+                    File.Copy(ofdFileName, Constants.AdditionalDocumentsDirectory + "/" + Path.GetFileName(ofdFileName));
+                }
+            }
         }
 
         #endregion Commands implementation
