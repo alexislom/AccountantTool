@@ -119,6 +119,11 @@ namespace AccountantTool.ViewModel
             Worksheet.DeleteRows(Worksheet.SelectionRange.Row, Worksheet.SelectionRange.Rows);
         }
 
+        public async Task RestoreLastFile(string defaultLastFileName)
+        {
+            await LoadRecords(defaultLastFileName);
+        }
+
         private async Task OnLoadData(object param)
         {
             var openFileDialog = new OpenFileDialog
@@ -129,32 +134,37 @@ namespace AccountantTool.ViewModel
 
             if (openFileDialog.ShowDialog() == true)
             {
-                Worksheet.Workbook.Load($"{openFileDialog.FileName}", FileFormat.ReoGridFormat);
+                await LoadRecords(openFileDialog.FileName);
+            }
+        }
 
-                AccountantRecords.Clear();
+        private async Task LoadRecords(string filePath)
+        {
+            Worksheet.Workbook.Load($"{filePath}", FileFormat.ReoGridFormat);
 
-                for (var rowIndex = 0; rowIndex <= Worksheet.RowCount; rowIndex++)
+            AccountantRecords.Clear();
+
+            for (var rowIndex = 0; rowIndex <= Worksheet.RowCount; rowIndex++)
+            {
+                var accountantRecord = new AccountantRecord();
+
+                for (var columnIndex = Constants.CompanyColumnIndex; columnIndex < Constants.CountOfColumns; columnIndex++)
                 {
-                    var accountantRecord = new AccountantRecord();
+                    var cell = Worksheet.GetCell(rowIndex, columnIndex);
+                    // TODO: REFACTOR THIS???!!!
+                    if (cell == null)
+                        return;
 
-                    for (var columnIndex = Constants.CompanyColumnIndex; columnIndex < Constants.CountOfColumns; columnIndex++)
-                    {
-                        var cell = Worksheet.GetCell(rowIndex, columnIndex);
-                        // TODO: REFACTOR THIS???!!!
-                        if (cell == null)
-                            return;
-
-                        SetRecordData(cell, accountantRecord, columnIndex);
-                    }
-
-                    var rowIndexClosure = rowIndex;
-                    await Task.Run(() =>
-                    {
-                        AccountantRecords.Add(accountantRecord);
-
-                        AddRecord(rowIndexClosure, AccountantRecords.Last());
-                    });
+                    SetRecordData(cell, accountantRecord, columnIndex);
                 }
+
+                var rowIndexClosure = rowIndex;
+                await Task.Run(() =>
+                {
+                    AccountantRecords.Add(accountantRecord);
+
+                    AddRecord(rowIndexClosure, AccountantRecords.Last());
+                });
             }
         }
 
@@ -170,6 +180,9 @@ namespace AccountantTool.ViewModel
             if (saveFileDialog.ShowDialog() == true)
             {
                 Worksheet.Workbook.Save($"{saveFileDialog.FileName}", FileFormat.ReoGridFormat);
+
+                AccountantTool.Properties.Settings.Default.LastFileName = saveFileDialog.FileName;
+                AccountantTool.Properties.Settings.Default.Save();
 
                 MessageBox.Show($"{(IsEnglishLanguage ? "File save as:" : "Файл сохранён как:")}" + Environment.NewLine +
                                 saveFileDialog.FileName, $"{(IsEnglishLanguage ? "Save input data" : "Сохранить введённые данные")}",

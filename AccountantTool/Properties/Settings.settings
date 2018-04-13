@@ -5,5 +5,8 @@
     <Setting Name="Language" Type="System.Globalization.CultureInfo" Scope="User">
       <Value Profile="(Default)">(Default)</Value>
     </Setting>
+    <Setting Name="LastFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
