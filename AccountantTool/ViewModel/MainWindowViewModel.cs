@@ -52,7 +52,7 @@ namespace AccountantTool.ViewModel
             DeleteRecordCommand = new AsyncDelegateCommand(OnDeleteRecord, CanExecuteOperation);
             SaveDocumentCommand = new RelayCommand(OnSaveDocument, CanExecuteOperation);
             ExportToExcelCommand = new RelayCommand(OnExportToExcel, CanExecuteOperation);
-            AddDocsCommand = new RelayCommand(OnAddDocuments, CanExecuteOperation);
+            AddDocsCommand = new RelayCommand(OnAddDocuments, x => false); // CanExecuteOperation);
 
             InitializeWorksheet();
         }
@@ -181,8 +181,8 @@ namespace AccountantTool.ViewModel
             {
                 Worksheet.Workbook.Save($"{saveFileDialog.FileName}", FileFormat.ReoGridFormat);
 
-                AccountantTool.Properties.Settings.Default.LastFileName = saveFileDialog.FileName;
-                AccountantTool.Properties.Settings.Default.Save();
+                Properties.Settings.Default.LastFileName = saveFileDialog.FileName;
+                Properties.Settings.Default.Save();
 
                 MessageBox.Show($"{(IsEnglishLanguage ? "File save as:" : "Файл сохранён как:")}" + Environment.NewLine +
                                 saveFileDialog.FileName, $"{(IsEnglishLanguage ? "Save input data" : "Сохранить введённые данные")}",

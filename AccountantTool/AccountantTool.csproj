@@ -242,6 +242,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Helpers\EnumHelpers.cs" />
+    <Compile Include="Helpers\FileInfoEqualityComparer.cs" />
     <Compile Include="Helpers\ListWrapper.cs" />
     <Compile Include="Helpers\Search\CollectionViewGeneric.cs" />
     <Compile Include="Helpers\Search\IAccountantRecordSearch.cs" />
