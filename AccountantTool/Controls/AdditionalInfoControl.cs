@@ -14,9 +14,6 @@ namespace AccountantTool.Controls
     {
         public AdditionalInfo Model { get; }
 
-        IEnumerable<string> AllFiles { get; set; }
-        //private string _lastUpdateText;
-
         public List<FileInfo> LocalFiles { get; set; } = new List<FileInfo>();
 
         public AdditionalInfoControl(AdditionalInfo model)
@@ -60,35 +57,6 @@ namespace AccountantTool.Controls
                                 || i.Name.ToLowerInvariant().Contains(searchTextBox.Text.ToLowerInvariant()))
                     .Select(c => new ListViewItem(new[] { c.Name, c.FullName })).ToArray());
             };
-
-            #region Comments
-            /*
-
-            if (!Directory.Exists(Constants.AdditionalDocumentsDirectory))
-            {
-                Directory.CreateDirectory(Constants.AdditionalDocumentsDirectory);
-            }
-
-            Files = Directory.GetFiles(Constants.AdditionalDocumentsDirectory);
-            Files = Files.Select(Path.GetFileName).ToList();
-            cbAttachedDocuments.DataSource = Files;
-            cbAttachedDocuments.SelectedIndex = -1;
-
-            //Cursor.Current = Cursors.Default;
-
-            // OnTextChanged event for combo box
-            cbAttachedDocuments.TextChanged += CbAttachedDocumentsOnTextChanged;
-
-            // OnTextUpdate event for combo box
-            cbAttachedDocuments.TextUpdate += CbAttachedDocuments_TextUpdate;
-
-            cbAttachedDocuments.SelectedIndexChanged += (sender, args) =>
-            {
-                cbAttachedDocuments.SelectedIndex = -1;
-            };
-
-            */
-            #endregion
         }
 
         private void AddFileBtn_Click(object sender, EventArgs e)
@@ -115,16 +83,18 @@ namespace AccountantTool.Controls
 
                     var fileInfo = new FileInfo(possiblePathToFile);
 
-                    Model.AttachedFiles.Add(fileInfo);
-                    LocalFiles.Add(fileInfo);
-                    attachedFilesListView.Items.Add(new ListViewItem(new[] { fileInfo.Name, fileInfo.FullName }));
+                    if (!LocalFiles.Contains(fileInfo, new FileInfoEqualityComparer()))
+                    {
+                        LocalFiles.Add(fileInfo);
+                        attachedFilesListView.Items.Add(new ListViewItem(new[] { fileInfo.Name, fileInfo.FullName }));
+                    }
                 }
             }
         }
 
         private void RemoveFileBtn_Click(object sender, EventArgs e)
         {
-            #region For deleting
+            #region For deleting from directory
             //var selectedItem = attachedFilesListView.FocusedItem;
 
             //var fullPathToFile = selectedItem.SubItems[1].Text;
@@ -136,16 +106,27 @@ namespace AccountantTool.Controls
 
             //Model.AttachedFiles.RemoveAll(x => x.FullName == fullPathToFile);
             //LocalFiles.RemoveAll(x => x.FullName == fullPathToFile);
-            #endregion For deleting
+            #endregion For deleting from directory
 
             attachedFilesListView.Items.Remove(attachedFilesListView.FocusedItem);
+        }
+
+        private void printDocBtn_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void OkAddInfoBtn_Click(object sender, EventArgs e)
         {
             Model.Notes = txtNotes?.Text;
 
-            if (attachedFilesListView.Items.Count != 0)
+            if (attachedFilesListView.Items.Count == 0)
+            {
+                Model.AttachedFiles = new List<FileInfo>();
+                return;
+            }
+
+            if (attachedFilesListView.Items.Count > 0)
             {
                 Model.AttachedFiles = new List<FileInfo>(attachedFilesListView.Items.Count);
 
@@ -155,80 +136,6 @@ namespace AccountantTool.Controls
                     Model.AttachedFiles.Add(new FileInfo(subItem[1].Text));
                 }
             }
-        }
-
-
-        private void CbAttachedDocuments_TextUpdate(object sender, EventArgs e)
-        {
-            string filter_param = cbAttachedDocuments.Text;
-
-            var filteredItems = AllFiles.ToList().FindAll(x => x.ToLowerInvariant().Contains(filter_param.ToLowerInvariant()));
-
-            cbAttachedDocuments.DataSource = filteredItems;
-
-            if (string.IsNullOrWhiteSpace(filter_param))
-            {
-                cbAttachedDocuments.DataSource = AllFiles;
-            }
-            cbAttachedDocuments.DroppedDown = true;
-            Cursor.Current = Cursors.Default;
-
-            // this will ensure that the drop down is as long as the list
-            cbAttachedDocuments.IntegralHeight = true;
-
-            // remove automatically selected first item
-            cbAttachedDocuments.SelectedIndex = -1;
-
-            cbAttachedDocuments.Text = filter_param;
-
-            // set the position of the cursor
-            cbAttachedDocuments.SelectionStart = filter_param.Length;
-            cbAttachedDocuments.SelectionLength = 0;
-        }
-
-        private void CbAttachedDocumentsOnTextChanged(object sender, EventArgs eventArgs)
-        {
-            if (AllFiles != null && !string.IsNullOrEmpty(cbAttachedDocuments.Text))
-            {
-                string filter_param = cbAttachedDocuments.Text.ToLowerInvariant();
-
-                var filteredItems = AllFiles.ToList().FindAll(x => x.Contains(filter_param));
-
-                cbAttachedDocuments.DataSource = filteredItems;
-
-                // if all values removed, bind the original full list again
-                if (string.IsNullOrEmpty(cbAttachedDocuments.Text))
-                {
-                    cbAttachedDocuments.DataSource = AllFiles;
-                }
-            }
-
-            //if (Files != null && !string.IsNullOrEmpty(cbAttachedDocuments.Text))
-            //{
-            //    var txt = cbAttachedDocuments.Text.ToLowerInvariant();
-            //    if (_lastUpdateText != txt)
-            //    {
-            //        _lastUpdateText = txt;
-            //        var ds = Files.Where(t => t.ToLowerInvariant().Contains(txt));
-            //        if (ds.Any())
-            //        {
-            //            // cbAttachedDocuments.DataSource = ds.ToList();
-            //        }
-            //        else
-            //        {
-            //            cbAttachedDocuments.DataSource = Files;
-            //        }
-
-            //        cbAttachedDocuments.DroppedDown = true;
-            //        cbAttachedDocuments.IntegralHeight = true;
-            //        cbAttachedDocuments.SelectedIndex = -1;
-
-            //        // cbAttachedDocuments.Text = txt;
-
-            //        cbAttachedDocuments.SelectionStart = txt.Length;
-            //        cbAttachedDocuments.SelectionLength = 0;
-            //    }
-            //}
         }
     }
 }
