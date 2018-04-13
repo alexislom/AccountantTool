@@ -39,17 +39,16 @@ namespace AccountantTool.View
 
         private async void MainWindow_ContentRendered(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.LastFileName != null)
+            if (Properties.Settings.Default.LastFileName == null)
+                return;
+            if (!File.Exists(Properties.Settings.Default.LastFileName))
+                return;
+
+            var messageBoxResult = MessageBox.Show($"{(ViewModel.IsEnglishLanguage ? "Do you want to load last used file?" : "Вы хотите загрузить последний использованный файл?")}" + Environment.NewLine +
+                                                   Properties.Settings.Default.LastFileName, $"{(ViewModel.IsEnglishLanguage ? "Restore last used file" : "Восстановить последний используемый файл")}", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (messageBoxResult == MessageBoxResult.Yes)
             {
-                if (File.Exists(Properties.Settings.Default.LastFileName))
-                {
-                    var messageBoxResult = MessageBox.Show($"{(ViewModel.IsEnglishLanguage ? "Do you want to load last used file?" : "Вы хотите загрузить последний использованный файл?")}" + Environment.NewLine +
-                                                           Properties.Settings.Default.LastFileName, $"{(ViewModel.IsEnglishLanguage ? "Restore last used file" : "Восстановить последний используемый файл")}", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (messageBoxResult == MessageBoxResult.Yes)
-                    {
-                        await ViewModel.RestoreLastFile(Properties.Settings.Default.LastFileName);
-                    }
-                }
+                await ViewModel.RestoreLastFile(Properties.Settings.Default.LastFileName);
             }
         }
     }
