@@ -31,15 +31,15 @@
             this.AddInfoGroupBox = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNotes = new System.Windows.Forms.TextBox();
-            this.OkAddInfoBtn = new System.Windows.Forms.Button();
             this.attachedFilesListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.searchTextBox = new System.Windows.Forms.TextBox();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SearchLabel = new System.Windows.Forms.Label();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
+            this.OkAddInfoBtn = new System.Windows.Forms.Button();
             this.RemoveFileBtn = new System.Windows.Forms.Button();
             this.AddFileBtn = new System.Windows.Forms.Button();
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.printDocBtn = new System.Windows.Forms.Button();
+            this.PrintDocBtn = new System.Windows.Forms.Button();
             this.AddInfoGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,16 +74,6 @@
             this.txtNotes.Size = new System.Drawing.Size(262, 20);
             this.txtNotes.TabIndex = 0;
             // 
-            // OkAddInfoBtn
-            // 
-            this.OkAddInfoBtn.Location = new System.Drawing.Point(371, 341);
-            this.OkAddInfoBtn.Name = "OkAddInfoBtn";
-            this.OkAddInfoBtn.Size = new System.Drawing.Size(84, 48);
-            this.OkAddInfoBtn.TabIndex = 6;
-            this.OkAddInfoBtn.Text = "Ok";
-            this.OkAddInfoBtn.UseVisualStyleBackColor = true;
-            this.OkAddInfoBtn.Click += new System.EventHandler(this.OkAddInfoBtn_Click);
-            // 
             // attachedFilesListView
             // 
             this.attachedFilesListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -106,12 +96,10 @@
             this.columnHeader1.Text = "Прикреплённые файлы";
             this.columnHeader1.Width = 198;
             // 
-            // searchTextBox
+            // columnHeader2
             // 
-            this.searchTextBox.Location = new System.Drawing.Point(158, 91);
-            this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(262, 20);
-            this.searchTextBox.TabIndex = 8;
+            this.columnHeader2.Text = "Путь к файлу";
+            this.columnHeader2.Width = 186;
             // 
             // SearchLabel
             // 
@@ -121,6 +109,23 @@
             this.SearchLabel.Size = new System.Drawing.Size(39, 13);
             this.SearchLabel.TabIndex = 9;
             this.SearchLabel.Text = "Поиск";
+            // 
+            // searchTextBox
+            // 
+            this.searchTextBox.Location = new System.Drawing.Point(158, 91);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(262, 20);
+            this.searchTextBox.TabIndex = 8;
+            // 
+            // OkAddInfoBtn
+            // 
+            this.OkAddInfoBtn.Location = new System.Drawing.Point(371, 341);
+            this.OkAddInfoBtn.Name = "OkAddInfoBtn";
+            this.OkAddInfoBtn.Size = new System.Drawing.Size(84, 48);
+            this.OkAddInfoBtn.TabIndex = 6;
+            this.OkAddInfoBtn.Text = "Ok";
+            this.OkAddInfoBtn.UseVisualStyleBackColor = true;
+            this.OkAddInfoBtn.Click += new System.EventHandler(this.OkAddInfoBtn_Click);
             // 
             // RemoveFileBtn
             // 
@@ -142,26 +147,21 @@
             this.AddFileBtn.UseVisualStyleBackColor = true;
             this.AddFileBtn.Click += new System.EventHandler(this.AddFileBtn_Click);
             // 
-            // columnHeader2
+            // PrintDocBtn
             // 
-            this.columnHeader2.Text = "Путь к файлу";
-            this.columnHeader2.Width = 186;
-            // 
-            // printDocBtn
-            // 
-            this.printDocBtn.Location = new System.Drawing.Point(257, 341);
-            this.printDocBtn.Name = "printDocBtn";
-            this.printDocBtn.Size = new System.Drawing.Size(81, 48);
-            this.printDocBtn.TabIndex = 14;
-            this.printDocBtn.Text = "Распечатать файл";
-            this.printDocBtn.UseVisualStyleBackColor = true;
-            this.printDocBtn.Click += new System.EventHandler(this.printDocBtn_Click);
+            this.PrintDocBtn.Location = new System.Drawing.Point(257, 341);
+            this.PrintDocBtn.Name = "PrintDocBtn";
+            this.PrintDocBtn.Size = new System.Drawing.Size(81, 48);
+            this.PrintDocBtn.TabIndex = 14;
+            this.PrintDocBtn.Text = "Распечатать файл";
+            this.PrintDocBtn.UseVisualStyleBackColor = true;
+            this.PrintDocBtn.Click += new System.EventHandler(this.PrintDocBtn_Click);
             // 
             // AdditionalInfoControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.printDocBtn);
+            this.Controls.Add(this.PrintDocBtn);
             this.Controls.Add(this.RemoveFileBtn);
             this.Controls.Add(this.AddFileBtn);
             this.Controls.Add(this.OkAddInfoBtn);
@@ -187,6 +187,6 @@
         private System.Windows.Forms.Button RemoveFileBtn;
         private System.Windows.Forms.Button AddFileBtn;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.Button printDocBtn;
+        private System.Windows.Forms.Button PrintDocBtn;
     }
 }

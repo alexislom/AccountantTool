@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using AccountantTool.Common;
 using AccountantTool.Helpers;
 using AccountantTool.Model;
+using MessageBox = System.Windows.Forms.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace AccountantTool.Controls
 {
     public partial class AdditionalInfoControl : UserControl
     {
+        #region Properties
         public AdditionalInfo Model { get; }
-
         public List<FileInfo> LocalFiles { get; set; } = new List<FileInfo>();
+        public bool IsEnglishLanguage => App.SelectedLanguage.Equals(App.Languages[0]);
+        #endregion Properties
 
         public AdditionalInfoControl(AdditionalInfo model)
         {
@@ -111,9 +115,44 @@ namespace AccountantTool.Controls
             attachedFilesListView.Items.Remove(attachedFilesListView.FocusedItem);
         }
 
-        private void printDocBtn_Click(object sender, EventArgs e)
+        private void PrintDocBtn_Click(object sender, EventArgs e)
         {
+            if (attachedFilesListView.FocusedItem != null)
+            {
+                var fullPathToFile = attachedFilesListView.FocusedItem.SubItems[1].Text;
+                //var fileName = attachedFilesListView.FocusedItem.SubItems[0].Text;
 
+                try
+                {
+                    //https://ourcodeworld.com/articles/read/502/how-to-print-a-pdf-from-your-winforms-application-in-c-sharp
+                    using (var printDialog = new PrintDialog())
+                    {
+                        printDialog.ShowDialog();
+                        var info = new ProcessStartInfo
+                        {
+                            Verb = Constants.ProcessStartInfoVerb,
+                            FileName = fullPathToFile,
+                            CreateNoWindow = true,
+                            WindowStyle = ProcessWindowStyle.Hidden,
+                        };
+
+                        var process = new Process { StartInfo = info };
+                        process.Start();
+
+                        //process.WaitForInputIdle();
+                        //Thread.Sleep(3000);
+                        //if (false == process.CloseMainWindow())
+                        //    process.Kill();
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show($"{(IsEnglishLanguage ? "Exception while printing:" : "Ошибка во время печати:")}" +
+                                    Environment.NewLine +
+                                    fullPathToFile, $"{(IsEnglishLanguage ? "Exception" : "Ошибка")}",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void OkAddInfoBtn_Click(object sender, EventArgs e)

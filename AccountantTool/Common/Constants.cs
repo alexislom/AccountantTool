@@ -21,7 +21,11 @@
         public const bool FileDialogRestoreDirectory = true;
         public const string SaveFileDialogFilter = "ReoGrid format|*.rgf;";
         public const string ExportFileDialogFilter = "Excel |*.xlsx";
+
         // Add documents
         public const string AdditionalDocumentsDirectory = "Documents";
+
+        // Printing
+        public const string ProcessStartInfoVerb = "print";
     }
 }
