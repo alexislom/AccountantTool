@@ -139,6 +139,8 @@ namespace AccountantTool.ViewModel
         {
             Worksheet.Workbook.Load($"{filePath}", FileFormat.ReoGridFormat);
 
+            SetWorksheetSettings();
+
             AccountantRecords.Clear();
 
             for (var rowIndex = 0; rowIndex <= Worksheet.RowCount; rowIndex++)
@@ -408,12 +410,17 @@ namespace AccountantTool.ViewModel
         {
             Worksheet.Columns = Constants.CountOfColumns;
             Worksheet.SelectionMode = WorksheetSelectionMode.Row;
-            Worksheet.SetSettings(WorksheetSettings.Edit_Readonly, Constants.EditReadonly);
+            SetWorksheetSettings();
 
             InitializeHeaders();
 
             DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
             Worksheet.SetColumnsWidth(Constants.CompanyColumnIndex, Constants.CountOfColumns, Constants.ColumnsWidth);
+        }
+
+        private void SetWorksheetSettings()
+        {
+            Worksheet.SetSettings(WorksheetSettings.Edit_Readonly, Constants.EditReadonly);
         }
 
         private void AddRecord(int row, AccountantRecord record)

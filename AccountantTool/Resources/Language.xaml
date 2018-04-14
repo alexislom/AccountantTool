@@ -14,7 +14,6 @@
     <system:String x:Key="AtDeleteRecordsTitle">Delete selected records</system:String>
     <system:String x:Key="AtSaveDocumentTitle">Save document</system:String>
     <system:String x:Key="AtExportToExcelTitle">Export to excel</system:String>
-    <system:String x:Key="AtAddDocsTitle">Add documents</system:String>
     <!--Table and add record dialog tittles-->
     <system:String x:Key="AtNameOfTheCompanyDialogTitle">Name of the company</system:String>
     <system:String x:Key="AtRequisitesDialogTitle">Requisites</system:String>
@@ -23,12 +22,12 @@
     <system:String x:Key="AtProductsDialogTitle">Products</system:String>
     <system:String x:Key="AtContractsDialogTitle">Contracts</system:String>
     <system:String x:Key="AtAddInfoDialogTitle">Additional info</system:String>
-    <!--New record dialog-->
+    <!--New record dialog--><!--
     <system:String x:Key="AtDialogSave">Save</system:String>
-    <!--Name of company tab-->
+    --><!--Name of company tab--><!--
     <system:String x:Key="AtFullNameOfTheCompanyTextBlock">Full name:</system:String>
     <system:String x:Key="AtShortNameOfTheCompanyTextBlock">Short name:</system:String>
-    <!--Requisites tab-->
+    --><!--Requisites tab--><!--
     <system:String x:Key="AtAddressIndexTextBlock">Index:</system:String>
     <system:String x:Key="AtAddressCountryTextBlock">Country:</system:String>
     <system:String x:Key="AtAddressRegionTextBlock">Region:</system:String>
@@ -41,33 +40,33 @@
     <system:String x:Key="AtRequisitesEmailTextBlock">Emailof company:</system:String>
     <system:String x:Key="AtRequisitesSiteTextBlock">Site of company:</system:String>
     <system:String x:Key="AtRequisitesOtherTextBlock">Other requisites of company:</system:String>
-    <!--Contact person tab-->
+    --><!--Contact person tab--><!--
     <system:String x:Key="AtContactPersonPositionTextBlock">Position:</system:String>
     <system:String x:Key="AtContactPersonSurnameTextBlock">Surname:</system:String>
     <system:String x:Key="AtContactPersonNameTextBlock">Name:</system:String>
     <system:String x:Key="AtContactPersonPatronymicTextBlock">Patronymic:</system:String>
     <system:String x:Key="AtContactPersonContactPhoneTextBlock">ContactPhone:</system:String>
     <system:String x:Key="AtContactPersonEmailTextBlock">Email:</system:String>
-    <!--License tab-->
+    --><!--License tab--><!--
     <system:String x:Key="AtLicenseNumberOfLicenseTextBlock">Number of license:</system:String>
     <system:String x:Key="AtLicenseDateOfIssueTextBlock">Date of issue:</system:String>
     <system:String x:Key="AtLicenseDateOfExpirationTextBlock">Date of expiration:</system:String>
     <system:String x:Key="AtLicenseLicenseTypeTextBlock">License type:</system:String>
-    <!--Products tab-->
+    --><!--Products tab--><!--
     <system:String x:Key="AtProductNameTextBlock">Name of product:</system:String>
     <system:String x:Key="AtProductDescriptionTextBlock">Description of product:</system:String>
     <system:String x:Key="AtProductCostFromSellerTextBlock">Cost from seller:</system:String>
     <system:String x:Key="AtProductCostForCustomerTextBlock">Cost for customer:</system:String>
     <system:String x:Key="AtProductCountTextBlock">Count:</system:String>
-    <!--Contracts tab-->
+    --><!--Contracts tab--><!--
     <system:String x:Key="AtContractNumberTextBlock">Number of contract:</system:String>
     <system:String x:Key="AtContractSideOfContractTextBlock">Side of contract:</system:String>
     <system:String x:Key="AtContractDateOfStartTextBlock">Date of start:</system:String>
     <system:String x:Key="AtContractDateOfEndTextBlock">Date of end:</system:String>
     <system:String x:Key="AtContractContractStageTextBlock">Contract stage:</system:String>
-    <!--Additional info tab-->
+    --><!--Additional info tab--><!--
     <system:String x:Key="AtAdditionalInfoNotesTextBlock">Notes:</system:String>
 
-    <system:String x:Key="AtListViewId">#</system:String>
+    <system:String x:Key="AtListViewId">#</system:String>-->
 
 </ResourceDictionary>

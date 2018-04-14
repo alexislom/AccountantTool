@@ -42,15 +42,15 @@
             this.txtFullName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFullName.Location = new System.Drawing.Point(168, 20);
             this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(289, 20);
+            this.txtFullName.Size = new System.Drawing.Size(227, 20);
             this.txtFullName.TabIndex = 0;
             // 
             // txtShortName
             // 
             this.txtShortName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtShortName.Location = new System.Drawing.Point(168, 64);
+            this.txtShortName.Location = new System.Drawing.Point(168, 53);
             this.txtShortName.Name = "txtShortName";
-            this.txtShortName.Size = new System.Drawing.Size(289, 20);
+            this.txtShortName.Size = new System.Drawing.Size(227, 20);
             this.txtShortName.TabIndex = 1;
             // 
             // label1
@@ -65,7 +65,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 71);
+            this.label2.Location = new System.Drawing.Point(19, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(131, 13);
             this.label2.TabIndex = 3;
@@ -82,16 +82,16 @@
             this.CompanyGroupBox.Controls.Add(this.txtFullName);
             this.CompanyGroupBox.Location = new System.Drawing.Point(3, 3);
             this.CompanyGroupBox.Name = "CompanyGroupBox";
-            this.CompanyGroupBox.Size = new System.Drawing.Size(490, 107);
+            this.CompanyGroupBox.Size = new System.Drawing.Size(428, 90);
             this.CompanyGroupBox.TabIndex = 4;
             this.CompanyGroupBox.TabStop = false;
             this.CompanyGroupBox.Text = "Название компании";
             // 
             // OkCompanyBtn
             // 
-            this.OkCompanyBtn.Location = new System.Drawing.Point(385, 120);
+            this.OkCompanyBtn.Location = new System.Drawing.Point(356, 97);
             this.OkCompanyBtn.Name = "OkCompanyBtn";
-            this.OkCompanyBtn.Size = new System.Drawing.Size(75, 23);
+            this.OkCompanyBtn.Size = new System.Drawing.Size(75, 31);
             this.OkCompanyBtn.TabIndex = 5;
             this.OkCompanyBtn.Text = "Ok";
             this.OkCompanyBtn.UseVisualStyleBackColor = true;
@@ -104,7 +104,7 @@
             this.Controls.Add(this.OkCompanyBtn);
             this.Controls.Add(this.CompanyGroupBox);
             this.Name = "CompanyControl";
-            this.Size = new System.Drawing.Size(496, 156);
+            this.Size = new System.Drawing.Size(450, 131);
             this.CompanyGroupBox.ResumeLayout(false);
             this.CompanyGroupBox.PerformLayout();
             this.ResumeLayout(false);

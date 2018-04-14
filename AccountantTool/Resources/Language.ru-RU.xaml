@@ -14,7 +14,6 @@
     <system:String x:Key="AtDeleteRecordsTitle">Удалить выбранные записи</system:String>
     <system:String x:Key="AtSaveDocumentTitle">Сохранить документ</system:String>
     <system:String x:Key="AtExportToExcelTitle">Экспорт в excel</system:String>
-    <system:String x:Key="AtAddDocsTitle">Добавить документы</system:String>
     <!--Table and add record dialog tittles-->
     <system:String x:Key="AtNameOfTheCompanyDialogTitle">Название компании</system:String>
     <system:String x:Key="AtRequisitesDialogTitle">Реквизиты</system:String>
@@ -23,12 +22,12 @@
     <system:String x:Key="AtProductsDialogTitle">Продукты</system:String>
     <system:String x:Key="AtContractsDialogTitle">Контракты</system:String>
     <system:String x:Key="AtAddInfoDialogTitle">Дополнительная информация</system:String>
-    <!--New record dialog-->
+    <!--New record dialog--><!--
     <system:String x:Key="AtDialogSave">Сохранить</system:String>
-    <!--Name of company tab-->
+    --><!--Name of company tab--><!--
     <system:String x:Key="AtFullNameOfTheCompanyTextBlock">Полное имя:</system:String>
     <system:String x:Key="AtShortNameOfTheCompanyTextBlock">Сокращённое имя:</system:String>
-    <!--Requisites tab-->
+    --><!--Requisites tab--><!--
     <system:String x:Key="AtAddressIndexTextBlock">Индекс:</system:String>
     <system:String x:Key="AtAddressCountryTextBlock">Страна:</system:String>
     <system:String x:Key="AtAddressRegionTextBlock">Область:</system:String>
@@ -41,32 +40,32 @@
     <system:String x:Key="AtRequisitesEmailTextBlock">Адрес электронной почты:</system:String>
     <system:String x:Key="AtRequisitesSiteTextBlock">Сайт компании:</system:String>
     <system:String x:Key="AtRequisitesOtherTextBlock">Иные реквизиты компании:</system:String>
-    <!--Contact person tab-->
+    --><!--Contact person tab--><!--
     <system:String x:Key="AtContactPersonPositionTextBlock">Должность:</system:String>
     <system:String x:Key="AtContactPersonSurnameTextBlock">Фамилия:</system:String>
     <system:String x:Key="AtContactPersonNameTextBlock">Имя:</system:String>
     <system:String x:Key="AtContactPersonPatronymicTextBlock">Отчество:</system:String>
     <system:String x:Key="AtContactPersonContactPhoneTextBlock">Контактный телефон:</system:String>
     <system:String x:Key="AtContactPersonEmailTextBlock">Адрес электронной почты:</system:String>
-    <!--License tab-->
+    --><!--License tab--><!--
     <system:String x:Key="AtLicenseNumberOfLicenseTextBlock">Номер лицензии:</system:String>
     <system:String x:Key="AtLicenseDateOfIssueTextBlock">Дата выдачи:</system:String>
     <system:String x:Key="AtLicenseDateOfExpirationTextBlock">Дата окончания действия:</system:String>
     <system:String x:Key="AtLicenseLicenseTypeTextBlock">Вид лицензии:</system:String>
-    <!--Products tab-->
+    --><!--Products tab--><!--
     <system:String x:Key="AtProductNameTextBlock">Наименование изделия:</system:String>
     <system:String x:Key="AtProductDescriptionTextBlock">Характеристика изделия:</system:String>
     <system:String x:Key="AtProductCostFromSellerTextBlock">Стоимость у продавца:</system:String>
     <system:String x:Key="AtProductCostForCustomerTextBlock">Стоимость при поставке покупателю:</system:String>
     <system:String x:Key="AtProductCountTextBlock">Количество поставляемых изделий:</system:String>
-    <!--Contracts tab-->
+    --><!--Contracts tab--><!--
     <system:String x:Key="AtContractNumberTextBlock">Номер контракта:</system:String>
     <system:String x:Key="AtContractSideOfContractTextBlock">Стороны контракта:</system:String>
     <system:String x:Key="AtContractDateOfStartTextBlock">Дата заключения контракта:</system:String>
     <system:String x:Key="AtContractDateOfEndTextBlock">Дата исполнения контракта:</system:String>
     <system:String x:Key="AtContractContractStageTextBlock">Стадия контракта:</system:String>
-    <!--Additional info tab-->
+    --><!--Additional info tab--><!--
     <system:String x:Key="AtAdditionalInfoNotesTextBlock">Записи:</system:String>
 
-    <system:String x:Key="AtListViewId">#</system:String>
+    <system:String x:Key="AtListViewId">#</system:String>-->
 </ResourceDictionary>

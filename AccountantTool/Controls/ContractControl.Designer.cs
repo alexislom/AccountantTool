@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.ContractGroupBox = new System.Windows.Forms.GroupBox();
+            this.maskedTextDateOfEnd = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextDateOfStart = new System.Windows.Forms.MaskedTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.textContractStage = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -38,8 +40,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textNumberOfContract = new System.Windows.Forms.TextBox();
             this.OkContractBtn = new System.Windows.Forms.Button();
-            this.maskedTextDateOfStart = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextDateOfEnd = new System.Windows.Forms.MaskedTextBox();
             this.ContractGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,10 +57,30 @@
             this.ContractGroupBox.Controls.Add(this.textNumberOfContract);
             this.ContractGroupBox.Location = new System.Drawing.Point(14, 12);
             this.ContractGroupBox.Name = "ContractGroupBox";
-            this.ContractGroupBox.Size = new System.Drawing.Size(381, 208);
+            this.ContractGroupBox.Size = new System.Drawing.Size(381, 189);
             this.ContractGroupBox.TabIndex = 1;
             this.ContractGroupBox.TabStop = false;
             this.ContractGroupBox.Text = "Исполнение контракта";
+            // 
+            // maskedTextDateOfEnd
+            // 
+            this.maskedTextDateOfEnd.Culture = new System.Globalization.CultureInfo("");
+            this.maskedTextDateOfEnd.Location = new System.Drawing.Point(151, 122);
+            this.maskedTextDateOfEnd.Mask = "00/00/0000";
+            this.maskedTextDateOfEnd.Name = "maskedTextDateOfEnd";
+            this.maskedTextDateOfEnd.Size = new System.Drawing.Size(213, 20);
+            this.maskedTextDateOfEnd.TabIndex = 20;
+            this.maskedTextDateOfEnd.ValidatingType = typeof(System.DateTime);
+            // 
+            // maskedTextDateOfStart
+            // 
+            this.maskedTextDateOfStart.Culture = new System.Globalization.CultureInfo("");
+            this.maskedTextDateOfStart.Location = new System.Drawing.Point(151, 60);
+            this.maskedTextDateOfStart.Mask = "00/00/0000";
+            this.maskedTextDateOfStart.Name = "maskedTextDateOfStart";
+            this.maskedTextDateOfStart.Size = new System.Drawing.Size(213, 20);
+            this.maskedTextDateOfStart.TabIndex = 19;
+            this.maskedTextDateOfStart.ValidatingType = typeof(System.DateTime);
             // 
             // label8
             // 
@@ -98,7 +118,7 @@
             // 
             // textSidesOfContract
             // 
-            this.textSidesOfContract.Location = new System.Drawing.Point(151, 85);
+            this.textSidesOfContract.Location = new System.Drawing.Point(151, 89);
             this.textSidesOfContract.Name = "textSidesOfContract";
             this.textSidesOfContract.Size = new System.Drawing.Size(213, 20);
             this.textSidesOfContract.TabIndex = 4;
@@ -130,33 +150,13 @@
             // 
             // OkContractBtn
             // 
-            this.OkContractBtn.Location = new System.Drawing.Point(303, 226);
+            this.OkContractBtn.Location = new System.Drawing.Point(303, 207);
             this.OkContractBtn.Name = "OkContractBtn";
-            this.OkContractBtn.Size = new System.Drawing.Size(75, 23);
+            this.OkContractBtn.Size = new System.Drawing.Size(75, 40);
             this.OkContractBtn.TabIndex = 2;
             this.OkContractBtn.Text = "Ok";
             this.OkContractBtn.UseVisualStyleBackColor = true;
             this.OkContractBtn.Click += new System.EventHandler(this.OkContractBtn_Click);
-            // 
-            // maskedTextDateOfStart
-            // 
-            this.maskedTextDateOfStart.Culture = new System.Globalization.CultureInfo("");
-            this.maskedTextDateOfStart.Location = new System.Drawing.Point(151, 60);
-            this.maskedTextDateOfStart.Mask = "00/00/0000";
-            this.maskedTextDateOfStart.Name = "maskedTextDateOfStart";
-            this.maskedTextDateOfStart.Size = new System.Drawing.Size(213, 20);
-            this.maskedTextDateOfStart.TabIndex = 19;
-            this.maskedTextDateOfStart.ValidatingType = typeof(System.DateTime);
-            // 
-            // maskedTextDateOfEnd
-            // 
-            this.maskedTextDateOfEnd.Culture = new System.Globalization.CultureInfo("");
-            this.maskedTextDateOfEnd.Location = new System.Drawing.Point(151, 125);
-            this.maskedTextDateOfEnd.Mask = "00/00/0000";
-            this.maskedTextDateOfEnd.Name = "maskedTextDateOfEnd";
-            this.maskedTextDateOfEnd.Size = new System.Drawing.Size(213, 20);
-            this.maskedTextDateOfEnd.TabIndex = 20;
-            this.maskedTextDateOfEnd.ValidatingType = typeof(System.DateTime);
             // 
             // ContractControl
             // 

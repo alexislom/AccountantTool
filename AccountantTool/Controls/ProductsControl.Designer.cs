@@ -30,7 +30,7 @@ namespace AccountantTool.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            this.ProductsListView = new EditableListView();
+            this.ProductsListView = new AccountantTool.Helpers.EditableListView();
             this.NumberOfProductColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DescriptionColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CostFromSellerColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -51,10 +51,11 @@ namespace AccountantTool.Controls
             this.CostFromSellerColumnHeader,
             this.CostForCustomerColumnHeader,
             this.CountColumnHeader});
-            this.ProductsListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ProductsListView.FullRowSelect = true;
+            this.ProductsListView.GridLines = true;
             this.ProductsListView.Location = new System.Drawing.Point(3, 16);
             this.ProductsListView.Name = "ProductsListView";
-            this.ProductsListView.Size = new System.Drawing.Size(826, 366);
+            this.ProductsListView.Size = new System.Drawing.Size(823, 238);
             this.ProductsListView.TabIndex = 2;
             this.ProductsListView.UseCompatibleStateImageBehavior = false;
             this.ProductsListView.View = System.Windows.Forms.View.Details;
@@ -89,14 +90,14 @@ namespace AccountantTool.Controls
             this.groupBox1.Controls.Add(this.ProductsListView);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(832, 385);
+            this.groupBox1.Size = new System.Drawing.Size(832, 264);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Изделия";
             // 
             // AddProductBtn
             // 
-            this.AddProductBtn.Location = new System.Drawing.Point(25, 394);
+            this.AddProductBtn.Location = new System.Drawing.Point(27, 273);
             this.AddProductBtn.Name = "AddProductBtn";
             this.AddProductBtn.Size = new System.Drawing.Size(75, 40);
             this.AddProductBtn.TabIndex = 4;
@@ -106,7 +107,7 @@ namespace AccountantTool.Controls
             // 
             // RemoveProductBtn
             // 
-            this.RemoveProductBtn.Location = new System.Drawing.Point(162, 394);
+            this.RemoveProductBtn.Location = new System.Drawing.Point(178, 273);
             this.RemoveProductBtn.Name = "RemoveProductBtn";
             this.RemoveProductBtn.Size = new System.Drawing.Size(75, 40);
             this.RemoveProductBtn.TabIndex = 5;
@@ -116,7 +117,7 @@ namespace AccountantTool.Controls
             // 
             // OkProductsBtn
             // 
-            this.OkProductsBtn.Location = new System.Drawing.Point(740, 394);
+            this.OkProductsBtn.Location = new System.Drawing.Point(731, 273);
             this.OkProductsBtn.Name = "OkProductsBtn";
             this.OkProductsBtn.Size = new System.Drawing.Size(75, 40);
             this.OkProductsBtn.TabIndex = 6;
@@ -133,7 +134,7 @@ namespace AccountantTool.Controls
             this.Controls.Add(this.AddProductBtn);
             this.Controls.Add(this.groupBox1);
             this.Name = "ProductsControl";
-            this.Size = new System.Drawing.Size(838, 443);
+            this.Size = new System.Drawing.Size(838, 328);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
