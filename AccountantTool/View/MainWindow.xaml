@@ -87,8 +87,6 @@
                           Icon="{iconPacks:Material ContentSave}"/>
                 <MenuItem Header="{DynamicResource AtExportToExcelTitle}" Command="{Binding ExportToExcelCommand}"
                           Icon="{iconPacks:Material Export}"/>
-                <MenuItem Header="{DynamicResource AtAddDocsTitle}" Command="{Binding AddDocsCommand}"
-                          Icon="{iconPacks:Material FileDocument}"/>
             </Menu>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" TextBlock.FontSize="14">
                 <!--<TextBlock Height="Auto" Margin="0,-1,0,0" VerticalAlignment="Center"

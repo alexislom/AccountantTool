@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,7 +34,6 @@ namespace AccountantTool.ViewModel
         public ICommand DeleteRecordCommand { get; }
         public ICommand SaveDocumentCommand { get; }
         public ICommand ExportToExcelCommand { get; }
-        public ICommand AddDocsCommand { get; }
         #endregion Commands
 
         #region Construction
@@ -52,7 +50,6 @@ namespace AccountantTool.ViewModel
             DeleteRecordCommand = new AsyncDelegateCommand(OnDeleteRecord, CanExecuteOperation);
             SaveDocumentCommand = new RelayCommand(OnSaveDocument, CanExecuteOperation);
             ExportToExcelCommand = new RelayCommand(OnExportToExcel, CanExecuteOperation);
-            AddDocsCommand = new RelayCommand(OnAddDocuments, x => false); // CanExecuteOperation);
 
             InitializeWorksheet();
         }
@@ -361,25 +358,6 @@ namespace AccountantTool.ViewModel
                 MessageBox.Show($"{(IsEnglishLanguage ? "File save as:" : "Файл сохранён как:")}" + Environment.NewLine +
                                 exportFileDialog.FileName, $"{(IsEnglishLanguage ? "Export to excel" : "Экспорт в эксель")}",
                                 MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-
-        private void OnAddDocuments()
-        {
-            var openFileDialog = new OpenFileDialog
-            {
-                Multiselect = true
-            };
-            if (openFileDialog.ShowDialog() == true)
-            {
-                foreach (var ofdFileName in openFileDialog.FileNames)
-                {
-                    if (!Directory.Exists(Constants.AdditionalDocumentsDirectory))
-                    {
-                        Directory.CreateDirectory(Constants.AdditionalDocumentsDirectory);
-                    }
-                    File.Copy(ofdFileName, Constants.AdditionalDocumentsDirectory + "/" + Path.GetFileName(ofdFileName));
-                }
             }
         }
 
