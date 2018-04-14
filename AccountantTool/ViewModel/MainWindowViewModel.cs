@@ -66,6 +66,12 @@ namespace AccountantTool.ViewModel
             InitializeHeaders();
         }
 
+        private static void SaveDefaultFileNameSetting(string fileName)
+        {
+            Properties.Settings.Default.LastFileName = fileName;
+            Properties.Settings.Default.Save();
+        }
+
         private async Task OnAddNewRecord(object param)
         {
             // TODO: Refactor this
@@ -132,6 +138,7 @@ namespace AccountantTool.ViewModel
             if (openFileDialog.ShowDialog() == true)
             {
                 await LoadRecords(openFileDialog.FileName);
+                SaveDefaultFileNameSetting(openFileDialog.FileName);
             }
         }
 
@@ -180,8 +187,7 @@ namespace AccountantTool.ViewModel
             {
                 Worksheet.Workbook.Save($"{saveFileDialog.FileName}", FileFormat.ReoGridFormat);
 
-                Properties.Settings.Default.LastFileName = saveFileDialog.FileName;
-                Properties.Settings.Default.Save();
+                SaveDefaultFileNameSetting(saveFileDialog.FileName);
 
                 MessageBox.Show($"{(IsEnglishLanguage ? "File save as:" : "Файл сохранён как:")}" + Environment.NewLine +
                                 saveFileDialog.FileName, $"{(IsEnglishLanguage ? "Save input data" : "Сохранить введённые данные")}",
