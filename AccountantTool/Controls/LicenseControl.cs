@@ -49,7 +49,7 @@ namespace AccountantTool.Controls
         {
             if (LicenseListView.Items.Count != 0)
             {
-                Model = new List<License>(LicenseListView.Items.Count);
+                Model.Clear();
 
                 foreach (ListViewItem item in LicenseListView.Items)
                 {

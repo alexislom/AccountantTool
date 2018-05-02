@@ -50,7 +50,7 @@ namespace AccountantTool.Controls
         {
             if (ProductsListView.Items.Count != 0)
             {
-                Model = new List<Product>(ProductsListView.Items.Count);
+                Model.Clear();
 
                 foreach (ListViewItem item in ProductsListView.Items)
                 {

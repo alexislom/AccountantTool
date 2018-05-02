@@ -48,7 +48,7 @@ namespace AccountantTool.Controls
         {
             if (ContactsListView.Items.Count != 0)
             {
-                Model = new List<ContactPerson>(ContactsListView.Items.Count);
+                Model.Clear();
 
                 foreach (ListViewItem item in ContactsListView.Items)
                 {
