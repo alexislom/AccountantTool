@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
+using AccountantTool.Controls.Interfaces;
 using AccountantTool.Model;
 
 namespace AccountantTool.Controls
 {
-    public partial class ProductsControl : UserControl
+    public partial class ProductsControl : UserControl, INotifyControlDataSave
     {
-        public List<Product> Model { get; private set; }
+        #region Properties
+        public List<Product> Model { get; }
+        public bool IsDirty { get; set; }
+        #endregion Properties
 
         public ProductsControl(List<Product> model)
         {
@@ -27,6 +31,8 @@ namespace AccountantTool.Controls
                     }));
                 }
             }
+
+            IsDirty = false;
         }
 
         private void AddProductBtn_Click(object sender, System.EventArgs e)
@@ -39,14 +45,23 @@ namespace AccountantTool.Controls
                 "Cost for customer",
                 "Count"
             }));
+
+            IsDirty = true;
         }
 
         private void RemoveProductBtn_Click(object sender, System.EventArgs e)
         {
             ProductsListView.Items.Remove(ProductsListView.SelectedItem);
+
+            IsDirty = true;
         }
 
         private void OkProductsBtn_Click(object sender, System.EventArgs e)
+        {
+            DoClose();
+        }
+
+        public void DoClose()
         {
             if (ProductsListView.Items.Count != 0)
             {
@@ -69,6 +84,8 @@ namespace AccountantTool.Controls
                     });
                 }
             }
+
+            IsDirty = false;
         }
     }
 }

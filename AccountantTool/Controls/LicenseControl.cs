@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using AccountantTool.Controls.Interfaces;
 using License = AccountantTool.Model.License;
 
 namespace AccountantTool.Controls
 {
-    public partial class LicenseControl : UserControl
+    public partial class LicenseControl : UserControl, INotifyControlDataSave
     {
-        public List<License> Model { get; private set; }
+        #region Properties
+        public List<License> Model { get; }
+        public bool IsDirty { get; set; }
+        #endregion Properties
 
         public LicenseControl(List<License> model)
         {
@@ -27,6 +31,8 @@ namespace AccountantTool.Controls
                     }));
                 }
             }
+
+            IsDirty = false;
         }
 
         private void AddLicenseBtn_Click(object sender, EventArgs e)
@@ -38,14 +44,23 @@ namespace AccountantTool.Controls
                 new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day ).ToShortDateString(),
                 "License type"
             }));
+
+            IsDirty = true;
         }
 
         private void RemoveLicenseBtn_Click(object sender, EventArgs e)
         {
             LicenseListView.Items.Remove(LicenseListView.SelectedItem);
+
+            IsDirty = true;
         }
 
         private void OkLicenseBtn_Click(object sender, EventArgs e)
+        {
+            DoClose();
+        }
+
+        public void DoClose()
         {
             if (LicenseListView.Items.Count != 0)
             {
@@ -67,6 +82,8 @@ namespace AccountantTool.Controls
                     });
                 }
             }
+
+            IsDirty = false;
         }
     }
 }

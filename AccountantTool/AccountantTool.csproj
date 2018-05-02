@@ -221,6 +221,7 @@
     <Compile Include="Controls\ContractControl.Designer.cs">
       <DependentUpon>ContractControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Interfaces\INotifyControlDataSave.cs" />
     <Compile Include="Controls\LicenseControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

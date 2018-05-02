@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
+using AccountantTool.Controls.Interfaces;
 using AccountantTool.Model;
 
 namespace AccountantTool.Controls
 {
-    public partial class ContactPersonControl : UserControl
+    public partial class ContactPersonControl : UserControl, INotifyControlDataSave
     {
-        public List<ContactPerson> Model { get; private set; }
+        #region Properties
+        public List<ContactPerson> Model { get; }
+        public bool IsDirty { get; set; }
+        #endregion Properties
 
         public ContactPersonControl(List<ContactPerson> model)
         {
@@ -26,6 +30,8 @@ namespace AccountantTool.Controls
                     }));
                 }
             }
+
+            IsDirty = false;
         }
 
         private void AddContactPersonBtn_Click(object sender, System.EventArgs e)
@@ -37,14 +43,22 @@ namespace AccountantTool.Controls
                 "Contact phone",
                 "email"
             }));
+
+            IsDirty = true;
         }
 
         private void RemoveContactPersonBtn_Click(object sender, System.EventArgs e)
         {
             ContactsListView.Items.Remove(ContactsListView.SelectedItem);
+            IsDirty = true;
         }
 
         private void OkContactPersonsBtn_Click(object sender, System.EventArgs e)
+        {
+            DoClose();
+        }
+
+        public void DoClose()
         {
             if (ContactsListView.Items.Count != 0)
             {
@@ -62,6 +76,8 @@ namespace AccountantTool.Controls
                     });
                 }
             }
+
+            IsDirty = false;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using AccountantTool.Common;
+using AccountantTool.Controls.Interfaces;
 using AccountantTool.Helpers;
 using AccountantTool.Model;
 using MessageBox = System.Windows.Forms.MessageBox;
@@ -12,12 +13,13 @@ using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace AccountantTool.Controls
 {
-    public partial class AdditionalInfoControl : UserControl
+    public partial class AdditionalInfoControl : UserControl, INotifyControlDataSave
     {
         #region Properties
         public AdditionalInfo Model { get; }
         public List<FileInfo> LocalFiles { get; set; } = new List<FileInfo>();
         public bool IsEnglishLanguage => App.SelectedLanguage.Equals(App.Languages[0]);
+        public bool IsDirty { get; set; }
         #endregion Properties
 
         public AdditionalInfoControl(AdditionalInfo model)
@@ -26,6 +28,7 @@ namespace AccountantTool.Controls
             InitializeComponent();
 
             txtNotes.Text = Model?.Notes;
+            txtNotes.TextChanged += (sender, args) => IsDirty = true;
 
             if (!Directory.Exists(Constants.AdditionalDocumentsDirectory))
             {
@@ -61,6 +64,8 @@ namespace AccountantTool.Controls
                                 || i.Name.ToLowerInvariant().Contains(searchTextBox.Text.ToLowerInvariant()))
                     .Select(c => new ListViewItem(new[] { c.Name, c.FullName })).ToArray());
             };
+
+            IsDirty = false;
         }
 
         private void AddFileBtn_Click(object sender, EventArgs e)
@@ -94,6 +99,8 @@ namespace AccountantTool.Controls
                     }
                 }
             }
+
+            IsDirty = true;
         }
 
         private void RemoveFileBtn_Click(object sender, EventArgs e)
@@ -113,6 +120,8 @@ namespace AccountantTool.Controls
             #endregion For deleting from directory
 
             attachedFilesListView.Items.Remove(attachedFilesListView.FocusedItem);
+
+            IsDirty = true;
         }
 
         private void PrintDocBtn_Click(object sender, EventArgs e)
@@ -157,6 +166,11 @@ namespace AccountantTool.Controls
 
         private void OkAddInfoBtn_Click(object sender, EventArgs e)
         {
+            DoClose();
+        }
+
+        public void DoClose()
+        {
             Model.Notes = txtNotes?.Text;
 
             if (attachedFilesListView.Items.Count == 0)
@@ -175,6 +189,8 @@ namespace AccountantTool.Controls
                     Model.AttachedFiles.Add(new FileInfo(subItem[1].Text));
                 }
             }
+
+            IsDirty = false;
         }
     }
 }
