@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Windows.Forms;
 using AccountantTool.Controls.Interfaces;
 using AccountantTool.Model;
@@ -25,8 +26,10 @@ namespace AccountantTool.Controls
                     {
                         product?.Name,
                         product?.Description,
-                        product?.CostFromSeller.ToString("C"),
-                        product?.CostForCustomer.ToString("C"),
+                        product?.CostFromSeller.ToString(CultureInfo.InvariantCulture),
+                        product?.CostFromSellerCurrency,
+                        product?.CostForCustomer.ToString(CultureInfo.InvariantCulture),
+                        product?.CostForCustomerCurrency,
                         product?.Count
                     }));
                 }
@@ -41,8 +44,10 @@ namespace AccountantTool.Controls
             {
                 "Name",
                 "Description",
-                "Cost from seller",
-                "Cost for customer",
+                "Cost from seller (currency)",
+                "currency1",
+                "Cost for customer (currency)",
+                "currency2",
                 "Count"
             }));
 
@@ -71,16 +76,18 @@ namespace AccountantTool.Controls
                 {
                     var subItem = item.SubItems;
 
-                    double.TryParse(subItem[2]?.Text, out var costFromSeller);
-                    double.TryParse(subItem[3]?.Text, out var costForCustomer);
+                    double.TryParse(subItem[2]?.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var costFromSeller);
+                    double.TryParse(subItem[4]?.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var costForCustomer);
 
                     Model.Add(new Product
                     {
                         Name = subItem[0]?.Text,
                         Description = subItem[1]?.Text,
                         CostFromSeller = costFromSeller,
+                        CostFromSellerCurrency = subItem[3]?.Text,
                         CostForCustomer = costForCustomer,
-                        Count = subItem[4]?.Text
+                        CostForCustomerCurrency = subItem[5]?.Text,
+                        Count = subItem[6]?.Text
                     });
                 }
             }

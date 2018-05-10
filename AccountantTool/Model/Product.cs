@@ -12,7 +12,11 @@ namespace AccountantTool.Model
 
         public double CostFromSeller { get; set; }
 
+        public string CostFromSellerCurrency { get; set; }
+
         public double CostForCustomer { get; set; }
+
+        public string CostForCustomerCurrency { get; set; }
 
         public string Count { get; set; }
 
