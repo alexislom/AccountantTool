@@ -12,6 +12,7 @@
 
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:common="clr-namespace:AccountantTool.Common"
 
     Title="{DynamicResource AtMainWindowTitle}"
     TitleAlignment="Center"
@@ -89,11 +90,10 @@
                           Icon="{iconPacks:Material Export}"/>
             </Menu>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" TextBlock.FontSize="14">
-                <!--<TextBlock Height="Auto" Margin="0,-1,0,0" VerticalAlignment="Center"
-                           Text="{DynamicResource AtSearchTitle}" />-->
-                <!--<TextBox Height="20" Width="200" Margin="5,0" VerticalContentAlignment="Center"
-                    controls:TextBoxHelper.Watermark="Search text box"
-                    Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}"/>-->
+                <TextBlock Height="Auto" Margin="0,-1,0,0" VerticalAlignment="Center" Text="{DynamicResource AtSearchTitle}"/>
+                <TextBox Height="20" Width="200" Margin="5,0" VerticalContentAlignment="Center"
+                    controls:TextBoxHelper.Watermark="Search text box" Text="{Binding SearchString, UpdateSourceTrigger=Explicit}"
+                    common:InputBindingsManager.UpdatePropertySourceWhenEnterPressed="TextBox.Text"/>
                 <!--mah:TextBoxHelper.Watermark="{Binding RandomWatermark, StringFormat={}Например: {0}, TargetNullValue=Загрузка..., Mode=TwoWay}"
                     IsEnabled="{Binding Path=IsLoadedData}"/>-->
             </StackPanel>

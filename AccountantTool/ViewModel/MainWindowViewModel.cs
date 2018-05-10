@@ -3,28 +3,101 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 using AccountantTool.Common;
 using AccountantTool.Helpers;
+using AccountantTool.Helpers.Search;
 using AccountantTool.Model;
 using AccountantTool.ReoGrid.CustomDropDownCell;
 using AccountantTool.ReoGrid.DataFormatter;
 using ClosedXML.Excel;
 using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
 using unvell.ReoGrid;
 using unvell.ReoGrid.DataFormat;
 using unvell.ReoGrid.IO;
 
 namespace AccountantTool.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase, IAccountantRecordSearch
     {
+        #region Fields
+        private readonly object _accountantRecordsLock = new object();
+        private string _searchString;
+        #endregion Fields
+
         #region Properties
         public ObservableCollection<AccountantRecord> AccountantRecords { get; set; }
         public Worksheet Worksheet { get; }
         public bool IsEnglishLanguage => App.SelectedLanguage.Equals(App.Languages[0]);
+        public ICollectionView<AccountantRecord> FilteredAccountantRecords { get; }
+        public string SearchString
+        {
+            get => _searchString;
+            set
+            {
+                _searchString = value;
+                OnPropertyChanged();
+
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    FilteredAccountantRecords.Filter = null;
+
+                    RefreshFilteredRecords(AccountantRecords);
+                }
+                else
+                {
+                    Task.Run(() =>
+                    {
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            FilteredAccountantRecords.Filter = obj => Filter(obj, value);
+                        }), DispatcherPriority.Background);
+                    });
+                    if (!FilteredAccountantRecords.IsEmpty)
+                    {
+                        RefreshFilteredRecords(FilteredAccountantRecords);
+                    }
+                }
+            }
+        }
+
+        private bool Filter(object obj, string value)
+        {
+            var recordString = ((AccountantRecord)obj).ToString().ToLower();
+            return recordString.Contains(value.ToLower());
+
+            //const string pattern = "\"(.*?)\"";
+            //var regex = new Regex(pattern);
+            //MatchCollection matchCollection = regex.Matches(recordString);
+
+            //foreach (Match match in matchCollection)
+            //{
+            //    if (match.ToString().ToLower().Contains(value.ToLower()))
+            //        return true;
+            //}
+
+            //return false;
+        }
+
+        private void RefreshFilteredRecords(IEnumerable<AccountantRecord> collection)
+        {
+            Worksheet.ClearRangeContent(RangePosition.EntireRange, CellElementFlag.All);
+
+            var rowIndex = 0;
+
+            foreach (var filteredAccountantRecords in collection)
+            {
+                AddRecord(rowIndex, filteredAccountantRecords);
+                rowIndex++;
+            }
+        }
+
         #endregion Properties
 
         #region Commands
@@ -43,6 +116,9 @@ namespace AccountantTool.ViewModel
             Worksheet = mainGrid;
 
             AccountantRecords = new ObservableCollection<AccountantRecord>();
+
+            BindingOperations.EnableCollectionSynchronization(AccountantRecords, _accountantRecordsLock);
+            FilteredAccountantRecords = new CollectionViewGeneric<AccountantRecord>(CollectionViewSource.GetDefaultView(AccountantRecords));
 
             ChangeLanguageCommand = new RelayCommand(ChangeLanguage);
             LoadDataCommand = new AsyncDelegateCommand(OnLoadData);

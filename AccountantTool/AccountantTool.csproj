@@ -197,6 +197,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\InputBindingsManager.cs" />
     <Compile Include="Controls\AdditionalInfoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
