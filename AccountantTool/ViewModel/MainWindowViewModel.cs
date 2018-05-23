@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,6 +17,7 @@ using AccountantTool.Model;
 using AccountantTool.ReoGrid.CustomDropDownCell;
 using AccountantTool.ReoGrid.DataFormatter;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Drawing;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using unvell.ReoGrid;
@@ -72,6 +74,7 @@ namespace AccountantTool.ViewModel
             var recordString = ((AccountantRecord)obj).ToString().ToLower();
             return recordString.Contains(value.ToLower());
 
+            #region RegExp try
             //const string pattern = "\"(.*?)\"";
             //var regex = new Regex(pattern);
             //MatchCollection matchCollection = regex.Matches(recordString);
@@ -83,6 +86,19 @@ namespace AccountantTool.ViewModel
             //}
 
             //return false;
+            #endregion RegExp try
+        }
+
+        private bool FilterBy(object obj, string value, string propertyName)
+        {
+            var filteredProperty = obj.GetType().GetProperty(propertyName, BindingFlags.Public
+                                                                           | BindingFlags.Instance
+                                                                           | BindingFlags.IgnoreCase);
+            if (filteredProperty == null)
+                return false;
+
+            var recordString = filteredProperty.GetValue(obj, null).ToString().ToLower();
+            return recordString.Contains(value.ToLower());
         }
 
         private void RefreshFilteredRecords(IEnumerable<AccountantRecord> collection)
@@ -317,8 +333,8 @@ namespace AccountantTool.ViewModel
                         record.Requisites.Address.Index,
                         record.Requisites.Address.Country,
                         record.Requisites.Address.Region,
-                        record.Requisites.Address.City,
                         record.Requisites.Address.District,
+                        record.Requisites.Address.City,
                         record.Requisites.Address.Street,
                         record.Requisites.Address.House,
                         record.Requisites.Address.Flat
