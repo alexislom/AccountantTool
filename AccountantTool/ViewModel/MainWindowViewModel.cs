@@ -352,6 +352,8 @@ namespace AccountantTool.ViewModel
 
                 worksheet.Cell(row, column).Value = "Сайт:";
                 worksheet.Cell(row, column + 1).Value = record.Requisites.Site;
+                worksheet.Cell(row, column + 1).Hyperlink = 
+                    new XLHyperlink(record.Requisites.Site.StartsWith("http:") ? record.Requisites.Site : "http://" + record.Requisites.Site);
 
                 row++;
 
@@ -435,6 +437,8 @@ namespace AccountantTool.ViewModel
                 row++;
 
                 worksheet.Cell(row, column).Value = record.AdditionalInfo.Notes;
+
+                worksheet.Columns().AdjustToContents();
 
                 // End of record info, setting page break and add row
                 worksheet.PageSetup.AddHorizontalPageBreak(row);
