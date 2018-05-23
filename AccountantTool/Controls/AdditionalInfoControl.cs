@@ -63,6 +63,8 @@ namespace AccountantTool.Controls
                     .Where(i => string.IsNullOrEmpty(searchTextBox.Text.ToLowerInvariant())
                                 || i.Name.ToLowerInvariant().Contains(searchTextBox.Text.ToLowerInvariant()))
                     .Select(c => new ListViewItem(new[] { c.Name, c.FullName })).ToArray());
+
+                IsDirty = true;
             };
 
             IsDirty = false;

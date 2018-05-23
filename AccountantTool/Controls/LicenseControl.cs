@@ -32,6 +32,8 @@ namespace AccountantTool.Controls
                 }
             }
 
+            LicenseListView.EditTextBox.TextChanged += (sender, args) => IsDirty = true;
+
             IsDirty = false;
         }
 

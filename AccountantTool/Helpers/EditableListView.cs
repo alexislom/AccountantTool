@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Color = System.Drawing.Color;
+using Control = System.Windows.Forms.Control;
 
 namespace AccountantTool.Helpers
 {
@@ -11,11 +13,11 @@ namespace AccountantTool.Helpers
         private int _y;
         private string _subItemText;
         private int _subItemSelected;
-        private readonly TextBox _editBox = new TextBox();
         #endregion Fields
 
         #region Properties
         public ListViewItem SelectedItem { get; private set; }
+        public TextBox EditTextBox { get; } = new TextBox();
         #endregion Properties
 
         public EditableListView()
@@ -28,35 +30,46 @@ namespace AccountantTool.Helpers
             DoubleClick += OnDoubleClick;
             GridLines = true;
 
-            _editBox.Size = new Size(0, 0);
-            _editBox.Location = new Point(0, 0);
-            Controls.AddRange(new Control[] { _editBox });
-            _editBox.KeyPress += EditOver;
-            _editBox.LostFocus += FocusOver;
-            _editBox.BackColor = Color.LightYellow;
-            _editBox.BorderStyle = BorderStyle.Fixed3D;
-            _editBox.Hide();
-            _editBox.Text = string.Empty;
+            // Increase ListView row height-------------------------------------------
+            // https://dotnet-snippets.de/snippet/zeilenhoehe-in-listview-aendern/1704
+            var imageList = new ImageList
+            {
+                ImageSize = new Size(1, 60),
+                TransparentColor = Color.Transparent
+            };
+            SmallImageList = imageList;
+            //------------------------------------------------------------------------
+
+            EditTextBox.Multiline = true;
+            EditTextBox.Size = new Size(0, 0);
+            EditTextBox.Location = new Point(0, 0);
+            Controls.AddRange(new Control[] { EditTextBox });
+            EditTextBox.KeyPress += EditOver;
+            EditTextBox.LostFocus += FocusOver;
+            EditTextBox.BackColor = Color.LightYellow;
+            EditTextBox.BorderStyle = BorderStyle.Fixed3D;
+            EditTextBox.Hide();
+            EditTextBox.Text = string.Empty;
         }
 
         #region Event handlers
 
         private void EditOver(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 13)
+            if (e.KeyChar == (int)Keys.Enter)
             {
-                SelectedItem.SubItems[_subItemSelected].Text = _editBox.Text;
-                _editBox.Hide();
+                SelectedItem.SubItems[_subItemSelected].Text = EditTextBox.Text;
+                //_editBox.Hide();
             }
 
-            if (e.KeyChar == 27)
-                _editBox.Hide();
+            if (e.KeyChar == (int)Keys.Escape)
+                EditTextBox.Hide();
         }
 
         private void FocusOver(object sender, EventArgs e)
         {
-            SelectedItem.SubItems[_subItemSelected].Text = _editBox.Text;
-            _editBox.Hide();
+            SelectedItem.SubItems[_subItemSelected].Text = EditTextBox.Text;
+            EditTextBox.Hide();
         }
 
         public void OnDoubleClick(object sender, EventArgs e)
@@ -77,15 +90,17 @@ namespace AccountantTool.Helpers
                 epos += Columns[i].Width;
             }
 
+            //double assignment of text property
+            //TODO: fix it
             _subItemText = SelectedItem.SubItems[_subItemSelected].Text;
 
             //var r = new Rectangle(spos, SelectedItem.Bounds.Y, epos, SelectedItem.Bounds.Bottom);
-            _editBox.Size = new Size(epos - spos, SelectedItem.Bounds.Bottom - SelectedItem.Bounds.Top);
-            _editBox.Location = new Point(spos, SelectedItem.Bounds.Y);
-            _editBox.Show();
-            _editBox.Text = _subItemText;
-            _editBox.SelectAll();
-            _editBox.Focus();
+            EditTextBox.Size = new Size(epos - spos, SelectedItem.Bounds.Bottom - SelectedItem.Bounds.Top);
+            EditTextBox.Location = new Point(spos, SelectedItem.Bounds.Y);
+            EditTextBox.Show();
+            EditTextBox.Text = _subItemText;
+            EditTextBox.SelectAll();
+            EditTextBox.Focus();
         }
 
         public void OnMouseDown(object sender, MouseEventArgs e)

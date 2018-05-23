@@ -52,7 +52,7 @@
             this.AddInfoGroupBox.Controls.Add(this.searchTextBox);
             this.AddInfoGroupBox.Location = new System.Drawing.Point(13, 15);
             this.AddInfoGroupBox.Name = "AddInfoGroupBox";
-            this.AddInfoGroupBox.Size = new System.Drawing.Size(442, 275);
+            this.AddInfoGroupBox.Size = new System.Drawing.Size(442, 317);
             this.AddInfoGroupBox.TabIndex = 5;
             this.AddInfoGroupBox.TabStop = false;
             this.AddInfoGroupBox.Text = "Дополнительная информация";
@@ -60,7 +60,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 29);
+            this.label1.Location = new System.Drawing.Point(19, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 2;
@@ -69,9 +69,10 @@
             // txtNotes
             // 
             this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNotes.Location = new System.Drawing.Point(158, 26);
+            this.txtNotes.Location = new System.Drawing.Point(158, 29);
+            this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(262, 20);
+            this.txtNotes.Size = new System.Drawing.Size(262, 75);
             this.txtNotes.TabIndex = 0;
             // 
             // attachedFilesListView
@@ -81,7 +82,7 @@
             this.columnHeader2});
             this.attachedFilesListView.FullRowSelect = true;
             this.attachedFilesListView.GridLines = true;
-            this.attachedFilesListView.Location = new System.Drawing.Point(22, 92);
+            this.attachedFilesListView.Location = new System.Drawing.Point(22, 146);
             this.attachedFilesListView.Name = "attachedFilesListView";
             this.attachedFilesListView.Size = new System.Drawing.Size(398, 165);
             this.attachedFilesListView.TabIndex = 7;
@@ -101,7 +102,7 @@
             // SearchLabel
             // 
             this.SearchLabel.AutoSize = true;
-            this.SearchLabel.Location = new System.Drawing.Point(19, 65);
+            this.SearchLabel.Location = new System.Drawing.Point(19, 117);
             this.SearchLabel.Name = "SearchLabel";
             this.SearchLabel.Size = new System.Drawing.Size(39, 13);
             this.SearchLabel.TabIndex = 9;
@@ -109,14 +110,14 @@
             // 
             // searchTextBox
             // 
-            this.searchTextBox.Location = new System.Drawing.Point(158, 62);
+            this.searchTextBox.Location = new System.Drawing.Point(158, 110);
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Size = new System.Drawing.Size(262, 20);
             this.searchTextBox.TabIndex = 8;
             // 
             // OkAddInfoBtn
             // 
-            this.OkAddInfoBtn.Location = new System.Drawing.Point(371, 296);
+            this.OkAddInfoBtn.Location = new System.Drawing.Point(371, 338);
             this.OkAddInfoBtn.Name = "OkAddInfoBtn";
             this.OkAddInfoBtn.Size = new System.Drawing.Size(84, 48);
             this.OkAddInfoBtn.TabIndex = 6;
@@ -126,7 +127,7 @@
             // 
             // RemoveFileBtn
             // 
-            this.RemoveFileBtn.Location = new System.Drawing.Point(136, 296);
+            this.RemoveFileBtn.Location = new System.Drawing.Point(139, 338);
             this.RemoveFileBtn.Name = "RemoveFileBtn";
             this.RemoveFileBtn.Size = new System.Drawing.Size(75, 48);
             this.RemoveFileBtn.TabIndex = 13;
@@ -136,7 +137,7 @@
             // 
             // AddFileBtn
             // 
-            this.AddFileBtn.Location = new System.Drawing.Point(13, 296);
+            this.AddFileBtn.Location = new System.Drawing.Point(13, 338);
             this.AddFileBtn.Name = "AddFileBtn";
             this.AddFileBtn.Size = new System.Drawing.Size(85, 48);
             this.AddFileBtn.TabIndex = 12;
@@ -146,7 +147,7 @@
             // 
             // PrintDocBtn
             // 
-            this.PrintDocBtn.Location = new System.Drawing.Point(257, 296);
+            this.PrintDocBtn.Location = new System.Drawing.Point(258, 338);
             this.PrintDocBtn.Name = "PrintDocBtn";
             this.PrintDocBtn.Size = new System.Drawing.Size(81, 48);
             this.PrintDocBtn.TabIndex = 14;
@@ -164,7 +165,7 @@
             this.Controls.Add(this.OkAddInfoBtn);
             this.Controls.Add(this.AddInfoGroupBox);
             this.Name = "AdditionalInfoControl";
-            this.Size = new System.Drawing.Size(470, 357);
+            this.Size = new System.Drawing.Size(470, 389);
             this.AddInfoGroupBox.ResumeLayout(false);
             this.AddInfoGroupBox.PerformLayout();
             this.ResumeLayout(false);

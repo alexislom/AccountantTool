@@ -73,6 +73,9 @@ namespace AccountantTool.Controls
             textRequisitesFlat.TextChanged += (sender, args) => IsDirty = true;
             textRequisitesSite.TextChanged += (sender, args) => IsDirty = true;
             textRequisitesEmail.TextChanged += (sender, args) => IsDirty = true;
+
+            DepartmentsListView.EditTextBox.TextChanged += (sender, args) => IsDirty = true;
+            OtherRequisitesListView.EditTextBox.TextChanged += (sender, args) => IsDirty = true;
         }
 
         #region Department phones List view

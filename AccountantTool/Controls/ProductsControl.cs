@@ -35,6 +35,8 @@ namespace AccountantTool.Controls
                 }
             }
 
+            ProductsListView.EditTextBox.TextChanged += (sender, args) => IsDirty = true;
+
             IsDirty = false;
         }
 
@@ -44,10 +46,10 @@ namespace AccountantTool.Controls
             {
                 "Name",
                 "Description",
-                "Cost from seller (currency)",
-                "currency1",
-                "Cost for customer (currency)",
-                "currency2",
+                "Cost from seller",
+                "Br",
+                "Cost for customer",
+                "Br",
                 "Count"
             }));
 

@@ -309,18 +309,18 @@ namespace AccountantTool.ViewModel
             {
                 // Name of company
                 worksheet.Cell(row, column).Value = "Название компании";
-                worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
 
                 row++;
 
                 worksheet.Cell(row, column).Value = record.Company.LongName;
-                worksheet.Range(row, column, row, column + 4).Merge().Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                worksheet.Range(row, column, row, column + 6).Merge().Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                 row++;
 
                 // Requisites
-                worksheet.Cell(row, column).Value = "Реквизиты:";
-                worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+                worksheet.Cell(row, column).Value = "Реквизиты";
+                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
 
                 row++;
 
@@ -341,7 +341,7 @@ namespace AccountantTool.ViewModel
                     };
                 worksheet.Cell(row, column).Value = string.Join(", ", addressList.Where(x => x != string.Empty));
                 worksheet.Cell(row, column).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-                worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("SubTitles");
+                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("SubTitles");
 
                 row++;
 
@@ -358,7 +358,7 @@ namespace AccountantTool.ViewModel
                 row++;
 
                 worksheet.Cell(row, column).Value = "Контактные телефоны:";
-                worksheet.Range(row, column, row, column + 4).Merge().Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                worksheet.Range(row, column, row, column + 6).Merge().Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                 row++;
 
@@ -369,7 +369,7 @@ namespace AccountantTool.ViewModel
                 }
 
                 worksheet.Cell(row, column).Value = "Иные реквизиты:";
-                worksheet.Range(row, column, row, column + 4).Merge().Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                worksheet.Range(row, column, row, column + 6).Merge().Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                 row++;
 
@@ -382,7 +382,7 @@ namespace AccountantTool.ViewModel
 
                 // Contact persons
                 worksheet.Cell(row, column).Value = "Контактные лица";
-                worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
 
                 row++;
                 if (record.ContactPersons.Any())
@@ -394,7 +394,7 @@ namespace AccountantTool.ViewModel
 
                 // License
                 worksheet.Cell(row, column).Value = "Наличие лицензии и сроки";
-                worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
 
                 row++;
 
@@ -407,7 +407,7 @@ namespace AccountantTool.ViewModel
 
                 // Products
                 worksheet.Cell(row, column).Value = "Покупаемые изделия и стоимость";
-                worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
 
                 row++;
 
@@ -420,7 +420,7 @@ namespace AccountantTool.ViewModel
 
                 // Contract
                 worksheet.Cell(row, column).Value = "Исполнение контракта";
-                worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
 
                 row++;
 
@@ -432,7 +432,7 @@ namespace AccountantTool.ViewModel
 
                 // Additional info
                 worksheet.Cell(row, column).Value = "Дополнительная информация";
-                worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
 
                 row++;
 

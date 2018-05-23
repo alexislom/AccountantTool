@@ -31,6 +31,8 @@ namespace AccountantTool.Controls
                 }
             }
 
+            ContactsListView.EditTextBox.TextChanged += (sender, args) => IsDirty = true;
+
             IsDirty = false;
         }
 

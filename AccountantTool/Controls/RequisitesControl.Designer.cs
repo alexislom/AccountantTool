@@ -32,6 +32,8 @@ namespace AccountantTool.Controls
         {
             this.components = new System.ComponentModel.Container();
             this.RequisitesGroupBox = new System.Windows.Forms.GroupBox();
+            this.textRequisitesStreet = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.textRequisitesFlat = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -57,8 +59,6 @@ namespace AccountantTool.Controls
             this.AddOtherRequisiteBtn = new System.Windows.Forms.Button();
             this.RemoveOtherRequisiteBtn = new System.Windows.Forms.Button();
             this.OkRequisitesBtn = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textRequisitesStreet = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.DepartmentsListView = new AccountantTool.Helpers.EditableListView();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -98,14 +98,30 @@ namespace AccountantTool.Controls
             this.RequisitesGroupBox.TabStop = false;
             this.RequisitesGroupBox.Text = "Реквизиты";
             // 
+            // textRequisitesStreet
+            // 
+            this.textRequisitesStreet.Location = new System.Drawing.Point(389, 56);
+            this.textRequisitesStreet.Name = "textRequisitesStreet";
+            this.textRequisitesStreet.Size = new System.Drawing.Size(185, 20);
+            this.textRequisitesStreet.TabIndex = 19;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(328, 59);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(39, 13);
+            this.label10.TabIndex = 18;
+            this.label10.Text = "Улица";
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(328, 124);
+            this.label9.Location = new System.Drawing.Point(315, 124);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(55, 13);
+            this.label9.Size = new System.Drawing.Size(68, 13);
             this.label9.TabIndex = 17;
-            this.label9.Text = "Квартира";
+            this.label9.Text = "Помещение";
             // 
             // textRequisitesFlat
             // 
@@ -254,7 +270,7 @@ namespace AccountantTool.Controls
             // 
             // AddDepartmentBtn
             // 
-            this.AddDepartmentBtn.Location = new System.Drawing.Point(16, 360);
+            this.AddDepartmentBtn.Location = new System.Drawing.Point(16, 421);
             this.AddDepartmentBtn.Name = "AddDepartmentBtn";
             this.AddDepartmentBtn.Size = new System.Drawing.Size(75, 41);
             this.AddDepartmentBtn.TabIndex = 3;
@@ -264,7 +280,7 @@ namespace AccountantTool.Controls
             // 
             // RemoveDepartmentBtn
             // 
-            this.RemoveDepartmentBtn.Location = new System.Drawing.Point(111, 360);
+            this.RemoveDepartmentBtn.Location = new System.Drawing.Point(108, 421);
             this.RemoveDepartmentBtn.Name = "RemoveDepartmentBtn";
             this.RemoveDepartmentBtn.Size = new System.Drawing.Size(75, 41);
             this.RemoveDepartmentBtn.TabIndex = 4;
@@ -274,7 +290,7 @@ namespace AccountantTool.Controls
             // 
             // AddOtherRequisiteBtn
             // 
-            this.AddOtherRequisiteBtn.Location = new System.Drawing.Point(441, 360);
+            this.AddOtherRequisiteBtn.Location = new System.Drawing.Point(441, 419);
             this.AddOtherRequisiteBtn.Name = "AddOtherRequisiteBtn";
             this.AddOtherRequisiteBtn.Size = new System.Drawing.Size(75, 41);
             this.AddOtherRequisiteBtn.TabIndex = 5;
@@ -284,7 +300,7 @@ namespace AccountantTool.Controls
             // 
             // RemoveOtherRequisiteBtn
             // 
-            this.RemoveOtherRequisiteBtn.Location = new System.Drawing.Point(540, 360);
+            this.RemoveOtherRequisiteBtn.Location = new System.Drawing.Point(540, 419);
             this.RemoveOtherRequisiteBtn.Name = "RemoveOtherRequisiteBtn";
             this.RemoveOtherRequisiteBtn.Size = new System.Drawing.Size(75, 41);
             this.RemoveOtherRequisiteBtn.TabIndex = 6;
@@ -294,29 +310,13 @@ namespace AccountantTool.Controls
             // 
             // OkRequisitesBtn
             // 
-            this.OkRequisitesBtn.Location = new System.Drawing.Point(272, 363);
+            this.OkRequisitesBtn.Location = new System.Drawing.Point(270, 422);
             this.OkRequisitesBtn.Name = "OkRequisitesBtn";
             this.OkRequisitesBtn.Size = new System.Drawing.Size(75, 38);
             this.OkRequisitesBtn.TabIndex = 7;
             this.OkRequisitesBtn.Text = "Ok";
             this.OkRequisitesBtn.UseVisualStyleBackColor = true;
             this.OkRequisitesBtn.Click += new System.EventHandler(this.OkRequisitesBtn_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(328, 59);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(39, 13);
-            this.label10.TabIndex = 18;
-            this.label10.Text = "Улица";
-            // 
-            // textRequisitesStreet
-            // 
-            this.textRequisitesStreet.Location = new System.Drawing.Point(389, 56);
-            this.textRequisitesStreet.Name = "textRequisitesStreet";
-            this.textRequisitesStreet.Size = new System.Drawing.Size(185, 20);
-            this.textRequisitesStreet.TabIndex = 19;
             // 
             // contextMenuStrip1
             // 
@@ -333,7 +333,7 @@ namespace AccountantTool.Controls
             this.DepartmentsListView.GridLines = true;
             this.DepartmentsListView.Location = new System.Drawing.Point(16, 231);
             this.DepartmentsListView.Name = "DepartmentsListView";
-            this.DepartmentsListView.Size = new System.Drawing.Size(272, 123);
+            this.DepartmentsListView.Size = new System.Drawing.Size(272, 173);
             this.DepartmentsListView.TabIndex = 8;
             this.DepartmentsListView.UseCompatibleStateImageBehavior = false;
             this.DepartmentsListView.View = System.Windows.Forms.View.Details;
@@ -357,7 +357,7 @@ namespace AccountantTool.Controls
             this.OtherRequisitesListView.GridLines = true;
             this.OtherRequisitesListView.Location = new System.Drawing.Point(304, 231);
             this.OtherRequisitesListView.Name = "OtherRequisitesListView";
-            this.OtherRequisitesListView.Size = new System.Drawing.Size(311, 123);
+            this.OtherRequisitesListView.Size = new System.Drawing.Size(311, 173);
             this.OtherRequisitesListView.TabIndex = 2;
             this.OtherRequisitesListView.UseCompatibleStateImageBehavior = false;
             this.OtherRequisitesListView.View = System.Windows.Forms.View.Details;
@@ -385,7 +385,7 @@ namespace AccountantTool.Controls
             this.Controls.Add(this.OtherRequisitesListView);
             this.Controls.Add(this.RequisitesGroupBox);
             this.Name = "RequisitesControl";
-            this.Size = new System.Drawing.Size(632, 414);
+            this.Size = new System.Drawing.Size(632, 465);
             this.RequisitesGroupBox.ResumeLayout(false);
             this.RequisitesGroupBox.PerformLayout();
             this.ResumeLayout(false);
