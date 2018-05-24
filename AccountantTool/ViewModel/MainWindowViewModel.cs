@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -69,6 +70,9 @@ namespace AccountantTool.ViewModel
                 }
             }
         }
+        #endregion Properties
+
+        #region Filter methods
 
         private bool Filter(object obj, string value)
         {
@@ -102,7 +106,9 @@ namespace AccountantTool.ViewModel
             return recordString.Contains(value.ToLower());
         }
 
-        private void RefreshFilteredRecords(IEnumerable<AccountantRecord> collection)
+        #endregion Filter methods
+
+        private async Task RefreshFilteredRecords(IEnumerable<AccountantRecord> collection)
         {
             Worksheet.ClearRangeContent(RangePosition.EntireRange, CellElementFlag.All);
 
@@ -110,12 +116,13 @@ namespace AccountantTool.ViewModel
 
             foreach (var filteredAccountantRecords in collection)
             {
-                AddRecord(rowIndex, filteredAccountantRecords);
-                rowIndex++;
+                await Task.Run(() =>
+                {
+                    AddRecord(rowIndex, filteredAccountantRecords);
+                    rowIndex++;
+                });
             }
         }
-
-        #endregion Properties
 
         #region Commands
         public ICommand ChangeLanguageCommand { get; }
@@ -300,13 +307,16 @@ namespace AccountantTool.ViewModel
             if (exportFileDialog.ShowDialog() != true)
                 return;
 
+            if (!FilteredAccountantRecords.Any())
+                return;
+
             var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("Inserting Data");
 
             var row = 1;
             const int column = 1;
 
-            foreach (var record in AccountantRecords)
+            foreach (var record in FilteredAccountantRecords)
             {
                 // Name of company
                 worksheet.Cell(row, column).Value = "Название компании";
@@ -440,9 +450,9 @@ namespace AccountantTool.ViewModel
                         {
                             worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
                             worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
-                        } 
+                        }
                     }
-                    
+
                     row += products.RowCount();
                 }
 
