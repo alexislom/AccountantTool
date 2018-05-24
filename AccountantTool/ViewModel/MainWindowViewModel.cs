@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
@@ -352,7 +353,7 @@ namespace AccountantTool.ViewModel
 
                 worksheet.Cell(row, column).Value = "Сайт:";
                 worksheet.Cell(row, column + 1).Value = record.Requisites.Site;
-                worksheet.Cell(row, column + 1).Hyperlink = 
+                worksheet.Cell(row, column + 1).Hyperlink =
                     new XLHyperlink(record.Requisites.Site.StartsWith("http:") ? record.Requisites.Site : "http://" + record.Requisites.Site);
 
                 row++;

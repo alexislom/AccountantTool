@@ -67,7 +67,22 @@ namespace AccountantTool.Controls
                 IsDirty = true;
             };
 
+            attachedFilesListView.MouseDoubleClick += AttachedFilesListView_MouseDoubleClick;
+
             IsDirty = false;
+        }
+
+        private void AttachedFilesListView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (attachedFilesListView.FocusedItem is null)
+                return;
+
+            var fullPathToFile = attachedFilesListView.FocusedItem.SubItems[1].Text;
+
+            var startInfo = new ProcessStartInfo { FileName = fullPathToFile };
+
+            var process = new Process { StartInfo = startInfo };
+            process.Start();
         }
 
         private void AddFileBtn_Click(object sender, EventArgs e)
