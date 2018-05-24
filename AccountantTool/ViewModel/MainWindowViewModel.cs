@@ -390,6 +390,15 @@ namespace AccountantTool.ViewModel
                 {
                     var contactPersons = worksheet.Cell(row, column).InsertData(record.ContactPersons.AsEnumerable());
 
+                    for (var rowIndex = 0; rowIndex < contactPersons.RowCount(); rowIndex++)
+                    {
+                        for (var columnIndex = 0; columnIndex < 7; columnIndex++)
+                        {
+                            worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                            worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                        }
+                    }
+
                     row += contactPersons.RowCount();
                 }
 
@@ -402,6 +411,15 @@ namespace AccountantTool.ViewModel
                 if (record.License.Any())
                 {
                     var license = worksheet.Cell(row, column).InsertData(record.License.AsEnumerable());
+
+                    for (var rowIndex = 0; rowIndex < license.RowCount(); rowIndex++)
+                    {
+                        for (var columnIndex = 0; columnIndex < 7; columnIndex++)
+                        {
+                            worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                            worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                        }
+                    }
 
                     row += license.RowCount();
                 }
@@ -416,6 +434,15 @@ namespace AccountantTool.ViewModel
                 {
                     var products = worksheet.Cell(row, column).InsertData(record.Products.AsEnumerable());
 
+                    for (var rowIndex = 0; rowIndex < products.RowCount(); rowIndex++)
+                    {
+                        for (var columnIndex = 0; columnIndex < 7; columnIndex++)
+                        {
+                            worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                            worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                        } 
+                    }
+                    
                     row += products.RowCount();
                 }
 
