@@ -97,17 +97,8 @@
                 <!--<TextBox Height="20" Width="200" Margin="5,0" VerticalContentAlignment="Center"
                     controls:TextBoxHelper.Watermark="Search text box" Text="{Binding SearchString, UpdateSourceTrigger=Explicit}"
                     common:InputBindingsManager.UpdatePropertySourceWhenEnterPressed="TextBox.Text"/>-->
-                <!--mah:TextBoxHelper.Watermark="{Binding RandomWatermark, StringFormat={}Например: {0}, TargetNullValue=Загрузка..., Mode=TwoWay}"
-                    IsEnabled="{Binding Path=IsLoadedData}"/>-->
             </StackPanel>
         </DockPanel>
-
-        <!--<StackPanel Grid.Row="1">
-            <TextBlock Height="Auto" Margin="0,-1,0,0" VerticalAlignment="Center" Text="{DynamicResource AtSearchTitle}"/>
-            <TextBox Height="20" Width="200" Margin="5,0" VerticalContentAlignment="Center"
-                     controls:TextBoxHelper.Watermark="Search text box" Text="{Binding SearchString1, UpdateSourceTrigger=Explicit}"
-                     common:InputBindingsManager.UpdatePropertySourceWhenEnterPressed="TextBox.Text"/>
-        </StackPanel>-->
 
         <!--Wrapping ReoGridControl like WinForms control using WindowsFormsHost
             Unfortunately, it's necessasry only for customization dropdown list view cells

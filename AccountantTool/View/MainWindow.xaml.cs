@@ -38,7 +38,6 @@ namespace AccountantTool.View
             ContentRendered += MainWindow_ContentRendered;
 
             // SearchTextBox settings----------------------------------------------------
-
             // Supply the control with the list of sections
             var sections = new List<string> { "All", "Companies", "Requisites", "Contact persons", "License", "Products", "Contracts", "Additional info" };
             SearchTextBox.SectionsList = sections;
