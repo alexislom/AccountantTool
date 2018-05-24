@@ -1,45 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Threading;
 using AccountantTool.Common;
 using AccountantTool.Helpers;
-using AccountantTool.Helpers.Search;
 using AccountantTool.Model;
 using AccountantTool.ReoGrid.CustomDropDownCell;
 using AccountantTool.ReoGrid.DataFormatter;
 using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Drawing;
 using Microsoft.Win32;
-using Newtonsoft.Json.Linq;
 using unvell.ReoGrid;
+using unvell.ReoGrid.Data;
 using unvell.ReoGrid.DataFormat;
 using unvell.ReoGrid.IO;
+using UIControls;
 
 namespace AccountantTool.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase, IAccountantRecordSearch
+    public class MainWindowViewModel : ViewModelBase //, IAccountantRecordSearch
     {
         #region Fields
         private readonly object _accountantRecordsLock = new object();
         private string _searchString;
+        private string _searchString1;
         #endregion Fields
 
         #region Properties
         public ObservableCollection<AccountantRecord> AccountantRecords { get; set; }
         public Worksheet Worksheet { get; }
         public bool IsEnglishLanguage => App.SelectedLanguage.Equals(App.Languages[0]);
-        public ICollectionView<AccountantRecord> FilteredAccountantRecords { get; }
+        //public ICollectionView<AccountantRecord> FilteredAccountantRecords { get; }
+
+        public Worksheet _initialWorksheet;
+
+
+        private List<AccountantRecord> _filteredRecords;
+
+        public List<AccountantRecord> FilteredRecords
+        {
+            get => _filteredRecords ?? (_filteredRecords = AccountantRecords.ToList());
+            set => _filteredRecords = value;
+        }
+
+        public string SearchString1
+        {
+            get => _searchString1;
+            set
+            {
+                _searchString1 = value;
+                OnPropertyChanged();
+
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    RefreshFilteredRecords(FilteredRecords);
+                }
+                else
+                {
+                    var result = FilteredRecords.Where(t => FilterBy(t, value, "Company"));
+                    if (result.Any())
+                    {
+                        RefreshFilteredRecords(result);
+                    }
+                }
+            }
+        }
         public string SearchString
         {
             get => _searchString;
@@ -50,27 +80,29 @@ namespace AccountantTool.ViewModel
 
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    FilteredAccountantRecords.Filter = null;
-
+                    FilteredRecords = AccountantRecords.ToList();
                     RefreshFilteredRecords(AccountantRecords);
                 }
                 else
                 {
-                    Task.Run(() =>
+                    var result = AccountantRecords.Where(t => Filter(t, value));
+                    if (result.Any())
                     {
-                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            FilteredAccountantRecords.Filter = obj => Filter(obj, value);
-                        }), DispatcherPriority.Background);
-                    });
-                    if (!FilteredAccountantRecords.IsEmpty)
-                    {
-                        RefreshFilteredRecords(FilteredAccountantRecords);
+                        FilteredRecords = result.ToList();
+                        RefreshFilteredRecords(result);
                     }
                 }
             }
         }
         #endregion Properties
+        public void OnSearch(SearchEventArgs searchArgs)
+        {
+            if (!searchArgs.Sections.Any())
+            {
+                searchArgs.Sections = new List<string> { "All" };
+            }
+            //TODO: add column filter logic
+        }
 
         #region Filter methods
 
@@ -110,6 +142,10 @@ namespace AccountantTool.ViewModel
 
         private async Task RefreshFilteredRecords(IEnumerable<AccountantRecord> collection)
         {
+            if (_initialWorksheet == null)
+            {
+                _initialWorksheet = Worksheet.Clone();
+            }
             Worksheet.ClearRangeContent(RangePosition.EntireRange, CellElementFlag.All);
 
             var rowIndex = 0;
@@ -142,7 +178,8 @@ namespace AccountantTool.ViewModel
             AccountantRecords = new ObservableCollection<AccountantRecord>();
 
             BindingOperations.EnableCollectionSynchronization(AccountantRecords, _accountantRecordsLock);
-            FilteredAccountantRecords = new CollectionViewGeneric<AccountantRecord>(CollectionViewSource.GetDefaultView(AccountantRecords));
+            //FilteredAccountantRecords = new CollectionViewGeneric<AccountantRecord>(CollectionViewSource.GetDefaultView(AccountantRecords));
+
 
             ChangeLanguageCommand = new RelayCommand(ChangeLanguage);
             LoadDataCommand = new AsyncDelegateCommand(OnLoadData);
@@ -307,8 +344,10 @@ namespace AccountantTool.ViewModel
             if (exportFileDialog.ShowDialog() != true)
                 return;
 
-            if (!FilteredAccountantRecords.Any())
-                return;
+            if (FilteredRecords != null && !FilteredRecords.Any())
+            {
+                FilteredRecords = AccountantRecords.ToList();
+            };
 
             var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("Inserting Data");
@@ -316,7 +355,7 @@ namespace AccountantTool.ViewModel
             var row = 1;
             const int column = 1;
 
-            foreach (var record in FilteredAccountantRecords)
+            foreach (var record in FilteredRecords)
             {
                 // Name of company
                 worksheet.Cell(row, column).Value = "Название компании";
@@ -549,6 +588,8 @@ namespace AccountantTool.ViewModel
             SetWorksheetSettings();
 
             InitializeHeaders();
+
+            var filter = Worksheet.CreateColumnFilter(Constants.CompanyColumnIndex, Constants.CompanyColumnIndex);
 
             DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
             Worksheet.SetColumnsWidth(Constants.CompanyColumnIndex, Constants.CountOfColumns, Constants.ColumnsWidth);

@@ -13,6 +13,7 @@
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:common="clr-namespace:AccountantTool.Common"
+    xmlns:uiControls="clr-namespace:UIControls;assembly=SearchTextBox"
 
     Title="{DynamicResource AtMainWindowTitle}"
     TitleAlignment="Center"
@@ -69,7 +70,8 @@
     </controls:MetroWindow.LeftWindowCommands>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="40" />
+            <!--<RowDefinition Height="30" />-->
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -90,20 +92,28 @@
                           Icon="{iconPacks:Material Export}"/>
             </Menu>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" TextBlock.FontSize="14">
-                <TextBlock Height="Auto" Margin="0,-1,0,0" VerticalAlignment="Center" Text="{DynamicResource AtSearchTitle}"/>
-                <TextBox Height="20" Width="200" Margin="5,0" VerticalContentAlignment="Center"
+                <TextBlock Height="Auto" Margin="2, 2, 10, 2" VerticalAlignment="Center" Text="{DynamicResource AtSearchTitle}"/>
+                <uiControls:SearchTextBox Height="30" Width="250" Margin="5" VerticalAlignment="Center" Name="SearchTextBox" Background="AliceBlue"/>
+                <!--<TextBox Height="20" Width="200" Margin="5,0" VerticalContentAlignment="Center"
                     controls:TextBoxHelper.Watermark="Search text box" Text="{Binding SearchString, UpdateSourceTrigger=Explicit}"
-                    common:InputBindingsManager.UpdatePropertySourceWhenEnterPressed="TextBox.Text"/>
+                    common:InputBindingsManager.UpdatePropertySourceWhenEnterPressed="TextBox.Text"/>-->
                 <!--mah:TextBoxHelper.Watermark="{Binding RandomWatermark, StringFormat={}Например: {0}, TargetNullValue=Загрузка..., Mode=TwoWay}"
                     IsEnabled="{Binding Path=IsLoadedData}"/>-->
             </StackPanel>
         </DockPanel>
 
+        <!--<StackPanel Grid.Row="1">
+            <TextBlock Height="Auto" Margin="0,-1,0,0" VerticalAlignment="Center" Text="{DynamicResource AtSearchTitle}"/>
+            <TextBox Height="20" Width="200" Margin="5,0" VerticalContentAlignment="Center"
+                     controls:TextBoxHelper.Watermark="Search text box" Text="{Binding SearchString1, UpdateSourceTrigger=Explicit}"
+                     common:InputBindingsManager.UpdatePropertySourceWhenEnterPressed="TextBox.Text"/>
+        </StackPanel>-->
+
         <!--Wrapping ReoGridControl like WinForms control using WindowsFormsHost
             Unfortunately, it's necessasry only for customization dropdown list view cells
             https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/walkthrough-arranging-windows-forms-controls-in-wpf
             https://reogrid.net/document/installation/-->
-        <WindowsFormsHost Grid.Row="1" x:Name="WindowsFormsHost"/>
+        <WindowsFormsHost Grid.Row="2" x:Name="WindowsFormsHost"/>
 
         <!--<rg:ReoGridControl x:Name="MainGrid" Grid.Row="1"/>-->
     </Grid>

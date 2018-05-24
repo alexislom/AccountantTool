@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Forms;
 using AccountantTool.ViewModel;
 using MahApps.Metro.Controls;
 using unvell.ReoGrid;
+using UIControls;
 using MessageBox = System.Windows.MessageBox;
 
 namespace AccountantTool.View
@@ -34,6 +36,26 @@ namespace AccountantTool.View
             ViewModel = (MainWindowViewModel)DataContext;
 
             ContentRendered += MainWindow_ContentRendered;
+
+            // SearchTextBox settings----------------------------------------------------
+
+            // Supply the control with the list of sections
+            var sections = new List<string> { "All", "Companies", "Requisites", "Contact persons", "License", "Products", "Contracts", "Additional info" };
+            SearchTextBox.SectionsList = sections;
+
+            // Choose a style for displaying sections
+            SearchTextBox.SectionsStyle = SearchTextBox.SectionsStyles.CheckBoxStyle;
+
+            // Add a routine handling the event OnSearch
+            SearchTextBox.OnSearch += OnSearch;
+            // --------------------------------------------------------------------------
+        }
+
+        private void OnSearch(object sender, RoutedEventArgs e)
+        {
+            var searchArgs = e as SearchEventArgs;
+
+            ViewModel.OnSearch(searchArgs);
         }
 
         private async void MainWindow_ContentRendered(object sender, EventArgs e)
