@@ -21,62 +21,72 @@ using UIControls;
 
 namespace AccountantTool.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase //, IAccountantRecordSearch
+    public class MainWindowViewModel : ViewModelBase
     {
         #region Fields
-        private readonly object _accountantRecordsLock = new object();
-        private string _searchString;
-        private string _searchString1;
+        private List<AccountantRecord> _filteredRecords;
+        private readonly Dictionary<string, string> _columnNamesMap = new Dictionary<string, string>
+        {
+            { "All", string.Empty},
+            { "Companies", "Company"},
+            {"Requisites", "Requisites"},
+            {"Contact persons", "ContactPersons"},
+            {"License", "License"},
+            {"Products", "Products"},
+            {"Contracts", "Contract"},
+            { "Additional info", "AdditionalInfo"}
+        };
         #endregion Fields
 
         #region Properties
         public ObservableCollection<AccountantRecord> AccountantRecords { get; set; }
         public Worksheet Worksheet { get; }
         public bool IsEnglishLanguage => App.SelectedLanguage.Equals(App.Languages[0]);
-        //public ICollectionView<AccountantRecord> FilteredAccountantRecords { get; }
-
-        private List<AccountantRecord> _filteredRecords;
-
         public List<AccountantRecord> FilteredRecords
         {
             get => _filteredRecords ?? (_filteredRecords = AccountantRecords.ToList());
             set => _filteredRecords = value;
         }
-
-        //public string SearchString
-        //{
-        //    get => _searchString;
-        //    set
-        //    {
-        //        _searchString = value;
-        //        OnPropertyChanged();
-
-        //        if (string.IsNullOrWhiteSpace(value))
-        //        {
-        //            FilteredRecords = AccountantRecords.ToList();
-        //            RefreshFilteredRecords(AccountantRecords);
-        //        }
-        //        else
-        //        {
-        //            var result = AccountantRecords.Where(t => Filter(t, value));
-        //            if (result.Any())
-        //            {
-        //                FilteredRecords = result.ToList();
-        //                RefreshFilteredRecords(result);
-        //            }
-        //        }
-        //    }
-        //}
         #endregion Properties
+
+        #region Commands
+        public ICommand ChangeLanguageCommand { get; }
+        public ICommand LoadDataCommand { get; }
+        public ICommand AddNewRecordCommand { get; }
+        public ICommand DeleteRecordCommand { get; }
+        public ICommand SaveDocumentCommand { get; }
+        public ICommand ExportToExcelCommand { get; }
+        #endregion Commands
+
+        #region Construction
+
+        public MainWindowViewModel(Worksheet mainGrid)
+        {
+            Worksheet = mainGrid;
+
+            AccountantRecords = new ObservableCollection<AccountantRecord>();
+
+            ChangeLanguageCommand = new RelayCommand(ChangeLanguage);
+            LoadDataCommand = new AsyncDelegateCommand(OnLoadData);
+            AddNewRecordCommand = new AsyncDelegateCommand(OnAddNewRecord);
+            DeleteRecordCommand = new AsyncDelegateCommand(OnDeleteRecord, CanExecuteOperation);
+            SaveDocumentCommand = new RelayCommand(OnSaveDocument, CanExecuteOperation);
+            ExportToExcelCommand = new RelayCommand(OnExportToExcel, CanExecuteOperation);
+
+            InitializeWorksheet();
+        }
+
+        #endregion Construction
+
         public void OnSearch(SearchEventArgs searchArgs)
         {
             if (!searchArgs.Sections.Any())
             {
                 searchArgs.Sections = new List<string> { "All" };
             }
-            //TODO: add column filter logic
+
             // global search
-            if (searchArgs.Sections.Count == 1 || searchArgs.Sections.Contains("All"))
+            if (searchArgs.Sections.Contains("All"))
             {
                 if (string.IsNullOrWhiteSpace(searchArgs.Keyword))
                 {
@@ -97,16 +107,27 @@ namespace AccountantTool.ViewModel
             {
                 if (string.IsNullOrWhiteSpace(searchArgs.Keyword))
                 {
-                    RefreshFilteredRecords(FilteredRecords);
+                    RefreshFilteredRecords(AccountantRecords);
                 }
                 else
                 {
-                    //TODO: Refactor this part (add logic for all properties)
-                    //searchArgs.Sections
-                    var result = FilteredRecords.Where(t => FilterBy(t, searchArgs.Keyword, "Company"));
-                    if (result.Any())
+                    var filteredProperties = searchArgs.Sections.Select(t => _columnNamesMap[t]).ToList();
+
+                    var results = new List<AccountantRecord>();
+
+                    foreach (var filter in filteredProperties)
                     {
-                        RefreshFilteredRecords(result);
+                        if (!string.IsNullOrEmpty(filter))
+                        {
+                            var result = FilteredRecords.Where(t => FilterBy(t, searchArgs.Keyword, filter));
+                            results.AddRange(result);
+                        }
+                    }
+
+                    if (results.Any())
+                    {
+                        FilteredRecords = results.Distinct().ToList();
+                        RefreshFilteredRecords(FilteredRecords);
                     }
                 }
             }
@@ -142,8 +163,55 @@ namespace AccountantTool.ViewModel
             if (filteredProperty == null)
                 return false;
 
-            var recordString = filteredProperty.GetValue(obj, null).ToString().ToLower();
-            return recordString.Contains(value.ToLower());
+            switch (propertyName)
+            {
+                #region delailed search
+                //case "Company":
+                //    var companyList = filteredProperty.GetValue(obj, null);
+                //    var companyDetails = (Company)companyList;
+                //    return companyDetails.LongName.ToLowerInvariant().Contains(value.ToLowerInvariant()) ||
+                //           companyDetails.ShortName.ToLowerInvariant().Contains(value.ToLowerInvariant());
+                //case "Requisites":
+
+                //    break;
+                #endregion delailed search
+                case "ContactPersons":
+                    var contactPersonsList = filteredProperty.GetValue(obj, null);
+                    var contactPersonsDetails = (List<ContactPerson>)contactPersonsList;
+                    if (contactPersonsDetails.Count > 0)
+                    {
+                        return contactPersonsDetails.Any(x => x.ToString().ToLowerInvariant().Contains(value.ToLowerInvariant()));
+                    }
+                    break;
+                case "License":
+                    var licenseList = filteredProperty.GetValue(obj, null);
+                    var licenseDetails = (List<License>)licenseList;
+                    if (licenseDetails.Count > 0)
+                    {
+                        return licenseDetails.Any(x => x.ToString().ToLowerInvariant().Contains(value.ToLowerInvariant()));
+                    }
+                    break;
+                case "Products":
+                    var productsList = filteredProperty.GetValue(obj, null);
+                    var productsDetails = (List<Product>)productsList;
+                    if (productsDetails.Count > 0)
+                    {
+                        return productsDetails.Any(x => x.ToString().ToLowerInvariant().Contains(value.ToLowerInvariant()));
+                    }
+                    break;
+                #region detailed search
+                //case "Contract":
+
+                //    break;
+                //case "AdditionalInfo":
+
+                //    break;
+                #endregion detailed search
+                default:
+                    var recordString = filteredProperty.GetValue(obj, null).ToString().ToLowerInvariant();
+                    return recordString.Contains(value.ToLowerInvariant());
+            }
+            return false;
         }
 
         #endregion Filter methods
@@ -163,38 +231,6 @@ namespace AccountantTool.ViewModel
                 });
             }
         }
-
-        #region Commands
-        public ICommand ChangeLanguageCommand { get; }
-        public ICommand LoadDataCommand { get; }
-        public ICommand AddNewRecordCommand { get; }
-        public ICommand DeleteRecordCommand { get; }
-        public ICommand SaveDocumentCommand { get; }
-        public ICommand ExportToExcelCommand { get; }
-        #endregion Commands
-
-        #region Construction
-
-        public MainWindowViewModel(Worksheet mainGrid)
-        {
-            Worksheet = mainGrid;
-
-            AccountantRecords = new ObservableCollection<AccountantRecord>();
-
-            //BindingOperations.EnableCollectionSynchronization(AccountantRecords, _accountantRecordsLock);
-            //FilteredAccountantRecords = new CollectionViewGeneric<AccountantRecord>(CollectionViewSource.GetDefaultView(AccountantRecords));
-
-            ChangeLanguageCommand = new RelayCommand(ChangeLanguage);
-            LoadDataCommand = new AsyncDelegateCommand(OnLoadData);
-            AddNewRecordCommand = new AsyncDelegateCommand(OnAddNewRecord);
-            DeleteRecordCommand = new AsyncDelegateCommand(OnDeleteRecord, CanExecuteOperation);
-            SaveDocumentCommand = new RelayCommand(OnSaveDocument, CanExecuteOperation);
-            ExportToExcelCommand = new RelayCommand(OnExportToExcel, CanExecuteOperation);
-
-            InitializeWorksheet();
-        }
-
-        #endregion Construction
 
         #region Commands implementation
 
@@ -383,14 +419,14 @@ namespace AccountantTool.ViewModel
 
                 var addressList = new List<string>
                     {
-                        record.Requisites.Address.Index,
-                        record.Requisites.Address.Country,
-                        record.Requisites.Address.Region,
-                        record.Requisites.Address.District,
-                        record.Requisites.Address.City,
-                        record.Requisites.Address.Street,
-                        record.Requisites.Address.House,
-                        record.Requisites.Address.Flat
+                        record.Requisites?.Address?.Index,
+                        record.Requisites?.Address?.Country,
+                        record.Requisites?.Address?.Region,
+                        record.Requisites?.Address?.District,
+                        record.Requisites?.Address?.City,
+                        record.Requisites?.Address?.Street,
+                        record.Requisites?.Address?.House,
+                        record.Requisites?.Address?.Flat
                     };
                 worksheet.Cell(row, column).Value = string.Join(", ", addressList.Where(x => x != string.Empty));
                 worksheet.Cell(row, column).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
@@ -591,8 +627,6 @@ namespace AccountantTool.ViewModel
             SetWorksheetSettings();
 
             InitializeHeaders();
-
-            var filter = Worksheet.CreateColumnFilter(Constants.CompanyColumnIndex, Constants.CompanyColumnIndex);
 
             DataFormatterManager.Instance.DataFormatters.Add(CellDataFormatFlag.Custom, new AccountantToolDataFormatter());
             Worksheet.SetColumnsWidth(Constants.CompanyColumnIndex, Constants.CountOfColumns, Constants.ColumnsWidth);

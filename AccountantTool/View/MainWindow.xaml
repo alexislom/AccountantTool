@@ -71,7 +71,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <!--<RowDefinition Height="30" />-->
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -104,7 +103,7 @@
             Unfortunately, it's necessasry only for customization dropdown list view cells
             https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/walkthrough-arranging-windows-forms-controls-in-wpf
             https://reogrid.net/document/installation/-->
-        <WindowsFormsHost Grid.Row="2" x:Name="WindowsFormsHost"/>
+        <WindowsFormsHost Grid.Row="1" x:Name="WindowsFormsHost"/>
 
         <!--<rg:ReoGridControl x:Name="MainGrid" Grid.Row="1"/>-->
     </Grid>
