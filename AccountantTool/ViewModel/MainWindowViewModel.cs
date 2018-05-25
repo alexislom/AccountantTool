@@ -386,7 +386,7 @@ namespace AccountantTool.ViewModel
             if (FilteredRecords != null && !FilteredRecords.Any())
             {
                 FilteredRecords = AccountantRecords.ToList();
-            };
+            }
 
             var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("Inserting Data");
@@ -441,8 +441,11 @@ namespace AccountantTool.ViewModel
 
                 worksheet.Cell(row, column).Value = "Сайт:";
                 worksheet.Cell(row, column + 1).Value = record.Requisites.Site;
-                worksheet.Cell(row, column + 1).Hyperlink =
-                    new XLHyperlink(record.Requisites.Site.StartsWith("http:") ? record.Requisites.Site : "http://" + record.Requisites.Site);
+                if (record.Requisites.Site != null)
+                {
+                    worksheet.Cell(row, column + 1).Hyperlink =
+                        new XLHyperlink(record.Requisites.Site.StartsWith("http:") ? record.Requisites.Site : "http://" + record.Requisites.Site);
+                }
 
                 row++;
 
