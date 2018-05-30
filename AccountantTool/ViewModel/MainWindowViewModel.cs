@@ -57,6 +57,7 @@ namespace AccountantTool.ViewModel
         public ICommand DeleteRecordCommand { get; }
         public ICommand SaveDocumentCommand { get; }
         public ICommand ExportToExcelCommand { get; }
+        public ICommand ExportToPdfCommand { get; }
         #endregion Commands
 
         #region Construction
@@ -73,6 +74,7 @@ namespace AccountantTool.ViewModel
             DeleteRecordCommand = new AsyncDelegateCommand(OnDeleteRecord, CanExecuteOperation);
             SaveDocumentCommand = new RelayCommand(OnSaveDocument, CanExecuteOperation);
             ExportToExcelCommand = new RelayCommand(OnExportToExcel, CanExecuteOperation);
+            ExportToPdfCommand = new RelayCommand(OnExportToPdf, CanExecuteOperation);
 
             InitializeWorksheet();
         }
@@ -374,6 +376,11 @@ namespace AccountantTool.ViewModel
             }
         }
 
+        private void OnExportToPdf()
+        {
+
+        }
+
         private void OnExportToExcel()
         {
             var exportFileDialog = new SaveFileDialog
@@ -589,7 +596,8 @@ namespace AccountantTool.ViewModel
                 workbook.NamedRanges.NamedRange("Titles").Ranges.Style = titlesStyle;
 
                 //worksheet.Columns().AdjustToContents();
-                worksheet.Columns().Width = 15.0;
+                //worksheet.Columns().Width = 15.0;
+                worksheet.Columns().AdjustToContents(5, 15);
                 worksheet.Style.Alignment.SetWrapText(true);
 
                 workbook.SaveAs($"{exportFileDialog.FileName}");
