@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -301,6 +302,7 @@ namespace AccountantTool.ViewModel
         public async Task RestoreLastFile(string defaultLastFileName)
         {
             await LoadRecords(defaultLastFileName);
+            FilteredRecords = AccountantRecords.ToList();
         }
 
         private async Task OnLoadData(object param)
@@ -314,6 +316,7 @@ namespace AccountantTool.ViewModel
             if (openFileDialog.ShowDialog() == true)
             {
                 await LoadRecords(openFileDialog.FileName);
+                FilteredRecords = AccountantRecords.ToList();
                 SaveDefaultFileNameSetting(openFileDialog.FileName);
             }
         }
@@ -388,36 +391,38 @@ namespace AccountantTool.ViewModel
                 FilteredRecords = AccountantRecords.ToList();
             }
 
-            var workbook = new XLWorkbook();
-            var worksheet = workbook.Worksheets.Add("Inserting Data");
-
-            var row = 1;
-            const int column = 1;
-
-            foreach (var record in FilteredRecords)
+            using (var workbook = new XLWorkbook())
             {
-                // Name of company
-                worksheet.Cell(row, column).Value = "Название компании";
-                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+                var worksheet = workbook.Worksheets.Add("Inserting Data");
 
-                row++;
+                var row = 1;
+                const int column = 1;
 
-                worksheet.Cell(row, column).Value = record.Company.LongName;
-                worksheet.Range(row, column, row, column + 6).Merge().Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                foreach (var record in FilteredRecords)
+                {
+                    // Name of company
+                    worksheet.Cell(row, column).Value = "Название компании";
+                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
 
-                row++;
+                    row++;
 
-                // Requisites
-                worksheet.Cell(row, column).Value = "Реквизиты";
-                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+                    worksheet.Cell(row, column).Value = record.Company.LongName;
+                    worksheet.Range(row, column, row, column + 6).Merge().Style.Alignment
+                        .SetHorizontal(XLAlignmentHorizontalValues.Center);
 
-                row++;
+                    row++;
 
-                worksheet.Cell(row, column).Value = "Адрес:";
+                    // Requisites
+                    worksheet.Cell(row, column).Value = "Реквизиты";
+                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
 
-                row++;
+                    row++;
 
-                var addressList = new List<string>
+                    worksheet.Cell(row, column).Value = "Адрес:";
+
+                    row++;
+
+                    var addressList = new List<string>
                     {
                         record.Requisites?.Address?.Index,
                         record.Requisites?.Address?.Country,
@@ -428,156 +433,173 @@ namespace AccountantTool.ViewModel
                         record.Requisites?.Address?.House,
                         record.Requisites?.Address?.Flat
                     };
-                worksheet.Cell(row, column).Value = string.Join(", ", addressList.Where(x => x != string.Empty));
-                worksheet.Cell(row, column).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("SubTitles");
+                    worksheet.Cell(row, column).Value = string.Join(", ", addressList.Where(x => x != string.Empty));
+                    worksheet.Cell(row, column).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("SubTitles");
 
-                row++;
+                    row++;
 
-                worksheet.Cell(row, column).Value = "Адрес электронной почты:";
-                worksheet.Cell(row, column + 1).Value = record.Requisites.Email;
+                    worksheet.Cell(row, column).Value = "Адрес электронной почты:";
+                    worksheet.Cell(row, column + 1).Value = record.Requisites?.Email;
 
-                row++;
+                    row++;
 
-                worksheet.Cell(row, column).Value = "Сайт:";
-                worksheet.Cell(row, column + 1).Value = record.Requisites.Site;
-                if (record.Requisites.Site != null)
-                {
-                    worksheet.Cell(row, column + 1).Hyperlink =
-                        new XLHyperlink(record.Requisites.Site.StartsWith("http:") ? record.Requisites.Site : "http://" + record.Requisites.Site);
-                }
-
-                row++;
-
-                worksheet.Cell(row, column).Value = "Контактные телефоны:";
-                worksheet.Range(row, column, row, column + 6).Merge().Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-
-                row++;
-
-                var contactPhonesRange = worksheet.Cell(row, column).InsertData(record.Requisites.DepartmentPhones.AsEnumerable());
-                if (contactPhonesRange != null)
-                {
-                    row += contactPhonesRange.RowCount();
-                }
-
-                worksheet.Cell(row, column).Value = "Иные реквизиты:";
-                worksheet.Range(row, column, row, column + 6).Merge().Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-
-                row++;
-
-                var contactOtherRequisites = worksheet.Cell(row, column).InsertData(record.Requisites.OtherRequisites.AsEnumerable());
-
-                if (contactOtherRequisites != null)
-                {
-                    row += contactOtherRequisites.RowCount();
-                }
-
-                // Contact persons
-                worksheet.Cell(row, column).Value = "Контактные лица";
-                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
-
-                row++;
-                if (record.ContactPersons.Any())
-                {
-                    var contactPersons = worksheet.Cell(row, column).InsertData(record.ContactPersons.AsEnumerable());
-
-                    for (var rowIndex = 0; rowIndex < contactPersons.RowCount(); rowIndex++)
+                    worksheet.Cell(row, column).Value = "Сайт:";
+                    worksheet.Cell(row, column + 1).Value = record.Requisites?.Site;
+                    if (record.Requisites.Site != null)
                     {
-                        for (var columnIndex = 0; columnIndex < 7; columnIndex++)
-                        {
-                            worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
-                            worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
-                        }
+                        worksheet.Cell(row, column + 1).Hyperlink =
+                            new XLHyperlink(record.Requisites.Site.StartsWith("http:")
+                                ? record.Requisites.Site
+                                : "http://" + record.Requisites.Site);
                     }
 
-                    row += contactPersons.RowCount();
-                }
+                    row++;
 
-                // License
-                worksheet.Cell(row, column).Value = "Наличие лицензии и сроки";
-                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+                    worksheet.Cell(row, column).Value = "Контактные телефоны:";
+                    worksheet.Range(row, column, row, column + 6).Merge().Style.Alignment
+                        .SetHorizontal(XLAlignmentHorizontalValues.Center);
 
-                row++;
+                    row++;
 
-                if (record.License.Any())
-                {
-                    var license = worksheet.Cell(row, column).InsertData(record.License.AsEnumerable());
-
-                    for (var rowIndex = 0; rowIndex < license.RowCount(); rowIndex++)
+                    var contactPhonesRange = worksheet.Cell(row, column)
+                        .InsertData(record.Requisites.DepartmentPhones.AsEnumerable());
+                    if (contactPhonesRange != null)
                     {
-                        for (var columnIndex = 0; columnIndex < 7; columnIndex++)
-                        {
-                            worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
-                            worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
-                        }
+                        row += contactPhonesRange.RowCount();
                     }
 
-                    row += license.RowCount();
-                }
+                    worksheet.Cell(row, column).Value = "Иные реквизиты:";
+                    worksheet.Range(row, column, row, column + 6).Merge().Style.Alignment
+                        .SetHorizontal(XLAlignmentHorizontalValues.Center);
 
-                // Products
-                worksheet.Cell(row, column).Value = "Покупаемые изделия и стоимость";
-                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+                    row++;
 
-                row++;
+                    var contactOtherRequisites = worksheet.Cell(row, column)
+                        .InsertData(record.Requisites.OtherRequisites.AsEnumerable());
 
-                if (record.Products.Any())
-                {
-                    var products = worksheet.Cell(row, column).InsertData(record.Products.AsEnumerable());
-
-                    for (var rowIndex = 0; rowIndex < products.RowCount(); rowIndex++)
+                    if (contactOtherRequisites != null)
                     {
-                        for (var columnIndex = 0; columnIndex < 7; columnIndex++)
-                        {
-                            worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
-                            worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
-                        }
+                        row += contactOtherRequisites.RowCount();
                     }
 
-                    row += products.RowCount();
+                    // Contact persons
+                    worksheet.Cell(row, column).Value = "Контактные лица";
+                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+
+                    row++;
+                    if (record.ContactPersons.Any())
+                    {
+                        var contactPersons =
+                            worksheet.Cell(row, column).InsertData(record.ContactPersons.AsEnumerable());
+
+                        for (var rowIndex = 0; rowIndex < contactPersons.RowCount(); rowIndex++)
+                        {
+                            for (var columnIndex = 0; columnIndex < 7; columnIndex++)
+                            {
+                                worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
+                                    .SetVertical(XLAlignmentVerticalValues.Top);
+                                worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
+                                    .SetHorizontal(XLAlignmentHorizontalValues.Left);
+                            }
+                        }
+
+                        row += contactPersons.RowCount();
+                    }
+
+                    // License
+                    worksheet.Cell(row, column).Value = "Наличие лицензии и сроки";
+                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+
+                    row++;
+
+                    if (record.License.Any())
+                    {
+                        var license = worksheet.Cell(row, column).InsertData(record.License.AsEnumerable());
+
+                        for (var rowIndex = 0; rowIndex < license.RowCount(); rowIndex++)
+                        {
+                            for (var columnIndex = 0; columnIndex < 7; columnIndex++)
+                            {
+                                worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
+                                    .SetVertical(XLAlignmentVerticalValues.Top);
+                                worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
+                                    .SetHorizontal(XLAlignmentHorizontalValues.Left);
+                            }
+                        }
+
+                        row += license.RowCount();
+                    }
+
+                    // Products
+                    worksheet.Cell(row, column).Value = "Покупаемые изделия и стоимость";
+                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+
+                    row++;
+
+                    if (record.Products.Any())
+                    {
+                        var products = worksheet.Cell(row, column).InsertData(record.Products.AsEnumerable());
+
+                        for (var rowIndex = 0; rowIndex < products.RowCount(); rowIndex++)
+                        {
+                            for (var columnIndex = 0; columnIndex < 7; columnIndex++)
+                            {
+                                worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
+                                    .SetVertical(XLAlignmentVerticalValues.Top);
+                                worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
+                                    .SetHorizontal(XLAlignmentHorizontalValues.Left);
+                            }
+                        }
+
+                        row += products.RowCount();
+                    }
+
+                    // Contract
+                    worksheet.Cell(row, column).Value = "Исполнение контракта";
+                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+
+                    row++;
+
+                    IEnumerable<Contract> contract = new List<Contract> { record.Contract };
+
+                    var contractCell = worksheet.Cell(row, column).InsertData(contract);
+
+                    row += contractCell.RowCount();
+
+                    // Additional info
+                    worksheet.Cell(row, column).Value = "Дополнительная информация";
+                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+
+                    row++;
+
+                    worksheet.Cell(row, column).Value = record.AdditionalInfo.Notes;
+
+                    worksheet.Columns().AdjustToContents();
+
+                    // End of record info, setting page break and add row
+                    worksheet.PageSetup.AddHorizontalPageBreak(row);
+                    row++;
                 }
 
-                // Contract
-                worksheet.Cell(row, column).Value = "Исполнение контракта";
-                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+                var titlesStyle = workbook.Style;
+                titlesStyle.Font.Bold = true;
+                titlesStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
-                row++;
+                workbook.NamedRanges.NamedRange("Titles").Ranges.Style = titlesStyle;
 
-                IEnumerable<Contract> contract = new List<Contract> { record.Contract };
+                //worksheet.Columns().AdjustToContents();
+                worksheet.Columns().Width = 15.0;
+                worksheet.Style.Alignment.SetWrapText(true);
 
-                var contractCell = worksheet.Cell(row, column).InsertData(contract);
-
-                row += contractCell.RowCount();
-
-                // Additional info
-                worksheet.Cell(row, column).Value = "Дополнительная информация";
-                worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
-
-                row++;
-
-                worksheet.Cell(row, column).Value = record.AdditionalInfo.Notes;
-
-                worksheet.Columns().AdjustToContents();
-
-                // End of record info, setting page break and add row
-                worksheet.PageSetup.AddHorizontalPageBreak(row);
-                row++;
+                workbook.SaveAs($"{exportFileDialog.FileName}");
             }
-
-            var titlesStyle = workbook.Style;
-            titlesStyle.Font.Bold = true;
-            titlesStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-
-            workbook.NamedRanges.NamedRange("Titles").Ranges.Style = titlesStyle;
-
-            worksheet.Columns().AdjustToContents();
-
-            workbook.SaveAs($"{exportFileDialog.FileName}");
 
             MessageBox.Show($"{(IsEnglishLanguage ? "File save as:" : "Файл сохранён как:")}" + Environment.NewLine +
                             exportFileDialog.FileName, $"{(IsEnglishLanguage ? "Export to excel" : "Экспорт в эксель")}",
                             MessageBoxButton.OK, MessageBoxImage.Information);
-
+            // Only for debug
+            //Process.Start($"{exportFileDialog.FileName}");
         }
 
         #endregion Commands implementation
