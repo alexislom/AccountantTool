@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -14,11 +15,14 @@ using AccountantTool.Model;
 using AccountantTool.ReoGrid.CustomDropDownCell;
 using AccountantTool.ReoGrid.DataFormatter;
 using ClosedXML.Excel;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Microsoft.Win32;
 using unvell.ReoGrid;
 using unvell.ReoGrid.DataFormat;
 using unvell.ReoGrid.IO;
 using UIControls;
+using Cell = unvell.ReoGrid.Cell;
 
 namespace AccountantTool.ViewModel
 {
@@ -378,7 +382,31 @@ namespace AccountantTool.ViewModel
 
         private void OnExportToPdf()
         {
+            #region Pdf export
+            //var document = new Document();
+            //PdfWriter.GetInstance(document, new FileStream(Environment.CurrentDirectory + @"\Document.pdf", FileMode.Create));
+            //document.Open();
 
+            //var table = new PdfPTable(3);
+            //var cell = new PdfPCell(new Phrase("Simple table", new Font(Font.TIMES_ROMAN, 16, Font.NORMAL, Color.ORANGE)))
+            //{
+            //    BackgroundColor = Color.WHITE,
+            //    Padding = 5,
+            //    Colspan = 3,
+            //    HorizontalAlignment = Element.ALIGN_CENTER
+            //};
+            //table.AddCell(cell);
+            //table.AddCell("Col 1 Row 1");
+            //table.AddCell("Col 2 Row 1");
+            //table.AddCell("Col 3 Row 1");
+            //table.AddCell("Col 1 Row 2");
+            //table.AddCell("Col 2 Row 2");
+            //table.AddCell("Col 3 Row 2");
+
+            //document.Add(table);
+
+            //document.Close();
+            #endregion Pdf export
         }
 
         private void OnExportToExcel()
@@ -597,17 +625,17 @@ namespace AccountantTool.ViewModel
 
                 //worksheet.Columns().AdjustToContents();
                 //worksheet.Columns().Width = 15.0;
-                worksheet.Columns().AdjustToContents(5, 15);
+                worksheet.Columns().AdjustToContents(5, 20);
                 worksheet.Style.Alignment.SetWrapText(true);
 
                 workbook.SaveAs($"{exportFileDialog.FileName}");
             }
 
-            MessageBox.Show($"{(IsEnglishLanguage ? "File save as:" : "Файл сохранён как:")}" + Environment.NewLine +
-                            exportFileDialog.FileName, $"{(IsEnglishLanguage ? "Export to excel" : "Экспорт в эксель")}",
-                            MessageBoxButton.OK, MessageBoxImage.Information);
+            //MessageBox.Show($"{(IsEnglishLanguage ? "File save as:" : "Файл сохранён как:")}" + Environment.NewLine +
+            //                exportFileDialog.FileName, $"{(IsEnglishLanguage ? "Export to excel" : "Экспорт в эксель")}",
+            //                MessageBoxButton.OK, MessageBoxImage.Information);
             // Only for debug
-            //Process.Start($"{exportFileDialog.FileName}");
+            Process.Start($"{exportFileDialog.FileName}");
         }
 
         #endregion Commands implementation

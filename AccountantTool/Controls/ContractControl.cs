@@ -49,8 +49,8 @@ namespace AccountantTool.Controls
         {
             Model.NumberOfContract = textNumberOfContract?.Text;
 
-            DateTime.TryParse(maskedTextDateOfStart?.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateOfStart);
-            DateTime.TryParse(maskedTextDateOfEnd?.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateOfEnd);
+            DateTime.TryParse(maskedTextDateOfStart?.Text, CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out var dateOfStart);
+            DateTime.TryParse(maskedTextDateOfEnd?.Text, CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out var dateOfEnd);
 
             Model.DateOfStart = dateOfStart;
             Model.SidesOfContract = textSidesOfContract?.Text;

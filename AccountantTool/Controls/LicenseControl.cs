@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows.Forms;
 using AccountantTool.Controls.Interfaces;
 using License = AccountantTool.Model.License;
@@ -72,8 +73,8 @@ namespace AccountantTool.Controls
                 {
                     var subItem = item.SubItems;
 
-                    DateTime.TryParse(subItem[1]?.Text, out var dateOfIssue);
-                    DateTime.TryParse(subItem[2]?.Text, out var dateOfExpiration);
+                    DateTime.TryParse(subItem[1]?.Text, CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out var dateOfIssue);
+                    DateTime.TryParse(subItem[2]?.Text, CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out var dateOfExpiration);
 
                     Model.Add(new License
                     {
