@@ -382,6 +382,47 @@ namespace AccountantTool.ViewModel
 
         private void OnExportToPdf()
         {
+            #region Another test
+            //var workbook = new XLWorkbook();
+            //var ws = workbook.Worksheets.Add("Style Alignment");
+
+            //var co = 2;
+            //var ro = 1;
+
+            //ws.Cell(++ro, co).Value = "Horizontal = Right";
+            //ws.Cell(ro, co).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+
+            //ws.Cell(++ro, co).Value = "Indent = 2";
+            //ws.Cell(ro, co).Style.Alignment.Indent = 2;
+
+            //ws.Cell(++ro, co).Value = "JustifyLastLine = true";
+            //ws.Cell(ro, co).Style.Alignment.JustifyLastLine = true;
+
+            //ws.Cell(++ro, co).Value = "ReadingOrder = ContextDependent";
+            //ws.Cell(ro, co).Style.Alignment.ReadingOrder = XLAlignmentReadingOrderValues.ContextDependent;
+
+            //ws.Cell(++ro, co).Value = "RelativeIndent = 2";
+            //ws.Cell(ro, co).Style.Alignment.RelativeIndent = 2;
+
+            //ws.Cell(++ro, co).Value = "ShrinkToFit = true";
+            //ws.Cell(ro, co).Style.Alignment.ShrinkToFit = true;
+
+            //ws.Cell(++ro, co).Value = "TextRotation = 45";
+            //ws.Cell(ro, co).Style.Alignment.TextRotation = 45;
+
+            //ws.Cell(++ro, co).Value = "TopToBottom = true";
+            //ws.Cell(ro, co).Style.Alignment.TopToBottom = true;
+
+            //ws.Cell(++ro, co).Value = "Vertical = Center";
+            //ws.Cell(ro, co).Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+
+            //ro++;
+            //var range = ws.Range(ro, co, ro, co + 2).Merge().Style.Alignment.WrapText = true;
+            ////ws.Cell(ro, co).Style.Alignment.WrapText = true;
+            //ws.Cell(ro, co).Value = "WrapText = true okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkofofofofofofofoofof";
+
+            //workbook.SaveAs("lalalalalala.xlsx");
+            #endregion Another test
             #region Pdf export
             //var document = new Document();
             //PdfWriter.GetInstance(document, new FileStream(Environment.CurrentDirectory + @"\Document.pdf", FileMode.Create));
@@ -437,19 +478,19 @@ namespace AccountantTool.ViewModel
                 {
                     // Name of company
                     worksheet.Cell(row, column).Value = "Название компании";
-                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+                    worksheet.Range(row, column, row, column + 5).Merge().AddToNamed("Titles");
 
                     row++;
 
                     worksheet.Cell(row, column).Value = record.Company.LongName;
-                    worksheet.Range(row, column, row, column + 6).Merge().Style.Alignment
+                    worksheet.Range(row, column, row, column + 5).Merge().Style.Alignment
                         .SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                     row++;
 
                     // Requisites
                     worksheet.Cell(row, column).Value = "Реквизиты";
-                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+                    worksheet.Range(row, column, row, column + 5).Merge().AddToNamed("Titles");
 
                     row++;
 
@@ -468,19 +509,19 @@ namespace AccountantTool.ViewModel
                     };
                     var address = string.Join(", ", addressList.Where(x => x != string.Empty));
                     worksheet.Cell(row, column + 1).Value = address;
-                    worksheet.Range(row, column + 1, row, column + 6).Merge().AddToNamed("SubTitles");
+                    worksheet.Range(row, column + 1, row, column + 5).Merge().AddToNamed("SubTitles");
 
                     row++;
 
                     worksheet.Cell(row, column).Value = "Адрес электронной почты:";
                     worksheet.Cell(row, column + 1).Value = record.Requisites?.Email;
-                    worksheet.Range(row, column + 1, row, column + 6).Merge().AddToNamed("SubTitles");
+                    worksheet.Range(row, column + 1, row, column + 5).Merge().AddToNamed("SubTitles");
 
                     row++;
 
                     worksheet.Cell(row, column).Value = "Сайт:";
                     worksheet.Cell(row, column + 1).Value = record.Requisites?.Site;
-                    worksheet.Range(row, column + 1, row, column + 6).Merge().AddToNamed("SubTitles");
+                    worksheet.Range(row, column + 1, row, column + 5).Merge().AddToNamed("SubTitles");
                     if (record.Requisites.Site != null)
                     {
                         worksheet.Cell(row, column + 1).Hyperlink =
@@ -494,7 +535,7 @@ namespace AccountantTool.ViewModel
                     if (record.Requisites.DepartmentPhones != null && record.Requisites.DepartmentPhones.Count > 0)
                     {
                         worksheet.Cell(row, column).Value = "Контактные телефоны:";
-                        worksheet.Range(row, column, row, column + 6).Merge().Style.Alignment
+                        worksheet.Range(row, column, row, column + 5).Merge().Style.Alignment
                             .SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                         row++;
@@ -516,7 +557,7 @@ namespace AccountantTool.ViewModel
                     if (record.Requisites.OtherRequisites != null && record.Requisites.OtherRequisites.Count > 0)
                     {
                         worksheet.Cell(row, column).Value = "Иные реквизиты:";
-                        worksheet.Range(row, column, row, column + 6).Merge().Style.Alignment
+                        worksheet.Range(row, column, row, column + 5).Merge().Style.Alignment
                             .SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                         row++;
@@ -538,7 +579,7 @@ namespace AccountantTool.ViewModel
 
                     // Contact persons
                     worksheet.Cell(row, column).Value = "Контактные лица";
-                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+                    worksheet.Range(row, column, row, column + 5).Merge().AddToNamed("Titles");
 
                     row++;
                     if (record.ContactPersons.Any())
@@ -571,7 +612,7 @@ namespace AccountantTool.ViewModel
 
                     // License
                     worksheet.Cell(row, column).Value = "Наличие лицензии и сроки";
-                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+                    worksheet.Range(row, column, row, column + 5).Merge().AddToNamed("Titles");
 
                     row++;
 
@@ -604,43 +645,48 @@ namespace AccountantTool.ViewModel
 
                     // Products
                     worksheet.Cell(row, column).Value = "Покупаемые изделия и стоимость";
-                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+                    worksheet.Range(row, column, row, column + 5).Merge().AddToNamed("Titles");
 
                     row++;
 
                     if (record.Products.Any())
                     {
                         worksheet.Cell(row, column).Value = "Наименование изделия";
-                        worksheet.Cell(row, column + 1).Value = "Характеристика";
-                        worksheet.Cell(row, column + 2).Value = "Стоимость у продавца";
-                        worksheet.Cell(row, column + 3).Value = "Валюта";
-                        worksheet.Cell(row, column + 4).Value = "Стоимость для покупателя";
-                        worksheet.Cell(row, column + 5).Value = "Валюта";
-                        worksheet.Cell(row, column + 6).Value = "Количество изделий";
+                        worksheet.Cell(row, column + 1).Value = "Стоимость у продавца";
+                        worksheet.Cell(row, column + 2).Value = "Валюта";
+                        worksheet.Cell(row, column + 3).Value = "Стоимость для покупателя";
+                        worksheet.Cell(row, column + 4).Value = "Валюта";
+                        worksheet.Cell(row, column + 5).Value = "Количество изделий";
 
-                        worksheet.Range(row, column, row, column + 6).Style.Font.SetItalic(true);
-                        worksheet.Range(row, column, row, column + 6).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                        worksheet.Range(row, column, row, column + 5).Style.Font.SetItalic(true);
+                        worksheet.Range(row, column, row, column + 5).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                         row++;
 
-                        var products = worksheet.Cell(row, column).InsertData(record.Products.AsEnumerable());
-
-                        for (var rowIndex = 0; rowIndex < products.RowCount(); rowIndex++)
+                        foreach (var product in record.Products)
                         {
-                            for (var columnIndex = 0; columnIndex < 7; columnIndex++)
+                            worksheet.Cell(row, column).Value = product.Name;
+                            worksheet.Cell(row, column + 1).Value = product.CostFromSeller;
+                            worksheet.Cell(row, column + 2).Value = product.CostFromSellerCurrency;
+                            worksheet.Cell(row, column + 3).Value = product.CostForCustomer;
+                            worksheet.Cell(row, column + 4).Value = product.CostForCustomerCurrency;
+                            worksheet.Cell(row, column + 5).Value = product.Count;
+                            row++;
+                            if (product.Description != null)
                             {
-                                worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
-                                    .SetVertical(XLAlignmentVerticalValues.Top);
-                                worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
-                                    .SetHorizontal(XLAlignmentHorizontalValues.Left);
+                                worksheet.Cell(row, column).Value = product.Description;
+                                worksheet.Range(row, column, row, column + 5).Merge();
+                                //This is little cheat how to set height of row for the marged columns
+                                worksheet.Row(row).Height = (product.Description.Length / 116 + 1) * 15;
+                                row++;
                             }
                         }
 
-                        row += products.RowCount();
+                        worksheet.Columns().AdjustToContents();
                     }
 
                     // Contract
                     worksheet.Cell(row, column).Value = "Исполнение контракта";
-                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+                    worksheet.Range(row, column, row, column + 5).Merge().AddToNamed("Titles");
 
                     row++;
 
@@ -662,12 +708,12 @@ namespace AccountantTool.ViewModel
 
                     // Additional info
                     worksheet.Cell(row, column).Value = "Дополнительная информация";
-                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("Titles");
+                    worksheet.Range(row, column, row, column + 5).Merge().AddToNamed("Titles");
 
                     row++;
 
                     worksheet.Cell(row, column).Value = record.AdditionalInfo.Notes;
-                    worksheet.Range(row, column, row, column + 6).Merge().AddToNamed("SubTitles");
+                    worksheet.Range(row, column, row, column + 5).Merge().AddToNamed("SubTitles");
                     worksheet.Cell(row, column).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
 
                     worksheet.Columns().AdjustToContents();
@@ -683,8 +729,6 @@ namespace AccountantTool.ViewModel
 
                 workbook.NamedRanges.NamedRange("Titles").Ranges.Style = titlesStyle;
 
-                //worksheet.Columns().AdjustToContents();
-                //worksheet.Columns().Width = 15.0;
                 worksheet.Columns().AdjustToContents(2, 20);
                 worksheet.Style.Alignment.SetWrapText(true);
 
