@@ -511,19 +511,22 @@ namespace AccountantTool.ViewModel
                     };
                     var address = string.Join(", ", addressList.Where(x => x != string.Empty));
                     worksheet.Cell(row, column + 1).Value = address;
-                    worksheet.Range(row, column + 1, row, column + 5).Merge().AddToNamed("SubTitles");
+                    worksheet.Range(row, column + 1, row, column + 5).Merge();
 
                     row++;
 
                     worksheet.Cell(row, column).Value = "Адрес электронной почты:";
                     worksheet.Cell(row, column + 1).Value = record.Requisites?.Email;
-                    worksheet.Range(row, column + 1, row, column + 5).Merge().AddToNamed("SubTitles");
+                    var emailRange = worksheet.Range(row, column + 1, row, column + 5).Merge();
+                    emailRange.Style.Font.Bold = true;
 
                     row++;
 
                     worksheet.Cell(row, column).Value = "Сайт:";
                     worksheet.Cell(row, column + 1).Value = record.Requisites?.Site;
-                    worksheet.Range(row, column + 1, row, column + 5).Merge().AddToNamed("SubTitles");
+                    var siteRange = worksheet.Range(row, column + 1, row, column + 5).Merge();
+                    siteRange.Style.Font.Bold = true;
+
                     if (record.Requisites.Site != null)
                     {
                         worksheet.Cell(row, column + 1).Hyperlink =
@@ -537,15 +540,21 @@ namespace AccountantTool.ViewModel
                     if (record.Requisites.DepartmentPhones != null && record.Requisites.DepartmentPhones.Count > 0)
                     {
                         worksheet.Cell(row, column).Value = "Контактные телефоны:";
-                        worksheet.Range(row, column, row, column + 5).Merge().Style.Alignment
-                            .SetHorizontal(XLAlignmentHorizontalValues.Center);
+                        worksheet.Range(row, column, row, column + 5).Merge();
+
+                        var phonesStyle = worksheet.Range(row, column, row, column + 5).Style;
+                        phonesStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        phonesStyle.Font.Bold = true;
+                        phonesStyle.Font.FontSize = 12;
 
                         row++;
                         worksheet.Cell(row, column).Value = "Отдел";
                         worksheet.Cell(row, column + 1).Value = "Телефон";
 
-                        worksheet.Range(row, column, row, column + 1).Style.Font.SetItalic(true);
-                        worksheet.Range(row, column, row, column + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                        var contactPhonesStyle = worksheet.Range(row, column, row, column + 1).Style;
+                        contactPhonesStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        contactPhonesStyle.Font.Bold = true;
+
                         row++;
 
                         var contactPhonesRange = worksheet.Cell(row, column)
@@ -559,15 +568,21 @@ namespace AccountantTool.ViewModel
                     if (record.Requisites.OtherRequisites != null && record.Requisites.OtherRequisites.Count > 0)
                     {
                         worksheet.Cell(row, column).Value = "Иные реквизиты:";
-                        worksheet.Range(row, column, row, column + 5).Merge().Style.Alignment
-                            .SetHorizontal(XLAlignmentHorizontalValues.Center);
+                        worksheet.Range(row, column, row, column + 5).Merge();
+
+                        var otherRequisitesStyle = worksheet.Range(row, column, row, column + 5).Style;
+                        otherRequisitesStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        otherRequisitesStyle.Font.Bold = true;
+                        otherRequisitesStyle.Font.FontSize = 12;
 
                         row++;
                         worksheet.Cell(row, column).Value = "Иной реквизит";
                         worksheet.Cell(row, column + 1).Value = "Его значение";
 
-                        worksheet.Range(row, column, row, column + 1).Style.Font.SetItalic(true);
-                        worksheet.Range(row, column, row, column + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                        var otherStyle = worksheet.Range(row, column, row, column + 1).Style;
+                        otherStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        otherStyle.Font.Bold = true;
+
                         row++;
 
                         var contactOtherRequisites = worksheet.Cell(row, column)
@@ -591,8 +606,10 @@ namespace AccountantTool.ViewModel
                         worksheet.Cell(row, column + 2).Value = "Контактный телефон";
                         worksheet.Cell(row, column + 3).Value = "Адрес электронной почты";
 
-                        worksheet.Range(row, column, row, column + 3).Style.Font.SetItalic(true);
-                        worksheet.Range(row, column, row, column + 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                        var contactsStyle = worksheet.Range(row, column, row, column + 3).Style;
+                        contactsStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        contactsStyle.Font.Bold = true;
+
                         row++;
 
                         var contactPersons =
@@ -625,8 +642,10 @@ namespace AccountantTool.ViewModel
                         worksheet.Cell(row, column + 2).Value = "Дата окончания";
                         worksheet.Cell(row, column + 3).Value = "Вид лицензии";
 
-                        worksheet.Range(row, column, row, column + 3).Style.Font.SetItalic(true);
-                        worksheet.Range(row, column, row, column + 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                        var licenseStyle = worksheet.Range(row, column, row, column + 3).Style;
+                        licenseStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        licenseStyle.Font.Bold = true;
+
                         row++;
 
                         var license = worksheet.Cell(row, column).InsertData(record.License.AsEnumerable());
@@ -660,8 +679,10 @@ namespace AccountantTool.ViewModel
                         worksheet.Cell(row, column + 4).Value = "Валюта";
                         worksheet.Cell(row, column + 5).Value = "Количество изделий";
 
-                        worksheet.Range(row, column, row, column + 5).Style.Font.SetItalic(true);
-                        worksheet.Range(row, column, row, column + 5).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                        var productsStyle = worksheet.Range(row, column, row, column + 5).Style;
+                        productsStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        productsStyle.Font.Bold = true;
+
                         row++;
 
                         foreach (var product in record.Products)
@@ -682,8 +703,6 @@ namespace AccountantTool.ViewModel
                                 row++;
                             }
                         }
-
-                        worksheet.Columns().AdjustToContents();
                     }
 
                     // Contract
@@ -698,8 +717,9 @@ namespace AccountantTool.ViewModel
                     worksheet.Cell(row, column + 3).Value = "Срок";
                     worksheet.Cell(row, column + 4).Value = "Статус";
 
-                    worksheet.Range(row, column, row, column + 4).Style.Font.SetItalic(true);
-                    worksheet.Range(row, column, row, column + 4).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                    var contractsStyle = worksheet.Range(row, column, row, column + 4).Style;
+                    contractsStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                    contractsStyle.Font.Bold = true;
                     row++;
 
                     IEnumerable<Contract> contract = new List<Contract> { record.Contract };
@@ -715,7 +735,7 @@ namespace AccountantTool.ViewModel
                     row++;
 
                     worksheet.Cell(row, column).Value = record.AdditionalInfo.Notes;
-                    worksheet.Range(row, column, row, column + 5).Merge().AddToNamed("SubTitles");
+                    worksheet.Range(row, column, row, column + 5).Merge();//.AddToNamed("SubTitles");
                     worksheet.Cell(row, column).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
 
                     worksheet.Columns().AdjustToContents();
@@ -724,16 +744,16 @@ namespace AccountantTool.ViewModel
                     worksheet.PageSetup.AddHorizontalPageBreak(row);
                     row++;
                 }
-
+                // Style for tittles----------------------
                 var titlesStyle = workbook.Style;
                 titlesStyle.Font.Bold = true;
+                titlesStyle.Font.FontSize = 16;
                 titlesStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-
                 workbook.NamedRanges.NamedRange("Titles").Ranges.Style = titlesStyle;
-
-                worksheet.Columns().AdjustToContents(2, 20);
+                //Wrap text and columns alignment---------
+                worksheet.Columns().AdjustToContents(2, 22);
                 worksheet.Style.Alignment.SetWrapText(true);
-
+                //----------------------------------------
                 workbook.SaveAs($"{exportFileDialog.FileName}");
             }
 
