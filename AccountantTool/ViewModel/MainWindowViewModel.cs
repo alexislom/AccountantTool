@@ -497,6 +497,7 @@ namespace AccountantTool.ViewModel
                     row++;
 
                     worksheet.Cell(row, column).Value = "Адрес:";
+                    worksheet.Cell(row, column).Style.Font.Bold = true;
 
                     var addressList = new List<string>
                     {
@@ -516,16 +517,16 @@ namespace AccountantTool.ViewModel
                     row++;
 
                     worksheet.Cell(row, column).Value = "Адрес электронной почты:";
+                    worksheet.Range(row, column + 1, row, column + 5).Merge();
+                    worksheet.Cell(row, column).Style.Font.Bold = true;
                     worksheet.Cell(row, column + 1).Value = record.Requisites?.Email;
-                    var emailRange = worksheet.Range(row, column + 1, row, column + 5).Merge();
-                    emailRange.Style.Font.Bold = true;
 
                     row++;
 
                     worksheet.Cell(row, column).Value = "Сайт:";
+                    worksheet.Range(row, column + 1, row, column + 5).Merge();
+                    worksheet.Cell(row, column).Style.Font.Bold = true;
                     worksheet.Cell(row, column + 1).Value = record.Requisites?.Site;
-                    var siteRange = worksheet.Range(row, column + 1, row, column + 5).Merge();
-                    siteRange.Style.Font.Bold = true;
 
                     if (record.Requisites.Site != null)
                     {
@@ -559,6 +560,9 @@ namespace AccountantTool.ViewModel
 
                         var contactPhonesRange = worksheet.Cell(row, column)
                             .InsertData(record.Requisites.DepartmentPhones.AsEnumerable());
+
+                        //contactPhonesRange.Style.Border.TopBorder = XLBorderStyleValues.Medium;
+                        //contactPhonesRange.Style.Border.TopBorderColor = XLColor.AshGrey;
                         if (contactPhonesRange != null)
                         {
                             row += contactPhonesRange.RowCount();
@@ -735,7 +739,7 @@ namespace AccountantTool.ViewModel
                     row++;
 
                     worksheet.Cell(row, column).Value = record.AdditionalInfo.Notes;
-                    worksheet.Range(row, column, row, column + 5).Merge();//.AddToNamed("SubTitles");
+                    worksheet.Range(row, column, row, column + 5).Merge();
                     worksheet.Cell(row, column).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
 
                     worksheet.Columns().AdjustToContents();
