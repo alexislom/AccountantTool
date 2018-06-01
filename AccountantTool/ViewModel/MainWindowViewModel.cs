@@ -274,6 +274,7 @@ namespace AccountantTool.ViewModel
             var rowIndexToInsertNewRecord = AccountantRecords.Count;
 
             AccountantRecords.Add(newEmptyRecord);
+            FilteredRecords = AccountantRecords.ToList();
 
             if (Worksheet.RowCount == AccountantRecords.Count)
             {
@@ -298,6 +299,7 @@ namespace AccountantTool.ViewModel
                     await Task.Run(() =>
                     {
                         AccountantRecords.Remove(recordToRemove);
+                        FilteredRecords = AccountantRecords.ToList();
                     });
                 }
             }
@@ -671,7 +673,7 @@ namespace AccountantTool.ViewModel
                             worksheet.Cell(row, column + 4).Value = product.CostForCustomerCurrency;
                             worksheet.Cell(row, column + 5).Value = product.Count;
                             row++;
-                            if (product.Description != null)
+                            if (!string.IsNullOrEmpty(product.Description))
                             {
                                 worksheet.Cell(row, column).Value = product.Description;
                                 worksheet.Range(row, column, row, column + 5).Merge();
