@@ -475,6 +475,10 @@ namespace AccountantTool.ViewModel
 
                 var row = 1;
                 const int column = 1;
+                // Borders style and alignment--------------------------
+                worksheet.Style.Border.TopBorder = XLBorderStyleValues.Thin;
+                worksheet.Style.Border.TopBorderColor = XLColor.AshGrey;
+                worksheet.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
                 foreach (var record in FilteredRecords)
                 {
@@ -517,16 +521,18 @@ namespace AccountantTool.ViewModel
                     row++;
 
                     worksheet.Cell(row, column).Value = "Адрес электронной почты:";
-                    worksheet.Range(row, column + 1, row, column + 5).Merge();
+                    var emailRange = worksheet.Range(row, column + 1, row, column + 5).Merge();
                     worksheet.Cell(row, column).Style.Font.Bold = true;
                     worksheet.Cell(row, column + 1).Value = record.Requisites?.Email;
+                    emailRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
 
                     row++;
 
                     worksheet.Cell(row, column).Value = "Сайт:";
-                    worksheet.Range(row, column + 1, row, column + 5).Merge();
+                    var siteRange = worksheet.Range(row, column + 1, row, column + 5).Merge();
                     worksheet.Cell(row, column).Style.Font.Bold = true;
                     worksheet.Cell(row, column + 1).Value = record.Requisites?.Site;
+                    siteRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
 
                     if (record.Requisites.Site != null)
                     {
@@ -561,8 +567,6 @@ namespace AccountantTool.ViewModel
                         var contactPhonesRange = worksheet.Cell(row, column)
                             .InsertData(record.Requisites.DepartmentPhones.AsEnumerable());
 
-                        //contactPhonesRange.Style.Border.TopBorder = XLBorderStyleValues.Medium;
-                        //contactPhonesRange.Style.Border.TopBorderColor = XLColor.AshGrey;
                         if (contactPhonesRange != null)
                         {
                             row += contactPhonesRange.RowCount();
@@ -619,16 +623,16 @@ namespace AccountantTool.ViewModel
                         var contactPersons =
                             worksheet.Cell(row, column).InsertData(record.ContactPersons.AsEnumerable());
 
-                        for (var rowIndex = 0; rowIndex < contactPersons.RowCount(); rowIndex++)
-                        {
-                            for (var columnIndex = 0; columnIndex < 7; columnIndex++)
-                            {
-                                worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
-                                    .SetVertical(XLAlignmentVerticalValues.Top);
-                                worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
-                                    .SetHorizontal(XLAlignmentHorizontalValues.Left);
-                            }
-                        }
+                        //for (var rowIndex = 0; rowIndex < contactPersons.RowCount(); rowIndex++)
+                        //{
+                        //    for (var columnIndex = 0; columnIndex < 6; columnIndex++)
+                        //    {
+                        //        worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
+                        //            .SetVertical(XLAlignmentVerticalValues.Top);
+                        //        worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
+                        //            .SetHorizontal(XLAlignmentHorizontalValues.Left);
+                        //    }
+                        //}
 
                         row += contactPersons.RowCount();
                     }
@@ -654,16 +658,16 @@ namespace AccountantTool.ViewModel
 
                         var license = worksheet.Cell(row, column).InsertData(record.License.AsEnumerable());
 
-                        for (var rowIndex = 0; rowIndex < license.RowCount(); rowIndex++)
-                        {
-                            for (var columnIndex = 0; columnIndex < 7; columnIndex++)
-                            {
-                                worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
-                                    .SetVertical(XLAlignmentVerticalValues.Top);
-                                worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
-                                    .SetHorizontal(XLAlignmentHorizontalValues.Left);
-                            }
-                        }
+                        //for (var rowIndex = 0; rowIndex < license.RowCount(); rowIndex++)
+                        //{
+                        //    for (var columnIndex = 0; columnIndex < 6; columnIndex++)
+                        //    {
+                        //        worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
+                        //            .SetVertical(XLAlignmentVerticalValues.Top);
+                        //        worksheet.Cell(row + rowIndex, column + columnIndex).Style.Alignment
+                        //            .SetHorizontal(XLAlignmentHorizontalValues.Left);
+                        //    }
+                        //}
 
                         row += license.RowCount();
                     }
@@ -701,7 +705,8 @@ namespace AccountantTool.ViewModel
                             if (!string.IsNullOrEmpty(product.Description))
                             {
                                 worksheet.Cell(row, column).Value = product.Description;
-                                worksheet.Range(row, column, row, column + 5).Merge();
+                                var descriptionRange = worksheet.Range(row, column, row, column + 5).Merge();
+                                descriptionRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
                                 //This is little cheat how to set height of row for the marged columns
                                 worksheet.Row(row).Height = (product.Description.Length / 116 + 1) * 15;
                                 row++;
@@ -729,6 +734,7 @@ namespace AccountantTool.ViewModel
                     IEnumerable<Contract> contract = new List<Contract> { record.Contract };
 
                     var contractCell = worksheet.Cell(row, column).InsertData(contract);
+                    contractCell.Style.Alignment.Vertical = XLAlignmentVerticalValues.Top;
 
                     row += contractCell.RowCount();
 
@@ -738,9 +744,14 @@ namespace AccountantTool.ViewModel
 
                     row++;
 
-                    worksheet.Cell(row, column).Value = record.AdditionalInfo.Notes;
-                    worksheet.Range(row, column, row, column + 5).Merge();
-                    worksheet.Cell(row, column).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                    if (!string.IsNullOrEmpty(record.AdditionalInfo.Notes))
+                    {
+                        worksheet.Cell(row, column).Value = record.AdditionalInfo.Notes;
+                        var addInfoRange = worksheet.Range(row, column, row, column + 5).Merge();
+                        addInfoRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                        //This is little cheat how to set height of row for the marged columns
+                        worksheet.Row(row).Height = (record.AdditionalInfo.Notes.Length / 116 + 1) * 15;
+                    }
 
                     worksheet.Columns().AdjustToContents();
 
@@ -754,10 +765,10 @@ namespace AccountantTool.ViewModel
                 titlesStyle.Font.FontSize = 16;
                 titlesStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                 workbook.NamedRanges.NamedRange("Titles").Ranges.Style = titlesStyle;
-                //Wrap text and columns alignment---------
+                // Wrap text and columns alignment--------
                 worksheet.Columns().AdjustToContents(2, 22);
                 worksheet.Style.Alignment.SetWrapText(true);
-                //----------------------------------------
+
                 workbook.SaveAs($"{exportFileDialog.FileName}");
             }
 
