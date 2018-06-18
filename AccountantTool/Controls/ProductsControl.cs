@@ -24,13 +24,17 @@ namespace AccountantTool.Controls
                 {
                     ProductsListView.Items.Add(new ListViewItem(new[]
                     {
+                        product?.NumberOfContract,
                         product?.Name,
                         product?.Description,
                         product?.CostFromSeller.ToString(CultureInfo.InvariantCulture),
                         product?.CostFromSellerCurrency,
                         product?.CostForCustomer.ToString(CultureInfo.InvariantCulture),
                         product?.CostForCustomerCurrency,
-                        product?.Count
+                        product?.RateCurrency,
+                        product?.Count,
+                        product?.GenericCost,
+                        product?.GenericCostCurrency
                     }));
                 }
             }
@@ -44,13 +48,17 @@ namespace AccountantTool.Controls
         {
             ProductsListView.Items.Add(new ListViewItem(new[]
             {
+                "Number of contract",
                 "Name",
                 "Description",
                 "Cost from seller",
                 "Br",
                 "Cost for customer",
                 "Br",
-                "Count"
+                "Rate currency",
+                "Count",
+                "Generic cost",
+                "Generic cost currency"
             }));
 
             IsDirty = true;
@@ -78,18 +86,22 @@ namespace AccountantTool.Controls
                 {
                     var subItem = item.SubItems;
 
-                    double.TryParse(subItem[2]?.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var costFromSeller);
-                    double.TryParse(subItem[4]?.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var costForCustomer);
+                    double.TryParse(subItem[3]?.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var costFromSeller);
+                    double.TryParse(subItem[5]?.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out var costForCustomer);
 
                     Model.Add(new Product
                     {
-                        Name = subItem[0]?.Text,
-                        Description = subItem[1]?.Text,
+                        NumberOfContract = subItem[0]?.Text,
+                        Name = subItem[1]?.Text,
+                        Description = subItem[2]?.Text,
                         CostFromSeller = costFromSeller,
-                        CostFromSellerCurrency = subItem[3]?.Text,
+                        CostFromSellerCurrency = subItem[4]?.Text,
                         CostForCustomer = costForCustomer,
-                        CostForCustomerCurrency = subItem[5]?.Text,
-                        Count = subItem[6]?.Text
+                        CostForCustomerCurrency = subItem[6]?.Text,
+                        RateCurrency = subItem[7]?.Text,
+                        Count = subItem[8]?.Text,
+                        GenericCost = subItem[9]?.Text,
+                        GenericCostCurrency = subItem[10]?.Text
                     });
                 }
             }

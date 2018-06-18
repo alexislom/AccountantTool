@@ -1,4 +1,5 @@
 ﻿using AccountantTool.Common;
+using AccountantTool.Helpers;
 using AccountantTool.Model;
 using Newtonsoft.Json;
 using unvell.ReoGrid;
@@ -11,15 +12,15 @@ namespace AccountantTool.ReoGrid.DataFormatter
         {
             if (cell.Column == Constants.ContractColumnIndex)
             {
-                var data = cell.GetData<Contract>();
+                var data = cell.GetData<ListWrapper<Contract>>();
 
                 if (data == null)
                 {
-                    data = JsonConvert.DeserializeObject<Contract>(cell.Data.ToString());
+                    data = JsonConvert.DeserializeObject<ListWrapper<Contract>>(cell.Data.ToString());
                     cell.Data = data;
                 }
 
-                return data.ContractStage ?? string.Empty;
+                return string.Empty;
             }
 
             return cell.Data.ToString();

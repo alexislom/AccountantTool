@@ -28,129 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ContractGroupBox = new System.Windows.Forms.GroupBox();
-            this.maskedTextDateOfEnd = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextDateOfStart = new System.Windows.Forms.MaskedTextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textContractStage = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textSidesOfContract = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textNumberOfContract = new System.Windows.Forms.TextBox();
+            this.components = new System.ComponentModel.Container();
             this.OkContractBtn = new System.Windows.Forms.Button();
-            this.ContractGroupBox.SuspendLayout();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ContractsListView = new AccountantTool.Helpers.EditableListView();
+            this.NumberOfContractColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DateOfStartColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SidesOfContractColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DateOfEndColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ConditionsOfContractColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.StageOfContractColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RemoveContractBtn = new System.Windows.Forms.Button();
+            this.AddContractBtn = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ContractGroupBox
-            // 
-            this.ContractGroupBox.Controls.Add(this.maskedTextDateOfEnd);
-            this.ContractGroupBox.Controls.Add(this.maskedTextDateOfStart);
-            this.ContractGroupBox.Controls.Add(this.label8);
-            this.ContractGroupBox.Controls.Add(this.textContractStage);
-            this.ContractGroupBox.Controls.Add(this.label7);
-            this.ContractGroupBox.Controls.Add(this.label3);
-            this.ContractGroupBox.Controls.Add(this.textSidesOfContract);
-            this.ContractGroupBox.Controls.Add(this.label2);
-            this.ContractGroupBox.Controls.Add(this.label1);
-            this.ContractGroupBox.Controls.Add(this.textNumberOfContract);
-            this.ContractGroupBox.Location = new System.Drawing.Point(14, 12);
-            this.ContractGroupBox.Name = "ContractGroupBox";
-            this.ContractGroupBox.Size = new System.Drawing.Size(381, 189);
-            this.ContractGroupBox.TabIndex = 1;
-            this.ContractGroupBox.TabStop = false;
-            this.ContractGroupBox.Text = "Исполнение контракта";
-            // 
-            // maskedTextDateOfEnd
-            // 
-            this.maskedTextDateOfEnd.Culture = new System.Globalization.CultureInfo("");
-            this.maskedTextDateOfEnd.Location = new System.Drawing.Point(151, 122);
-            this.maskedTextDateOfEnd.Mask = "00/00/0000";
-            this.maskedTextDateOfEnd.Name = "maskedTextDateOfEnd";
-            this.maskedTextDateOfEnd.Size = new System.Drawing.Size(213, 20);
-            this.maskedTextDateOfEnd.TabIndex = 20;
-            this.maskedTextDateOfEnd.ValidatingType = typeof(System.DateTime);
-            // 
-            // maskedTextDateOfStart
-            // 
-            this.maskedTextDateOfStart.Culture = new System.Globalization.CultureInfo("");
-            this.maskedTextDateOfStart.Location = new System.Drawing.Point(151, 60);
-            this.maskedTextDateOfStart.Mask = "00/00/0000";
-            this.maskedTextDateOfStart.Name = "maskedTextDateOfStart";
-            this.maskedTextDateOfStart.Size = new System.Drawing.Size(213, 20);
-            this.maskedTextDateOfStart.TabIndex = 19;
-            this.maskedTextDateOfStart.ValidatingType = typeof(System.DateTime);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(17, 156);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(104, 13);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "Статус исполнения";
-            // 
-            // textContractStage
-            // 
-            this.textContractStage.Location = new System.Drawing.Point(151, 153);
-            this.textContractStage.Name = "textContractStage";
-            this.textContractStage.Size = new System.Drawing.Size(213, 20);
-            this.textContractStage.TabIndex = 14;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(17, 125);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(32, 13);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Срок";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 92);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Стороны контракта";
-            // 
-            // textSidesOfContract
-            // 
-            this.textSidesOfContract.Location = new System.Drawing.Point(151, 89);
-            this.textSidesOfContract.Name = "textSidesOfContract";
-            this.textSidesOfContract.Size = new System.Drawing.Size(213, 20);
-            this.textSidesOfContract.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Дата контракта";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Номер контракта";
-            // 
-            // textNumberOfContract
-            // 
-            this.textNumberOfContract.Location = new System.Drawing.Point(151, 29);
-            this.textNumberOfContract.Name = "textNumberOfContract";
-            this.textNumberOfContract.Size = new System.Drawing.Size(213, 20);
-            this.textNumberOfContract.TabIndex = 0;
             // 
             // OkContractBtn
             // 
-            this.OkContractBtn.Location = new System.Drawing.Point(303, 207);
+            this.OkContractBtn.Location = new System.Drawing.Point(570, 328);
             this.OkContractBtn.Name = "OkContractBtn";
             this.OkContractBtn.Size = new System.Drawing.Size(75, 40);
             this.OkContractBtn.TabIndex = 2;
@@ -158,33 +53,111 @@
             this.OkContractBtn.UseVisualStyleBackColor = true;
             this.OkContractBtn.Click += new System.EventHandler(this.OkContractBtn_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.ContractsListView);
+            this.groupBox1.Location = new System.Drawing.Point(13, 15);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(660, 307);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Контракты";
+            // 
+            // ContractsListView
+            // 
+            this.ContractsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.NumberOfContractColumnHeader,
+            this.DateOfStartColumnHeader,
+            this.SidesOfContractColumnHeader,
+            this.DateOfEndColumnHeader,
+            this.ConditionsOfContractColumnHeader,
+            this.StageOfContractColumnHeader});
+            this.ContractsListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ContractsListView.FullRowSelect = true;
+            this.ContractsListView.GridLines = true;
+            this.ContractsListView.Location = new System.Drawing.Point(3, 16);
+            this.ContractsListView.Name = "ContractsListView";
+            this.ContractsListView.Size = new System.Drawing.Size(654, 288);
+            this.ContractsListView.TabIndex = 1;
+            this.ContractsListView.UseCompatibleStateImageBehavior = false;
+            this.ContractsListView.View = System.Windows.Forms.View.Details;
+            // 
+            // NumberOfContractColumnHeader
+            // 
+            this.NumberOfContractColumnHeader.Text = "Номер контракта";
+            this.NumberOfContractColumnHeader.Width = 103;
+            // 
+            // DateOfStartColumnHeader
+            // 
+            this.DateOfStartColumnHeader.Text = "Дата заключения";
+            this.DateOfStartColumnHeader.Width = 104;
+            // 
+            // SidesOfContractColumnHeader
+            // 
+            this.SidesOfContractColumnHeader.Text = "Стороны контракта";
+            this.SidesOfContractColumnHeader.Width = 115;
+            // 
+            // DateOfEndColumnHeader
+            // 
+            this.DateOfEndColumnHeader.Text = "Срок исполнения";
+            this.DateOfEndColumnHeader.Width = 101;
+            // 
+            // ConditionsOfContractColumnHeader
+            // 
+            this.ConditionsOfContractColumnHeader.Text = "Условия поставки";
+            this.ConditionsOfContractColumnHeader.Width = 155;
+            // 
+            // StageOfContractColumnHeader
+            // 
+            this.StageOfContractColumnHeader.Text = "Статус";
+            this.StageOfContractColumnHeader.Width = 67;
+            // 
+            // RemoveContractBtn
+            // 
+            this.RemoveContractBtn.Location = new System.Drawing.Point(187, 328);
+            this.RemoveContractBtn.Name = "RemoveContractBtn";
+            this.RemoveContractBtn.Size = new System.Drawing.Size(75, 40);
+            this.RemoveContractBtn.TabIndex = 4;
+            this.RemoveContractBtn.Text = "Удалить контракт";
+            this.RemoveContractBtn.UseVisualStyleBackColor = true;
+            this.RemoveContractBtn.Click += new System.EventHandler(this.RemoveContractBtn_Click);
+            // 
+            // AddContractBtn
+            // 
+            this.AddContractBtn.Location = new System.Drawing.Point(38, 328);
+            this.AddContractBtn.Name = "AddContractBtn";
+            this.AddContractBtn.Size = new System.Drawing.Size(75, 40);
+            this.AddContractBtn.TabIndex = 5;
+            this.AddContractBtn.Text = "Добавить контракт";
+            this.AddContractBtn.UseVisualStyleBackColor = true;
+            this.AddContractBtn.Click += new System.EventHandler(this.AddContractBtn_Click);
+            // 
             // ContractControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.AddContractBtn);
+            this.Controls.Add(this.RemoveContractBtn);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.OkContractBtn);
-            this.Controls.Add(this.ContractGroupBox);
             this.Name = "ContractControl";
-            this.Size = new System.Drawing.Size(409, 259);
-            this.ContractGroupBox.ResumeLayout(false);
-            this.ContractGroupBox.PerformLayout();
+            this.Size = new System.Drawing.Size(692, 376);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox ContractGroupBox;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textContractStage;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textSidesOfContract;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textNumberOfContract;
         private System.Windows.Forms.Button OkContractBtn;
-        private System.Windows.Forms.MaskedTextBox maskedTextDateOfEnd;
-        private System.Windows.Forms.MaskedTextBox maskedTextDateOfStart;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private Helpers.EditableListView ContractsListView;
+        private System.Windows.Forms.ColumnHeader NumberOfContractColumnHeader;
+        private System.Windows.Forms.ColumnHeader DateOfStartColumnHeader;
+        private System.Windows.Forms.ColumnHeader DateOfEndColumnHeader;
+        private System.Windows.Forms.ColumnHeader ConditionsOfContractColumnHeader;
+        private System.Windows.Forms.ColumnHeader SidesOfContractColumnHeader;
+        private System.Windows.Forms.ColumnHeader StageOfContractColumnHeader;
+        private System.Windows.Forms.Button RemoveContractBtn;
+        private System.Windows.Forms.Button AddContractBtn;
     }
 }

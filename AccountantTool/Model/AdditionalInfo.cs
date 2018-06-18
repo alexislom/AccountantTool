@@ -8,7 +8,7 @@ namespace AccountantTool.Model
     [Serializable]
     public class AdditionalInfo
     {
-        public string Notes { get; set; }
+        public List<AddInfoTable> AddInfoTable { get; set; }
 
         public List<FileInfo> AttachedFiles { get; set; }
 
@@ -16,5 +16,14 @@ namespace AccountantTool.Model
         {
             return JsonConvert.SerializeObject(this);
         }
+    }
+
+    public class AddInfoTable
+    {
+        public string NumberOfContract { get; set; }
+
+        public string Notes { get; set; }
+
+        public string OtherParticipants { get; set; }
     }
 }

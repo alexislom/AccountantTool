@@ -19,7 +19,7 @@ namespace AccountantTool.Model
 
         public List<Product> Products { get; set; }
 
-        public Contract Contract { get; set; }
+        public List<Contract> Contracts { get; set; }
 
         public AdditionalInfo AdditionalInfo { get; set; }
 

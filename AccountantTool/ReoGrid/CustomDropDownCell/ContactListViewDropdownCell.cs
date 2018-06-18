@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
 using AccountantTool.Controls;
 using AccountantTool.Model;
 
@@ -7,7 +6,7 @@ namespace AccountantTool.ReoGrid.CustomDropDownCell
 {
     public class ContractListViewDropdownCell : BaseListViewDropdownCell
     {
-        public ContractListViewDropdownCell(Contract model) : base(new ContractControl(model))
+        public ContractListViewDropdownCell(List<Contract> model) : base(new ContractControl(model))
         {
         }
     }

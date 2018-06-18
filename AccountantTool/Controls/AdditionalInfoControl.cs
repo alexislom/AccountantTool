@@ -27,8 +27,23 @@ namespace AccountantTool.Controls
             Model = model;
             InitializeComponent();
 
-            txtNotes.Text = Model?.Notes;
-            txtNotes.TextChanged += (sender, args) => IsDirty = true;
+            #region AddInfo table
+
+            if (Model?.AddInfoTable != null)
+            {
+                foreach (var addInfo in Model.AddInfoTable)
+                {
+                    AddInfoListView.Items.Add(new ListViewItem(new[]
+                    {
+                        addInfo.NumberOfContract,
+                        addInfo.Notes,
+                        addInfo.OtherParticipants
+                    }));
+                }
+            }
+
+            AddInfoListView.EditTextBox.TextChanged += (sender, args) => IsDirty = true;
+            #endregion AddInfo table
 
             if (!Directory.Exists(Constants.AdditionalDocumentsDirectory))
             {
@@ -181,6 +196,25 @@ namespace AccountantTool.Controls
             }
         }
 
+        private void AddInfoBtn_Click(object sender, EventArgs e)
+        {
+            AddInfoListView.Items.Add(new ListViewItem(new[]
+            {
+                "Nember of contract",
+                "Notes",
+                "Other participants"
+            }));
+
+            IsDirty = true;
+        }
+
+        private void RemoveInfoBtn_Click(object sender, EventArgs e)
+        {
+            AddInfoListView.Items.Remove(AddInfoListView.SelectedItem);
+
+            IsDirty = true;
+        }
+
         private void OkAddInfoBtn_Click(object sender, EventArgs e)
         {
             DoClose();
@@ -188,7 +222,21 @@ namespace AccountantTool.Controls
 
         public void DoClose()
         {
-            Model.Notes = txtNotes?.Text;
+            if (AddInfoListView.Items.Count != 0)
+            {
+                Model.AddInfoTable = new List<AddInfoTable>(AddInfoListView.Items.Count);
+
+                foreach (ListViewItem item in AddInfoListView.Items)
+                {
+                    var subItem = item.SubItems;
+                    Model.AddInfoTable.Add(new AddInfoTable
+                    {
+                        NumberOfContract = subItem[0]?.Text,
+                        Notes = subItem[1]?.Text,
+                        OtherParticipants = subItem[2]?.Text
+                    });
+                }
+            }
 
             if (attachedFilesListView.Items.Count == 0)
             {

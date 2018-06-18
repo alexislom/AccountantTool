@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
 using AccountantTool.Controls.Interfaces;
@@ -9,35 +10,57 @@ namespace AccountantTool.Controls
 {
     public partial class ContractControl : UserControl, INotifyControlDataSave
     {
-        #region Fields & properties
-        public Contract Model { get; }
-        private readonly DateTime _minDateTime = new DateTime(2000, 01, 01);
+        #region Properties
+        public List<Contract> Model { get; }
         public bool IsDirty { get; set; }
-        #endregion Fields & properties
+        #endregion Properties
 
-        public ContractControl(Contract model)
+        public ContractControl(List<Contract> model)
         {
             Model = model;
             InitializeComponent();
 
-            textNumberOfContract.Text = Model?.NumberOfContract;
-            textSidesOfContract.Text = Model?.SidesOfContract;
-            maskedTextDateOfStart.Text = Model?.DateOfStart < _minDateTime ? DateTime.Now.ToString("d") : Model?.DateOfStart.ToString("d");
-            maskedTextDateOfEnd.Text = Model?.DateOfEnd < _minDateTime ? DateTime.Now.ToString("d") : Model?.DateOfEnd.ToString("d");
-            textContractStage.Text = Model?.ContractStage;
+            if (Model != null)
+            {
+                foreach (var contract in Model)
+                {
+                    ContractsListView.Items.Add(new ListViewItem(new[]
+                    {
+                        contract?.NumberOfContract,
+                        contract?.DateOfStart.ToString("d"),
+                        contract?.SidesOfContract,
+                        contract?.DateOfEnd.ToString("d"),
+                        contract?.ConditionsOfContract,
+                        contract?.ContractStage
+                    }));
+                }
+            }
 
-            EventSubscriptions();
+            ContractsListView.EditTextBox.TextChanged += (sender, args) => IsDirty = true;
 
             IsDirty = false;
         }
 
-        private void EventSubscriptions()
+        private void AddContractBtn_Click(object sender, EventArgs e)
         {
-            textNumberOfContract.TextChanged += (sender, args) => IsDirty = true;
-            textSidesOfContract.TextChanged += (sender, args) => IsDirty = true;
-            maskedTextDateOfStart.TextChanged += (sender, args) => IsDirty = true;
-            maskedTextDateOfEnd.TextChanged += (sender, args) => IsDirty = true;
-            textContractStage.TextChanged += (sender, args) => IsDirty = true;
+            ContractsListView.Items.Add(new ListViewItem(new[]
+            {
+                "Number of contract" + new Random().Next(1, 1000000),
+                new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day ).ToShortDateString(),
+                "Sides of contract",
+                new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day ).ToShortDateString(),
+                "Conditions of contract",
+                "Stage of contract",
+            }));
+
+            IsDirty = true;
+        }
+
+        private void RemoveContractBtn_Click(object sender, EventArgs e)
+        {
+            ContractsListView.Items.Remove(ContractsListView.SelectedItem);
+
+            IsDirty = true;
         }
 
         private void OkContractBtn_Click(object sender, EventArgs e)
@@ -47,15 +70,28 @@ namespace AccountantTool.Controls
 
         public void DoClose()
         {
-            Model.NumberOfContract = textNumberOfContract?.Text;
+            if (ContractsListView.Items.Count != 0)
+            {
+                Model.Clear();
 
-            DateTime.TryParse(maskedTextDateOfStart?.Text, CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out var dateOfStart);
-            DateTime.TryParse(maskedTextDateOfEnd?.Text, CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out var dateOfEnd);
+                foreach (ListViewItem item in ContractsListView.Items)
+                {
+                    var subItem = item.SubItems;
 
-            Model.DateOfStart = dateOfStart;
-            Model.SidesOfContract = textSidesOfContract?.Text;
-            Model.DateOfEnd = dateOfEnd;
-            Model.ContractStage = textContractStage?.Text;
+                    DateTime.TryParse(subItem[1]?.Text, CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out var dateOfStart);
+                    DateTime.TryParse(subItem[3]?.Text, CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out var dateOfEnd);
+
+                    Model.Add(new Contract
+                    {
+                        NumberOfContract = subItem[0]?.Text,
+                        DateOfStart = dateOfStart,
+                        SidesOfContract = subItem[2]?.Text,
+                        DateOfEnd = dateOfEnd,
+                        ConditionsOfContract = subItem[4]?.Text,
+                        ContractStage = subItem[5]?.Text
+                    });
+                }
+            }
 
             IsDirty = false;
         }

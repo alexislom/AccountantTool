@@ -20,7 +20,7 @@ namespace AccountantTool.ReoGrid.DataFormatter
                     cell.Data = data;
                 }
 
-                return data.Notes ?? string.Empty;
+                return string.Empty;
             }
 
             return cell.Data.ToString();

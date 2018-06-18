@@ -30,18 +30,23 @@ namespace AccountantTool.Controls
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.AddProductBtn = new System.Windows.Forms.Button();
             this.RemoveProductBtn = new System.Windows.Forms.Button();
             this.OkProductsBtn = new System.Windows.Forms.Button();
             this.ProductsListView = new AccountantTool.Helpers.EditableListView();
-            this.NumberOfProductColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.NumberOfContractColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.NameOfProductColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DescriptionColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CostFromSellerColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FromSellerCurrency = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CostForCustomerColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ForCustomerCurrency = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CountColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RateOfCurrencyColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.GeneralCountColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.GeneralCountCurrencyColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,14 +55,14 @@ namespace AccountantTool.Controls
             this.groupBox1.Controls.Add(this.ProductsListView);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(832, 264);
+            this.groupBox1.Size = new System.Drawing.Size(1237, 300);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Изделия";
             // 
             // AddProductBtn
             // 
-            this.AddProductBtn.Location = new System.Drawing.Point(27, 273);
+            this.AddProductBtn.Location = new System.Drawing.Point(25, 309);
             this.AddProductBtn.Name = "AddProductBtn";
             this.AddProductBtn.Size = new System.Drawing.Size(75, 40);
             this.AddProductBtn.TabIndex = 4;
@@ -67,7 +72,7 @@ namespace AccountantTool.Controls
             // 
             // RemoveProductBtn
             // 
-            this.RemoveProductBtn.Location = new System.Drawing.Point(178, 273);
+            this.RemoveProductBtn.Location = new System.Drawing.Point(208, 309);
             this.RemoveProductBtn.Name = "RemoveProductBtn";
             this.RemoveProductBtn.Size = new System.Drawing.Size(75, 40);
             this.RemoveProductBtn.TabIndex = 5;
@@ -77,7 +82,7 @@ namespace AccountantTool.Controls
             // 
             // OkProductsBtn
             // 
-            this.OkProductsBtn.Location = new System.Drawing.Point(731, 273);
+            this.OkProductsBtn.Location = new System.Drawing.Point(851, 309);
             this.OkProductsBtn.Name = "OkProductsBtn";
             this.OkProductsBtn.Size = new System.Drawing.Size(75, 40);
             this.OkProductsBtn.TabIndex = 6;
@@ -88,56 +93,79 @@ namespace AccountantTool.Controls
             // ProductsListView
             // 
             this.ProductsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.NumberOfProductColumnHeader,
+            this.NumberOfContractColumnHeader,
+            this.NameOfProductColumnHeader,
             this.DescriptionColumnHeader,
             this.CostFromSellerColumnHeader,
             this.FromSellerCurrency,
             this.CostForCustomerColumnHeader,
             this.ForCustomerCurrency,
-            this.CountColumnHeader});
+            this.RateOfCurrencyColumnHeader,
+            this.CountColumnHeader,
+            this.GeneralCountColumnHeader,
+            this.GeneralCountCurrencyColumnHeader});
             this.ProductsListView.FullRowSelect = true;
             this.ProductsListView.GridLines = true;
             this.ProductsListView.Location = new System.Drawing.Point(6, 19);
             this.ProductsListView.Name = "ProductsListView";
-            this.ProductsListView.Size = new System.Drawing.Size(876, 239);
+            this.ProductsListView.Size = new System.Drawing.Size(1225, 275);
             this.ProductsListView.TabIndex = 2;
             this.ProductsListView.UseCompatibleStateImageBehavior = false;
             this.ProductsListView.View = System.Windows.Forms.View.Details;
             // 
-            // NumberOfProductColumnHeader
+            // NumberOfContractColumnHeader
             // 
-            this.NumberOfProductColumnHeader.Text = "Наименование изделия";
-            this.NumberOfProductColumnHeader.Width = 133;
+            this.NumberOfContractColumnHeader.Text = "Номер контракта";
+            this.NumberOfContractColumnHeader.Width = 106;
+            // 
+            // NameOfProductColumnHeader
+            // 
+            this.NameOfProductColumnHeader.Text = "Наименование изделия";
+            this.NameOfProductColumnHeader.Width = 137;
             // 
             // DescriptionColumnHeader
             // 
-            this.DescriptionColumnHeader.Text = "Характеристика изделия";
-            this.DescriptionColumnHeader.Width = 143;
+            this.DescriptionColumnHeader.Text = "Характеристика изделия, комплектация";
+            this.DescriptionColumnHeader.Width = 227;
             // 
             // CostFromSellerColumnHeader
             // 
-            this.CostFromSellerColumnHeader.Text = "Стоимость у продавца ";
-            this.CostFromSellerColumnHeader.Width = 130;
+            this.CostFromSellerColumnHeader.Text = "Стоимость производителя (за единицу)";
+            this.CostFromSellerColumnHeader.Width = 221;
             // 
             // FromSellerCurrency
             // 
             this.FromSellerCurrency.Text = "Валюта";
-            this.FromSellerCurrency.Width = 54;
+            this.FromSellerCurrency.Width = 65;
             // 
             // CostForCustomerColumnHeader
             // 
-            this.CostForCustomerColumnHeader.Text = "Стоимость при поставке покупателю";
-            this.CostForCustomerColumnHeader.Width = 207;
+            this.CostForCustomerColumnHeader.Text = "Стоимость продавца (за единицу)";
+            this.CostForCustomerColumnHeader.Width = 187;
             // 
             // ForCustomerCurrency
             // 
             this.ForCustomerCurrency.Text = "Валюта";
-            this.ForCustomerCurrency.Width = 53;
+            this.ForCustomerCurrency.Width = 82;
             // 
             // CountColumnHeader
             // 
-            this.CountColumnHeader.Text = "Количество поставляемых изделий";
-            this.CountColumnHeader.Width = 110;
+            this.CountColumnHeader.Text = "Количество изделий";
+            this.CountColumnHeader.Width = 121;
+            // 
+            // RateOfCurrencyColumnHeader
+            // 
+            this.RateOfCurrencyColumnHeader.Text = "Курс валюты";
+            this.RateOfCurrencyColumnHeader.Width = 85;
+            // 
+            // GeneralCountColumnHeader
+            // 
+            this.GeneralCountColumnHeader.Text = "Общая стоимость";
+            this.GeneralCountColumnHeader.Width = 119;
+            // 
+            // GeneralCountCurrencyColumnHeader
+            // 
+            this.GeneralCountCurrencyColumnHeader.Text = "Валюта";
             // 
             // ProductsControl
             // 
@@ -148,7 +176,7 @@ namespace AccountantTool.Controls
             this.Controls.Add(this.AddProductBtn);
             this.Controls.Add(this.groupBox1);
             this.Name = "ProductsControl";
-            this.Size = new System.Drawing.Size(845, 320);
+            this.Size = new System.Drawing.Size(1243, 351);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -157,7 +185,7 @@ namespace AccountantTool.Controls
         #endregion
 
         private EditableListView ProductsListView;
-        private System.Windows.Forms.ColumnHeader NumberOfProductColumnHeader;
+        private System.Windows.Forms.ColumnHeader NameOfProductColumnHeader;
         private System.Windows.Forms.ColumnHeader DescriptionColumnHeader;
         private System.Windows.Forms.ColumnHeader CostFromSellerColumnHeader;
         private System.Windows.Forms.ColumnHeader CostForCustomerColumnHeader;
@@ -168,5 +196,9 @@ namespace AccountantTool.Controls
         private System.Windows.Forms.Button OkProductsBtn;
         private System.Windows.Forms.ColumnHeader FromSellerCurrency;
         private System.Windows.Forms.ColumnHeader ForCustomerCurrency;
+        private System.Windows.Forms.ColumnHeader NumberOfContractColumnHeader;
+        private System.Windows.Forms.ColumnHeader RateOfCurrencyColumnHeader;
+        private System.Windows.Forms.ColumnHeader GeneralCountColumnHeader;
+        private System.Windows.Forms.ColumnHeader GeneralCountCurrencyColumnHeader;
     }
 }

@@ -267,7 +267,7 @@ namespace AccountantTool.ViewModel
                 ContactPersons = new List<ContactPerson>(),
                 License = new List<License>(),
                 Products = new List<Product>(),
-                Contract = new Contract(),
+                Contracts = new List<Contract>(),
                 AdditionalInfo = new AdditionalInfo()
             };
 
@@ -482,7 +482,7 @@ namespace AccountantTool.ViewModel
 
                 foreach (var record in FilteredRecords)
                 {
-                    // Name of company
+                    #region Name of the company
                     worksheet.Cell(row, column).Value = "Название компании";
                     worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
 
@@ -493,8 +493,9 @@ namespace AccountantTool.ViewModel
                         .SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                     row++;
+                    #endregion Name of the company
 
-                    // Requisites
+                    #region Requisites
                     worksheet.Cell(row, column).Value = "Реквизиты";
                     worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
 
@@ -604,9 +605,10 @@ namespace AccountantTool.ViewModel
                         {
                             row += contactOtherRequisites.RowCount();
                         }
-                    }
+                    } 
+                    #endregion Requisites
 
-                    // Contact persons
+                    #region Contact persons
                     worksheet.Cell(row, column).Value = "Контактные лица";
                     worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
 
@@ -629,8 +631,9 @@ namespace AccountantTool.ViewModel
 
                         row += contactPersons.RowCount();
                     }
+                    #endregion Contact persons
 
-                    // License
+                    #region License
                     worksheet.Cell(row, column).Value = "Наличие лицензии и сроки";
                     worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
 
@@ -653,102 +656,156 @@ namespace AccountantTool.ViewModel
 
                         row += license.RowCount();
                     }
+                    #endregion License
 
-                    // Products
-                    worksheet.Cell(row, column).Value = "Покупаемые изделия и стоимость";
-                    worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
-
-                    row++;
-
-                    if (record.Products.Any())
+                    #region Blocs of contract's information
+                    foreach (var contract in record.Contracts)
                     {
-                        foreach (var product in record.Products)
+                        worksheet.Cell(row, column).Value = "Контракт №: " + contract.NumberOfContract;
+                        var numberOfContractTittle = worksheet.Range(row, column, row, column + 4).Merge();
+                        numberOfContractTittle.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                        numberOfContractTittle.Style.Font.SetFontSize(16);
+                        numberOfContractTittle.Style.Font.Italic = true;
+                        numberOfContractTittle.Style.Font.Bold = true;
+
+                        row++;
+
+                        worksheet.Cell(row, column).Value = "Исполнение контракта";
+                        worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+
+                        row++;
+
+                        worksheet.Cell(row, column).Value = "Дата заключения";
+                        worksheet.Cell(row, column + 1).Value = "Стороны";
+                        worksheet.Cell(row, column + 2).Value = "Срок исполнения";
+                        worksheet.Cell(row, column + 3).Value = "Условия поставки";
+                        worksheet.Cell(row, column + 4).Value = "Статус";
+
+                        var contractsStyle = worksheet.Range(row, column, row, column + 4).Style;
+                        contractsStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        contractsStyle.Font.Bold = true;
+
+                        row++;
+
+                        worksheet.Cell(row, column).Value = contract.DateOfStart;
+                        worksheet.Cell(row, column + 1).Value = contract.SidesOfContract;
+                        worksheet.Cell(row, column + 2).Value = contract.DateOfEnd;
+                        worksheet.Cell(row, column + 3).Value = contract.ConditionsOfContract;
+                        worksheet.Cell(row, column + 4).Value = contract.ContractStage;
+
+                        row++;
+
+                        #region Products
+                        if (record.Products.Any(x => x.NumberOfContract == contract.NumberOfContract))
                         {
-                            worksheet.Cell(row, column).Value = "Наименование изделия";
-                            worksheet.Cell(row, column + 1).Value = "Характеристика изделия";
-
-                            worksheet.Range(row, column + 1, row, column + 4).Merge();
-                            var descriptionStyle = worksheet.Range(row, column, row, column + 4).Style;
-                            descriptionStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-                            descriptionStyle.Font.Bold = true;
+                            // Products
+                            worksheet.Cell(row, column).Value = "Покупаемые изделия и стоимость";
+                            worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
 
                             row++;
 
-                            worksheet.Cell(row, column).Value = product.Name;
-
-                            var descriptionRange = worksheet.Range(row, column + 1, row, column + 4).Merge();
-                            descriptionRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
-                            worksheet.Row(row).Style.Alignment.Vertical = XLAlignmentVerticalValues.Top;
-
-                            if (!string.IsNullOrEmpty(product.Description))
+                            foreach (var product in record.Products)
                             {
-                                worksheet.Cell(row, column + 1).Value = product.Description;
-                                //This is little cheat how to set height of row for the merged columns
-                                worksheet.Row(row).Height = (product.Description.Length / 76 + 1) * 15;
+                                if (product.NumberOfContract == contract.NumberOfContract)
+                                {
+                                    worksheet.Cell(row, column).Value = "Наименование изделия";
+                                    worksheet.Cell(row, column + 1).Value = "Характеристика изделия, комплектация";
+
+                                    worksheet.Range(row, column + 1, row, column + 4).Merge();
+                                    var descriptionStyle = worksheet.Range(row, column, row, column + 4).Style;
+                                    descriptionStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                                    descriptionStyle.Font.Bold = true;
+
+                                    row++;
+
+                                    worksheet.Cell(row, column).Value = product.Name;
+
+                                    var descriptionRange = worksheet.Range(row, column + 1, row, column + 4).Merge();
+                                    descriptionRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                                    worksheet.Row(row).Style.Alignment.Vertical = XLAlignmentVerticalValues.Top;
+
+                                    if (!string.IsNullOrEmpty(product.Description))
+                                    {
+                                        worksheet.Cell(row, column + 1).Value = product.Description;
+                                        //This is little cheat how to set height of row for the merged columns
+                                        worksheet.Row(row).Height = (product.Description.Length / 76 + 1) * 15;
+                                    }
+
+                                    row++;
+
+                                    worksheet.Cell(row, column).Value = "Стоимость производителя (за единицу)";
+                                    worksheet.Cell(row, column + 1).Value = "Валюта";
+                                    worksheet.Cell(row, column + 2).Value = "Стоимость продавца (за единицу)";
+                                    worksheet.Cell(row, column + 3).Value = "Валюта";
+                                    worksheet.Cell(row, column + 4).Value = "Курс валюты";
+                                    var descStyle = worksheet.Range(row, column, row, column + 4).Style;
+                                    descStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                                    descStyle.Font.Bold = true;
+
+                                    row++;
+
+                                    worksheet.Cell(row, column).Value = product.CostFromSeller;
+                                    worksheet.Cell(row, column + 1).Value = product.CostFromSellerCurrency;
+                                    worksheet.Cell(row, column + 2).Value = product.CostForCustomer;
+                                    worksheet.Cell(row, column + 3).Value = product.CostForCustomerCurrency;
+                                    worksheet.Cell(row, column + 4).Value = product.RateCurrency;
+
+                                    row++;
+
+                                    worksheet.Cell(row, column).Value = "Количество изделий";
+                                    worksheet.Cell(row, column + 1).Value = "Общая стоимость";
+                                    worksheet.Cell(row, column + 2).Value = "Валюта";
+                                    var descSecLineStyle = worksheet.Range(row, column, row, column + 2).Style;
+                                    descSecLineStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                                    descSecLineStyle.Font.Bold = true;
+
+                                    row++;
+
+                                    worksheet.Cell(row, column).Value = product.Count;
+                                    worksheet.Cell(row, column + 1).Value = product.GenericCost;
+                                    worksheet.Cell(row, column + 2).Value = product.GenericCostCurrency;
+
+                                    row++;
+                                }
                             }
-
-                            row++;
-
-                            worksheet.Cell(row, column).Value = "Стоимость у продавца";
-                            worksheet.Cell(row, column + 1).Value = "Валюта";
-                            worksheet.Cell(row, column + 2).Value = "Стоимость для покупателя";
-                            worksheet.Cell(row, column + 3).Value = "Валюта";
-                            worksheet.Cell(row, column + 4).Value = "Количество изделий";
-
-                            var descStyle = worksheet.Range(row, column, row, column + 4).Style;
-                            descStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-                            descStyle.Font.Bold = true;
-
-                            row++;
-
-                            worksheet.Cell(row, column).Value = product.CostFromSeller;
-                            worksheet.Cell(row, column + 1).Value = product.CostFromSellerCurrency;
-                            worksheet.Cell(row, column + 2).Value = product.CostForCustomer;
-                            worksheet.Cell(row, column + 3).Value = product.CostForCustomerCurrency;
-                            worksheet.Cell(row, column + 4).Value = product.Count;
-
-                            row++;
                         }
+                        #endregion Products
+
+                        #region Additional info
+                        if (record.AdditionalInfo.AddInfoTable.Any(x => x.NumberOfContract == contract.NumberOfContract))
+                        {
+                            foreach (var addInfoItem in record.AdditionalInfo.AddInfoTable)
+                            {
+                                if (addInfoItem.NumberOfContract == contract.NumberOfContract)
+                                {
+                                    worksheet.Cell(row, column).Value = "Дополнительная информация";
+                                    worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
+                                    row++;
+
+                                    if (!string.IsNullOrEmpty(addInfoItem.Notes))
+                                    {
+                                        worksheet.Cell(row, column).Value = addInfoItem.Notes;
+                                        var addInfoRange = worksheet.Range(row, column, row, column + 4).Merge();
+                                        addInfoRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                                        //This is little cheat how to set height of row for the merged columns
+                                        worksheet.Row(row).Height = (addInfoItem.Notes.Length / 76 + 1) * 15;
+                                    }
+
+                                    row++;
+
+                                    worksheet.Cell(row, column).Value = "Иные участники:";
+                                    var otherParticipants = worksheet.Range(row, column + 1, row, column + 4).Merge();
+                                    worksheet.Cell(row, column).Style.Font.Bold = true;
+                                    worksheet.Cell(row, column + 1).Value = addInfoItem.OtherParticipants;
+                                    otherParticipants.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+
+                                    row++;
+                                }
+                            }
+                        }
+                        #endregion Additional info
                     }
-
-                    // Contract
-                    worksheet.Cell(row, column).Value = "Исполнение контракта";
-                    worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
-
-                    row++;
-
-                    worksheet.Cell(row, column).Value = "Номер";
-                    worksheet.Cell(row, column + 1).Value = "Дата";
-                    worksheet.Cell(row, column + 2).Value = "Стороны";
-                    worksheet.Cell(row, column + 3).Value = "Срок";
-                    worksheet.Cell(row, column + 4).Value = "Статус";
-
-                    var contractsStyle = worksheet.Range(row, column, row, column + 4).Style;
-                    contractsStyle.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-                    contractsStyle.Font.Bold = true;
-                    row++;
-
-                    IEnumerable<Contract> contract = new List<Contract> { record.Contract };
-
-                    var contractCell = worksheet.Cell(row, column).InsertData(contract);
-                    contractCell.Style.Alignment.Vertical = XLAlignmentVerticalValues.Top;
-
-                    row += contractCell.RowCount();
-
-                    // Additional info
-                    worksheet.Cell(row, column).Value = "Дополнительная информация";
-                    worksheet.Range(row, column, row, column + 4).Merge().AddToNamed("Titles");
-
-                    row++;
-
-                    if (!string.IsNullOrEmpty(record.AdditionalInfo.Notes))
-                    {
-                        worksheet.Cell(row, column).Value = record.AdditionalInfo.Notes;
-                        var addInfoRange = worksheet.Range(row, column, row, column + 4).Merge();
-                        addInfoRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
-                        //This is little cheat how to set height of row for the merged columns
-                        worksheet.Row(row).Height = (record.AdditionalInfo.Notes.Length / 76 + 1) * 15;
-                    }
+                    #endregion Blocs of contract's information
 
                     worksheet.Columns().AdjustToContents();
 
@@ -809,8 +866,9 @@ namespace AccountantTool.ViewModel
                     accountantRecord.Products.AddRange(products.Context);
                     break;
                 case Constants.ContractColumnIndex:
-                    var contract = cell.GetData<Contract>();
-                    accountantRecord.Contract = contract;
+                    var contracts = cell.GetData<ListWrapper<Contract>>();
+                    accountantRecord.Contracts = new List<Contract>(contracts.Context.Count);
+                    accountantRecord.Contracts.AddRange(contracts.Context);
                     break;
                 case Constants.AdditionalInfoColumnIndex:
                     var addInfo = cell.GetData<AdditionalInfo>();
@@ -856,8 +914,8 @@ namespace AccountantTool.ViewModel
             Worksheet.SetCellData(row, Constants.ProductsColumnIndex, new ListWrapper<Product>(record.Products));
             Worksheet.SetCellBody(row, Constants.ProductsColumnIndex, new ProductsListViewDropdownCell(record.Products));
 
-            Worksheet.SetCellData(row, Constants.ContractColumnIndex, record.Contract);
-            Worksheet.SetCellBody(row, Constants.ContractColumnIndex, new ContractListViewDropdownCell(record.Contract));
+            Worksheet.SetCellData(row, Constants.ContractColumnIndex, new ListWrapper<Contract>(record.Contracts));
+            Worksheet.SetCellBody(row, Constants.ContractColumnIndex, new ContractListViewDropdownCell(record.Contracts));
 
             Worksheet.SetCellData(row, Constants.AdditionalInfoColumnIndex, record.AdditionalInfo);
             Worksheet.SetCellBody(row, Constants.AdditionalInfoColumnIndex, new AdditionalInfoListViewDropdownCell(record.AdditionalInfo));

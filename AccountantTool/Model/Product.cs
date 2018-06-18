@@ -6,6 +6,8 @@ namespace AccountantTool.Model
     [Serializable]
     public class Product
     {
+        public string NumberOfContract { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -18,7 +20,13 @@ namespace AccountantTool.Model
 
         public string CostForCustomerCurrency { get; set; }
 
+        public string RateCurrency { get; set; }
+
         public string Count { get; set; }
+
+        public string GenericCost { get; set; }
+
+        public string GenericCostCurrency { get; set; }
 
         public override string ToString()
         {
