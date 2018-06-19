@@ -539,13 +539,13 @@ namespace AccountantTool.ViewModel
                     worksheet.Cell(row, column + 1).Value = record.Requisites?.Site;
                     siteRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
 
-                    if (record.Requisites.Site != null)
-                    {
-                        worksheet.Cell(row, column + 1).Hyperlink =
-                            new XLHyperlink(record.Requisites.Site.StartsWith("http:")
-                                ? record.Requisites.Site
-                                : "http://" + record.Requisites.Site);
-                    }
+                    //if (record.Requisites.Site != null)
+                    //{
+                    //    worksheet.Cell(row, column + 1).Hyperlink =
+                    //        new XLHyperlink(record.Requisites.Site.StartsWith("http:")
+                    //            ? record.Requisites.Site
+                    //            : "http://" + record.Requisites.Site);
+                    //}
 
                     row++;
 
@@ -605,7 +605,7 @@ namespace AccountantTool.ViewModel
                         {
                             row += contactOtherRequisites.RowCount();
                         }
-                    } 
+                    }
                     #endregion Requisites
 
                     #region Contact persons
@@ -800,6 +800,20 @@ namespace AccountantTool.ViewModel
                                     otherParticipants.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
 
                                     row++;
+                                }
+                            }
+                        }
+                        if (!(record.AdditionalInfo.ContractFileInfo is null)
+                            && record.AdditionalInfo.ContractFileInfo.Any(x => x.Value == contract.NumberOfContract))
+                        {
+                            foreach (var item in record.AdditionalInfo.ContractFileInfo)
+                            {
+                                if (item.Value == contract.NumberOfContract)
+                                {
+                                    worksheet.Range(row, column, row, column + 4).Merge();
+                                    worksheet.Cell(row, column).Value = item.Key;
+                                    worksheet.Cell(row, column).Hyperlink = new XLHyperlink(item.Key);
+                                    row++;  
                                 }
                             }
                         }

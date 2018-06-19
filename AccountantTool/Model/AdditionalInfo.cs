@@ -10,6 +10,8 @@ namespace AccountantTool.Model
     {
         public List<AddInfoTable> AddInfoTable { get; set; }
 
+        public Dictionary<string, string> ContractFileInfo { get; set; }
+
         public List<FileInfo> AttachedFiles { get; set; }
 
         public override string ToString()

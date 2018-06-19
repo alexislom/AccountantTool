@@ -57,7 +57,10 @@ namespace AccountantTool.Controls
             {
                 var result = Model.AttachedFiles.Intersect(files, new FileInfoEqualityComparer());
 
-                attachedFilesListView.Items.AddRange(result.Select(c => new ListViewItem(new[] { c.Name, c.FullName })).ToArray());
+                attachedFilesListView.Items.AddRange(result.Select(c => new ListViewItem(new[]
+                {
+                    Model?.ContractFileInfo[c.FullName] ?? "Number of contract", c.Name, c.FullName
+                })).ToArray());
 
                 foreach (var item in result)
                 {
@@ -77,27 +80,12 @@ namespace AccountantTool.Controls
                 attachedFilesListView.Items.AddRange(LocalFiles
                     .Where(i => string.IsNullOrEmpty(searchTextBox.Text.ToLowerInvariant())
                                 || i.Name.ToLowerInvariant().Contains(searchTextBox.Text.ToLowerInvariant()))
-                    .Select(c => new ListViewItem(new[] { c.Name, c.FullName })).ToArray());
+                    .Select(c => new ListViewItem(new[] { Model?.ContractFileInfo[c.FullName] ?? "Number of contract", c.Name, c.FullName })).ToArray());
 
                 IsDirty = true;
             };
 
-            attachedFilesListView.MouseDoubleClick += AttachedFilesListView_MouseDoubleClick;
-
             IsDirty = false;
-        }
-
-        private void AttachedFilesListView_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (attachedFilesListView.FocusedItem is null)
-                return;
-
-            var fullPathToFile = attachedFilesListView.FocusedItem.SubItems[1].Text;
-
-            var startInfo = new ProcessStartInfo { FileName = fullPathToFile };
-
-            var process = new Process { StartInfo = startInfo };
-            process.Start();
         }
 
         private void AddFileBtn_Click(object sender, EventArgs e)
@@ -127,7 +115,7 @@ namespace AccountantTool.Controls
                     if (!LocalFiles.Contains(fileInfo, new FileInfoEqualityComparer()))
                     {
                         LocalFiles.Add(fileInfo);
-                        attachedFilesListView.Items.Add(new ListViewItem(new[] { fileInfo.Name, fileInfo.FullName }));
+                        attachedFilesListView.Items.Add(new ListViewItem(new[] { "Number of contract", fileInfo.Name, fileInfo.FullName }));
                     }
                 }
             }
@@ -154,6 +142,19 @@ namespace AccountantTool.Controls
             attachedFilesListView.Items.Remove(attachedFilesListView.FocusedItem);
 
             IsDirty = true;
+        }
+
+        private void OpenAttachedFileBtn_Click(object sender, EventArgs e)
+        {
+            if (attachedFilesListView.SelectedItem is null)
+                return;
+
+            var fullPathToFile = attachedFilesListView.FocusedItem.SubItems[2].Text;
+
+            var startInfo = new ProcessStartInfo { FileName = fullPathToFile };
+
+            var process = new Process { StartInfo = startInfo };
+            process.Start();
         }
 
         private void PrintDocBtn_Click(object sender, EventArgs e)
@@ -200,7 +201,7 @@ namespace AccountantTool.Controls
         {
             AddInfoListView.Items.Add(new ListViewItem(new[]
             {
-                "Nember of contract",
+                "Number of contract",
                 "Notes",
                 "Other participants"
             }));
@@ -241,17 +242,19 @@ namespace AccountantTool.Controls
             if (attachedFilesListView.Items.Count == 0)
             {
                 Model.AttachedFiles = new List<FileInfo>();
-                return;
             }
 
             if (attachedFilesListView.Items.Count > 0)
             {
-                Model.AttachedFiles = new List<FileInfo>(attachedFilesListView.Items.Count);
+                var capacity = attachedFilesListView.Items.Count;
+                Model.AttachedFiles = new List<FileInfo>(capacity);
+                Model.ContractFileInfo = new Dictionary<string, string>(capacity);
 
                 foreach (ListViewItem item in attachedFilesListView.Items)
                 {
                     var subItem = item.SubItems;
-                    Model.AttachedFiles.Add(new FileInfo(subItem[1].Text));
+                    Model?.ContractFileInfo.Add(subItem[2].Text, subItem[0].Text);
+                    Model.AttachedFiles.Add(new FileInfo(subItem[2].Text));
                 }
             }
 

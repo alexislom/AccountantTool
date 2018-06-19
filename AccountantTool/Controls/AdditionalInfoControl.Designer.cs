@@ -1,4 +1,6 @@
-﻿namespace AccountantTool.Controls
+﻿using AccountantTool.Helpers;
+
+namespace AccountantTool.Controls
 {
     partial class AdditionalInfoControl
     {
@@ -36,7 +38,8 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.attachedFilesListView = new System.Windows.Forms.ListView();
+            this.attachedFilesListView = new AccountantTool.Helpers.EditableListView();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SearchLabel = new System.Windows.Forms.Label();
@@ -45,6 +48,7 @@
             this.RemoveFileBtn = new System.Windows.Forms.Button();
             this.AddFileBtn = new System.Windows.Forms.Button();
             this.PrintDocBtn = new System.Windows.Forms.Button();
+            this.OpenAttachedFileBtn = new System.Windows.Forms.Button();
             this.AddInfoGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,6 +121,7 @@
             // attachedFilesListView
             // 
             this.attachedFilesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4,
             this.columnHeader1,
             this.columnHeader2});
             this.attachedFilesListView.FullRowSelect = true;
@@ -128,10 +133,15 @@
             this.attachedFilesListView.UseCompatibleStateImageBehavior = false;
             this.attachedFilesListView.View = System.Windows.Forms.View.Details;
             // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Номер контракта";
+            this.columnHeader4.Width = 104;
+            // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Прикреплённые файлы";
-            this.columnHeader1.Width = 256;
+            this.columnHeader1.Text = "Прикреплённый файл";
+            this.columnHeader1.Width = 162;
             // 
             // columnHeader2
             // 
@@ -186,7 +196,7 @@
             // 
             // PrintDocBtn
             // 
-            this.PrintDocBtn.Location = new System.Drawing.Point(325, 458);
+            this.PrintDocBtn.Location = new System.Drawing.Point(361, 458);
             this.PrintDocBtn.Name = "PrintDocBtn";
             this.PrintDocBtn.Size = new System.Drawing.Size(81, 48);
             this.PrintDocBtn.TabIndex = 14;
@@ -194,10 +204,21 @@
             this.PrintDocBtn.UseVisualStyleBackColor = true;
             this.PrintDocBtn.Click += new System.EventHandler(this.PrintDocBtn_Click);
             // 
+            // OpenAttachedFileBtn
+            // 
+            this.OpenAttachedFileBtn.Location = new System.Drawing.Point(243, 458);
+            this.OpenAttachedFileBtn.Name = "OpenAttachedFileBtn";
+            this.OpenAttachedFileBtn.Size = new System.Drawing.Size(81, 48);
+            this.OpenAttachedFileBtn.TabIndex = 15;
+            this.OpenAttachedFileBtn.Text = "Открыть файл";
+            this.OpenAttachedFileBtn.UseVisualStyleBackColor = true;
+            this.OpenAttachedFileBtn.Click += new System.EventHandler(this.OpenAttachedFileBtn_Click);
+            // 
             // AdditionalInfoControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.OpenAttachedFileBtn);
             this.Controls.Add(this.PrintDocBtn);
             this.Controls.Add(this.RemoveFileBtn);
             this.Controls.Add(this.AddFileBtn);
@@ -215,7 +236,7 @@
 
         private System.Windows.Forms.GroupBox AddInfoGroupBox;
         private System.Windows.Forms.Button OkAddInfoBtn;
-        private System.Windows.Forms.ListView attachedFilesListView;
+        private EditableListView attachedFilesListView;
         private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.Label SearchLabel;
         private System.Windows.Forms.ColumnHeader columnHeader1;
@@ -229,5 +250,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.Button RemoveInfoBtn;
         private System.Windows.Forms.Button AddInfoBtn;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.Button OpenAttachedFileBtn;
     }
 }
