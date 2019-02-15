@@ -772,7 +772,7 @@ namespace AccountantTool.ViewModel
                         #endregion Products
 
                         #region Additional info
-                        if (record.AdditionalInfo.AddInfoTable.Any(x => x.NumberOfContract == contract.NumberOfContract))
+                        if (record.AdditionalInfo.AddInfoTable != null && record.AdditionalInfo.AddInfoTable.Any(x => x.NumberOfContract == contract.NumberOfContract))
                         {
                             foreach (var addInfoItem in record.AdditionalInfo.AddInfoTable)
                             {
