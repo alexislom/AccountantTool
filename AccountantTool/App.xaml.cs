@@ -51,7 +51,7 @@ namespace AccountantTool
             }
             finally
             {
-                Application.Current.Shutdown();
+                Current.Shutdown();
             }
         }
 
