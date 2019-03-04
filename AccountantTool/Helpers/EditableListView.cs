@@ -16,7 +16,7 @@ namespace AccountantTool.Helpers
         #endregion Fields
 
         #region Properties
-        public ListViewItem SelectedItem { get; private set; }
+        public ListViewItem SelectedItem { get; set; }
         public TextBox EditTextBox { get; } = new TextBox();
         #endregion Properties
 

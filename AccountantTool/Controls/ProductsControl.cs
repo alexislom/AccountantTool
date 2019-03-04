@@ -46,22 +46,14 @@ namespace AccountantTool.Controls
 
         private void AddProductBtn_Click(object sender, System.EventArgs e)
         {
-            ProductsListView.Items.Add(new ListViewItem(new[]
+            var form = new ProductsForm();
+            if(form.ShowDialog() == DialogResult.OK)
             {
-                "Number of contract",
-                "Name",
-                "Description",
-                "Cost from seller",
-                "Br",
-                "Cost for customer",
-                "Br",
-                "Rate currency",
-                "Count",
-                "Generic cost",
-                "Generic cost currency"
-            }));
-
-            IsDirty = true;
+                ProductsListView.Items.Add(form.Product);
+                //ProductsListView.SelectedItem = form.Product;
+                IsDirty = true;
+                DoClose();
+            }
         }
 
         private void RemoveProductBtn_Click(object sender, System.EventArgs e)

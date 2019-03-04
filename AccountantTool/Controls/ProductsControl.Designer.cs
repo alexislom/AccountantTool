@@ -43,8 +43,8 @@ namespace AccountantTool.Controls
             this.FromSellerCurrency = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CostForCustomerColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ForCustomerCurrency = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CountColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.RateOfCurrencyColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CountColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.GeneralCountColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.GeneralCountCurrencyColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
@@ -108,6 +108,7 @@ namespace AccountantTool.Controls
             this.ProductsListView.GridLines = true;
             this.ProductsListView.Location = new System.Drawing.Point(6, 19);
             this.ProductsListView.Name = "ProductsListView";
+            this.ProductsListView.SelectedItem = null;
             this.ProductsListView.Size = new System.Drawing.Size(1225, 275);
             this.ProductsListView.TabIndex = 2;
             this.ProductsListView.UseCompatibleStateImageBehavior = false;
@@ -148,15 +149,15 @@ namespace AccountantTool.Controls
             this.ForCustomerCurrency.Text = "Валюта";
             this.ForCustomerCurrency.Width = 82;
             // 
-            // CountColumnHeader
-            // 
-            this.CountColumnHeader.Text = "Количество изделий";
-            this.CountColumnHeader.Width = 121;
-            // 
             // RateOfCurrencyColumnHeader
             // 
             this.RateOfCurrencyColumnHeader.Text = "Курс валюты";
             this.RateOfCurrencyColumnHeader.Width = 85;
+            // 
+            // CountColumnHeader
+            // 
+            this.CountColumnHeader.Text = "Количество изделий";
+            this.CountColumnHeader.Width = 121;
             // 
             // GeneralCountColumnHeader
             // 
@@ -176,7 +177,7 @@ namespace AccountantTool.Controls
             this.Controls.Add(this.AddProductBtn);
             this.Controls.Add(this.groupBox1);
             this.Name = "ProductsControl";
-            this.Size = new System.Drawing.Size(1243, 351);
+            this.Size = new System.Drawing.Size(1243, 357);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
