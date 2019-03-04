@@ -47,6 +47,7 @@ namespace AccountantTool.Controls
             this.CountColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.GeneralCountColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.GeneralCountCurrencyColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.EditBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -168,10 +169,21 @@ namespace AccountantTool.Controls
             // 
             this.GeneralCountCurrencyColumnHeader.Text = "Валюта";
             // 
+            // EditBtn
+            // 
+            this.EditBtn.Location = new System.Drawing.Point(365, 309);
+            this.EditBtn.Name = "EditBtn";
+            this.EditBtn.Size = new System.Drawing.Size(75, 40);
+            this.EditBtn.TabIndex = 7;
+            this.EditBtn.Text = "Изменить изделие";
+            this.EditBtn.UseVisualStyleBackColor = true;
+            this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
+            // 
             // ProductsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.EditBtn);
             this.Controls.Add(this.OkProductsBtn);
             this.Controls.Add(this.RemoveProductBtn);
             this.Controls.Add(this.AddProductBtn);
@@ -201,5 +213,6 @@ namespace AccountantTool.Controls
         private System.Windows.Forms.ColumnHeader RateOfCurrencyColumnHeader;
         private System.Windows.Forms.ColumnHeader GeneralCountColumnHeader;
         private System.Windows.Forms.ColumnHeader GeneralCountCurrencyColumnHeader;
+        private System.Windows.Forms.Button EditBtn;
     }
 }

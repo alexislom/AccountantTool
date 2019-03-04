@@ -56,6 +56,34 @@ namespace AccountantTool.Controls
             }
         }
 
+        private void EditBtn_Click(object sender, System.EventArgs e)
+        {
+            if(ProductsListView.SelectedItem != null)
+            {
+                var form = new ProductsForm();
+
+                form.TextBox1.Text = ProductsListView.SelectedItem.SubItems[0]?.Text;
+                form.TextBox2.Text = ProductsListView.SelectedItem.SubItems[1]?.Text;
+                form.TextBox3.Text = ProductsListView.SelectedItem.SubItems[2]?.Text;
+                form.TextBox4.Text = ProductsListView.SelectedItem.SubItems[3]?.Text;
+                form.TextBox5.Text = ProductsListView.SelectedItem.SubItems[4]?.Text;
+                form.TextBox6.Text = ProductsListView.SelectedItem.SubItems[5]?.Text;
+                form.TextBox7.Text = ProductsListView.SelectedItem.SubItems[6]?.Text;
+                form.TextBox8.Text = ProductsListView.SelectedItem.SubItems[7]?.Text;
+                form.TextBox9.Text = ProductsListView.SelectedItem.SubItems[8]?.Text;
+                form.TextBox10.Text = ProductsListView.SelectedItem.SubItems[9]?.Text;
+                form.TextBox11.Text = ProductsListView.SelectedItem.SubItems[10]?.Text;
+
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    //Chenage selected item
+                    ProductsListView.Items[ProductsListView.SelectedIndices[0]] = form.Product;
+                    IsDirty = true;
+                    DoClose();
+                }
+            }
+        }
+
         private void RemoveProductBtn_Click(object sender, System.EventArgs e)
         {
             ProductsListView.Items.Remove(ProductsListView.SelectedItem);

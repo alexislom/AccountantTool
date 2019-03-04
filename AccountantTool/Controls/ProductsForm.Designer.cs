@@ -301,6 +301,19 @@
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.TextBox textBox11;
+
+        public System.Windows.Forms.TextBox TextBox1 => textBox1;
+        public System.Windows.Forms.TextBox TextBox2 => textBox2;
+        public System.Windows.Forms.TextBox TextBox3 => textBox3;
+        public System.Windows.Forms.TextBox TextBox4 => textBox4;
+        public System.Windows.Forms.TextBox TextBox5 => textBox5;
+        public System.Windows.Forms.TextBox TextBox6 => textBox6;
+        public System.Windows.Forms.TextBox TextBox7 => textBox7;
+        public System.Windows.Forms.TextBox TextBox8 => textBox8;
+        public System.Windows.Forms.TextBox TextBox9 => textBox9;
+        public System.Windows.Forms.TextBox TextBox10 => textBox10;
+        public System.Windows.Forms.TextBox TextBox11 => textBox11;
+
         private System.Windows.Forms.Button CancelBtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
