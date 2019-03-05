@@ -55,11 +55,14 @@ namespace AccountantTool.Controls
 
             if (Model?.AttachedFiles != null)
             {
-                var result = Model.AttachedFiles.Intersect(files, new FileInfoEqualityComparer());
+                //var result = Model.AttachedFiles.Intersect(files, new FileInfoEqualityComparer());
+
+                //For changing file path if the user relocate folder with program
+                var result = files.Intersect(Model.AttachedFiles, new FileInfoEqualityComparer());
 
                 attachedFilesListView.Items.AddRange(result.Select(c => new ListViewItem(new[]
                 {
-                    Model?.ContractFileInfo[c.FullName] ?? "Number of contract", c.Name, c.FullName
+                    Model.ContractFileInfo.ContainsKey(c.FullName) ? Model?.ContractFileInfo[c.FullName] : "Number of contract", c.Name, c.FullName
                 })).ToArray());
 
                 foreach (var item in result)
@@ -80,7 +83,9 @@ namespace AccountantTool.Controls
                 attachedFilesListView.Items.AddRange(LocalFiles
                     .Where(i => string.IsNullOrEmpty(searchTextBox.Text.ToLowerInvariant())
                                 || i.Name.ToLowerInvariant().Contains(searchTextBox.Text.ToLowerInvariant()))
-                    .Select(c => new ListViewItem(new[] { Model?.ContractFileInfo[c.FullName] ?? "Number of contract", c.Name, c.FullName })).ToArray());
+                    .Select(c => new ListViewItem(new[] { Model.ContractFileInfo.ContainsKey(c.FullName)
+                                                            ? Model?.ContractFileInfo[c.FullName]
+                                                            : "Number of contract", c.Name, c.FullName })).ToArray());
 
                 IsDirty = true;
             };
