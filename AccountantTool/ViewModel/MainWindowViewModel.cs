@@ -1,9 +1,8 @@
-﻿using System;
+﻿// ReSharper disable All
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -15,8 +14,6 @@ using AccountantTool.Model;
 using AccountantTool.ReoGrid.CustomDropDownCell;
 using AccountantTool.ReoGrid.DataFormatter;
 using ClosedXML.Excel;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using Microsoft.Win32;
 using unvell.ReoGrid;
 using unvell.ReoGrid.DataFormat;
@@ -118,7 +115,7 @@ namespace AccountantTool.ViewModel
                 }
                 else
                 {
-                    var filteredProperties = searchArgs.Sections.Select(t => _columnNamesMap[t]).ToList();
+                    List<string> filteredProperties = searchArgs.Sections.Select(t => _columnNamesMap[t]).ToList();
 
                     var results = new List<AccountantRecord>();
 
