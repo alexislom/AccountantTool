@@ -64,7 +64,7 @@ namespace AccountantTool.Controls
 
                 form.TextBox1.Text = ProductsListView.SelectedItem.SubItems[0]?.Text;
                 form.TextBox2.Text = ProductsListView.SelectedItem.SubItems[1]?.Text;
-                form.TextBox3.Text = ProductsListView.SelectedItem.SubItems[2]?.Text;
+                form.RichTextBox3.Text = ProductsListView.SelectedItem.SubItems[2]?.Text;
                 form.TextBox4.Text = ProductsListView.SelectedItem.SubItems[3]?.Text;
                 form.TextBox5.Text = ProductsListView.SelectedItem.SubItems[4]?.Text;
                 form.TextBox6.Text = ProductsListView.SelectedItem.SubItems[5]?.Text;

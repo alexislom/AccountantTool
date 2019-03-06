@@ -18,7 +18,7 @@ namespace AccountantTool.Controls
             {
                 textBox1.Text,
                 textBox2.Text,
-                textBox3.Text,
+                richTextBox3.Text,
                 textBox4.Text,
                 textBox5.Text,
                 textBox6.Text,
